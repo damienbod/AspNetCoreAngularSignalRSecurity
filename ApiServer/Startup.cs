@@ -11,8 +11,6 @@ using Microsoft.AspNetCore.DataProtection;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
-using System.IdentityModel.Tokens.Jwt;
-using System.Collections.Generic;
 using Newtonsoft.Json.Serialization;
 using IdentityServer4.AccessTokenValidation;
 
@@ -36,16 +34,8 @@ namespace AspNet5SQLite
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration["Production:SqliteConnectionString"];
-            var folderForKeyStore = Configuration["Production:KeyStoreFolderWhichIsBacked"];
-          
+
             var cert = new X509Certificate2(Path.Combine(_env.ContentRootPath, "damienbodserver.pfx"), "");
-
-            // Important The folderForKeyStore needs to be backed up.
-            services.AddDataProtection()
-                .SetApplicationName("AspNet5IdentityServerAngularImplicitFlow")
-                .PersistKeysToFileSystem(new DirectoryInfo(folderForKeyStore))
-                .ProtectKeysWithCertificate(cert);
-
 
             services.AddDbContext<DataEventRecordContext>(options =>
                 options.UseSqlite(connection)
