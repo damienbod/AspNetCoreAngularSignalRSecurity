@@ -6,3 +6,4 @@
 /StsServer/bin
 /SecurityAspNetCoreSignalR/angularApp/**/*.js
 /SecurityAspNetCoreSignalR/angularApp/**/*.js.map
+/SecurityAspNetCoreSignalR/bin
