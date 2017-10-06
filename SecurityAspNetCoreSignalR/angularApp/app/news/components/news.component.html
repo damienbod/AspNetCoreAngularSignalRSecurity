@@ -1,0 +1,77 @@
+﻿<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="form-inline" >
+            <div class="form-group">
+                
+                <label for="group">Group: </label>
+                <select class="form-control" type="number" [(ngModel)]="group">
+                    <option *ngFor="let g of (newsState$|async)?.groups" [ngValue]="g">{{g}}</option>
+                </select>
+
+              
+                <label for="author">Author: </label>
+                <input type="text" class="form-control" id="author" placeholder="your name" name="author" [(ngModel)]="author" required>
+            </div>
+            <button class="btn btn-primary" style="width:150px;" (click)="join()">Join</button>
+            <button class="btn btn-primary" style="width:150px;" (click)="leave()">Leave</button>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+
+        <form class="form-horizontal" style="padding: 10px 0;" (ngSubmit)="sendNewsItem()" #newsItemForm="ngForm">
+            <div class="form-group">
+                <label for="header" class="col-sm-2 control-label">Header</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="header" placeholder="your header..." name="header" [(ngModel)]="newsItem.Header" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newsText" class="col-sm-2 control-label">Text</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="newsText" placeholder="your newsText..." name="newsText" [(ngModel)]="newsItem.NewsText" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newsText" class="col-sm-2 control-label"></label>
+                <div class="col-sm-9">
+                    <button type="submit" class="btn btn-primary col-sm-12" [disabled]="!newsItemForm.valid">Send News to: {{group}}</button>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+
+    <div class="row" *ngIf="newsItems?.length > 0">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>header</th>
+                        <th>Text</th>
+                        <th>Author</th>
+                        <th>Group</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of newsItems; let i = index">
+                        <td>{{i + 1}}</td>
+                        <td>{{item.Header}}</td>
+                        <td>{{item.NewsText}}</td>
+                        <td>{{item.Author}}</td>
+                        <td>{{item.NewsGroup}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+ 
+    <div class="row" *ngIf="newsItems?.length <= 0">
+        <span>No news items</span>
+    </div>
+</div>
