@@ -1,49 +1,71 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AspNet5SQLite.Model;
+using ApiServer.Model;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 
-namespace AspNet5SQLite.Repositories
+namespace ApiServer.Repositories
 {
     public class DataEventRecordRepository : IDataEventRecordRepository
     {
         private readonly DataEventRecordContext _context;
         private readonly ILogger _logger;
-        //private IDataProtector _protector;
 
         public DataEventRecordRepository(DataEventRecordContext context, ILoggerFactory loggerFactory, IDataProtectionProvider provider)
         {
             _context = context;
             _logger = loggerFactory.CreateLogger("IDataEventRecordResporitory");
-            //_protector = provider.CreateProtector("DataEventRecordRepository.v1");
         }
 
-        public List<DataEventRecord> GetAll()
+        public IEnumerable<DataEventRecordDto> GetAll(string username)
         {
             _logger.LogCritical("Getting a the existing records");
-            return _context.DataEventRecords.ToList();
+            return _context.DataEventRecords.Where(item => item.Username == username).Select(z =>
+                new DataEventRecordDto
+                {
+                    Name = z.Name,
+                    Description = z.Description,
+                    Timestamp = z.Timestamp,
+                    Id = z.Id
+                });
         }
 
-        public DataEventRecord Get(long id)
+        public DataEventRecordDto Get(long id)
         {
-            var dataEventRecord = _context.DataEventRecords.First(t => t.Id == id);
-            //unprotectDescription(dataEventRecord);
+            var dataEventRecord = _context.DataEventRecords.Select(z =>
+                new DataEventRecordDto
+                {
+                    Name = z.Name,
+                    Description = z.Description,
+                    Timestamp = z.Timestamp,
+                    Id = z.Id
+                }).First(t => t.Id == id);
             return dataEventRecord;
         }
 
         [HttpPost]
-        public void Post(DataEventRecord dataEventRecord )
+        public void Post(DataEventRecordDto dataEventRecord, string username)
         {
-            //protectDescription(dataEventRecord);
-            _context.DataEventRecords.Add(dataEventRecord);
+            _context.DataEventRecords.Add(new DataEventRecord
+            {
+                Name = dataEventRecord.Name,
+                Description = dataEventRecord.Description,
+                Timestamp = dataEventRecord.Timestamp,
+                Id = dataEventRecord.Id,
+                Username = username
+            });
             _context.SaveChanges();
         }
 
-        public void Put(long id, [FromBody]DataEventRecord dataEventRecord)
+        public void Put(long id, DataEventRecordDto dataEventRecordDto)
         {
-            //protectDescription(dataEventRecord);
+            var dataEventRecord = _context.DataEventRecords.First(t => t.Id == id);
+            dataEventRecord.Name = dataEventRecordDto.Name;
+            dataEventRecord.Description = dataEventRecordDto.Description;
+            dataEventRecord.Timestamp = DateTime.UtcNow;
+
             _context.DataEventRecords.Update(dataEventRecord);
             _context.SaveChanges();
         }
@@ -53,20 +75,6 @@ namespace AspNet5SQLite.Repositories
             var entity = _context.DataEventRecords.First(t => t.Id == id);
             _context.DataEventRecords.Remove(entity);
             _context.SaveChanges();
-        }
-
-        private void protectDescription(DataEventRecord dataEventRecord)
-        {
-            // TODO add this when keys work again
-            //var protectedData = _protector.Protect(dataEventRecord.Description);
-            //dataEventRecord.Description = protectedData;
-        }
-
-        private void unprotectDescription(DataEventRecord dataEventRecord)
-        {
-            // TODO add this when keys work again
-            //var unprotectedData = _protector.Unprotect(dataEventRecord.Description);
-            //dataEventRecord.Description = unprotectedData;
         }
     }
 }

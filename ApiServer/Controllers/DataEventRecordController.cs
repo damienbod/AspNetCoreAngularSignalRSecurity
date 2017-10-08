@@ -1,10 +1,10 @@
-using AspNet5SQLite.Model;
-using AspNet5SQLite.Repositories;
+using ApiServer.Model;
+using ApiServer.Repositories;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AspNet5SQLite.Controllers
+namespace ApiServer.Controllers
 {
     [Authorize("dataEventRecords")]
     [Route("api/[controller]")]
@@ -21,7 +21,8 @@ namespace AspNet5SQLite.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_dataEventRecordRepository.GetAll());
+            var username = HttpContext.User.Identity.Name;
+            return Ok(_dataEventRecordRepository.GetAll(username));
         }
 
         [Authorize("dataEventRecordsAdmin")]
@@ -33,14 +34,15 @@ namespace AspNet5SQLite.Controllers
 
         [Authorize("dataEventRecordsAdmin")]
         [HttpPost]
-        public void Post([FromBody]DataEventRecord value)
+        public void Post([FromBody]DataEventRecordDto value)
         {
-            _dataEventRecordRepository.Post(value);
+            var username = HttpContext.User.Identity.Name;
+            _dataEventRecordRepository.Post(value, username);
         }
 
         [Authorize("dataEventRecordsAdmin")]
         [HttpPut("{id}")]
-        public void Put(long id, [FromBody]DataEventRecord value)
+        public void Put(long id, [FromBody]DataEventRecordDto value)
         {
             _dataEventRecordRepository.Put(id, value);
         }

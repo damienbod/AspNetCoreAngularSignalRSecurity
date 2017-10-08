@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
-using AspNet5SQLite.Model;
-using Microsoft.AspNetCore.Mvc;
+using ApiServer.Model;
 
-namespace AspNet5SQLite.Repositories
+namespace ApiServer.Repositories
 {
     public interface IDataEventRecordRepository
     {
         void Delete(long id);
-        DataEventRecord Get(long id);
-        List<DataEventRecord> GetAll();
-        void Post(DataEventRecord dataEventRecord);
-        void Put(long id, [FromBody] DataEventRecord dataEventRecord);
+        DataEventRecordDto Get(long id);
+        IEnumerable<DataEventRecordDto> GetAll(string username);
+        void Post(DataEventRecordDto dataEventRecord, string username);
+        void Put(long id, DataEventRecordDto dataEventRecord);
     }
 }
