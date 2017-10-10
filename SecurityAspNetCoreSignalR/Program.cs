@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Angular2WebpackVisualStudio
+namespace SecurityAspNetCoreSignalR
 {
     public class Program
     {

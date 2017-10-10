@@ -1,8 +1,8 @@
-﻿using AngularClient.ViewModel;
+﻿using SecurityAspNetCoreSignalR.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace AngularClient.Controllers
+namespace SecurityAspNetCoreSignalR.Controllers
 {
     [Route("api/[controller]")]
     public class ClientAppSettingsController : Controller
