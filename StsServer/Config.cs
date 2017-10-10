@@ -67,35 +67,6 @@ namespace QuickstartIdentityServer
             {
                 new Client
                 {
-                    ClientName = "angularjsclient",
-                    ClientId = "angularjsclient",
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowAccessTokensViaBrowser = true,
-                    RedirectUris = new List<string>
-                    {
-                        "https://localhost:44376/authorized"
-                    },
-                    PostLogoutRedirectUris = new List<string>
-                    {
-                        "https://localhost:44346/unauthorized.html"
-                    },
-                    AllowedCorsOrigins = new List<string>
-                    {
-                        "https://localhost:44346"
-                    },
-                    AllowedScopes = new List<string>
-                    {
-                        "openid",
-                        "email",
-                        "profile",
-                        "dataEventRecords",
-                        "dataeventrecordsscope",
-                        "securedFiles",
-                        "securedfilesscope",
-                    }
-                },
-                new Client
-                {
                     ClientName = "angularclient",
                     ClientId = "angularclient",
                     AccessTokenType = AccessTokenType.Reference,
@@ -129,42 +100,7 @@ namespace QuickstartIdentityServer
                         "profile",
                         "email"
                     }
-                },
-                new Client
-                {
-                    ClientName = "angularclientidtokenonly",
-                    ClientId = "angularclientidtokenonly",
-                    AccessTokenType = AccessTokenType.Reference,
-                    AccessTokenLifetime = 120,// 120 seconds, default 60 minutes
-                    IdentityTokenLifetime = 90,
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowAccessTokensViaBrowser = true,
-                    RedirectUris = new List<string>
-                    {
-                        "https://localhost:44372"
-
-                    },
-                    PostLogoutRedirectUris = new List<string>
-                    {
-                        "https://localhost:44372/Unauthorized"
-                    },
-                    AllowedCorsOrigins = new List<string>
-                    {
-                        "https://localhost:44372",
-                        "http://localhost:44372"
-                    },
-                    AllowedScopes = new List<string>
-                    {
-                        "openid",
-                        "dataEventRecords",
-                        "dataeventrecordsscope",
-                        "securedFiles",
-                        "securedfilesscope",
-                        "role",
-                        "profile",
-                        "email"
-                    }
-}
+                }
             };
         }
     }
