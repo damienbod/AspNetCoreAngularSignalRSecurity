@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using IdentityServer4.AccessTokenValidation;
+using ApiServer.Policies;
 
 namespace ApiServer
 {
@@ -73,13 +74,19 @@ namespace ApiServer
                 });
                 options.AddPolicy("dataEventRecordsUser", policyUser =>
                 {
-                    policyUser.RequireClaim("role",  "dataEventRecords.user");
+                    policyUser.RequireClaim("role", "dataEventRecords.user");
                 });
                 options.AddPolicy("dataEventRecords", policyUser =>
                 {
                     policyUser.RequireClaim("scope", "dataEventRecords");
                 });
+                options.AddPolicy("correctUser", policyCorrectUser =>
+                {
+                    policyCorrectUser.Requirements.Add(new CorrectUserRequirement());
+                });
             });
+
+            services.AddSingleton<IAuthorizationHandler, CorrectUserHandler>();
 
             services.AddMvc(options =>
             {
