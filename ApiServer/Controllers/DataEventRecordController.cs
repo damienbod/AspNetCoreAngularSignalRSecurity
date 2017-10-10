@@ -25,6 +25,7 @@ namespace ApiServer.Controllers
             return Ok(_dataEventRecordRepository.GetAll(username));
         }
 
+        [Authorize("correctUser")]
         [Authorize("dataEventRecordsAdmin")]
         [HttpGet("{id}")]
         public IActionResult Get(long id)
