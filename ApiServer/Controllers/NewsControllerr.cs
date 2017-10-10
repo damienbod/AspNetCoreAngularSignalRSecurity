@@ -1,11 +1,11 @@
-﻿using AspNetCoreAngularSignalR.SignalRHubs;
+﻿using ApiServer.SignalRHubs;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using AspNetCoreAngularSignalR.Providers;
+using ApiServer.Providers;
 
-namespace AspNetCoreAngularSignalR.Controllers
+namespace ApiServer.Controllers
 {
     [Route("api/[controller]")]
     public class NewsController : Controller

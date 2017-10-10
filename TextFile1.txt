@@ -1,3 +1,6 @@
+Add userId to the item, only items with the XX can be updated
+------------
+
 protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, SomeRequirement requirement)
 {
     if (context == null)

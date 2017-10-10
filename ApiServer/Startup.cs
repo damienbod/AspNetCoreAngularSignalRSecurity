@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using IdentityServer4.AccessTokenValidation;
 using ApiServer.Policies;
+using ApiServer.Providers;
+using ApiServer.SignalRHubs;
 
 namespace ApiServer
 {
@@ -34,11 +36,18 @@ namespace ApiServer
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration["Production:SqliteConnectionString"];
+            var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
 
             var cert = new X509Certificate2(Path.Combine(_env.ContentRootPath, "damienbodserver.pfx"), "");
 
             services.AddDbContext<DataEventRecordContext>(options =>
                 options.UseSqlite(connection)
+            );
+
+            services.AddDbContext<NewsContext>(options =>
+                options.UseSqlite(
+                    sqlConnectionString
+                ), ServiceLifetime.Singleton
             );
 
             //Add Cors support to the service
@@ -88,6 +97,9 @@ namespace ApiServer
 
             services.AddSingleton<IAuthorizationHandler, CorrectUserHandler>();
 
+            services.AddSingleton<NewsStore>();
+            services.AddSignalR();
+
             services.AddMvc(options =>
             {
                options.Filters.Add(new AuthorizeFilter(guestPolicy));
@@ -109,6 +121,13 @@ namespace ApiServer
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<LoopyHub>("loopy");
+                routes.MapHub<NewsHub>("looney");
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

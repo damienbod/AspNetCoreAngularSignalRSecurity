@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreAngularSignalR.SignalRHubs
+﻿namespace ApiServer.SignalRHubs
 {
     public class NewsItem
     {

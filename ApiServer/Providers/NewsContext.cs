@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace AspNetCoreAngularSignalR.Providers
+namespace ApiServer.Providers
 {
     public class NewsContext : DbContext
     {

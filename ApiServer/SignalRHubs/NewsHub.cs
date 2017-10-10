@@ -1,8 +1,8 @@
-﻿using AspNetCoreAngularSignalR.Providers;
+﻿using ApiServer.Providers;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
-namespace AspNetCoreAngularSignalR.SignalRHubs
+namespace ApiServer.SignalRHubs
 {
     public class NewsHub : Hub
     {

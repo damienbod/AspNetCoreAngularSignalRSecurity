@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreAngularSignalR.Providers
+﻿namespace ApiServer.Providers
 {
     public class NewsGroup
     {

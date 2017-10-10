@@ -1,9 +1,9 @@
-﻿using AspNetCoreAngularSignalR.SignalRHubs;
+﻿using ApiServer.SignalRHubs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AspNetCoreAngularSignalR.Providers
+namespace ApiServer.Providers
 {
     public class NewsStore
     {
