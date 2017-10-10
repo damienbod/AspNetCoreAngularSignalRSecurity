@@ -35,18 +35,19 @@ namespace ApiServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = Configuration["Production:SqliteConnectionString"];
-            var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
+            var sqliteConnectionString = Configuration["SqliteConnectionString"];
+            var defaultConnection = Configuration.GetConnectionString("DefaultConnection");
 
             var cert = new X509Certificate2(Path.Combine(_env.ContentRootPath, "damienbodserver.pfx"), "");
 
             services.AddDbContext<DataEventRecordContext>(options =>
-                options.UseSqlite(connection)
+                options.UseSqlite(sqliteConnectionString)
             );
 
+            // used for the new items which belong to the signalr hub
             services.AddDbContext<NewsContext>(options =>
                 options.UseSqlite(
-                    sqlConnectionString
+                    defaultConnection
                 ), ServiceLifetime.Singleton
             );
 

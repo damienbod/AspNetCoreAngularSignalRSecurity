@@ -94,8 +94,6 @@ namespace QuickstartIdentityServer
                         "openid",
                         "dataEventRecords",
                         "dataeventrecordsscope",
-                        "securedFiles",
-                        "securedfilesscope",
                         "role",
                         "profile",
                         "email"
