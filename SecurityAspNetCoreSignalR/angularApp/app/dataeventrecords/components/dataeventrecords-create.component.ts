@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 
-import { DataEventRecordsService } from '../dataeventrecords/DataEventRecordsService';
-import { DataEventRecord } from './models/DataEventRecord';
+import { DataEventRecordsService } from '../dataeventrecords.service';
+import { DataEventRecord } from '../models/DataEventRecord';
 
 @Component({
     selector: 'app-dataeventrecords-create',

@@ -9,6 +9,7 @@ import { AppRoutes } from './app.routes';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { NewsModule } from './news/news.module';
+import { DataEventRecordsModule } from './dataeventrecords/dataeventrecords.module';
 import { SharedModule } from './shared/shared.module';
 
 import { EffectsModule } from '@ngrx/effects';
@@ -16,12 +17,6 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthModule, OidcSecurityService, OpenIDImplicitFlowConfiguration } from 'angular-auth-oidc-client';
 
-import { DataEventRecordsService } from './dataeventrecords/DataEventRecordsService';
-import { DataEventRecord } from './dataeventrecords/models/DataEventRecord';
-
-import { DataEventRecordsListComponent } from './dataeventrecords/dataeventrecords-list.component';
-import { DataEventRecordsCreateComponent } from './dataeventrecords/dataeventrecords-create.component';
-import { DataEventRecordsEditComponent } from './dataeventrecords/dataeventrecords-edit.component';
 
 @NgModule({
     imports: [
@@ -34,6 +29,7 @@ import { DataEventRecordsEditComponent } from './dataeventrecords/dataeventrecor
         CoreModule.forRoot(),
         HomeModule,
         NewsModule,
+        DataEventRecordsModule,
         StoreModule.forRoot({}),
         StoreDevtoolsModule.instrument({
             maxAge: 25 //  Retains last 25 states
@@ -42,15 +38,11 @@ import { DataEventRecordsEditComponent } from './dataeventrecords/dataeventrecor
     ],
 
     declarations: [
-        AppComponent,
-        DataEventRecordsListComponent,
-        DataEventRecordsCreateComponent,
-        DataEventRecordsEditComponent
+        AppComponent
     ],
 
     providers: [
         OidcSecurityService,
-        DataEventRecordsService,
         Configuration
     ],
 

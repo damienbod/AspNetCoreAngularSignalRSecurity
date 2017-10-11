@@ -5,9 +5,8 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 import { Observable } from 'rxjs/Observable';
 
-import { DataEventRecordsService } from '../dataeventrecords/DataEventRecordsService';
-import { DataEventRecord } from './models/DataEventRecord';
-
+import { DataEventRecordsService } from '../dataeventrecords.service';
+import { DataEventRecord } from '../models/DataEventRecord';
 
 @Component({
     selector: 'app-dataeventrecords-list',
