@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { Configuration } from './app.constants';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routes';
@@ -14,6 +15,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthModule, OidcSecurityService, OpenIDImplicitFlowConfiguration } from 'angular-auth-oidc-client';
+
+import { DataEventRecordsService } from './dataeventrecords/DataEventRecordsService';
+import { DataEventRecord } from './dataeventrecords/models/DataEventRecord';
+
+import { DataEventRecordsListComponent } from './dataeventrecords/dataeventrecords-list.component';
+import { DataEventRecordsCreateComponent } from './dataeventrecords/dataeventrecords-create.component';
+import { DataEventRecordsEditComponent } from './dataeventrecords/dataeventrecords-edit.component';
 
 @NgModule({
     imports: [
@@ -34,11 +42,16 @@ import { AuthModule, OidcSecurityService, OpenIDImplicitFlowConfiguration } from
     ],
 
     declarations: [
-        AppComponent
+        AppComponent,
+        DataEventRecordsListComponent,
+        DataEventRecordsCreateComponent,
+        DataEventRecordsEditComponent
     ],
 
     providers: [
-        OidcSecurityService
+        OidcSecurityService,
+        DataEventRecordsService,
+        Configuration
     ],
 
     bootstrap: [AppComponent],
@@ -48,13 +61,14 @@ export class AppModule {
     clientConfiguration: any;
 
     constructor(public oidcSecurityService: OidcSecurityService,
-        private http: Http
+        private http: Http,
+        private configuration: Configuration
     ) {
 
         console.log('APP STARTING');
         this.configClient().subscribe(config => {
 
-            let openIDImplicitFlowConfiguration = new OpenIDImplicitFlowConfiguration();
+            const openIDImplicitFlowConfiguration = new OpenIDImplicitFlowConfiguration();
             openIDImplicitFlowConfiguration.stsServer = this.clientConfiguration.stsServer;
             openIDImplicitFlowConfiguration.redirect_url = this.clientConfiguration.redirect_url;
             openIDImplicitFlowConfiguration.client_id = this.clientConfiguration.client_id;
@@ -68,11 +82,11 @@ export class AppModule {
             openIDImplicitFlowConfiguration.unauthorized_route = this.clientConfiguration.unauthorized_route;
             openIDImplicitFlowConfiguration.log_console_warning_active = this.clientConfiguration.log_console_warning_active;
             openIDImplicitFlowConfiguration.log_console_debug_active = this.clientConfiguration.log_console_debug_active;
-            openIDImplicitFlowConfiguration.max_id_token_iat_offset_allowed_in_seconds = this.clientConfiguration.max_id_token_iat_offset_allowed_in_seconds;
+            openIDImplicitFlowConfiguration.max_id_token_iat_offset_allowed_in_seconds =
+                this.clientConfiguration.max_id_token_iat_offset_allowed_in_seconds;
 
             this.oidcSecurityService.setupModule(openIDImplicitFlowConfiguration);
-
-            // configuration.Server = this.clientConfiguration.apiServer;
+            configuration.Server = this.clientConfiguration.apiServer;
         });
     }
 
