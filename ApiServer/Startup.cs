@@ -35,7 +35,7 @@ namespace ApiServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var sqliteConnectionString = Configuration["SqliteConnectionString"];
+            var sqliteConnectionString = Configuration.GetConnectionString("SqliteConnectionString");
             var defaultConnection = Configuration.GetConnectionString("DefaultConnection");
 
             var cert = new X509Certificate2(Path.Combine(_env.ContentRootPath, "damienbodserver.pfx"), "");
