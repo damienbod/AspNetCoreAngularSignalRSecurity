@@ -3,23 +3,20 @@ import { DataEventRecordsListComponent } from './components/dataeventrecords-lis
 import { DataEventRecordsCreateComponent } from './components/dataeventrecords-create.component';
 import { DataEventRecordsEditComponent } from './components/dataeventrecords-edit.component';
 
-export const DATA_RECORDS_ROUTES: Routes = [
+
+const routes: Routes = [
+    {
+        path: 'dataeventrecords/create',
+        component: DataEventRecordsCreateComponent
+    },
+    {
+        path: 'dataeventrecords/edit/:id',
+        component: DataEventRecordsEditComponent
+    },
     {
         path: 'dataeventrecords',
-
-        children: [
-            {
-                path: 'create',
-                component: DataEventRecordsCreateComponent
-            },
-            {
-                path: 'edit/:id',
-                component: DataEventRecordsEditComponent
-            },
-            {
-                path: '',
-                component: DataEventRecordsListComponent,
-            }
-        ]
+        component: DataEventRecordsListComponent,
     }
 ];
+
+export const DataEventRecordsRoutes = RouterModule.forChild(routes);

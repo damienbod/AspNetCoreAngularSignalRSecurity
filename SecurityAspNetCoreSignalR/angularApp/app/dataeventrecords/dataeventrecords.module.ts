@@ -8,18 +8,18 @@ import { DataEventRecordsService } from './dataeventrecords.service';
 import { DataEventRecordsListComponent } from './components/dataeventrecords-list.component';
 import { DataEventRecordsCreateComponent } from './components/dataeventrecords-create.component';
 import { DataEventRecordsEditComponent } from './components/dataeventrecords-edit.component';
-import { DATA_RECORDS_ROUTES } from './dataeventrecords.routes';
+import { DataEventRecordsRoutes } from './dataeventrecords.routes';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         HttpClientModule,
-        DATA_RECORDS_ROUTES
+        DataEventRecordsRoutes
     ],
 
     declarations: [
