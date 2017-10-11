@@ -29,7 +29,7 @@ namespace ApiServer
             _env = env;
             var builder = new ConfigurationBuilder()
                  .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("config.json");
+                .AddJsonFile("appsettings.json");
             Configuration = builder.Build();
         }
 
