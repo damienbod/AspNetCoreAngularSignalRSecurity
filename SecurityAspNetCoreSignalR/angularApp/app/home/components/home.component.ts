@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HubConnection } from '@aspnet/signalr-client';
+import { Configuration } from '../../app.constants';
 
 @Component({
     selector: 'app-home-component',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
     message = '';
     messages: string[] = [];
 
-    constructor() {
+    constructor(private configuration: Configuration) {
     }
 
     public sendMessage(): void {
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._hubConnection = new HubConnection('/loopy');
+        this._hubConnection = new HubConnection('https://localhost:44390/loopy');
 
         this._hubConnection.on('Send', (data: any) => {
             const received = `Received: ${data}`;

@@ -9,6 +9,7 @@ import { NewsItem } from './models/news-item';
 import { Store } from '@ngrx/store';
 import { NewsState } from './store/news.state';
 import * as NewsActions from './store/news.action';
+import { Configuration } from '../app.constants';
 
 @Injectable()
 export class NewsService {
@@ -18,10 +19,11 @@ export class NewsService {
     private headers: HttpHeaders;
 
     constructor(private http: HttpClient,
-        private store: Store<any>
+        private store: Store<any>,
+        private configuration: Configuration
     ) {
         this.init();
-        this.actionUrl = 'http://localhost:5000/api/news/';
+        this.actionUrl = this.configuration.Server + 'api/news/';
 
         this.headers = new HttpHeaders();
         this.headers = this.headers.set('Content-Type', 'application/json');
@@ -47,7 +49,7 @@ export class NewsService {
 
     private init() {
 
-        this._hubConnection = new HubConnection('/looney');
+        this._hubConnection = new HubConnection('https://localhost:44390/looney');
 
         this._hubConnection.on('Send', (newsItem: NewsItem) => {
             this.store.dispatch(new NewsActions.ReceivedItemAction(newsItem));
