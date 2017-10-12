@@ -15,6 +15,9 @@ using IdentityServer4.AccessTokenValidation;
 using ApiServer.Policies;
 using ApiServer.Providers;
 using ApiServer.SignalRHubs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Primitives;
+using System.Threading.Tasks;
 
 namespace ApiServer
 {
@@ -74,6 +77,19 @@ namespace ApiServer
                   options.Authority = "https://localhost:44318/";
                   options.ApiName = "dataEventRecords";
                   options.ApiSecret = "dataEventRecordsSecret";
+                  options.Events = new JwtBearerEvents
+                  {
+                      OnMessageReceived = context =>
+                      {
+                          StringValues token;
+                          if (context.Request.Path.Value.StartsWith("/loo") && context.Request.Query.TryGetValue("token", out token))
+                          {
+                              context.Token = token;
+                          }
+
+                          return Task.CompletedTask;
+                      }
+                  };
               });
 
             services.AddAuthorization(options =>

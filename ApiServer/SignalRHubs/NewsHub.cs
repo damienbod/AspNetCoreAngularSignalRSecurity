@@ -1,9 +1,11 @@
 ﻿using ApiServer.Providers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
 namespace ApiServer.SignalRHubs
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class NewsHub : Hub
     {
         private NewsStore _newsStore;
