@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { HubConnection } from '@aspnet/signalr-client';
 import { Configuration } from '../../app.constants';
@@ -9,44 +10,44 @@ import { OidcSecurityService, AuthorizationResult } from 'angular-auth-oidc-clie
     templateUrl: './home.component.html'
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
     private _hubConnection: HubConnection;
-    public async: any;
+    async: any;
     message = '';
     messages: string[] = [];
+
+    isAuthorizedSubscription: Subscription;
+    isAuthorized: boolean;
 
     constructor(
         private configuration: Configuration,
         private oidcSecurityService: OidcSecurityService
     ) {
-        if (this.oidcSecurityService.moduleSetup) {
-            this.onModuleSetup();
-        } else {
-            this.oidcSecurityService.onModuleSetup.subscribe(() => {
-                this.onModuleSetup();
-            });
-        }
     }
 
-    private onModuleSetup() {
-        if (window.location.hash) {
-            this.oidcSecurityService.authorizedCallback();
-        } else {
-            this.oidcSecurityService.getIsAuthorized().subscribe((authorized: boolean) => {
-                if (authorized) {
+    ngOnInit() {
+        this.isAuthorizedSubscription = this.oidcSecurityService.getIsAuthorized().subscribe(
+            (isAuthorized: boolean) => {
+                this.isAuthorized = isAuthorized;
+                if (this.isAuthorized) {
                     this.init();
                 }
             });
-        }
+        console.log('IsAuthorized:' + this.isAuthorized);
     }
-    public sendMessage(): void {
+
+    ngOnDestroy(): void {
+        this.isAuthorizedSubscription.unsubscribe();
+    }
+
+    sendMessage(): void {
         const data = `Sent: ${this.message}`;
 
         this._hubConnection.invoke('Send', data);
         this.messages.push(data);
     }
 
-    init() {
+    private init() {
         this._hubConnection = new HubConnection('https://localhost:44390/loopy');
 
         this._hubConnection.on('Send', (data: any) => {
