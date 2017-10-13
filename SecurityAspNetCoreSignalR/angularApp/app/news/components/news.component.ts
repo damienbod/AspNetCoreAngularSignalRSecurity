@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { NewsState } from '../store/news.state';
@@ -18,6 +19,9 @@ export class NewsComponent implements OnInit {
     author = 'unknown';
     newsState$: Observable<NewsState>;
     groups = ['IT', 'global', 'sport'];
+
+    isAuthorizedSubscription: Subscription;
+    isAuthorized: boolean;
 
     constructor(private store: Store<any>) {
         this.newsState$ = this.store.select<NewsState>(state => state.news.newsitems);
