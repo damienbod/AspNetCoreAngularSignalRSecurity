@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             tokenValue = '?token=' + token;
         }
 
-        this._hubConnection = new HubConnection('https://localhost:44390/loopy' + tokenValue);
+        this._hubConnection = new HubConnection(this.configuration.Server + tokenValue);
 
         this._hubConnection.on('Send', (data: any) => {
             const received = `Received: ${data}`;

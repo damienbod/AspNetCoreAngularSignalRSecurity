@@ -59,7 +59,7 @@ export class NewsService {
         }
 
         // this.connection = new signalR.HubConnection(url + '?token=' + token, options);
-        this._hubConnection = new HubConnection('https://localhost:44390/looney' + tokenValue);
+        this._hubConnection = new HubConnection(this.configuration.Server + tokenValue);
 
         this._hubConnection.on('Send', (newsItem: NewsItem) => {
             this.store.dispatch(new NewsActions.ReceivedItemAction(newsItem));

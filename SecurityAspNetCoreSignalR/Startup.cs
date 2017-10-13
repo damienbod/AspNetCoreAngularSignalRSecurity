@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SecurityAspNetCoreSignalR.ViewModel;
+using Serilog;
 
 namespace SecurityAspNetCoreSignalR
 {
@@ -14,6 +15,14 @@ namespace SecurityAspNetCoreSignalR
     {
         public Startup(IHostingEnvironment env)
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .Enrich.WithProperty("App", "SecurityAspNetCoreSignalR")
+                .Enrich.FromLogContext()
+                .WriteTo.Seq("http://localhost:5341")
+                .WriteTo.RollingFile("../../Logs/SecurityAspNetCoreSignalR")
+                .CreateLogger();
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -48,6 +57,8 @@ namespace SecurityAspNetCoreSignalR
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            loggerFactory.AddSerilog();
 
             var angularRoutes = new[] {
                  "/home",

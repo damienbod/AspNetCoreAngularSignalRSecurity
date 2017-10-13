@@ -12,6 +12,7 @@ using IdentityServer4.Services;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using Microsoft.AspNetCore.Identity;
+using Serilog;
 
 namespace IdentityServerWithAspNetIdentitySqlite
 {
@@ -21,6 +22,14 @@ namespace IdentityServerWithAspNetIdentitySqlite
 
         public Startup(IHostingEnvironment env)
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .Enrich.WithProperty("App", "StsServer")
+                .Enrich.FromLogContext()
+                .WriteTo.Seq("http://localhost:5341")
+                .WriteTo.RollingFile("../../Logs/ApiServer")
+                .CreateLogger();
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -66,6 +75,8 @@ namespace IdentityServerWithAspNetIdentitySqlite
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            loggerFactory.AddSerilog();
 
             if (env.IsDevelopment())
             {

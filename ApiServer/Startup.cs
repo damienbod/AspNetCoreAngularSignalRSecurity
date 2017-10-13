@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Primitives;
 using System.Threading.Tasks;
 using ApiServer.Data;
+using Serilog;
 
 namespace ApiServer
 {
@@ -30,6 +31,14 @@ namespace ApiServer
 
         public Startup(IHostingEnvironment env)
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .Enrich.WithProperty("App", "ApiServer")
+                .Enrich.FromLogContext()
+                .WriteTo.Seq("http://localhost:5341")
+                .WriteTo.RollingFile("../../Logs/ApiServer")
+                .CreateLogger();
+
             _env = env;
             var builder = new ConfigurationBuilder()
                  .SetBasePath(env.ContentRootPath)
@@ -133,6 +142,8 @@ namespace ApiServer
         {
             loggerFactory.AddConsole();
             loggerFactory.AddDebug();
+
+            loggerFactory.AddSerilog();
 
             app.UseExceptionHandler("/Home/Error");
             app.UseCors("corsGlobalPolicy");
