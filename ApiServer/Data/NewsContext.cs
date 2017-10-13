@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using ApiServer.Providers;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiServer.Providers
+namespace ApiServer.Data
 {
     public class NewsContext : DbContext
     {

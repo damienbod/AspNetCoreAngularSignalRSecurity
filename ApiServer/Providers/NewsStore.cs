@@ -1,4 +1,5 @@
-﻿using ApiServer.SignalRHubs;
+﻿using ApiServer.Data;
+using ApiServer.SignalRHubs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

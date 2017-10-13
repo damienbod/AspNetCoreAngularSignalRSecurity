@@ -18,6 +18,7 @@ using ApiServer.SignalRHubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Primitives;
 using System.Threading.Tasks;
+using ApiServer.Data;
 
 namespace ApiServer
 {

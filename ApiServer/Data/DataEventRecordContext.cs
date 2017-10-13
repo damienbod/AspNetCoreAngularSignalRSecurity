@@ -1,6 +1,7 @@
+using ApiServer.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiServer.Model
+namespace ApiServer.Data
 {
     public class DataEventRecordContext : DbContext
     {
