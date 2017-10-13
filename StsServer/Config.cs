@@ -39,22 +39,6 @@ namespace QuickstartIdentityServer
                         }
                     },
                     UserClaims = { "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin", "dataEventRecords.user" }
-                },
-                new ApiResource("securedFiles")
-                {
-                    ApiSecrets =
-                    {
-                        new Secret("securedFilesSecret".Sha256())
-                    },
-                    Scopes =
-                    {
-                        new Scope
-                        {
-                            Name = "securedfilesscope",
-                            DisplayName = "Scope for the securedFiles ApiResource"
-                        }
-                    },
-                    UserClaims = { "role", "admin", "user", "securedFiles", "securedFiles.admin", "securedFiles.user" }
                 }
             };
         }

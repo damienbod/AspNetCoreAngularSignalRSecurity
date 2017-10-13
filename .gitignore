@@ -8,3 +8,4 @@
 /SecurityAspNetCoreSignalR/angularApp/**/*.js.map
 /SecurityAspNetCoreSignalR/bin
 /SecurityAspNetCoreSignalR/wwwroot
+/Logs
