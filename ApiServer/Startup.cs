@@ -82,17 +82,35 @@ namespace ApiServer
                 .Build();
 
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-              .AddIdentityServerAuthentication(options =>
+              //.AddIdentityServerAuthentication(options =>
+              //{
+              //    options.Authority = "https://localhost:44318/";
+              //    options.ApiName = "dataEventRecords";
+              //    options.ApiSecret = "dataEventRecordsSecret";
+              //    //options.Events = new JwtBearerEvents
+              //    //{
+              //    //    OnMessageReceived = context =>
+              //    //    {
+              //    //        StringValues token;
+              //    //        if (context.Request.Path.Value.StartsWith("/loo") && context.Request.Query.TryGetValue("token", out token))
+              //    //        {
+              //    //            context.Token = token;
+              //    //        }
+
+              //    //        return Task.CompletedTask;
+              //    //    }
+              //    //};
+              //})
+              .AddJwtBearer(options =>
               {
                   options.Authority = "https://localhost:44318/";
-                  options.ApiName = "dataEventRecords";
-                  options.ApiSecret = "dataEventRecordsSecret";
+                  options.Audience = "dataEventRecords";
+                  options.IncludeErrorDetails = true;
                   options.Events = new JwtBearerEvents
                   {
                       OnMessageReceived = context =>
                       {
-                          StringValues token;
-                          if (context.Request.Path.Value.StartsWith("/loo") && context.Request.Query.TryGetValue("token", out token))
+                          if (context.Request.Path.Value.StartsWith("/loo") && context.Request.Query.TryGetValue("token", out StringValues token))
                           {
                               context.Token = token;
                           }
