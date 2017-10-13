@@ -48,7 +48,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     private init() {
-        this._hubConnection = new HubConnection('https://localhost:44390/loopy');
+
+        const token = this.oidcSecurityService.getToken();
+        let tokenValue = '';
+        if (token !== '') {
+            tokenValue = '?token=' + token;
+        }
+
+        this._hubConnection = new HubConnection('https://localhost:44390/loopy' + tokenValue);
 
         this._hubConnection.on('Send', (data: any) => {
             const received = `Received: ${data}`;
