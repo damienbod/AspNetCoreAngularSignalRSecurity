@@ -51,7 +51,9 @@ namespace SecurityAspNetCoreSignalR
 
             var angularRoutes = new[] {
                  "/home",
-                 "/news"
+                 "/news",
+                 "/dataeventrecords",
+                 "/unauthorized"
              };
 
             app.Use(async (context, next) =>

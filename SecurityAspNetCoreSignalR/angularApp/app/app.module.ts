@@ -76,7 +76,7 @@ export class AppModule {
             openIDImplicitFlowConfiguration.log_console_debug_active = this.clientConfiguration.log_console_debug_active;
             openIDImplicitFlowConfiguration.max_id_token_iat_offset_allowed_in_seconds =
                 this.clientConfiguration.max_id_token_iat_offset_allowed_in_seconds;
-
+            
             this.oidcSecurityService.setupModule(openIDImplicitFlowConfiguration);
             configuration.Server = this.clientConfiguration.apiServer;
         });
