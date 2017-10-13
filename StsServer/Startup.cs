@@ -27,7 +27,7 @@ namespace IdentityServerWithAspNetIdentitySqlite
                 .Enrich.WithProperty("App", "StsServer")
                 .Enrich.FromLogContext()
                 .WriteTo.Seq("http://localhost:5341")
-                .WriteTo.RollingFile("../../Logs/StsServer")
+                .WriteTo.RollingFile("../Logs/StsServer")
                 .CreateLogger();
 
             var builder = new ConfigurationBuilder()

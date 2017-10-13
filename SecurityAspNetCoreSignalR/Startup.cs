@@ -20,7 +20,7 @@ namespace SecurityAspNetCoreSignalR
                 .Enrich.WithProperty("App", "SecurityAspNetCoreSignalR")
                 .Enrich.FromLogContext()
                 .WriteTo.Seq("http://localhost:5341")
-                .WriteTo.RollingFile("../../Logs/SecurityAspNetCoreSignalR")
+                .WriteTo.RollingFile("../Logs/SecurityAspNetCoreSignalR")
                 .CreateLogger();
 
             var builder = new ConfigurationBuilder()

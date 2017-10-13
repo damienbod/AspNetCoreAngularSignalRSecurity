@@ -36,7 +36,7 @@ namespace ApiServer
                 .Enrich.WithProperty("App", "ApiServer")
                 .Enrich.FromLogContext()
                 .WriteTo.Seq("http://localhost:5341")
-                .WriteTo.RollingFile("../../Logs/ApiServer")
+                .WriteTo.RollingFile("../Logs/ApiServer")
                 .CreateLogger();
 
             _env = env;
@@ -116,10 +116,10 @@ namespace ApiServer
                 {
                     policyUser.RequireClaim("scope", "dataEventRecords");
                 });
-                options.AddPolicy("correctUser", policyCorrectUser =>
-                {
-                    policyCorrectUser.Requirements.Add(new CorrectUserRequirement());
-                });
+                //options.AddPolicy("correctUser", policyCorrectUser =>
+                //{
+                //    policyCorrectUser.Requirements.Add(new CorrectUserRequirement());
+                //});
             });
 
             services.AddSingleton<IAuthorizationHandler, CorrectUserHandler>();
