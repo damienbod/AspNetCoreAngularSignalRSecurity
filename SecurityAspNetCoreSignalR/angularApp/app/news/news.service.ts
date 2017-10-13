@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { NewsState } from './store/news.state';
 import * as NewsActions from './store/news.action';
 import { Configuration } from '../app.constants';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Injectable()
 export class NewsService {
@@ -20,9 +21,10 @@ export class NewsService {
 
     constructor(private http: HttpClient,
         private store: Store<any>,
-        private configuration: Configuration
+        private configuration: Configuration,
+        private oidcSecurityService: OidcSecurityService
     ) {
-        this.init();
+        // this.init();
         this.actionUrl = this.configuration.Server + 'api/news/';
 
         this.headers = new HttpHeaders();
@@ -49,7 +51,15 @@ export class NewsService {
 
     private init() {
 
-        this._hubConnection = new HubConnection('https://localhost:44390/looney');
+        const token = this.oidcSecurityService.getToken();
+        let tokenValue = '';
+        if (token !== '') {
+            tokenValue = '?token=' + token;
+            this.headers.append('Authorization', tokenValue);
+        }
+
+        // this.connection = new signalR.HubConnection(url + '?token=' + token, options);
+        this._hubConnection = new HubConnection('https://localhost:44390/looney' + tokenValue);
 
         this._hubConnection.on('Send', (newsItem: NewsItem) => {
             this.store.dispatch(new NewsActions.ReceivedItemAction(newsItem));

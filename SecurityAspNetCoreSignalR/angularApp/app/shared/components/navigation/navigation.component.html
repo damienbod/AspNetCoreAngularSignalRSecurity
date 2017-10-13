@@ -16,6 +16,8 @@
                 <li><a [routerLink]="['/news']">News</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a class="navigationLinkButton" *ngIf="!isAuthorized" (click)="login()">Login</a></li>
+                <li><a class="navigationLinkButton" *ngIf="isAuthorized" (click)="logout()">Logout</a></li>
                 <li>
                     <a href="https://twitter.com/damien_bod"><img src="assets/damienbod.jpg" height="30" /></a>
                 </li>

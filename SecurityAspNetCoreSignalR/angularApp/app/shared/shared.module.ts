@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { CustomFooterComponent } from './components/customfooter/customfooter.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 @NgModule({
     imports: [
@@ -13,12 +14,14 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 
     declarations: [
         NavigationComponent,
-        CustomFooterComponent
+        CustomFooterComponent,
+        UnauthorizedComponent
     ],
 
     exports: [
         NavigationComponent,
-        CustomFooterComponent
+        CustomFooterComponent,
+        UnauthorizedComponent
     ]
 })
 
