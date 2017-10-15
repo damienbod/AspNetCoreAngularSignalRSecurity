@@ -1,16 +1,16 @@
 export class NewsItem {
-    public Header: string;
-    public NewsText: string;
-    public Author: string;
-    public NewsGroup: string;
+    public header: string;
+    public newsText: string;
+    public author: string;
+    public newsGroup: string;
 
     constructor() {
     }
 
     AddData(header: string, newsText: string, author: string, newsGroup: string) {
-        this.Header = header;
-        this.NewsText = newsText;
-        this.Author = author;
-        this.NewsGroup = newsGroup;
+        this.header = header;
+        this.newsText = newsText;
+        this.author = author;
+        this.newsGroup = newsGroup;
     }
 }

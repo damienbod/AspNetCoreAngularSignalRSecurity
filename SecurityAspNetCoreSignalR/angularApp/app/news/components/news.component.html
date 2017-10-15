@@ -1,16 +1,16 @@
-﻿<div class="container-fluid" *ngIf="isAuthorized" >
+﻿<div class="container-fluid">
 
     <div class="row">
 
-        <div class="form-inline" >
+        <div class="form-inline">
             <div class="form-group">
-                
+
                 <label for="group">Group: </label>
                 <select class="form-control" type="number" [(ngModel)]="group">
                     <option *ngFor="let g of (newsState$|async)?.groups" [ngValue]="g">{{g}}</option>
                 </select>
 
-              
+
                 <label for="author">Author: </label>
                 <input type="text" class="form-control" id="author" placeholder="your name" name="author" [(ngModel)]="author" required>
             </div>
@@ -27,13 +27,13 @@
             <div class="form-group">
                 <label for="header" class="col-sm-2 control-label">Header</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="header" placeholder="your header..." name="header" [(ngModel)]="newsItem.Header" required>
+                    <input type="text" class="form-control" id="header" placeholder="your header..." name="header" [(ngModel)]="newsItem.header" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="newsText" class="col-sm-2 control-label">Text</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="newsText" placeholder="your newsText..." name="newsText" [(ngModel)]="newsItem.NewsText" required>
+                    <input type="text" class="form-control" id="newsText" placeholder="your newsText..." name="newsText" [(ngModel)]="newsItem.newsText" required>
                 </div>
             </div>
             <div class="form-group">
@@ -42,7 +42,7 @@
                     <button type="submit" class="btn btn-primary col-sm-12" [disabled]="!newsItemForm.valid">Send News to: {{group}}</button>
                 </div>
             </div>
-            
+
         </form>
     </div>
 
@@ -61,16 +61,16 @@
                 <tbody>
                     <tr *ngFor="let item of newsItems; let i = index">
                         <td>{{i + 1}}</td>
-                        <td>{{item.Header}}</td>
-                        <td>{{item.NewsText}}</td>
-                        <td>{{item.Author}}</td>
-                        <td>{{item.NewsGroup}}</td>
+                        <td>{{item.header}}</td>
+                        <td>{{item.newsText}}</td>
+                        <td>{{item.author}}</td>
+                        <td>{{item.newsGroup}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
- 
+
     <div class="row" *ngIf="newsItems?.length <= 0">
         <span>No news items</span>
     </div>
