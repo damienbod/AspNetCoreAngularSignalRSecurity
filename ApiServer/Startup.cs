@@ -138,10 +138,10 @@ namespace ApiServer
                 {
                     policyUser.RequireClaim("scope", "dataEventRecords");
                 });
-                //options.AddPolicy("correctUser", policyCorrectUser =>
-                //{
-                //    policyCorrectUser.Requirements.Add(new CorrectUserRequirement());
-                //});
+                options.AddPolicy("correctUser", policyCorrectUser =>
+                {
+                    policyCorrectUser.Requirements.Add(new CorrectUserRequirement());
+                });
             });
 
             services.AddSingleton<IAuthorizationHandler, CorrectUserHandler>();

@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using ApiServer.Providers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiServer.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     public class NewsController : Controller
     {

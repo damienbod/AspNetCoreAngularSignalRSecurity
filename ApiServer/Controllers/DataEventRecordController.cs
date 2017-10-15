@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiServer.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [Authorize("dataEventRecords")]
     [Route("api/[controller]")]
     public class DataEventRecordsController : Controller
