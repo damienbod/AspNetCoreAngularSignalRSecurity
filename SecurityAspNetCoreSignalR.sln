@@ -3,12 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityAspNetCoreSignalR", "SecurityAspNetCoreSignalR\SecurityAspNetCoreSignalR.csproj", "{9D3FEC9C-6EAB-433C-AAAC-7D6444F9E8B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecurityAspNetCoreSignalR", "SecurityAspNetCoreSignalR\SecurityAspNetCoreSignalR.csproj", "{9D3FEC9C-6EAB-433C-AAAC-7D6444F9E8B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7CA75068-1E6A-4563-A577-36967ABAC844}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.md = Readme.md
-		TextFile1.txt = TextFile1.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StsServer", "StsServer\StsServer.csproj", "{FE1A9892-39EA-4FA6-8A75-A7CDDFFBFF41}"

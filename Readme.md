@@ -1,1 +1,1 @@
-# Securtiy with ASP.NET Core SignalR and Angalar
+# Security with ASP.NET Core, SignalR and Angular

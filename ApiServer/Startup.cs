@@ -64,11 +64,10 @@ namespace ApiServer
                 ), ServiceLifetime.Singleton
             );
 
-            //Add Cors support to the service
-            services.AddCors();
+            services.AddSingleton<IAuthorizationHandler, CorrectUserHandler>();
+            services.AddSingleton<NewsStore>();
 
             var policy = new Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy();
-
             policy.Headers.Add("*");
             policy.Methods.Add("*");
             policy.Origins.Add("*");
@@ -77,7 +76,6 @@ namespace ApiServer
             services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
 
             var guestPolicy = new AuthorizationPolicyBuilder()
-                .RequireAuthenticatedUser()
                 .RequireClaim("scope", "dataEventRecords")
                 .Build();
 
@@ -144,9 +142,6 @@ namespace ApiServer
                 });
             });
 
-            services.AddSingleton<IAuthorizationHandler, CorrectUserHandler>();
-
-            services.AddSingleton<NewsStore>();
             services.AddSignalR();
 
             services.AddMvc(options =>
