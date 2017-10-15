@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { NewsState } from '../store/news.state';
 import * as NewsActions from '../store/news.action';
 import { NewsItem } from '../models/news-item';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
     selector: 'app-news-component',
     templateUrl: './news.component.html'
 })
 
-export class NewsComponent implements OnInit {
+export class NewsComponent implements OnInit, OnDestroy {
     public async: any;
     newsItem: NewsItem;
     newsItems: NewsItem[];
@@ -23,7 +24,10 @@ export class NewsComponent implements OnInit {
     isAuthorizedSubscription: Subscription;
     isAuthorized: boolean;
 
-    constructor(private store: Store<any>) {
+    constructor(
+        private store: Store<any>,
+        private oidcSecurityService: OidcSecurityService
+    ) {
         this.newsState$ = this.store.select<NewsState>(state => state.news.newsitems);
 
         this.store.select<NewsState>(state => state.news.newsitems).subscribe((o: NewsState) => {
@@ -49,6 +53,17 @@ export class NewsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.store.dispatch(new NewsActions.SelectAllGroupsAction());
+        this.isAuthorizedSubscription = this.oidcSecurityService.getIsAuthorized().subscribe(
+            (isAuthorized: boolean) => {
+                this.isAuthorized = isAuthorized;
+                if (this.isAuthorized) {
+                    this.store.dispatch(new NewsActions.SelectAllGroupsAction());
+                }
+            });
+        console.log('IsAuthorized:' + this.isAuthorized);
+    }
+
+    ngOnDestroy(): void {
+        this.isAuthorizedSubscription.unsubscribe();
     }
 }

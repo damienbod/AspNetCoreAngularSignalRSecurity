@@ -18,13 +18,13 @@ export class NewsService {
     private _hubConnection: HubConnection;
     private actionUrl: string;
     private headers: HttpHeaders;
+    private hubInitialized = false;
 
     constructor(private http: HttpClient,
         private store: Store<any>,
         private configuration: Configuration,
         private oidcSecurityService: OidcSecurityService
     ) {
-        // this.init();
         this.actionUrl = this.configuration.Server + 'api/news/';
 
         this.headers = new HttpHeaders();
@@ -33,15 +33,18 @@ export class NewsService {
     }
 
     send(newsItem: NewsItem): NewsItem {
+        this.checkHub();
         this._hubConnection.invoke('Send', newsItem);
         return newsItem;
     }
 
     joinGroup(group: string): void {
+        this.checkHub();
         this._hubConnection.invoke('JoinGroup', group);
     }
 
     leaveGroup(group: string): void {
+        this.checkHub();
         this._hubConnection.invoke('LeaveGroup', group);
     }
 
@@ -49,41 +52,45 @@ export class NewsService {
         return this.http.get<string[]>(this.actionUrl, { headers: this.headers });
     }
 
-    private init() {
+    private checkHub() {
+        // TODO add error handling
+        if (!this.hubInitialized) {
+            const token = this.oidcSecurityService.getToken();
+            let tokenValue = '';
+            if (token !== '') {
+                tokenValue = '?token=' + token;
+                this.headers.append('Authorization', tokenValue);
+            }
 
-        const token = this.oidcSecurityService.getToken();
-        let tokenValue = '';
-        if (token !== '') {
-            tokenValue = '?token=' + token;
-            this.headers.append('Authorization', tokenValue);
-        }
+            // this.connection = new signalR.HubConnection(url + '?token=' + token, options);
+            this._hubConnection = new HubConnection(this.configuration.Server + 'looney' + tokenValue);
 
-        // this.connection = new signalR.HubConnection(url + '?token=' + token, options);
-        this._hubConnection = new HubConnection(this.configuration.Server + 'looney' + tokenValue);
-
-        this._hubConnection.on('Send', (newsItem: NewsItem) => {
-            this.store.dispatch(new NewsActions.ReceivedItemAction(newsItem));
-        });
-
-        this._hubConnection.on('JoinGroup', (data: string) => {
-            this.store.dispatch(new NewsActions.ReceivedGroupJoinedAction(data));
-        });
-
-        this._hubConnection.on('LeaveGroup', (data: string) => {
-            this.store.dispatch(new NewsActions.ReceivedGroupLeftAction(data));
-        });
-
-        this._hubConnection.on('History', (newsItems: NewsItem[]) => {
-            this.store.dispatch(new NewsActions.ReceivedGroupHistoryAction(newsItems));
-        });
-
-        this._hubConnection.start()
-            .then(() => {
-                console.log('Hub connection started')
-            })
-            .catch(err => {
-                console.log('Error while establishing connection')
+            this._hubConnection.on('Send', (newsItem: NewsItem) => {
+                this.store.dispatch(new NewsActions.ReceivedItemAction(newsItem));
             });
+
+            this._hubConnection.on('JoinGroup', (data: string) => {
+                this.store.dispatch(new NewsActions.ReceivedGroupJoinedAction(data));
+            });
+
+            this._hubConnection.on('LeaveGroup', (data: string) => {
+                this.store.dispatch(new NewsActions.ReceivedGroupLeftAction(data));
+            });
+
+            this._hubConnection.on('History', (newsItems: NewsItem[]) => {
+                this.store.dispatch(new NewsActions.ReceivedGroupHistoryAction(newsItems));
+            });
+
+            this._hubConnection.start()
+                .then(() => {
+                    console.log('Hub connection started')
+                })
+                .catch(err => {
+                    console.log('Error while establishing connection')
+                });
+
+            this.hubInitialized = true;
+        }
     }
 
 }

@@ -1,10 +1,10 @@
-﻿<div class="container-fluid">
+﻿<div class="container-fluid"  *ngIf="isAuthorized" >
 
-    <div class="row">
+    <h1>Send some news messages</h1>
 
+    <div class="row" >
         <div class="form-inline">
             <div class="form-group">
-
                 <label for="group">Group: </label>
                 <select class="form-control" type="number" [(ngModel)]="group">
                     <option *ngFor="let g of (newsState$|async)?.groups" [ngValue]="g">{{g}}</option>
