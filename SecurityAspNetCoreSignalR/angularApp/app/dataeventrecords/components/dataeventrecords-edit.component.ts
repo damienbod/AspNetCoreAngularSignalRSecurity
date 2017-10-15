@@ -38,6 +38,7 @@ export class DataEventRecordsEditComponent implements OnInit, OnDestroy   {
 
         this.sub = this._route.params.subscribe(params => {
             const id = +params['id']; // (+) converts string 'id' to a number
+            this.id = id;
             if (!this.DataEventRecord) {
                 this._dataEventRecordsService.GetById(id)
                     .subscribe(data => this.DataEventRecord = data,
