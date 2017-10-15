@@ -53,7 +53,7 @@ namespace ApiServer.Repositories
             {
                 Name = dataEventRecord.Name,
                 Description = dataEventRecord.Description,
-                Timestamp = dataEventRecord.Timestamp,
+                Timestamp = DateTime.UtcNow,
                 Id = dataEventRecord.Id,
                 Username = username
             });
