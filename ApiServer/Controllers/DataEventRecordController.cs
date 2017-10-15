@@ -22,7 +22,7 @@ namespace ApiServer.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var username = HttpContext.User.Identity.Name;
+            var username = HttpContext.User.FindFirst("name").Value;
             return Ok(_dataEventRecordRepository.GetAll(username));
         }
 
@@ -34,11 +34,11 @@ namespace ApiServer.Controllers
             return Ok(_dataEventRecordRepository.Get(id));
         }
 
-        //[Authorize("dataEventRecordsAdmin")]
+        [Authorize("dataEventRecordsAdmin")]
         [HttpPost]
         public void Post([FromBody]DataEventRecordDto value)
         {
-            var username = HttpContext.User.Identity.Name;
+            var username = HttpContext.User.FindFirst("name").Value;
             _dataEventRecordRepository.Post(value, username);
         }
 
