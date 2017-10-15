@@ -51,6 +51,13 @@ export class NewsService {
     }
 
     getAllGroups(): Observable<string[]> {
+
+        const token = this.oidcSecurityService.getToken();
+        if (token !== '') {
+            const tokenValue = 'Bearer ' + token;
+            this.headers = this.headers.append('Authorization', tokenValue);
+        }
+
         return this.http.get<string[]>(this.actionUrl, { headers: this.headers });
     }
 
@@ -71,10 +78,8 @@ export class NewsService {
         let tokenValue = '';
         if (token !== '') {
             tokenValue = '?token=' + token;
-            this.headers.append('Authorization', tokenValue);
         }
 
-        // this.connection = new signalR.HubConnection(url + '?token=' + token, options);
         this._hubConnection = new HubConnection(this.configuration.Server + 'looney' + tokenValue);
 
         this._hubConnection.on('Send', (newsItem: NewsItem) => {
