@@ -58,6 +58,8 @@ namespace QuickstartIdentityServer
                     IdentityTokenLifetime = 300,
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
+                    AllowOfflineAccess =true,
+                    AlwaysIncludeUserClaimsInIdToken = true,
                     RedirectUris = new List<string>
                     {
                         "https://localhost:44311"

@@ -33,18 +33,11 @@ namespace IdentityServerWithAspNetIdentitySqlite
             var principal = await _claimsFactory.CreateAsync(user);
 
             var claims = principal.Claims.ToList();
-
             claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
-            
 
+            claims.Add(new Claim(JwtClaimTypes.Name, user.Email));
+            claims.Add(new Claim(JwtClaimTypes.Email, user.Email));
             claims.Add(new Claim(JwtClaimTypes.GivenName, user.UserName));
-            //new Claim(JwtClaimTypes.Role, "admin"),
-            //new Claim(JwtClaimTypes.Role, "dataEventRecords.admin"),
-            //new Claim(JwtClaimTypes.Role, "dataEventRecords.user"),
-            //new Claim(JwtClaimTypes.Role, "dataEventRecords"),
-            //new Claim(JwtClaimTypes.Role, "securedFiles.user"),
-            //new Claim(JwtClaimTypes.Role, "securedFiles.admin"),
-            //new Claim(JwtClaimTypes.Role, "securedFiles")
 
             if (user.IsAdmin)
             {
@@ -68,23 +61,6 @@ namespace IdentityServerWithAspNetIdentitySqlite
                 claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords"));
                 claims.Add(new Claim(JwtClaimTypes.Scope, "dataEventRecords"));
             }
-
-            if (user.SecuredFilesRole == "securedFiles.admin")
-            {
-                claims.Add(new Claim(JwtClaimTypes.Role, "securedFiles.admin"));
-                claims.Add(new Claim(JwtClaimTypes.Role, "securedFiles.user"));
-                claims.Add(new Claim(JwtClaimTypes.Role, "securedFiles"));
-                claims.Add(new Claim(JwtClaimTypes.Scope, "securedFiles"));
-            }
-            else
-            {
-                claims.Add(new Claim(JwtClaimTypes.Role, "securedFiles.user"));
-                claims.Add(new Claim(JwtClaimTypes.Role, "securedFiles"));
-                claims.Add(new Claim(JwtClaimTypes.Scope, "securedFiles"));
-            }
-
-            claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
-
 
             context.IssuedClaims = claims;
         }
