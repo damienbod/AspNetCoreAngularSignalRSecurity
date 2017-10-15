@@ -82,44 +82,47 @@ namespace ApiServer
                 .Build();
 
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-              //.AddIdentityServerAuthentication(options =>   // Does not work with SignalR
-              //{
-              //    options.Authority = "https://localhost:44318/";
-              //    options.ApiName = "dataEventRecords";
-              //    options.ApiSecret = "dataEventRecordsSecret";
-              //    options.SupportedTokens = SupportedTokens.Both;
-              //    options.Events = new JwtBearerEvents
-              //    {
-              //        OnMessageReceived = context =>
-              //        {
-              //            StringValues token;
-              //            if (context.Request.Path.Value.StartsWith("/loo") && context.Request.Query.TryGetValue("token", out token))
-              //            {
-              //                context.Token = token;
-              //            }
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = "https://localhost:44318/";
+                    options.Audience = "dataEventRecords";
+                    options.IncludeErrorDetails = true;
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            if (context.Request.Path.Value.StartsWith("/loo") && 
+                                context.Request.Query.TryGetValue("token", out StringValues token)
+                            )
+                            {
+                                context.Token = token;
+                            }
 
-              //            return Task.CompletedTask;
-              //        }
-              //    };
-              //});
-              .AddJwtBearer(options =>
-              {
-                  options.Authority = "https://localhost:44318/";
-                  options.Audience = "dataEventRecords";
-                  options.IncludeErrorDetails = true;
-                  options.Events = new JwtBearerEvents
-                  {
-                      OnMessageReceived = context =>
-                      {
-                          if (context.Request.Path.Value.StartsWith("/loo") && context.Request.Query.TryGetValue("token", out StringValues token))
-                          {
-                              context.Token = token;
-                          }
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
 
-                          return Task.CompletedTask;
-                      }
-                  };
-              });
+            //.AddIdentityServerAuthentication(options =>   // Does not work with SignalR
+            //{
+            //    options.Authority = "https://localhost:44318/";
+            //    options.ApiName = "dataEventRecords";
+            //    options.ApiSecret = "dataEventRecordsSecret";
+            //    options.SupportedTokens = SupportedTokens.Jwt;
+            //    options.Events = new JwtBearerEvents
+            //    {
+            //        OnMessageReceived = context =>
+            //        {
+            //            StringValues token;
+            //            if (context.Request.Path.Value.StartsWith("/loo") && context.Request.Query.TryGetValue("token", out token))
+            //            {
+            //                context.Token = token;
+            //            }
+
+            //            return Task.CompletedTask;
+            //        }
+            //    };
+            //});
 
             services.AddAuthorization(options =>
             {
