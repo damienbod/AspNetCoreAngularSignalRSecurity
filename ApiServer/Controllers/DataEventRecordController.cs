@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApiServer.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
-    [Authorize("dataEventRecords")]
+    //[Authorize("dataEventRecords")]
     [Route("api/[controller]")]
     public class DataEventRecordsController : Controller
     {
@@ -18,7 +18,7 @@ namespace ApiServer.Controllers
             _dataEventRecordRepository = dataEventRecordRepository;
         }
 
-        [Authorize("dataEventRecordsUser")]
+        //[Authorize("dataEventRecordsUser")]
         [HttpGet]
         public IActionResult Get()
         {
@@ -27,14 +27,14 @@ namespace ApiServer.Controllers
         }
 
         //[Authorize("correctUser")]
-        [Authorize("dataEventRecordsAdmin")]
+        //[Authorize("dataEventRecordsAdmin")]
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
             return Ok(_dataEventRecordRepository.Get(id));
         }
 
-        [Authorize("dataEventRecordsAdmin")]
+        //[Authorize("dataEventRecordsAdmin")]
         [HttpPost]
         public void Post([FromBody]DataEventRecordDto value)
         {
@@ -42,14 +42,14 @@ namespace ApiServer.Controllers
             _dataEventRecordRepository.Post(value, username);
         }
 
-        [Authorize("dataEventRecordsAdmin")]
+        //[Authorize("dataEventRecordsAdmin")]
         [HttpPut("{id}")]
         public void Put(long id, [FromBody]DataEventRecordDto value)
         {
             _dataEventRecordRepository.Put(id, value);
         }
 
-        [Authorize("dataEventRecordsAdmin")]
+        //[Authorize("dataEventRecordsAdmin")]
         [HttpDelete("{id}")]
         public void Delete(long id)
         {

@@ -20,6 +20,8 @@ using Microsoft.Extensions.Primitives;
 using System.Threading.Tasks;
 using ApiServer.Data;
 using Serilog;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ApiServer
 {
@@ -85,6 +87,12 @@ namespace ApiServer
                     options.Authority = "https://localhost:44318/";
                     options.Audience = "dataEventRecords";
                     options.IncludeErrorDetails = true;
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = "https://localhost:44318/",
+                        ValidAudience = "dataEventRecords",
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("dataEventRecordsSecret"))
+                    };
                     options.Events = new JwtBearerEvents
                     {
                         OnMessageReceived = context =>
