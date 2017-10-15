@@ -28,7 +28,7 @@ export class NewsService {
         private configuration: Configuration,
         private oidcSecurityService: OidcSecurityService
     ) {
-        this.actionUrl = this.configuration.Server + 'api/news/';
+        this.actionUrl = `${this.configuration.Server}api/news/`;
 
         this.headers = new HttpHeaders();
         this.headers = this.headers.set('Content-Type', 'application/json');
@@ -80,7 +80,7 @@ export class NewsService {
             tokenValue = '?token=' + token;
         }
 
-        this._hubConnection = new HubConnection(this.configuration.Server + 'looney' + tokenValue);
+        this._hubConnection = new HubConnection(`${this.configuration.Server}looney${tokenValue}`);
 
         this._hubConnection.on('Send', (newsItem: NewsItem) => {
             this.store.dispatch(new NewsActions.ReceivedItemAction(newsItem));

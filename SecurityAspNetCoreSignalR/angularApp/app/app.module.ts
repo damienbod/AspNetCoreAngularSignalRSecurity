@@ -88,7 +88,7 @@ export class AppModule {
         // console.log('window.location.href', window.location.href);
         // console.log('window.location.origin', window.location.origin);
 
-        return this.http.get(window.location.origin + '/api/ClientAppSettings').map(res => {
+        return this.http.get(`${window.location.origin}/api/ClientAppSettings`).map(res => {
             this.clientConfiguration = res.json();
         });
     }
