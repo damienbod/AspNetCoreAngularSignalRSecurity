@@ -12,7 +12,7 @@ install:
 build_script:
 - dotnet build
 - npm -g install npm@latest
-- cd src\SecurityAspNetCoreSignalR
+- cd SecurityAspNetCoreSignalR
 - npm install
 - npm run build-production
 - npm run build-dev
