@@ -1,5 +1,7 @@
 # Security with ASP.NET Core, SignalR and Angular
 
+[![Build status](https://ci.appveyor.com/api/projects/status/y3m83q53ql5g3ywl?svg=true)](https://ci.appveyor.com/project/damienbod/aspnetcoreangularsignalrsecurity)
+
 
 ### Posts in this series:
 
