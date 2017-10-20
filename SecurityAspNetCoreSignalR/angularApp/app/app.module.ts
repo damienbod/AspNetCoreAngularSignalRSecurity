@@ -69,7 +69,7 @@ export class AppModule {
             openIDImplicitFlowConfiguration.post_logout_redirect_uri = this.clientConfiguration.post_logout_redirect_uri;
             openIDImplicitFlowConfiguration.start_checksession = this.clientConfiguration.start_checksession;
             openIDImplicitFlowConfiguration.silent_renew = this.clientConfiguration.silent_renew;
-            openIDImplicitFlowConfiguration.startup_route = this.clientConfiguration.startup_route;
+            openIDImplicitFlowConfiguration.post_login_route = this.clientConfiguration.startup_route;
             openIDImplicitFlowConfiguration.forbidden_route = this.clientConfiguration.forbidden_route;
             openIDImplicitFlowConfiguration.unauthorized_route = this.clientConfiguration.unauthorized_route;
             openIDImplicitFlowConfiguration.log_console_warning_active = this.clientConfiguration.log_console_warning_active;
