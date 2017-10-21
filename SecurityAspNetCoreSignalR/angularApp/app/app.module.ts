@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule, Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Configuration } from './app.constants';
 
 import { AppComponent } from './app.component';
@@ -23,7 +23,6 @@ import { AuthModule, OidcSecurityService, OpenIDImplicitFlowConfiguration } from
         BrowserModule,
         AppRoutes,
         SharedModule,
-        HttpModule,
         HttpClientModule,
         AuthModule.forRoot(),
         CoreModule.forRoot(),
@@ -53,12 +52,14 @@ export class AppModule {
     clientConfiguration: any;
 
     constructor(public oidcSecurityService: OidcSecurityService,
-        private http: Http,
+        private http: HttpClient,
         private configuration: Configuration
     ) {
 
         console.log('APP STARTING');
         this.configClient().subscribe(config => {
+
+            this.clientConfiguration = config;
 
             const openIDImplicitFlowConfiguration = new OpenIDImplicitFlowConfiguration();
             openIDImplicitFlowConfiguration.stsServer = this.clientConfiguration.stsServer;
@@ -87,9 +88,8 @@ export class AppModule {
         // console.log('window.location', window.location);
         // console.log('window.location.href', window.location.href);
         // console.log('window.location.origin', window.location.origin);
+        // console.log(`${window.location.origin}/api/ClientAppSettings`);
 
-        return this.http.get(`${window.location.origin}/api/ClientAppSettings`).map(res => {
-            this.clientConfiguration = res.json();
-        });
+        return this.http.get(`${window.location.origin}/api/ClientAppSettings`);
     }
 }
