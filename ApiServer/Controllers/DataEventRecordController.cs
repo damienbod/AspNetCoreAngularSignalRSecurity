@@ -44,10 +44,11 @@ namespace ApiServer.Controllers
         }
 
         [Authorize("dataEventRecordsAdmin")]
+        [Authorize("correctUser")]
         [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody]DataEventRecordDto value)
+        public IActionResult Put(long id, [FromBody]DataEventRecordDto dataEventRecordDto)
         {
-            _dataEventRecordRepository.Put(id, value);
+            _dataEventRecordRepository.Put(id, dataEventRecordDto);
             return NoContent();
         }
 

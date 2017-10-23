@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApiServer.Model;
 
 namespace ApiServer.Repositories
@@ -10,5 +11,6 @@ namespace ApiServer.Repositories
         IEnumerable<DataEventRecordDto> GetAll(string username);
         void Post(DataEventRecordDto dataEventRecord, string username);
         void Put(long id, DataEventRecordDto dataEventRecord);
+        string GetUsername(long dataEventRecordId);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using ApiServer.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using System;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ApiServer.Policies
@@ -24,9 +23,11 @@ namespace ApiServer.Policies
 
             var authFilterCtx = (Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)context.Resource;
             var httpContext = authFilterCtx.HttpContext;
+            var pathData = httpContext.Request.Path.Value.Split("/");
+            long id = long.Parse(pathData[pathData.Length -1]);
 
-            //  _dataEventRecordRepository.Get(httpContext.Request.Query.TryGetValue())
-            if ("mist" == requirement.Username)
+            var username = _dataEventRecordRepository.GetUsername(id);
+            if (username == httpContext.User.Identity.Name)
             {
                 context.Succeed(requirement);
             }
