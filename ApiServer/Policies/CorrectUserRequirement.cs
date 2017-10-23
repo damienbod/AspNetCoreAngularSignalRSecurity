@@ -2,10 +2,5 @@
 
 namespace ApiServer.Policies
 {
-    public class CorrectUserRequirement : IAuthorizationRequirement
-    {
-        public CorrectUserRequirement()
-        {
-        }
-    }
+    public class CorrectUserRequirement : IAuthorizationRequirement{}
 }
