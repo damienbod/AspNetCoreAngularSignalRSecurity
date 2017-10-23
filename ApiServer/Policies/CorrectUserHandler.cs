@@ -1,7 +1,6 @@
 ﻿using ApiServer.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using System;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ApiServer.Policies
