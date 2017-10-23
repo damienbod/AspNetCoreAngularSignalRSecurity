@@ -46,6 +46,13 @@ namespace ApiServer.Repositories
             return dataEventRecord;
         }
 
+
+        public string GetUsername(long id)
+        {
+            var data = _context.DataEventRecords.First(t => t.Id == id);
+            return data.Username;
+        }
+
         [HttpPost]
         public void Post(DataEventRecordDto dataEventRecord, string username)
         {
