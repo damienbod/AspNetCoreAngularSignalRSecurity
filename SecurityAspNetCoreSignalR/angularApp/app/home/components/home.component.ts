@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
 import { HubConnection } from '@aspnet/signalr-client';
 import { Configuration } from '../../app.constants';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
@@ -66,7 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             .then(() => {
                 console.log('Hub connection started')
             })
-            .catch(err => {
+            .catch(() => {
                 console.log('Error while establishing connection')
             });
     }

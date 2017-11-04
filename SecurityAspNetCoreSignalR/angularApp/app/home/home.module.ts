@@ -6,10 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home.component';
 import { HomeRoutes } from './home.routes';
 
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-
-
 @NgModule({
     imports: [
         CommonModule,

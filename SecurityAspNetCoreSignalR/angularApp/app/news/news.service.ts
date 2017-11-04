@@ -8,7 +8,6 @@ import { Observable } from 'rxjs/Observable';
 import { HubConnection } from '@aspnet/signalr-client';
 import { NewsItem } from './models/news-item';
 import { Store } from '@ngrx/store';
-import { NewsState } from './store/news.state';
 import * as NewsActions from './store/news.action';
 import { Configuration } from '../app.constants';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
@@ -102,7 +101,7 @@ export class NewsService {
             .then(() => {
                 console.log('Hub connection started')
             })
-            .catch(err => {
+            .catch(() => {
                 console.log('Error while establishing connection')
             });
     }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Configuration } from './app.constants';
 
 import { AppComponent } from './app.component';
@@ -52,8 +52,7 @@ export class AppModule {
     clientConfiguration: any;
 
     constructor(public oidcSecurityService: OidcSecurityService,
-        private http: HttpClient,
-        private configuration: Configuration
+        private http: HttpClient
     ) {
 
         console.log('APP STARTING');
@@ -79,7 +78,7 @@ export class AppModule {
                 this.clientConfiguration.max_id_token_iat_offset_allowed_in_seconds;
 
             this.oidcSecurityService.setupModule(openIDImplicitFlowConfiguration);
-            configuration.Server = this.clientConfiguration.apiServer;
+            // configuration.Server = this.clientConfiguration.apiServer;
         });
     }
 

@@ -1,6 +1,4 @@
 import { NewsState } from './news.state';
-import { NewsItem } from '../models/news-item';
-import { Action } from '@ngrx/store';
 import * as newsAction from './news.action';
 
 export const initialState: NewsState = {
