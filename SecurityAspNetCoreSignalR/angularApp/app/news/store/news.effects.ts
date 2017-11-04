@@ -8,7 +8,6 @@ import { of } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/Rx';
 
 import * as newsAction from './news.action';
-import { NewsItem } from '../models/news-item';
 import { NewsService } from '../news.service';
 
 @Injectable()
@@ -38,7 +37,7 @@ export class NewsEffects {
                 .map((data: string[]) => {
                     return new newsAction.SelectAllGroupsActionComplete(data);
                 })
-                .catch((error: any) => {
+                .catch(() => {
                     return of({ type: 'getAllGroups$' })
                 })
         );
