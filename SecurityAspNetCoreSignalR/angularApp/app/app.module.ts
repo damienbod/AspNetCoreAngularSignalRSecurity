@@ -78,7 +78,7 @@ export class AppModule {
                 this.clientConfiguration.max_id_token_iat_offset_allowed_in_seconds;
 
             this.oidcSecurityService.setupModule(openIDImplicitFlowConfiguration);
-            //configuration.Server = this.clientConfiguration.apiServer;
+            // configuration.Server = this.clientConfiguration.apiServer;
         });
     }
 

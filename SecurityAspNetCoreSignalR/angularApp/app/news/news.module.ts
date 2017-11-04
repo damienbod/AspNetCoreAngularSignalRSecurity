@@ -11,6 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NewsEffects } from './store/news.effects';
 import { newsReducer } from './store/news.reducer';
+import * as newsAction from './store/news.action';
 
 @NgModule({
     imports: [
@@ -19,7 +20,7 @@ import { newsReducer } from './store/news.reducer';
         HttpClientModule,
         NewsRoutes,
         StoreModule.forFeature('news', {
-            newsitems: newsReducer,
+            newsitems: newsReducer, newsAction
         }),
         EffectsModule.forFeature([NewsEffects])
     ],
