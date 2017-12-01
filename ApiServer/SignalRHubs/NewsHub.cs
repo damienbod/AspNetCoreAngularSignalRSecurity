@@ -1,7 +1,6 @@
 ﻿using ApiServer.Providers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -37,7 +36,15 @@ namespace ApiServer.SignalRHubs
                 throw new System.Exception("cannot join a group which does not exist.");
             }
 
-            _userInfoInMemory.AddUpdate(Context.ConnectionId, groupName, Context.User.Identity.Name);
+            if(_userInfoInMemory.AddUpdate(Context.ConnectionId, groupName, Context.User.Identity.Name))
+            {
+                // send all online user the new user
+                IReadOnlyList<string> list = new List<string>() { Context.ConnectionId };
+                await Clients.AllExcept(list).InvokeAsync(
+                    "NewOnlineUser",
+                    _userInfoInMemory.GetUserInfo(Context.ConnectionId)
+                );
+            }
 
             await Groups.AddAsync(Context.ConnectionId, groupName);
             await Clients.Group(groupName).InvokeAsync("JoinGroup", groupName);
@@ -45,12 +52,7 @@ namespace ApiServer.SignalRHubs
             var history = _newsStore.GetAllNewsItems(groupName);
             await Clients.Client(Context.ConnectionId).InvokeAsync("History", history);
 
-            // send all online user the new user
-            IReadOnlyList<string> list = new List<string>() { Context.ConnectionId };
-            //await Clients.AllExcept(list).InvokeAsync(
-            //    "NewOnlineUser", 
-            //    _userInfoInMemory.GetAllExceptUser()
-            //);
+            
 
             // send the new user all existing users
             await Clients.Client(Context.ConnectionId).InvokeAsync(
@@ -68,6 +70,11 @@ namespace ApiServer.SignalRHubs
 
             await Clients.Group(groupName).InvokeAsync("LeaveGroup", groupName);
             await Groups.RemoveAsync(Context.ConnectionId, groupName);
+        }
+
+        public Task SendDirectMessage(string message, string targetUserId)
+        {
+            return Clients.Client(targetUserId).InvokeAsync("SendDM", message);
         }
     }
 }
