@@ -68,6 +68,7 @@ namespace ApiServer
 
             services.AddSingleton<IAuthorizationHandler, CorrectUserHandler>();
             services.AddSingleton<NewsStore>();
+            services.AddSingleton<UserInfoInMemory>();
 
             var policy = new Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy();
             policy.Headers.Add("*");

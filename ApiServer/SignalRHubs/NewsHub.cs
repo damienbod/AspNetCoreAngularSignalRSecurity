@@ -1,6 +1,8 @@
 ﻿using ApiServer.Providers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ApiServer.SignalRHubs
@@ -9,9 +11,11 @@ namespace ApiServer.SignalRHubs
     public class NewsHub : Hub
     {
         private NewsStore _newsStore;
+        private UserInfoInMemory _userInfoInMemory;
 
-        public NewsHub(NewsStore newsStore)
+        public NewsHub(NewsStore newsStore, UserInfoInMemory userInfoInMemory)
         {
+            _userInfoInMemory = userInfoInMemory;
             _newsStore = newsStore;
         }
 
@@ -32,6 +36,8 @@ namespace ApiServer.SignalRHubs
             {
                 throw new System.Exception("cannot join a group which does not exist.");
             }
+
+            _userInfoInMemory.AddUpdate(Context.ConnectionId, groupName, Context.User.Identity.Name);
 
             await Groups.AddAsync(Context.ConnectionId, groupName);
             await Clients.Group(groupName).InvokeAsync("JoinGroup", groupName);
