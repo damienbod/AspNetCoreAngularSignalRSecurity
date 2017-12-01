@@ -116,7 +116,7 @@ export class ReceivedNewOnlineUser implements Action {
 export class ReceivedOnlineUsers implements Action {
     readonly type = RECEIVED_ONLINE_USERS;
 
-    constructor(public onlineUser: OnlineUser) { }
+    constructor(public onlineUsers: OnlineUser[]) { }
 }
 
 export type Actions
