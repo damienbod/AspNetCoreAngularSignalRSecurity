@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ApiServer.SignalRHubs
 {
@@ -7,10 +8,11 @@ namespace ApiServer.SignalRHubs
     {
         private ConcurrentDictionary<string, UserInfo> _onlineUser { get; set; } = new ConcurrentDictionary<string, UserInfo>();
 
-        public void AddUpdate(string key, string groupName, string name)
+        public void AddUpdate(string id, string groupName, string name)
         {
-            var userInfo = _onlineUser.GetOrAdd(key, new UserInfo
+            var userInfo = _onlineUser.GetOrAdd(id, new UserInfo
             {
+                Id = id,
                 Name = name,
                 Groups = new List<string> { groupName }
 
@@ -20,6 +22,11 @@ namespace ApiServer.SignalRHubs
             {
                 userInfo.Groups.Add(groupName);
             }
+        }
+
+        public IEnumerable<UserInfo> GetAllExceptUser(string id)
+        {
+            return _onlineUser.Values.Where(item => item.Id != id);
         }
     }
 }

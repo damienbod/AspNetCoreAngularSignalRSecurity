@@ -44,6 +44,19 @@ namespace ApiServer.SignalRHubs
 
             var history = _newsStore.GetAllNewsItems(groupName);
             await Clients.Client(Context.ConnectionId).InvokeAsync("History", history);
+
+            // send all online user the new user
+            IReadOnlyList<string> list = new List<string>() { Context.ConnectionId };
+            //await Clients.AllExcept(list).InvokeAsync(
+            //    "NewOnlineUser", 
+            //    _userInfoInMemory.GetAllExceptUser()
+            //);
+
+            // send the new user all existing users
+            await Clients.Client(Context.ConnectionId).InvokeAsync(
+                "OnlineUsers",
+                _userInfoInMemory.GetAllExceptUser(Context.ConnectionId)
+            );
         }
 
         public async Task LeaveGroup(string groupName)
