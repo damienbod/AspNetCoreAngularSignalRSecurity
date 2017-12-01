@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { NewsItem } from '../models/news-item';
+import { OnlineUser } from '../models/online-user';
 
 export const JOIN_GROUP = '[news] JOIN_GROUP';
 export const LEAVE_GROUP = '[news] LEAVE_GROUP';
@@ -10,12 +11,28 @@ export const SEND_NEWS_ITEM_COMPLETE = '[news] SEND_NEWS_ITEM_COMPLETE';
 export const RECEIVED_NEWS_ITEM = '[news] RECEIVED_NEWS_ITEM';
 export const RECEIVED_GROUP_JOINED = '[news] RECEIVED_GROUP_JOINED';
 export const RECEIVED_GROUP_LEFT = '[news] RECEIVED_GROUP_LEFT';
-
 export const RECEIVED_GROUP_HISTORY = '[news] RECEIVED_GROUP_HISTORY';
 
+export const RECEIVED_NEW_ONLINE_USER = '[news] RECEIVED_NEW_ONLINE_USER';
+export const RECEIVED_ONLINE_USERS = '[news] RECEIVED_ONLINE_USERS';
 
 export const SELECTALL_GROUPS = '[news] Select All Groups';
 export const SELECTALL_GROUPS_COMPLETE = '[news] Select All Groups Complete';
+
+export const SEND_DIRECT_MESSAGE = '[news] SEND_DIRECT_MESSAGE';
+export const SEND_DIRECT_MESSAGE_COMPLETE = '[news] SEND_DIRECT_MESSAGE_COMPLETE';
+
+export class SendDirectMessageAction implements Action {
+    readonly type = SEND_DIRECT_MESSAGE;
+
+    constructor(public message: string, public userId: string) { }
+}
+
+export class SendDirectMessageActionComplete implements Action {
+    readonly type = SEND_DIRECT_MESSAGE_COMPLETE;
+
+    constructor(public message: string) { }
+}
 
 export class JoinGroupAction implements Action {
     readonly type = JOIN_GROUP;
@@ -41,6 +58,7 @@ export class LeaveGroupActionComplete implements Action {
 
     constructor(public group: string) { }
 }
+
 export class SendNewsItemAction implements Action {
     readonly type = SEND_NEWS_ITEM;
 
@@ -89,6 +107,18 @@ export class SelectAllGroupsActionComplete implements Action {
     constructor(public groups: string[]) { }
 }
 
+export class ReceivedNewOnlineUser implements Action {
+    readonly type = RECEIVED_NEW_ONLINE_USER;
+
+    constructor(public onlineUser: OnlineUser) { }
+}
+
+export class ReceivedOnlineUsers implements Action {
+    readonly type = RECEIVED_ONLINE_USERS;
+
+    constructor(public onlineUser: OnlineUser) { }
+}
+
 export type Actions
     = JoinGroupAction
     | LeaveGroupAction
@@ -101,5 +131,9 @@ export type Actions
     | ReceivedGroupLeftAction
     | ReceivedGroupHistoryAction
     | SelectAllGroupsAction
-    | SelectAllGroupsActionComplete;
+    | SelectAllGroupsActionComplete
+    | SendDirectMessageAction
+    | SendDirectMessageActionComplete
+    | ReceivedNewOnlineUser
+    | ReceivedOnlineUsers;
 

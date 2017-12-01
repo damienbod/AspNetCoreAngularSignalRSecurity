@@ -41,6 +41,11 @@ export class NewsService {
         return newsItem;
     }
 
+    sendDirectMessage(message: string, userId: string): string {
+        this._hubConnection.invoke('SendDM', message, userId);
+        return message;
+    }
+
     joinGroup(group: string): void {
         this._hubConnection.invoke('JoinGroup', group);
     }

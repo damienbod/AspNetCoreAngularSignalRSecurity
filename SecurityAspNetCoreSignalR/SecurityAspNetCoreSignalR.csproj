@@ -13,4 +13,13 @@
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="angularApp\app\news\models\online-user.js">
+      <DependentUpon>online-user.ts</DependentUpon>
+    </None>
+    <None Update="angularApp\app\news\models\online-user.js.map">
+      <DependentUpon>online-user.js</DependentUpon>
+    </None>
+  </ItemGroup>
 </Project>
