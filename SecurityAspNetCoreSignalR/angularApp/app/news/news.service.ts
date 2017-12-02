@@ -111,6 +111,10 @@ export class NewsService {
             this.store.dispatch(new NewsActions.ReceivedOnlineUsers(onlineUsers));
         });
 
+        this._hubConnection.on('NewOnlineUser', (message: string, onlineUser: OnlineUser) => {
+            this.store.dispatch(new NewsActions.ReceivedDirectMessage(message, onlineUser));
+        });
+
         this._hubConnection.start()
             .then(() => {
                 console.log('Hub connection started')

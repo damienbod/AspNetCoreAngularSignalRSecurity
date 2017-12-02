@@ -21,6 +21,7 @@ export const SELECTALL_GROUPS_COMPLETE = '[news] Select All Groups Complete';
 
 export const SEND_DIRECT_MESSAGE = '[news] SEND_DIRECT_MESSAGE';
 export const SEND_DIRECT_MESSAGE_COMPLETE = '[news] SEND_DIRECT_MESSAGE_COMPLETE';
+export const RECEIVED_DIRECT_MESSAGE = '[news] RECEIVED_DIRECT_MESSAGE';
 
 export class SendDirectMessageAction implements Action {
     readonly type = SEND_DIRECT_MESSAGE;
@@ -119,6 +120,13 @@ export class ReceivedOnlineUsers implements Action {
     constructor(public onlineUsers: OnlineUser[]) { }
 }
 
+
+export class ReceivedDirectMessage implements Action {
+    readonly type = RECEIVED_DIRECT_MESSAGE;
+
+    constructor(public message: string, public onlineUser: OnlineUser) { }
+}
+
 export type Actions
     = JoinGroupAction
     | LeaveGroupAction
@@ -135,5 +143,6 @@ export type Actions
     | SendDirectMessageAction
     | SendDirectMessageActionComplete
     | ReceivedNewOnlineUser
-    | ReceivedOnlineUsers;
+    | ReceivedOnlineUsers
+    | ReceivedDirectMessage;
 
