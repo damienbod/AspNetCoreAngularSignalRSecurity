@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import * as NewsActions from './store/news.action';
 import { Configuration } from '../app.constants';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { OnlineUser } from './models/online-user';
 
 @Injectable()
 export class NewsService {
@@ -100,6 +101,14 @@ export class NewsService {
 
         this._hubConnection.on('History', (newsItems: NewsItem[]) => {
             this.store.dispatch(new NewsActions.ReceivedGroupHistoryAction(newsItems));
+        });
+
+        this._hubConnection.on('NewOnlineUser', (onlineUser: OnlineUser) => {
+            this.store.dispatch(new NewsActions.ReceivedNewOnlineUser(onlineUser));
+        });
+
+        this._hubConnection.on('OnlineUsers', (onlineUsers: OnlineUser[]) => {
+            this.store.dispatch(new NewsActions.ReceivedOnlineUsers(onlineUsers));
         });
 
         this._hubConnection.start()

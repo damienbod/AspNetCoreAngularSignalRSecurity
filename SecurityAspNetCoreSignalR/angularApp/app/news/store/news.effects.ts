@@ -13,13 +13,19 @@ import { NewsService } from '../news.service';
 @Injectable()
 export class NewsEffects {
 
-    @Effect() sendNewItem$: Observable<Action> = this.actions$.ofType<newsAction.SendNewsItemAction>(newsAction.SEND_NEWS_ITEM)
+    @Effect() sendNewItem$ = this.actions$.ofType<newsAction.SendNewsItemAction>(newsAction.SEND_NEWS_ITEM)
         .switchMap((action: newsAction.SendNewsItemAction) => {
             this.newsService.send(action.newsItem);
             return Observable.of(new newsAction.SendNewsItemActionComplete(action.newsItem));
         });
 
-    @Effect() joinGroup$: Observable<Action> = this.actions$.ofType<newsAction.JoinGroupAction>(newsAction.JOIN_GROUP)
+    @Effect() sendDirectMessage$ = this.actions$.ofType<newsAction.SendDirectMessageAction>(newsAction.SEND_DIRECT_MESSAGE)
+        .switchMap((action: newsAction.SendDirectMessageAction) => {
+            this.newsService.sendDirectMessage(action.message, action.userId);
+            return Observable.of(new newsAction.SendDirectMessageActionComplete(action.message));
+        });
+
+    @Effect() joinGroup$ = this.actions$.ofType<newsAction.JoinGroupAction>(newsAction.JOIN_GROUP)
         .switchMap((action: newsAction.JoinGroupAction) => {
             this.newsService.joinGroup(action.group);
             return Observable.of(new newsAction.JoinGroupActionComplete(action.group));
@@ -31,7 +37,7 @@ export class NewsEffects {
             return Observable.of(new newsAction.LeaveGroupActionComplete(action.group));
         });
 
-    @Effect() getAllGroups$: Observable<Action> = this.actions$.ofType(newsAction.SELECTALL_GROUPS)
+    @Effect() getAllGroups$ = this.actions$.ofType(newsAction.SELECTALL_GROUPS)
         .switchMap(() =>
             this.newsService.getAllGroups()
                 .map((data: string[]) => {
