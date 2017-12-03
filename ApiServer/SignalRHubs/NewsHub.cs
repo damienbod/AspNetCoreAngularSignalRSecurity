@@ -10,11 +10,9 @@ namespace ApiServer.SignalRHubs
     public class NewsHub : Hub
     {
         private NewsStore _newsStore;
-        private UserInfoInMemory _userInfoInMemory;
 
-        public NewsHub(NewsStore newsStore, UserInfoInMemory userInfoInMemory)
+        public NewsHub(NewsStore newsStore)
         {
-            _userInfoInMemory = userInfoInMemory;
             _newsStore = newsStore;
         }
 
@@ -36,29 +34,11 @@ namespace ApiServer.SignalRHubs
                 throw new System.Exception("cannot join a group which does not exist.");
             }
 
-            if(_userInfoInMemory.AddUpdate(Context.ConnectionId, groupName, Context.User.Identity.Name))
-            {
-                // send all online user the new user
-                IReadOnlyList<string> list = new List<string>() { Context.ConnectionId };
-                await Clients.AllExcept(list).InvokeAsync(
-                    "NewOnlineUser",
-                    _userInfoInMemory.GetUserInfo(Context.ConnectionId)
-                );
-            }
-
             await Groups.AddAsync(Context.ConnectionId, groupName);
             await Clients.Group(groupName).InvokeAsync("JoinGroup", groupName);
 
             var history = _newsStore.GetAllNewsItems(groupName);
             await Clients.Client(Context.ConnectionId).InvokeAsync("History", history);
-
-            
-
-            // send the new user all existing users
-            await Clients.Client(Context.ConnectionId).InvokeAsync(
-                "OnlineUsers",
-                _userInfoInMemory.GetAllExceptUser(Context.ConnectionId)
-            );
         }
 
         public async Task LeaveGroup(string groupName)
@@ -70,12 +50,6 @@ namespace ApiServer.SignalRHubs
 
             await Clients.Group(groupName).InvokeAsync("LeaveGroup", groupName);
             await Groups.RemoveAsync(Context.ConnectionId, groupName);
-        }
-
-        public Task SendDirectMessage(string message, string targetUserId)
-        {
-            var userInfoSender = _userInfoInMemory.GetUserInfo(Context.ConnectionId);
-            return Clients.Client(targetUserId).InvokeAsync("SendDM", message, userInfoSender);
         }
     }
 }
