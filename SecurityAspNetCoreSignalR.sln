@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecurityAspNetCoreSignalR", "SecurityAspNetCoreSignalR\SecurityAspNetCoreSignalR.csproj", "{9D3FEC9C-6EAB-433C-AAAC-7D6444F9E8B8}"
 EndProject
@@ -13,6 +13,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StsServer", "StsServer\StsServer.csproj", "{FE1A9892-39EA-4FA6-8A75-A7CDDFFBFF41}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer", "ApiServer\ApiServer.csproj", "{61242CA8-FF15-4EC7-8DC4-80CD98054927}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirectMessagesAngular", "DirectMessagesAngular\DirectMessagesAngular.csproj", "{1A23AF18-67B3-421B-BE24-E0585B5F9D99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{61242CA8-FF15-4EC7-8DC4-80CD98054927}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61242CA8-FF15-4EC7-8DC4-80CD98054927}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61242CA8-FF15-4EC7-8DC4-80CD98054927}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A23AF18-67B3-421B-BE24-E0585B5F9D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A23AF18-67B3-421B-BE24-E0585B5F9D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A23AF18-67B3-421B-BE24-E0585B5F9D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A23AF18-67B3-421B-BE24-E0585B5F9D99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

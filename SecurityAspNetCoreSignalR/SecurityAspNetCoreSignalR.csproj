@@ -13,4 +13,10 @@
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="angularApp\app\news\components\direct-message.component.js">
+      <DependentUpon>direct-message.component.ts</DependentUpon>
+    </None>
+  </ItemGroup>
 </Project>
