@@ -19,12 +19,6 @@ export class NewsEffects {
             return Observable.of(new newsAction.SendNewsItemActionComplete(action.newsItem));
         });
 
-    @Effect() sendDirectMessage$ = this.actions$.ofType<newsAction.SendDirectMessageAction>(newsAction.SEND_DIRECT_MESSAGE)
-        .switchMap((action: newsAction.SendDirectMessageAction) => {
-            this.newsService.sendDirectMessage(action.message, action.userId);
-            return Observable.of(new newsAction.SendDirectMessageActionComplete(action.message));
-        });
-
     @Effect() joinGroup$ = this.actions$.ofType<newsAction.JoinGroupAction>(newsAction.JOIN_GROUP)
         .switchMap((action: newsAction.JoinGroupAction) => {
             this.newsService.joinGroup(action.group);

@@ -53,7 +53,7 @@ export class DirectMessagesService {
         if (token !== '') {
             tokenValue = '?token=' + token;
         }
-        const url = 'https://localhost:44300/';
+        const url = 'https://localhost:44390/';
         this._hubConnection = new HubConnection(`${url}looney${tokenValue}`);
 
         this._hubConnection.on('NewOnlineUser', (onlineUser: OnlineUser) => {

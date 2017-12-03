@@ -12,7 +12,6 @@ import { StoreModule } from '@ngrx/store';
 import { NewsEffects } from './store/news.effects';
 import { newsReducer } from './store/news.reducer';
 import * as newsAction from './store/news.action';
-import { DirectMessageComponent } from './components/direct-message.component';
 
 @NgModule({
     imports: [
@@ -27,8 +26,7 @@ import { DirectMessageComponent } from './components/direct-message.component';
     ],
 
     declarations: [
-        NewsComponent,
-        DirectMessageComponent
+        NewsComponent
     ],
 
     providers: [
@@ -36,8 +34,7 @@ import { DirectMessageComponent } from './components/direct-message.component';
     ],
 
     exports: [
-        NewsComponent,
-        DirectMessageComponent
+        NewsComponent
     ]
 })
 

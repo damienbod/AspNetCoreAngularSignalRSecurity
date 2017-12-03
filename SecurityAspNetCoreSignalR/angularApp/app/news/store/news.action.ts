@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
 import { NewsItem } from '../models/news-item';
-import { OnlineUser } from '../models/online-user';
 
 export const JOIN_GROUP = '[news] JOIN_GROUP';
 export const LEAVE_GROUP = '[news] LEAVE_GROUP';
@@ -18,22 +17,6 @@ export const RECEIVED_ONLINE_USERS = '[news] RECEIVED_ONLINE_USERS';
 
 export const SELECTALL_GROUPS = '[news] Select All Groups';
 export const SELECTALL_GROUPS_COMPLETE = '[news] Select All Groups Complete';
-
-export const SEND_DIRECT_MESSAGE = '[news] SEND_DIRECT_MESSAGE';
-export const SEND_DIRECT_MESSAGE_COMPLETE = '[news] SEND_DIRECT_MESSAGE_COMPLETE';
-export const RECEIVED_DIRECT_MESSAGE = '[news] RECEIVED_DIRECT_MESSAGE';
-
-export class SendDirectMessageAction implements Action {
-    readonly type = SEND_DIRECT_MESSAGE;
-
-    constructor(public message: string, public userId: string) { }
-}
-
-export class SendDirectMessageActionComplete implements Action {
-    readonly type = SEND_DIRECT_MESSAGE_COMPLETE;
-
-    constructor(public message: string) { }
-}
 
 export class JoinGroupAction implements Action {
     readonly type = JOIN_GROUP;
@@ -108,24 +91,6 @@ export class SelectAllGroupsActionComplete implements Action {
     constructor(public groups: string[]) { }
 }
 
-export class ReceivedNewOnlineUser implements Action {
-    readonly type = RECEIVED_NEW_ONLINE_USER;
-
-    constructor(public onlineUser: OnlineUser) { }
-}
-
-export class ReceivedOnlineUsers implements Action {
-    readonly type = RECEIVED_ONLINE_USERS;
-
-    constructor(public onlineUsers: OnlineUser[]) { }
-}
-
-
-export class ReceivedDirectMessage implements Action {
-    readonly type = RECEIVED_DIRECT_MESSAGE;
-
-    constructor(public message: string, public onlineUser: OnlineUser) { }
-}
 
 export type Actions
     = JoinGroupAction
@@ -139,10 +104,5 @@ export type Actions
     | ReceivedGroupLeftAction
     | ReceivedGroupHistoryAction
     | SelectAllGroupsAction
-    | SelectAllGroupsActionComplete
-    | SendDirectMessageAction
-    | SendDirectMessageActionComplete
-    | ReceivedNewOnlineUser
-    | ReceivedOnlineUsers
-    | ReceivedDirectMessage;
+    | SelectAllGroupsActionComplete;
 
