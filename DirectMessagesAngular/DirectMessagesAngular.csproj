@@ -12,5 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="angularApp\tests\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 </Project>
