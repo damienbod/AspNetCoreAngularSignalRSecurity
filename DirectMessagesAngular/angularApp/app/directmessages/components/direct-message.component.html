@@ -16,7 +16,23 @@
         </div>
 
         <div class="content">
-            bbb
+            <mat-form-field style="width:95%">
+                <textarea matInput placeholder="your message" matTextareaAutosize matAutosizeMinRows="2"
+                          matAutosizeMaxRows="5"></textarea>
+            </mat-form-field>
+           
+        </div>
+        <div class="content">
+            <mat-chip-list class="mat-chip-list-stacked">
+                <mat-chip selected="true" [color]="green">
+                    hi
+                </mat-chip>
+                <mat-chip [color]="blue">
+                    disss
+                </mat-chip>
+            </mat-chip-list>
+
+
         </div>
     </div>
 </div>

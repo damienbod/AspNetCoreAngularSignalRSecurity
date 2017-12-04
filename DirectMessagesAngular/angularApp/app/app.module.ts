@@ -19,10 +19,14 @@ import {
     MatToolbarModule,
     MatButtonModule,
 } from '@angular/material';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
+        CommonModule,
         FormsModule,
         routing,
         HttpClientModule,

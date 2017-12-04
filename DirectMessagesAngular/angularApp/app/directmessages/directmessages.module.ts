@@ -23,7 +23,8 @@ import {
     MatListModule,
     MatSelectModule,
     MatInputModule,
-    MatSidenavModule
+    MatFormFieldModule,
+    MatChipsModule
 } from '@angular/material';
 
 @NgModule({
@@ -36,7 +37,6 @@ import {
             dm: directMessagesReducer, directMessagesAction
         }),
         EffectsModule.forFeature([DirectMessagesEffects]),
-        CommonModule,
         MatListModule,
         MatIconModule,
         MatButtonModule,
@@ -44,8 +44,9 @@ import {
         MatMenuModule,
         MatSelectModule,
         MatInputModule,
-        MatSidenavModule,
-        FlexLayoutModule
+        MatFormFieldModule,
+        FlexLayoutModule,
+        MatChipsModule
     ],
 
     declarations: [
