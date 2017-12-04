@@ -14,6 +14,17 @@ import { DirectMessagesEffects } from './store/directmessages.effects';
 import { directMessagesReducer } from './store/directmessages.reducer';
 import * as directMessagesAction from './store/directmessages.action';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {
+    MatMenuModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatSelectModule,
+    MatInputModule,
+    MatSidenavModule
+} from '@angular/material';
 
 @NgModule({
     imports: [
@@ -24,7 +35,17 @@ import * as directMessagesAction from './store/directmessages.action';
         StoreModule.forFeature('dm', {
             dm: directMessagesReducer, directMessagesAction
         }),
-        EffectsModule.forFeature([DirectMessagesEffects])
+        EffectsModule.forFeature([DirectMessagesEffects]),
+        CommonModule,
+        MatListModule,
+        MatIconModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatSelectModule,
+        MatInputModule,
+        MatSidenavModule,
+        FlexLayoutModule
     ],
 
     declarations: [
@@ -40,4 +61,4 @@ import * as directMessagesAction from './store/directmessages.action';
     ]
 })
 
-export class NewsModule { }
+export class DirectMessagesModule { }

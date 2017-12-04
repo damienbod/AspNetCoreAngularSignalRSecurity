@@ -1,5 +1,4 @@
 export class OnlineUser {
-    public id: string;
-    public name: string;
-    public groups: string[];
+    public connectionId: string;
+    public userName: string;
 }

@@ -8,34 +8,30 @@ namespace ApiServer.SignalRHubs
     {
         private ConcurrentDictionary<string, UserInfo> _onlineUser { get; set; } = new ConcurrentDictionary<string, UserInfo>();
 
-        public bool AddUpdate(string id, string groupName, string name)
+        public bool AddUpdate(string name, string connectionId)
         {
-            var userAlreadyExists = _onlineUser.ContainsKey(id);
-            var userInfo = _onlineUser.GetOrAdd(id, new UserInfo
-            {
-                Id = id,
-                Name = name,
-                Groups = new List<string> { groupName }
+            var userAlreadyExists = _onlineUser.ContainsKey(name);
 
-            });
-
-            if (!userInfo.Groups.Contains(groupName))
+            var userInfo = new UserInfo
             {
-                userInfo.Groups.Add(groupName);
-            }
+                UserName = name,
+                ConnectionId = connectionId
+            };
+
+            _onlineUser.AddOrUpdate(name, userInfo, (key, value) => userInfo);
 
             return userAlreadyExists;
         }
 
-        public IEnumerable<UserInfo> GetAllExceptUser(string id)
+        public IEnumerable<UserInfo> GetAllUsersExceptThis(string username)
         {
-            return _onlineUser.Values.Where(item => item.Id != id);
+            return _onlineUser.Values.Where(item => item.UserName != username);
         }
 
-        public UserInfo GetUserInfo(string id)
+        public UserInfo GetUserInfo(string username)
         {
             UserInfo user;
-            _onlineUser.TryGetValue(id, out user);
+            _onlineUser.TryGetValue(username, out user);
             return user;
         }
     }

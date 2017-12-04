@@ -36,7 +36,7 @@ export function directMessagesReducer(state = initialState, action: directMessag
 
         case directMessagesAction.RECEIVED_NEW_ONLINE_USER:
             return Object.assign({}, state, {
-                newsItems: state.onlineUsers.concat(action.onlineUser),
+                onlineUsers: state.onlineUsers.concat(action.onlineUser),
             });
 
         case directMessagesAction.RECEIVED_ONLINE_USERS:

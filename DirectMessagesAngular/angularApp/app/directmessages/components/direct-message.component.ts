@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { DirectMessagesState } from '../store/directmessages.state';
-import * as NewsActions from '../store/directmessages.action';
+import * as directMessagesAction from '../store/directmessages.action';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { OnlineUser } from '../models/online-user';
 import { DirectMessage } from '../models/direct-message';
@@ -19,7 +19,7 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     onlineUser: OnlineUser;
     directMessages: DirectMessage[];
     message = 'message';
-    newsState$: Observable<DirectMessagesState>;
+    dmState$: Observable<DirectMessagesState>;
 
     isAuthorizedSubscription: Subscription;
     isAuthorized: boolean;
@@ -28,11 +28,11 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
         private store: Store<any>,
         private oidcSecurityService: OidcSecurityService
     ) {
-        this.newsState$ = this.store.select<DirectMessagesState>(state => state.news.newsitems);
+        this.dmState$ = this.store.select<DirectMessagesState>(state => state.dm.dm);
     }
 
     public send(): void {
-        this.store.dispatch(new NewsActions.SendDirectMessageAction(this.message, this.onlineUser.id));
+        this.store.dispatch(new directMessagesAction.SendDirectMessageAction(this.message, this.onlineUser.userName));
     }
 
     ngOnInit() {

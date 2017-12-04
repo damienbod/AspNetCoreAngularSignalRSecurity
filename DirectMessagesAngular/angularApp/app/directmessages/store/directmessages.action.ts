@@ -1,12 +1,15 @@
 import { Action } from '@ngrx/store';
 import { OnlineUser } from '../models/online-user';
 
-export const RECEIVED_NEW_ONLINE_USER = '[news] RECEIVED_NEW_ONLINE_USER';
-export const RECEIVED_ONLINE_USERS = '[news] RECEIVED_ONLINE_USERS';
+export const RECEIVED_NEW_ONLINE_USER = '[dm] RECEIVED_NEW_ONLINE_USER';
+export const RECEIVED_ONLINE_USERS = '[dm] RECEIVED_ONLINE_USERS';
 
-export const SEND_DIRECT_MESSAGE = '[news] SEND_DIRECT_MESSAGE';
-export const SEND_DIRECT_MESSAGE_COMPLETE = '[news] SEND_DIRECT_MESSAGE_COMPLETE';
-export const RECEIVED_DIRECT_MESSAGE = '[news] RECEIVED_DIRECT_MESSAGE';
+export const JOIN = '[dm] Join';
+export const JOIN_SENT = '[dm] JoinSent';
+
+export const SEND_DIRECT_MESSAGE = '[dm] SEND_DIRECT_MESSAGE';
+export const SEND_DIRECT_MESSAGE_COMPLETE = '[dm] SEND_DIRECT_MESSAGE_COMPLETE';
+export const RECEIVED_DIRECT_MESSAGE = '[dm] RECEIVED_DIRECT_MESSAGE';
 
 export class SendDirectMessageAction implements Action {
     readonly type = SEND_DIRECT_MESSAGE;

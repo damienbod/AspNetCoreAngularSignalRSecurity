@@ -1,7 +1,7 @@
-﻿using ApiServer.Providers;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApiServer.SignalRHubs
@@ -18,31 +18,37 @@ namespace ApiServer.SignalRHubs
 
         public async Task Join()
         {
-            if(_userInfoInMemory.AddUpdate(Context.ConnectionId, "sss", Context.User.Identity.Name))
+            if (!_userInfoInMemory.AddUpdate(Context.User.Identity.Name, Context.ConnectionId))
             {
-                // send all online user the new user
-                IReadOnlyList<string> list = new List<string>() { Context.ConnectionId };
-                await Clients.AllExcept(list).InvokeAsync(
+                // new user
+
+                var list = _userInfoInMemory.GetAllUsersExceptThis(Context.User.Identity.Name).ToList();
+                await Clients.AllExcept(new List<string> { Context.ConnectionId }).InvokeAsync(
                     "NewOnlineUser",
-                    _userInfoInMemory.GetUserInfo(Context.ConnectionId)
-                );
+                    _userInfoInMemory.GetUserInfo(Context.User.Identity.Name)
+                    );
+            }
+            else
+            {
+                // existing user joined again
+                
             }
 
-            // await Groups.AddAsync(Context.ConnectionId, groupName);
+            await Clients.Client(Context.ConnectionId).InvokeAsync(
+                "Joined",
+                _userInfoInMemory.GetUserInfo(Context.User.Identity.Name)
+                );
 
-            
-
-            // send the new user all existing users
             await Clients.Client(Context.ConnectionId).InvokeAsync(
                 "OnlineUsers",
-                _userInfoInMemory.GetAllExceptUser(Context.ConnectionId)
+                _userInfoInMemory.GetAllUsersExceptThis(Context.User.Identity.Name)
             );
         }
 
-        public Task SendDirectMessage(string message, string targetUserId)
+        public Task SendDirectMessage(string message, string targetUserName)
         {
             var userInfoSender = _userInfoInMemory.GetUserInfo(Context.ConnectionId);
-            return Clients.Client(targetUserId).InvokeAsync("SendDM", message, userInfoSender);
+            return Clients.Group(targetUserName).InvokeAsync("SendDM", message, userInfoSender);
         }
     }
 }

@@ -1,11 +1,33 @@
-﻿<div class="container-fluid" *ngIf="isAuthorized" >
+﻿<div class="full-width" *ngIf="isAuthorized">
+    <div class="left-navigation-container" >
+        <nav>
+
+            <mat-list>
+                <mat-list-item *ngFor="let onlineuser of (dmState$|async)?.onlineUsers">{{onlineuser.userName}}</mat-list-item>
+            </mat-list>
+
+        </nav>
+    </div>
+    <div class="column-container content-container">
+        <div class="row-container info-bar">
+            
+        </div>
+
+        <div class="content">
+            bbb
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="container-fluid" *ngIf="isAuthorized" >
 
     <div class="row" >
         <div class="form-inline">
             <div class="form-group">
                 <label for="online-users">Online Users: </label>
                 <select class="form-control" type="number" [(ngModel)]="onlineUser">
-                    <option *ngFor="let g of (newsState$|async)?.onlineUsers" [ngValue]="g">{{g.name}}</option>
+                    <option *ngFor="let g of (dmState$|async)?.onlineUsers" [ngValue]="g">{{g.name}}</option>
                 </select>
 
 
@@ -46,4 +68,4 @@
     <div class="row" *ngIf="newsItems?.length <= 0">
         <span>No message</span>
     </div>
-</div>
+</div>-->

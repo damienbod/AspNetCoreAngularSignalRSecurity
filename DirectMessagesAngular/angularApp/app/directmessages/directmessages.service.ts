@@ -54,23 +54,29 @@ export class DirectMessagesService {
             tokenValue = '?token=' + token;
         }
         const url = 'https://localhost:44390/';
-        this._hubConnection = new HubConnection(`${url}looney${tokenValue}`);
+        this._hubConnection = new HubConnection(`${url}usersdm${tokenValue}`);
 
         this._hubConnection.on('NewOnlineUser', (onlineUser: OnlineUser) => {
+            console.log('NewOnlineUser recieved');
+            console.log(onlineUser);
             this.store.dispatch(new directMessagesActions.ReceivedNewOnlineUser(onlineUser));
         });
 
         this._hubConnection.on('OnlineUsers', (onlineUsers: OnlineUser[]) => {
+            console.log('OnlineUsers recieved');
+            console.log(onlineUsers);
             this.store.dispatch(new directMessagesActions.ReceivedOnlineUsers(onlineUsers));
         });
 
-        this._hubConnection.on('NewOnlineUser', (message: string, onlineUser: OnlineUser) => {
-            this.store.dispatch(new directMessagesActions.ReceivedDirectMessage(message, onlineUser));
+        this._hubConnection.on('Joined', (onlineUser: OnlineUser) => {
+            console.log('Joined recieved');
+            console.log(onlineUser);
         });
 
         this._hubConnection.start()
             .then(() => {
                 console.log('Hub connection started')
+                this._hubConnection.invoke('Join');
             })
             .catch(() => {
                 console.log('Error while establishing connection')

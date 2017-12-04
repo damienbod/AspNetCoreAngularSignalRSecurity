@@ -10,6 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 import { AuthModule, OpenIDImplicitFlowConfiguration, OidcSecurityService } from 'angular-auth-oidc-client';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
@@ -25,6 +28,11 @@ import {
         HttpClientModule,
         AuthModule.forRoot(),
         FlexLayoutModule,
+        StoreModule.forRoot({}),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25 //  Retains last 25 states
+        }),
+        EffectsModule.forRoot([]),
         MatToolbarModule,
         MatButtonModule
     ],
@@ -53,17 +61,17 @@ export class AppModule {
         // or if it contains additional audiences not trusted by the Client.
         openIDImplicitFlowConfiguration.client_id = 'angularclient';
         openIDImplicitFlowConfiguration.response_type = 'id_token token';
-        openIDImplicitFlowConfiguration.scope = 'openid profile email';
+        openIDImplicitFlowConfiguration.scope = 'dataEventRecords openid profile email';
         openIDImplicitFlowConfiguration.post_logout_redirect_uri = 'https://localhost:44395/unauthorized';
         openIDImplicitFlowConfiguration.start_checksession = false;
         openIDImplicitFlowConfiguration.silent_renew = false;
-        openIDImplicitFlowConfiguration.post_login_route = '/home';
+        openIDImplicitFlowConfiguration.post_login_route = '/dm';
         // HTTP 403
         openIDImplicitFlowConfiguration.forbidden_route = '/unauthorized';
         // HTTP 401
         openIDImplicitFlowConfiguration.unauthorized_route = '/unauthorized';
         openIDImplicitFlowConfiguration.log_console_warning_active = true;
-        openIDImplicitFlowConfiguration.log_console_debug_active = true;
+        openIDImplicitFlowConfiguration.log_console_debug_active = false;
         // id_token C8: The iat Claim can be used to reject tokens that were issued too far away from the current time,
         // limiting the amount of time that nonces need to be stored to prevent attacks.The acceptable range is Client specific.
         openIDImplicitFlowConfiguration.max_id_token_iat_offset_allowed_in_seconds = 10;
