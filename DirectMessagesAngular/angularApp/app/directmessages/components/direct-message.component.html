@@ -3,14 +3,16 @@
         <nav>
 
             <mat-list>
-                <mat-list-item *ngFor="let onlineuser of (dmState$|async)?.onlineUsers">{{onlineuser.userName}}</mat-list-item>
+                <mat-list-item *ngFor="let onlineuser of (dmState$|async)?.onlineUsers">
+                    <a mat-button (click)="selectChat(onlineuser.userName)">{{onlineuser.userName}}</a>
+                </mat-list-item>
             </mat-list>
 
         </nav>
     </div>
     <div class="column-container content-container">
         <div class="row-container info-bar">
-            
+            <h3 style="padding-left: 20px;">{{selectedOnlineUserName}}</h3>
         </div>
 
         <div class="content">

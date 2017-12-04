@@ -18,11 +18,13 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     onlineUsers: OnlineUser[];
     onlineUser: OnlineUser;
     directMessages: DirectMessage[];
-    message = 'message';
+    selectedOnlineUserName = '';
     dmState$: Observable<DirectMessagesState>;
 
     isAuthorizedSubscription: Subscription;
     isAuthorized: boolean;
+
+    message = '';
 
     constructor(
         private store: Store<any>,
@@ -31,7 +33,7 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
         this.dmState$ = this.store.select<DirectMessagesState>(state => state.dm.dm);
     }
 
-    public send(): void {
+    public sendDm(): void {
         this.store.dispatch(new directMessagesAction.SendDirectMessageAction(this.message, this.onlineUser.userName));
     }
 
@@ -47,5 +49,9 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.isAuthorizedSubscription.unsubscribe();
+    }
+
+    selectChat(onlineuserUserName: string): void {
+        this.selectedOnlineUserName = onlineuserUserName
     }
 }
