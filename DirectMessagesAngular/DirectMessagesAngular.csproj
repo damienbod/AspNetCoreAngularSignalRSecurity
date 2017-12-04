@@ -11,6 +11,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="angularApp\fonts\" />
     <Folder Include="angularApp\tests\" />
     <Folder Include="Controllers\" />
   </ItemGroup>

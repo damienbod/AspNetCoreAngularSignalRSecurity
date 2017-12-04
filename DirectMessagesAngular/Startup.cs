@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SecurityAspNetCoreSignalR.ViewModel;
 
 namespace Angular2WebpackVisualStudio
 {
@@ -26,6 +27,7 @@ namespace Angular2WebpackVisualStudio
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ClientAppSettings>(Configuration.GetSection("ClientAppSettings"));
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -49,7 +51,7 @@ namespace Angular2WebpackVisualStudio
 
             var angularRoutes = new[] {
                  "/home",
-                 "/test",
+                 "/unauthorized",
                  "/dm",
                  "/about"
              };

@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
-  <a mat-button routerLinkActive="active" [routerLink]="'/about'">About</a>
-  <a mat-button routerLinkActive="active" [routerLink]="'/test'">Test</a>
+    <a mat-button routerLinkActive="active" *ngIf="!isAuthorized" (click)="login()">Login</a>
+    <a mat-button routerLinkActive="active" *ngIf="isAuthorized" (click)="logout()">Logout</a>
 </mat-toolbar>
 <div class="basic-container">
-  <router-outlet></router-outlet>
-  <span class="version-info">Current build: {{version.full}}</span>
+    <router-outlet></router-outlet>
 </div>
+
