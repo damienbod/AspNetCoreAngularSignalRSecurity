@@ -13,17 +13,18 @@
     <div class="column-container content-container">
         <div class="row-container info-bar">
             <h3 style="padding-left: 20px;">{{selectedOnlineUserName}}</h3>
+            <a mat-button (click)="sendMessage()" *ngIf="selectedOnlineUserName && selectedOnlineUserName !=='' && message !==''">SEND</a>
         </div>
 
         <div class="content" *ngIf="selectedOnlineUserName && selectedOnlineUserName !==''">
 
-            <mat-form-field style="width:95%">
-                <textarea matInput placeholder="your message" matTextareaAutosize matAutosizeMinRows="2"
+            <mat-form-field  style="width:95%">
+                <textarea matInput placeholder="your message" [(ngModel)]="message" matTextareaAutosize matAutosizeMinRows="2"
                           matAutosizeMaxRows="5"></textarea>
             </mat-form-field>
            
             <mat-chip-list class="mat-chip-list-stacked">
-                <mat-chip selected="true" >
+                <mat-chip selected="true" style="width:95%">
                     hi
                 </mat-chip>
                 <mat-chip >
