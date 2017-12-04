@@ -47,8 +47,9 @@ namespace ApiServer.SignalRHubs
 
         public Task SendDirectMessage(string message, string targetUserName)
         {
-            var userInfoSender = _userInfoInMemory.GetUserInfo(Context.ConnectionId);
-            return Clients.Group(targetUserName).InvokeAsync("SendDM", message, userInfoSender);
+            var userInfoSender = _userInfoInMemory.GetUserInfo(Context.User.Identity.Name);
+            var userInfoReciever = _userInfoInMemory.GetUserInfo(targetUserName);
+            return Clients.Client(userInfoReciever.ConnectionId).InvokeAsync("SendDM", message, userInfoSender);
         }
     }
 }
