@@ -4,7 +4,8 @@ import { DirectMessage } from '../models/direct-message';
 
 export const initialState: DirectMessagesState = {
     onlineUsers: [],
-    directMessages: []
+    directMessages: [],
+    connected: false
 };
 
 export function directMessagesReducer(state = initialState, action: directMessagesAction.Actions): DirectMessagesState {
@@ -51,6 +52,16 @@ export function directMessagesReducer(state = initialState, action: directMessag
         case directMessagesAction.RECEIVED_ONLINE_USERS:
             return Object.assign({}, state, {
                 onlineUsers: action.onlineUsers
+            });
+
+        case directMessagesAction.JOIN_SENT:
+            return Object.assign({}, state, {
+                connected: true,
+            });
+
+        case directMessagesAction.LEAVE_SENT:
+            return Object.assign({}, state, {
+                connected: false,
             });
 
         default:

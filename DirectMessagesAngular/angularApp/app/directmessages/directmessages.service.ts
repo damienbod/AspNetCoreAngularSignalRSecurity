@@ -40,6 +40,10 @@ export class DirectMessagesService {
         this._hubConnection.invoke('Leave');
     }
 
+    join(): void {
+        this._hubConnection.invoke('Join');
+    }
+
     private init() {
         this.isAuthorizedSubscription = this.oidcSecurityService.getIsAuthorized().subscribe(
             (isAuthorized: boolean) => {
@@ -75,6 +79,7 @@ export class DirectMessagesService {
 
         this._hubConnection.on('Joined', (onlineUser: OnlineUser) => {
             console.log('Joined received');
+            this.store.dispatch(new directMessagesActions.JoinSent());
             console.log(onlineUser);
         });
 

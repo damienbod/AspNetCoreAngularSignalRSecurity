@@ -46,7 +46,6 @@ export class ReceivedUserLeft implements Action {
     constructor(public name: string) { }
 }
 
-
 export class Leave implements Action {
     readonly type = LEAVE;
 
@@ -55,6 +54,18 @@ export class Leave implements Action {
 
 export class LeaveSent implements Action {
     readonly type = LEAVE_SENT;
+
+    constructor() { }
+}
+
+export class Join implements Action {
+    readonly type = JOIN;
+
+    constructor() { }
+}
+
+export class JoinSent implements Action {
+    readonly type = JOIN_SENT;
 
     constructor() { }
 }
@@ -73,5 +84,7 @@ export type Actions
     | ReceivedDirectMessage
     | Leave
     | LeaveSent
+    | Join
+    | JoinSent
     | ReceivedUserLeft;
 

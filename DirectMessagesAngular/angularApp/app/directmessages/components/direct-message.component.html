@@ -13,8 +13,9 @@
     <div class="column-container content-container">
         <div class="row-container info-bar">
             <h3 style="padding-left: 20px;">{{selectedOnlineUserName}}</h3>
-            <a mat-button (click)="sendMessage()" *ngIf="selectedOnlineUserName && selectedOnlineUserName !=='' && message !==''">SEND</a>
-            <a mat-button (click)="disconnect()">Disconnect</a>
+            <a mat-button (click)="sendMessage()" *ngIf="(dmState$|async)?.connected && selectedOnlineUserName && selectedOnlineUserName !=='' && message !==''">SEND</a>
+            <a mat-button (click)="disconnect()" *ngIf="(dmState$|async)?.connected">Disconnect</a>
+            <a mat-button (click)="connect()" *ngIf="!(dmState$|async)?.connected">Connect</a>
         </div>
 
         <div class="content" *ngIf="selectedOnlineUserName && selectedOnlineUserName !==''">

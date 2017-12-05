@@ -3,5 +3,6 @@ import { DirectMessage } from '../models/direct-message';
 
 export interface DirectMessagesState {
     onlineUsers: OnlineUser[],
-    directMessages: DirectMessage[]
+    directMessages: DirectMessage[],
+    connected: boolean
 };

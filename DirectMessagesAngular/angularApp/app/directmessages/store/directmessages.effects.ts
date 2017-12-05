@@ -26,6 +26,13 @@ export class DirectMessagesEffects {
             return Observable.of(new directMessagesAction.LeaveSent());
         });
 
+    @Effect() Join$ =
+    this.actions$.ofType<directMessagesAction.Join>(directMessagesAction.JOIN)
+        .switchMap(() => {
+            this.directMessagesService.join();
+            return Observable.of(new directMessagesAction.JoinSent());
+        });
+
     constructor(
         private directMessagesService: DirectMessagesService,
         private actions$: Actions
