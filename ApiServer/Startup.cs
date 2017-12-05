@@ -68,6 +68,7 @@ namespace ApiServer
 
             services.AddSingleton<IAuthorizationHandler, CorrectUserHandler>();
             services.AddSingleton<NewsStore>();
+            services.AddSingleton<UserInfoInMemory>();
 
             var policy = new Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy();
             policy.Headers.Add("*");
@@ -109,8 +110,8 @@ namespace ApiServer
                 {
                     OnMessageReceived = context =>
                     {
-                        if (context.Request.Path.Value.StartsWith("/loo") &&
-                            context.Request.Query.TryGetValue("token", out StringValues token)
+                        if ( (context.Request.Path.Value.StartsWith("/loo")) || (context.Request.Path.Value.StartsWith("/usersdm")) 
+                            && context.Request.Query.TryGetValue("token", out StringValues token)
                         )
                         {
                             context.Token = token;
@@ -176,6 +177,7 @@ namespace ApiServer
             {
                 routes.MapHub<LoopyHub>("loopy");
                 routes.MapHub<NewsHub>("looney");
+                routes.MapHub<UsersDmHub>("usersdm");
             });
 
             app.UseMvc(routes =>

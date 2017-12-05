@@ -10,3 +10,9 @@
 /SecurityAspNetCoreSignalR/wwwroot
 /Logs
 /SecurityAspNetCoreSignalR/SecurityAspNetCoreSignalR.csproj.user
+/DirectMessagesAngular/node_modules
+/DirectMessagesAngular/**/*.js.map
+/DirectMessagesAngular/angularApp/app/**/*.js
+/DirectMessagesAngular/wwwroot/dist/
+/DirectMessagesAngular/bin
+/DirectMessagesAngular/angularApp/*.js

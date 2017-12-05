@@ -10,9 +10,10 @@ export const SEND_NEWS_ITEM_COMPLETE = '[news] SEND_NEWS_ITEM_COMPLETE';
 export const RECEIVED_NEWS_ITEM = '[news] RECEIVED_NEWS_ITEM';
 export const RECEIVED_GROUP_JOINED = '[news] RECEIVED_GROUP_JOINED';
 export const RECEIVED_GROUP_LEFT = '[news] RECEIVED_GROUP_LEFT';
-
 export const RECEIVED_GROUP_HISTORY = '[news] RECEIVED_GROUP_HISTORY';
 
+export const RECEIVED_NEW_ONLINE_USER = '[news] RECEIVED_NEW_ONLINE_USER';
+export const RECEIVED_ONLINE_USERS = '[news] RECEIVED_ONLINE_USERS';
 
 export const SELECTALL_GROUPS = '[news] Select All Groups';
 export const SELECTALL_GROUPS_COMPLETE = '[news] Select All Groups Complete';
@@ -41,6 +42,7 @@ export class LeaveGroupActionComplete implements Action {
 
     constructor(public group: string) { }
 }
+
 export class SendNewsItemAction implements Action {
     readonly type = SEND_NEWS_ITEM;
 
@@ -88,6 +90,7 @@ export class SelectAllGroupsActionComplete implements Action {
 
     constructor(public groups: string[]) { }
 }
+
 
 export type Actions
     = JoinGroupAction

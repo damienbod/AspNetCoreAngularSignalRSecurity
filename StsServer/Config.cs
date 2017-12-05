@@ -54,26 +54,30 @@ namespace QuickstartIdentityServer
                     ClientName = "angularclient",
                     ClientId = "angularclient",
                     AccessTokenType = AccessTokenType.Jwt,
-                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 300,
+                    AccessTokenLifetime = 3300,// 330 seconds, default 60 minutes
+                    IdentityTokenLifetime = 3000,
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
                     AllowOfflineAccess =true,
                     AlwaysIncludeUserClaimsInIdToken = true,
                     RedirectUris = new List<string>
                     {
-                        "https://localhost:44311"
+                        "https://localhost:44311",
+                        "https://localhost:44395"
 
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
                         "https://localhost:44311/unauthorized",
-                        "https://localhost:44311"
+                        "https://localhost:44311",
+                        "https://localhost:44395/unauthorized",
+                        "https://localhost:44395"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
                         "https://localhost:44311",
-                        "http://localhost:44311"
+                        "http://localhost:44311",
+                        "https://localhost:44395"
                     },
                     AllowedScopes = new List<string>
                     {
