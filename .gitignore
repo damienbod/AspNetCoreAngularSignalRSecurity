@@ -14,3 +14,5 @@
 /DirectMessagesAngular/**/*.js.map
 /DirectMessagesAngular/angularApp/app/**/*.js
 /DirectMessagesAngular/wwwroot/dist/
+/DirectMessagesAngular/bin
+/DirectMessagesAngular/angularApp/*.js

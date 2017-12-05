@@ -24,12 +24,11 @@
             </mat-form-field>
            
             <mat-chip-list class="mat-chip-list-stacked">
-                <mat-chip selected="true" style="width:95%">
-                    hi
-                </mat-chip>
-                <mat-chip >
-                    disss
-                </mat-chip>
+                <ng-container *ngFor="let directMessage of (dmState$|async)?.directMessages">
+                    <mat-chip selected="directMessage.fromOnlineUser"  style="width:95%">
+                        {{getUserInfoName(directMessage)}} {{directMessage.message}} 
+                    </mat-chip>
+                </ng-container>
             </mat-chip-list>
 
         </div>

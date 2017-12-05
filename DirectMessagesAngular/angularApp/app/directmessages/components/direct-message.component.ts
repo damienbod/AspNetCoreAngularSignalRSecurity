@@ -57,5 +57,14 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
 
     sendMessage() {
         console.log('send message to:' + this.selectedOnlineUserName + ':' + this.message);
+        this.store.dispatch(new directMessagesAction.SendDirectMessageAction(this.message, this.selectedOnlineUserName));
+    }
+
+    getUserInfoName(directMessage: DirectMessage) {
+        if (directMessage.fromOnlineUser) {
+            return directMessage.fromOnlineUser.userName;
+        }
+
+        return '';
     }
 }

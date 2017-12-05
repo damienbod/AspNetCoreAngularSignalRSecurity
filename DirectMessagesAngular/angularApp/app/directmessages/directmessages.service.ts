@@ -31,7 +31,8 @@ export class DirectMessagesService {
     }
 
     sendDirectMessage(message: string, userId: string): string {
-        this._hubConnection.invoke('SendDM', message, userId);
+
+        this._hubConnection.invoke('SendDirectMessage', message, userId);
         return message;
     }
 
@@ -71,6 +72,11 @@ export class DirectMessagesService {
         this._hubConnection.on('Joined', (onlineUser: OnlineUser) => {
             console.log('Joined recieved');
             console.log(onlineUser);
+        });
+
+        this._hubConnection.on('SendDM', (message: string, onlineUser: OnlineUser) => {
+            console.log('SendDM recieved');
+            this.store.dispatch(new directMessagesActions.ReceivedDirectMessage(message, onlineUser));
         });
 
         this._hubConnection.start()
