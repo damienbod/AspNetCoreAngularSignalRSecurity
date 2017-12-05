@@ -11,9 +11,12 @@ import './app.component.css';
 export class AppComponent implements OnInit, OnDestroy {
 
     title: string;
+    email: string;
 
     isAuthorizedSubscription: Subscription;
     isAuthorized: boolean;
+    userDataSubscription: Subscription;
+    userData: boolean;
 
     constructor(
         public oidcSecurityService: OidcSecurityService
@@ -32,11 +35,19 @@ export class AppComponent implements OnInit, OnDestroy {
             (isAuthorized: boolean) => {
                 this.isAuthorized = isAuthorized;
             });
+
+        this.userDataSubscription = this.oidcSecurityService.getUserData().subscribe(
+            (userData: any) => {
+                if (userData && userData !== '') {
+                    this.email = userData.email;
+                }
+            });
     }
 
     ngOnDestroy(): void {
         this.isAuthorizedSubscription.unsubscribe();
         this.oidcSecurityService.onModuleSetup.unsubscribe();
+        this.userDataSubscription.unsubscribe();
     }
 
     login() {
