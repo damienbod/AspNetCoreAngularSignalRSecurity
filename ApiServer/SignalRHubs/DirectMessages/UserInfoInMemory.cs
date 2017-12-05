@@ -23,6 +23,12 @@ namespace ApiServer.SignalRHubs
             return userAlreadyExists;
         }
 
+        public void Remove(string name)
+        {
+            UserInfo userInfo;
+            _onlineUser.TryRemove(name, out userInfo);
+        }
+
         public IEnumerable<UserInfo> GetAllUsersExceptThis(string username)
         {
             return _onlineUser.Values.Where(item => item.UserName != username);

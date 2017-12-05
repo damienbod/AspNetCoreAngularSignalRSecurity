@@ -16,6 +16,15 @@ namespace ApiServer.SignalRHubs
             _userInfoInMemory = userInfoInMemory;
         }
 
+        public async Task Leave()
+        {
+            _userInfoInMemory.Remove(Context.User.Identity.Name);
+            await Clients.AllExcept(new List<string> { Context.ConnectionId }).InvokeAsync(
+                   "UserLeft",
+                   Context.User.Identity.Name
+                   );
+        }
+
         public async Task Join()
         {
             if (!_userInfoInMemory.AddUpdate(Context.User.Identity.Name, Context.ConnectionId))

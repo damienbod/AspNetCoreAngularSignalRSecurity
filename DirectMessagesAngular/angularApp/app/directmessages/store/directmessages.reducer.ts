@@ -22,6 +22,13 @@ export function directMessagesReducer(state = initialState, action: directMessag
             });
         }
 
+        case directMessagesAction.RECEIVED_USER_LEFT: {
+
+            return Object.assign({}, state, {
+                onlineUsers: state.onlineUsers.filter(obj => obj.userName === action.name)
+            });
+        }
+
         case directMessagesAction.SEND_DIRECT_MESSAGE_COMPLETE: {
 
             const directMessage: DirectMessage = {

@@ -36,6 +36,10 @@ export class DirectMessagesService {
         return message;
     }
 
+    leave(): void {
+        this._hubConnection.invoke('Leave');
+    }
+
     private init() {
         this.isAuthorizedSubscription = this.oidcSecurityService.getIsAuthorized().subscribe(
             (isAuthorized: boolean) => {
@@ -58,25 +62,30 @@ export class DirectMessagesService {
         this._hubConnection = new HubConnection(`${url}usersdm${tokenValue}`);
 
         this._hubConnection.on('NewOnlineUser', (onlineUser: OnlineUser) => {
-            console.log('NewOnlineUser recieved');
+            console.log('NewOnlineUser received');
             console.log(onlineUser);
             this.store.dispatch(new directMessagesActions.ReceivedNewOnlineUser(onlineUser));
         });
 
         this._hubConnection.on('OnlineUsers', (onlineUsers: OnlineUser[]) => {
-            console.log('OnlineUsers recieved');
+            console.log('OnlineUsers received');
             console.log(onlineUsers);
             this.store.dispatch(new directMessagesActions.ReceivedOnlineUsers(onlineUsers));
         });
 
         this._hubConnection.on('Joined', (onlineUser: OnlineUser) => {
-            console.log('Joined recieved');
+            console.log('Joined received');
             console.log(onlineUser);
         });
 
         this._hubConnection.on('SendDM', (message: string, onlineUser: OnlineUser) => {
-            console.log('SendDM recieved');
+            console.log('SendDM received');
             this.store.dispatch(new directMessagesActions.ReceivedDirectMessage(message, onlineUser));
+        });
+
+        this._hubConnection.on('UserLeft', (name: string) => {
+            console.log('UserLeft received');
+            this.store.dispatch(new directMessagesActions.ReceivedUserLeft(name));
         });
 
         this._hubConnection.start()

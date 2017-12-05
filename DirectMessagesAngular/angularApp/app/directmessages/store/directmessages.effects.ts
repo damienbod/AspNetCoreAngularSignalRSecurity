@@ -19,6 +19,13 @@ export class DirectMessagesEffects {
             return Observable.of(new directMessagesAction.SendDirectMessageActionComplete(action.message));
         });
 
+    @Effect() Leave$ =
+    this.actions$.ofType<directMessagesAction.Leave>(directMessagesAction.LEAVE)
+        .switchMap(() => {
+            this.directMessagesService.leave();
+            return Observable.of(new directMessagesAction.LeaveSent());
+        });
+
     constructor(
         private directMessagesService: DirectMessagesService,
         private actions$: Actions
