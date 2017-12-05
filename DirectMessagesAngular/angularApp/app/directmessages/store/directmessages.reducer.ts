@@ -23,9 +23,11 @@ export function directMessagesReducer(state = initialState, action: directMessag
         }
 
         case directMessagesAction.RECEIVED_USER_LEFT: {
-
+            const index = state.onlineUsers.findIndex(obj => obj.userName === action.name);
+            const list = [...state.onlineUsers]; // clone the array
+            list.splice(index, 1);
             return Object.assign({}, state, {
-                onlineUsers: state.onlineUsers.filter(obj => obj.userName === action.name)
+                onlineUsers: list
             });
         }
 
@@ -56,3 +58,4 @@ export function directMessagesReducer(state = initialState, action: directMessag
 
     }
 }
+

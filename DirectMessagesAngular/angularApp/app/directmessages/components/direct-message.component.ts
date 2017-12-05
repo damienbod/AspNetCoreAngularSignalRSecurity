@@ -67,4 +67,12 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
 
         return '';
     }
+
+    disconnect() {
+        this.store.dispatch(new directMessagesAction.Leave());
+    }
+
+    connect() {
+        // TODO
+    }
 }

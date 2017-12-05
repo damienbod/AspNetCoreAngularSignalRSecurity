@@ -14,6 +14,7 @@
         <div class="row-container info-bar">
             <h3 style="padding-left: 20px;">{{selectedOnlineUserName}}</h3>
             <a mat-button (click)="sendMessage()" *ngIf="selectedOnlineUserName && selectedOnlineUserName !=='' && message !==''">SEND</a>
+            <a mat-button (click)="disconnect()">Disconnect</a>
         </div>
 
         <div class="content" *ngIf="selectedOnlineUserName && selectedOnlineUserName !==''">
