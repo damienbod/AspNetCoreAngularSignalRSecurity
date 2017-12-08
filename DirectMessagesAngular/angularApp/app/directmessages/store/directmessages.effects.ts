@@ -1,5 +1,4 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
+import { switchMap } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
@@ -13,25 +12,25 @@ export class DirectMessagesEffects {
 
 
     @Effect() sendDirectMessage$ =
-    this.actions$.ofType<directMessagesAction.SendDirectMessageAction>(directMessagesAction.SEND_DIRECT_MESSAGE)
-        .switchMap((action: directMessagesAction.SendDirectMessageAction) => {
+    this.actions$.ofType<directMessagesAction.SendDirectMessageAction>(directMessagesAction.SEND_DIRECT_MESSAGE).pipe(
+        switchMap((action: directMessagesAction.SendDirectMessageAction) => {
             this.directMessagesService.sendDirectMessage(action.message, action.userId);
             return Observable.of(new directMessagesAction.SendDirectMessageActionComplete(action.message));
-        });
+        }));
 
     @Effect() Leave$ =
-    this.actions$.ofType<directMessagesAction.Leave>(directMessagesAction.LEAVE)
-        .switchMap(() => {
+    this.actions$.ofType<directMessagesAction.Leave>(directMessagesAction.LEAVE).pipe(
+        switchMap(() => {
             this.directMessagesService.leave();
             return Observable.of(new directMessagesAction.LeaveSent());
-        });
+        }));
 
     @Effect() Join$ =
-    this.actions$.ofType<directMessagesAction.Join>(directMessagesAction.JOIN)
-        .switchMap(() => {
+    this.actions$.ofType<directMessagesAction.Join>(directMessagesAction.JOIN).pipe(
+        switchMap(() => {
             this.directMessagesService.join();
             return Observable.of(new directMessagesAction.JoinSent());
-        });
+            }));
 
     constructor(
         private directMessagesService: DirectMessagesService,
