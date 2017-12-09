@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace ApiServer.SignalRHubs
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public class LoopyHub : Hub
+    public class SignalRHomeHub : Hub
     {
         public Task Send(string data)
         {

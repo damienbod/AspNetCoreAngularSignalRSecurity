@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             tokenValue = '?token=' + token;
         }
 
-        this._hubConnection = new HubConnection(`${this.configuration.Server}loopy${tokenValue}`);
+        this._hubConnection = new HubConnection(`${this.configuration.Server}signalrhome${tokenValue}`);
 
         this._hubConnection.on('Send', (data: any) => {
             const received = `Received: ${data}`;

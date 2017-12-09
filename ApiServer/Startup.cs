@@ -110,7 +110,10 @@ namespace ApiServer
                 {
                     OnMessageReceived = context =>
                     {
-                        if ( (context.Request.Path.Value.StartsWith("/loo")) || (context.Request.Path.Value.StartsWith("/usersdm")) 
+                        if ( ( context.Request.Path.Value.StartsWith("/signalrhome")
+                            || context.Request.Path.Value.StartsWith("/looney")
+                            || context.Request.Path.Value.StartsWith("/usersdm") 
+                           )
                             && context.Request.Query.TryGetValue("token", out StringValues token)
                         )
                         {
@@ -175,9 +178,9 @@ namespace ApiServer
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<LoopyHub>("loopy");
-                routes.MapHub<NewsHub>("looney");
                 routes.MapHub<UsersDmHub>("usersdm");
+                routes.MapHub<SignalRHomeHub>("signalrhome");
+                //routes.MapHub<NewsHub>("looney");
             });
 
             app.UseMvc(routes =>
