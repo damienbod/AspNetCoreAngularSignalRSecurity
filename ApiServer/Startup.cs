@@ -180,7 +180,7 @@ namespace ApiServer
             {
                 routes.MapHub<UsersDmHub>("usersdm");
                 routes.MapHub<SignalRHomeHub>("signalrhome");
-                //routes.MapHub<NewsHub>("looney");
+                routes.MapHub<NewsHub>("looney");
             });
 
             app.UseMvc(routes =>
