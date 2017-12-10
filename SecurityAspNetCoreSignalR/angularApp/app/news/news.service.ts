@@ -1,4 +1,3 @@
-import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
