@@ -43,7 +43,7 @@
     "ie-shim": "0.1.0",
     "msgpack5": "^4.0.1",
     "@aspnet/signalr-client": "1.0.0-alpha2-final",
-    "angular-auth-oidc-client": "file:../../angular2Tests/angular-auth-oidc-client/angular-auth-oidc-client-4.0.0.tgz",
+    "angular-auth-oidc-client": "4.0.0",
     "rxjs": "5.5.6",
     "zone.js": "0.8.20"
   },
