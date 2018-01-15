@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
-import { AuthModule, OpenIDImplicitFlowConfiguration, OidcSecurityService } from 'angular-auth-oidc-client';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -21,6 +20,19 @@ import {
 } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {
+    AuthModule,
+    OidcSecurityService,
+    OpenIDImplicitFlowConfiguration,
+    OidcConfigService,
+    AuthWellKnownEndpoints
+} from 'angular-auth-oidc-client';
+
+export function loadConfig(oidcConfigService: OidcConfigService) {
+    console.log('APP_INITIALIZER STARTING');
+    return () => oidcConfigService.load_using_stsServer('https://localhost:44318');
+}
 
 @NgModule({
     imports: [
@@ -47,14 +59,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ],
     providers: [
         OidcSecurityService,
+        OidcConfigService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: loadConfig,
+            deps: [OidcConfigService],
+            multi: true
+        },
         Configuration
     ],
     bootstrap:    [AppComponent],
 })
 
 export class AppModule {
-    constructor(public oidcSecurityService: OidcSecurityService) {
-
+    constructor(
+        private oidcSecurityService: OidcSecurityService,
+        private oidcConfigService: OidcConfigService,
+    ) {
+        this.oidcConfigService.onConfigurationLoaded.subscribe(() => {
         const openIDImplicitFlowConfiguration = new OpenIDImplicitFlowConfiguration();
 
         openIDImplicitFlowConfiguration.stsServer = 'https://localhost:44318';
@@ -80,6 +102,13 @@ export class AppModule {
         // limiting the amount of time that nonces need to be stored to prevent attacks.The acceptable range is Client specific.
         openIDImplicitFlowConfiguration.max_id_token_iat_offset_allowed_in_seconds = 10;
 
-        this.oidcSecurityService.setupModule(openIDImplicitFlowConfiguration);
+        const authWellKnownEndpoints = new AuthWellKnownEndpoints();
+        authWellKnownEndpoints.setWellKnownEndpoints(this.oidcConfigService.wellKnownEndpoints);
+
+        this.oidcSecurityService.setupModule(openIDImplicitFlowConfiguration, authWellKnownEndpoints);
+
+        });
+
+        console.log('APP STARTING');
     }
 }
