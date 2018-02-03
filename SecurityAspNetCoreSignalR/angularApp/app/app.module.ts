@@ -37,10 +37,10 @@ export function loadConfig(oidcConfigService: OidcConfigService) {
         HomeModule,
         NewsModule,
         DataEventRecordsModule,
-        StoreModule.forRoot({}),
         StoreDevtoolsModule.instrument({
             maxAge: 25 //  Retains last 25 states
         }),
+        StoreModule.forRoot({}),
         EffectsModule.forRoot([])
     ],
 
