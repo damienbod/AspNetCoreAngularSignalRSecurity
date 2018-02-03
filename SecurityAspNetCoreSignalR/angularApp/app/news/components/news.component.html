@@ -1,18 +1,21 @@
 ﻿<div class="container-fluid" *ngIf="isAuthorized">
 
-    <div class="row">
-        <div class="form-inline">
-            <div class="form-group">
-                <label for="group">Group: </label>
-                <select class="form-control" type="number" [(ngModel)]="group">
-                    <option *ngFor="let g of (newsState$|async)?.groups" [ngValue]="g">{{g}}</option>
-                </select>
+    <div class="form-group row">
+        <label for="group" class="col-sm-2 col-form-label">Group</label>
+        <div class="col-sm-2">
+            <select class="form-control" type="number" [(ngModel)]="group">
+                <option *ngFor="let g of (newsState$|async)?.groups" [ngValue]="g">{{g}}</option>
+            </select>
+        </div>
+        <label for="author" class="col-sm-2 col-form-label">Author:</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="author" placeholder="your name" name="author" [(ngModel)]="author" required>
+        </div>
 
-
-                <label for="author">Author: </label>
-                <input type="text" class="form-control" id="author" placeholder="your name" name="author" [(ngModel)]="author" required>
-            </div>
+        <div class="col-sm-2">
             <button class="btn btn-primary" style="width:150px;" (click)="join()">Join</button>
+        </div>
+        <div class="col-sm-2">
             <button class="btn btn-primary" style="width:150px;" (click)="leave()">Leave</button>
         </div>
     </div>
