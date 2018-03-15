@@ -23,15 +23,13 @@
     "lint": "tslint ./angularApp"
   },
   "dependencies": {
-    "@angular/animations": "5.2.3",
+    "@angular/animations": "5.2.9",
     "@angular/cdk": "5.2.4",
-    "@angular/common": "5.2.3",
+    "@angular/common": "5.2.9",
     "@angular/flex-layout": "5.0.0-beta.13",
     "@ngrx/effects": "^5.2.0",
     "@ngrx/store": "^5.2.0",
     "@ngrx/store-devtools": "5.2.0",
-    "@angular/animations": "5.2.9",
-    "@angular/common": "5.2.9",
     "@angular/compiler": "5.2.9",
     "@angular/compiler-cli": "5.2.9",
     "@angular/core": "5.2.9",
