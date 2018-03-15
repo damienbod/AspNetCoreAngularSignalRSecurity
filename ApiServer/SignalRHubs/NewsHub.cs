@@ -24,7 +24,7 @@ namespace ApiServer.SignalRHubs
             }
 
             _newsStore.CreateNewItem(newsItem);
-            return Clients.Group(newsItem.NewsGroup).InvokeAsync("Send", newsItem);
+            return Clients.Group(newsItem.NewsGroup).SendAsync("Send", newsItem);
         }
 
         public async Task JoinGroup(string groupName)
@@ -35,10 +35,10 @@ namespace ApiServer.SignalRHubs
             }
 
             await Groups.AddAsync(Context.ConnectionId, groupName);
-            await Clients.Group(groupName).InvokeAsync("JoinGroup", groupName);
+            await Clients.Group(groupName).SendAsync("JoinGroup", groupName);
 
             var history = _newsStore.GetAllNewsItems(groupName);
-            await Clients.Client(Context.ConnectionId).InvokeAsync("History", history);
+            await Clients.Client(Context.ConnectionId).SendAsync("History", history);
         }
 
         public async Task LeaveGroup(string groupName)
@@ -48,7 +48,7 @@ namespace ApiServer.SignalRHubs
                 throw new System.Exception("cannot leave a group which does not exist.");
             }
 
-            await Clients.Group(groupName).InvokeAsync("LeaveGroup", groupName);
+            await Clients.Group(groupName).SendAsync("LeaveGroup", groupName);
             await Groups.RemoveAsync(Context.ConnectionId, groupName);
         }
     }
