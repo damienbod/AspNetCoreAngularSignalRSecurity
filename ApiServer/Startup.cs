@@ -178,9 +178,9 @@ namespace ApiServer
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<UsersDmHub>("usersdm");
-                routes.MapHub<SignalRHomeHub>("signalrhome");
-                routes.MapHub<NewsHub>("looney");
+                routes.MapHub<UsersDmHub>("/usersdm");
+                routes.MapHub<SignalRHomeHub>("/signalrhome");
+                routes.MapHub<NewsHub>("/looney");
             });
 
             app.UseMvc(routes =>
