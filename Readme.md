@@ -18,6 +18,8 @@
 
 ## History
 
+2018-04-22: Updated Angular 5.2.10, latest ASP.NET Core SignalR preview2
+
 2018-03-21: Updated Angular 5.2.9, angular-auth-oidc-client 4.1.0
 
 2018-03-15: Updated signalr Microsoft.AspNetCore.SignalR 1.0.0-preview1-final, Angular 5.2.8, @aspnet/signalr 1.0.0-preview1-update1
