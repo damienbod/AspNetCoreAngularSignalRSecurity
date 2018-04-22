@@ -12,7 +12,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { DirectMessagesEffects } from './store/directmessages.effects';
 import { directMessagesReducer } from './store/directmessages.reducer';
-import * as directMessagesAction from './store/directmessages.action';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
@@ -33,9 +32,7 @@ import {
         FormsModule,
         HttpClientModule,
         DirectMessagesRoutes,
-        StoreModule.forFeature('dm', {
-            dm: directMessagesReducer, directMessagesAction
-        }),
+        StoreModule.forFeature('dm', directMessagesReducer),
         EffectsModule.forFeature([DirectMessagesEffects]),
         MatListModule,
         MatIconModule,

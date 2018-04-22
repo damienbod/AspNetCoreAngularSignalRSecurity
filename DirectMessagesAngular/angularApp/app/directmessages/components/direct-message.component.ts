@@ -30,8 +30,8 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
         private store: Store<any>,
         private oidcSecurityService: OidcSecurityService
     ) {
-        this.dmState$ = this.store.select<DirectMessagesState>(state => state.dm.dm);
-        this.dmStateSubscription = this.store.select<DirectMessagesState>(state => state.dm.dm)
+        this.dmState$ = this.store.select<DirectMessagesState>(state => state.dm);
+        this.dmStateSubscription = this.store.select<DirectMessagesState>(state => state.dm)
             .subscribe((o: DirectMessagesState) => {
                 this.connected = o.connected;
             });
