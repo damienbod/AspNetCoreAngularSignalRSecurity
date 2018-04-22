@@ -14,12 +14,12 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 @Injectable()
 export class NewsService {
 
-    private _hubConnection: HubConnection;
+    private _hubConnection: HubConnection | undefined;
     private actionUrl: string;
     private headers: HttpHeaders;
 
-    isAuthorizedSubscription: Subscription;
-    isAuthorized: boolean;
+    isAuthorizedSubscription: Subscription | undefined;
+    isAuthorized = false;
 
     constructor(private http: HttpClient,
         private store: Store<any>,
@@ -36,21 +36,29 @@ export class NewsService {
     }
 
     send(newsItem: NewsItem): NewsItem {
-        this._hubConnection.invoke('Send', newsItem);
+        if (this._hubConnection) {
+            this._hubConnection.invoke('Send', newsItem);
+        }
         return newsItem;
     }
 
     sendDirectMessage(message: string, userId: string): string {
-        this._hubConnection.invoke('SendDM', message, userId);
+        if (this._hubConnection) {
+            this._hubConnection.invoke('SendDM', message, userId);
+        }
         return message;
     }
 
     joinGroup(group: string): void {
-        this._hubConnection.invoke('JoinGroup', group);
+        if (this._hubConnection) {
+            this._hubConnection.invoke('JoinGroup', group);
+        }
     }
 
     leaveGroup(group: string): void {
-        this._hubConnection.invoke('LeaveGroup', group);
+        if (this._hubConnection) {
+            this._hubConnection.invoke('LeaveGroup', group);
+        }
     }
 
     getAllGroups(): Observable<string[]> {

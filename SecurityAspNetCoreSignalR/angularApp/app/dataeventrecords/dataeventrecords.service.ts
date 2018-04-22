@@ -3,14 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Configuration } from '../app.constants';
-import { OidcSecurityService} from 'angular-auth-oidc-client';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { DataEventRecord } from './models/DataEventRecord';
 
 @Injectable()
 export class DataEventRecordsService {
 
     private actionUrl: string;
-    private headers: HttpHeaders;
+    private headers: HttpHeaders = new HttpHeaders();
 
     constructor(private http: HttpClient, configuration: Configuration, private _securityService: OidcSecurityService) {
         this.actionUrl = `${configuration.Server}api/DataEventRecords/`;

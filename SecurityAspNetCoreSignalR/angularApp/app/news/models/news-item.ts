@@ -1,8 +1,8 @@
 export class NewsItem {
-    public header: string;
-    public newsText: string;
-    public author: string;
-    public newsGroup: string;
+    public header = '';
+    public newsText = '';
+    public author = '';
+    public newsGroup = '';
 
     constructor() {
     }
