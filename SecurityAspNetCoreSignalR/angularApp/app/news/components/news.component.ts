@@ -15,14 +15,14 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 export class NewsComponent implements OnInit, OnDestroy {
     public async: any;
     newsItem: NewsItem;
-    newsItems: NewsItem[];
+    newsItems: NewsItem[] = [];
     group = 'IT';
     author = 'unknown';
     newsState$: Observable<NewsState>;
     groups = ['IT', 'global', 'sport'];
 
-    isAuthorizedSubscription: Subscription;
-    isAuthorized: boolean;
+    isAuthorizedSubscription: Subscription | undefined;
+    isAuthorized = false;
 
     constructor(
         private store: Store<any>,
@@ -64,6 +64,8 @@ export class NewsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.isAuthorizedSubscription.unsubscribe();
+        if (this.isAuthorizedSubscription) {
+            this.isAuthorizedSubscription.unsubscribe();
+        }
     }
 }

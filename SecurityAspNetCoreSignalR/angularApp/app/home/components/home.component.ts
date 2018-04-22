@@ -10,13 +10,13 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
-    private _hubConnection: HubConnection;
+    private _hubConnection: HubConnection | undefined;
     async: any;
     message = '';
     messages: string[] = [];
 
-    isAuthorizedSubscription: Subscription;
-    isAuthorized: boolean;
+    isAuthorizedSubscription: Subscription | undefined;
+    isAuthorized = false;
 
     constructor(
         private configuration: Configuration,
@@ -36,13 +36,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.isAuthorizedSubscription.unsubscribe();
+        if (this.isAuthorizedSubscription) {
+            this.isAuthorizedSubscription.unsubscribe();
+        }
     }
 
     sendMessage(): void {
         const data = `Sent: ${this.message}`;
-
-        this._hubConnection.invoke('Send', data);
+        if (this._hubConnection) {
+            this._hubConnection.invoke('Send', data);
+        }
         this.messages.push(data);
     }
 
