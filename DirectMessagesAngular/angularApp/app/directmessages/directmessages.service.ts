@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -40,6 +40,7 @@ export class DirectMessagesService {
     }
 
     join(): void {
+        console.log('send join');
         this._hubConnection.invoke('Join');
     }
 

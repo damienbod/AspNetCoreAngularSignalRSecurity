@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription ,  Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { DirectMessagesState } from '../store/directmessages.state';
 import * as directMessagesAction from '../store/directmessages.action';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { OnlineUser } from '../models/online-user';
 import { DirectMessage } from '../models/direct-message';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-direct-message-component',
@@ -33,9 +32,10 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
         this.dmState$ = this.store.select<DirectMessagesState>(state => state.dm);
         this.dmStateSubscription = this.store.select<DirectMessagesState>(state => state.dm)
             .subscribe((o: DirectMessagesState) => {
-                this.connected = o.connected;
+                this.connected = o.dm.connected;
+                console.log('o.dm');
+                console.log(o.dm);
             });
-
     }
 
     public sendDm(): void {
