@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
+import { Subscription ,  Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NewsState } from '../store/news.state';
 import * as NewsActions from '../store/news.action';
@@ -31,7 +30,9 @@ export class NewsComponent implements OnInit, OnDestroy {
         this.newsState$ = this.store.select<NewsState>(state => state.news.newsitems);
 
         this.store.select<NewsState>(state => state.news.newsitems).subscribe((o: NewsState) => {
-            this.newsItems = o.newsItems;
+            if (o.newsItems) {
+                this.newsItems = o.newsItems;
+            }
         });
 
         this.newsItem = new NewsItem();
