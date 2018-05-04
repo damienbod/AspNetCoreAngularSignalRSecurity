@@ -33,6 +33,8 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
         this.dmStateSubscription = this.store.select<DirectMessagesState>(state => state.dm)
             .subscribe((o: DirectMessagesState) => {
                 this.connected = o.dm.connected;
+                console.log('o.dm');
+                console.log(o.dm);
             });
     }
 

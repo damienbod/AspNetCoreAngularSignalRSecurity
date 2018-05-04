@@ -22,7 +22,11 @@ export function directMessagesReducer(state = initialState, action: directMessag
             }
 
             return Object.assign({}, state, {
-                directMessages: state.dm.directMessages.concat(directMessage),
+                dm: {
+                    directMessages: state.dm.directMessages.concat(directMessage),
+                    connected: state.dm.connected,
+                    onlineUsers: state.dm.onlineUsers
+                }
             });
         }
 
@@ -31,7 +35,11 @@ export function directMessagesReducer(state = initialState, action: directMessag
             const list = [...state.dm.onlineUsers]; // clone the array
             list.splice(index, 1);
             return Object.assign({}, state, {
-                onlineUsers: list
+                dm: {
+                    directMessages: state.dm.directMessages,
+                    connected: state.dm.connected,
+                    onlineUsers: list
+                }
             });
         }
 
@@ -43,28 +51,49 @@ export function directMessagesReducer(state = initialState, action: directMessag
             }
 
             return Object.assign({}, state, {
-                directMessages: state.dm.directMessages.concat(directMessage),
+                dm: {
+                    directMessages: state.dm.directMessages.concat(directMessage),
+                    connected: state.dm.connected,
+                    onlineUsers: state.dm.onlineUsers
+                }
             });
         }
 
         case directMessagesAction.RECEIVED_NEW_ONLINE_USER:
             return Object.assign({}, state, {
-                onlineUsers: state.dm.onlineUsers.concat(action.onlineUser),
+                dm: {
+                    directMessages: state.dm.directMessages,
+                    connected: state.dm.connected,
+                    onlineUsers: state.dm.onlineUsers.concat(action.onlineUser)
+                }
             });
 
         case directMessagesAction.RECEIVED_ONLINE_USERS:
             return Object.assign({}, state, {
-                onlineUsers: action.onlineUsers
+                dm: {
+                    directMessages: state.dm.directMessages,
+                    connected: state.dm.connected,
+                    onlineUsers: action.onlineUsers
+                }
+                
             });
 
         case directMessagesAction.JOIN_SENT:
             return Object.assign({}, state, {
-                connected: true,
+                dm: {
+                    directMessages: state.dm.directMessages,
+                    connected: true,
+                    onlineUsers: state.dm.onlineUsers
+                }
             });
 
         case directMessagesAction.LEAVE_SENT:
             return Object.assign({}, state, {
-                connected: false,
+                dm: {
+                    directMessages: state.dm.directMessages,
+                    connected: false,
+                    onlineUsers: state.dm.onlineUsers
+                }
             });
 
         default:
