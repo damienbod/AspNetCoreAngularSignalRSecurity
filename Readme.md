@@ -18,6 +18,8 @@
 
 ## History
 
+2018-05-04: Updated Angular 6.0.0, STS to bootstrap 4
+
 2018-04-22: Updated Angular 5.2.10, latest ASP.NET Core SignalR preview2
 
 2018-03-21: Updated Angular 5.2.9, angular-auth-oidc-client 4.1.0
