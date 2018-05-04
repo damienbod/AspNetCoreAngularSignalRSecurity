@@ -4,7 +4,7 @@
         <label for="group" class="col-sm-2 col-form-label">Group</label>
         <div class="col-sm-2">
             <select class="form-control" type="number" [(ngModel)]="group">
-                <option *ngFor="let g of (newsState$|async)?.groups" [ngValue]="g">{{g}}</option>
+                <option *ngFor="let g of (newsState$|async)?.news.groups" [ngValue]="g">{{g}}</option>
             </select>
         </div>
         <label for="author" class="col-sm-2 col-form-label">Author:</label>

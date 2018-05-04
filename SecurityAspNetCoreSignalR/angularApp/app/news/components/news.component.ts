@@ -27,14 +27,15 @@ export class NewsComponent implements OnInit, OnDestroy {
         private store: Store<any>,
         private oidcSecurityService: OidcSecurityService
     ) {
-        this.newsState$ = this.store.select<NewsState>(state => state.news.newsitems);
+        this.newsState$ = this.store.select<NewsState>(state => state.news);
 
-        this.store.select<NewsState>(state => state.news.newsitems).subscribe((o: NewsState) => {
-            if (o.newsItems) {
-                this.newsItems = o.newsItems;
-            }
+        this.store.select<NewsState>(state => state.news).subscribe((o: NewsState) => {
+            console.log('event');
+            console.log(o);
+            this.newsItems = o.news.newsItems;
         });
 
+        console.log(this.newsItems);
         this.newsItem = new NewsItem();
         this.newsItem.AddData('', '', this.author, this.group);
     }
@@ -46,6 +47,7 @@ export class NewsComponent implements OnInit, OnDestroy {
     }
 
     public join(): void {
+        console.log('join');
         this.store.dispatch(new NewsActions.JoinGroupAction(this.group));
     }
 
@@ -58,6 +60,7 @@ export class NewsComponent implements OnInit, OnDestroy {
             (isAuthorized: boolean) => {
                 this.isAuthorized = isAuthorized;
                 if (this.isAuthorized) {
+                    console.log('this.store.dispatch(new NewsActions.SelectAllGroupsAction()');
                     this.store.dispatch(new NewsActions.SelectAllGroupsAction());
                 }
             });

@@ -29,6 +29,7 @@ namespace ApiServer.Controllers
 
         public List<string> GetAllGroups()
         {
+            var data = _newsStore.GetAllGroups();
             return _newsStore.GetAllGroups();
         }
     }
