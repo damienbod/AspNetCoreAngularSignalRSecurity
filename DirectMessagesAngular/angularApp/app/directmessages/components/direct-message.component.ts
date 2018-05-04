@@ -34,7 +34,6 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
             .subscribe((o: DirectMessagesState) => {
                 this.connected = o.dm.connected;
             });
-
     }
 
     public sendDm(): void {
