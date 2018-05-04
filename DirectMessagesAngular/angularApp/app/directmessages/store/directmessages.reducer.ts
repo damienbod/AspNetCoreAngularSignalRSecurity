@@ -3,10 +3,13 @@ import * as directMessagesAction from './directmessages.action';
 import { DirectMessage } from '../models/direct-message';
 
 export const initialState: DirectMessagesState = {
-    onlineUsers: [],
-    directMessages: [],
-    connected: false
-};
+    dm:
+    {
+            onlineUsers: [],
+            directMessages: [],
+            connected: false
+    }
+}
 
 export function directMessagesReducer(state = initialState, action: directMessagesAction.Actions): DirectMessagesState {
     switch (action.type) {
@@ -19,13 +22,13 @@ export function directMessagesReducer(state = initialState, action: directMessag
             }
 
             return Object.assign({}, state, {
-                directMessages: state.directMessages.concat(directMessage),
+                directMessages: state.dm.directMessages.concat(directMessage),
             });
         }
 
         case directMessagesAction.RECEIVED_USER_LEFT: {
-            const index = state.onlineUsers.findIndex(obj => obj.userName === action.name);
-            const list = [...state.onlineUsers]; // clone the array
+            const index = state.dm.onlineUsers.findIndex(obj => obj.userName === action.name);
+            const list = [...state.dm.onlineUsers]; // clone the array
             list.splice(index, 1);
             return Object.assign({}, state, {
                 onlineUsers: list
@@ -40,13 +43,13 @@ export function directMessagesReducer(state = initialState, action: directMessag
             }
 
             return Object.assign({}, state, {
-                directMessages: state.directMessages.concat(directMessage),
+                directMessages: state.dm.directMessages.concat(directMessage),
             });
         }
 
         case directMessagesAction.RECEIVED_NEW_ONLINE_USER:
             return Object.assign({}, state, {
-                onlineUsers: state.onlineUsers.concat(action.onlineUser),
+                onlineUsers: state.dm.onlineUsers.concat(action.onlineUser),
             });
 
         case directMessagesAction.RECEIVED_ONLINE_USERS:

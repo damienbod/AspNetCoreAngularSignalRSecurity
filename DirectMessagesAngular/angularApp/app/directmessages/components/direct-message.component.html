@@ -3,7 +3,7 @@
         <nav>
 
             <mat-list>
-                <mat-list-item *ngFor="let onlineuser of (dmState$|async)?.onlineUsers">
+                <mat-list-item *ngFor="let onlineuser of (dmState$|async)?.dm.onlineUsers">
                     <a mat-button (click)="selectChat(onlineuser.userName)">{{onlineuser.userName}}</a>
                 </mat-list-item>
             </mat-list>
@@ -26,7 +26,7 @@
             </mat-form-field>
            
             <mat-chip-list class="mat-chip-list-stacked">
-                <ng-container *ngFor="let directMessage of (dmState$|async)?.directMessages">
+                <ng-container *ngFor="let directMessage of (dmState$|async)?.dm.directMessages">
 
                     <ng-container *ngIf="getUserInfoName(directMessage) !== ''">
                         <mat-chip selected="true" style="width:95%">
