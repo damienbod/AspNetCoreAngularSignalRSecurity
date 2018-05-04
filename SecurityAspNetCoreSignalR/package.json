@@ -23,6 +23,9 @@
     "lint": "tslint ./angularApp"
   },
   "dependencies": {
+    "@ngrx/effects": "^5.2.0",
+    "@ngrx/store": "^5.2.0",
+    "@ngrx/store-devtools": "5.2.0",
     "@aspnet/signalr": "^1.0.0-preview2-final",
     "angular-auth-oidc-client": "4.1.0",
     "@angular/animations": "6.0.0",
