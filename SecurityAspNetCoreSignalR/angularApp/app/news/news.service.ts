@@ -1,8 +1,7 @@
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription ,  Observable } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
 import { HubConnection } from '@aspnet/signalr';
 import { NewsItem } from './models/news-item';
@@ -64,6 +63,8 @@ export class NewsService {
     getAllGroups(): Observable<string[]> {
 
         const token = this.oidcSecurityService.getToken();
+        console.log('getAllGroups token:');
+        console.log(token);
         if (token !== '') {
             const tokenValue = 'Bearer ' + token;
             this.headers = this.headers.append('Authorization', tokenValue);

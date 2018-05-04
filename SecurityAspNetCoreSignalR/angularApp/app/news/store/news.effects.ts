@@ -18,7 +18,7 @@ export class NewsEffects {
         }));
 
     @Effect() joinGroup$ = this.actions$.ofType<newsAction.JoinGroupAction>(newsAction.JOIN_GROUP).pipe(
-        switchMap((action: newsAction.JoinGroupAction) => {
+        switchMap((action: newsAction.JoinGroupAction ) => {
             this.newsService.joinGroup(action.group);
             return Observable.of(new newsAction.JoinGroupActionComplete(action.group));
         }));
