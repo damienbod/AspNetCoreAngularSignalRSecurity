@@ -63,8 +63,8 @@ namespace QuickstartIdentityServer
                 claims.Add(new Claim(JwtClaimTypes.Scope, "dataEventRecords"));
             }
 
-            claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
-
+            claims.Add(new Claim(JwtClaimTypes.Name, user.Email));
+            claims.Add(new Claim(JwtClaimTypes.Email, user.Email));
 
             context.IssuedClaims = claims;
         }
