@@ -29,13 +29,6 @@ namespace IdentityServerWithAspNetIdentity.Controllers
             return View();
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
         /// <summary>
         /// Shows the error page
         /// </summary>
