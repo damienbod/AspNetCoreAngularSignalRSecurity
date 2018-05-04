@@ -4,7 +4,6 @@ import { switchMap } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs/Rx';
 
 import * as directMessagesAction from './directmessages.action';
 import { DirectMessagesService } from '../directmessages.service';
