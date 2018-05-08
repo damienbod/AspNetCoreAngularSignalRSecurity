@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import * as directMessagesActions from './store/directmessages.action';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { OnlineUser } from './models/online-user';
+import * as signalR from '@aspnet/signalr';
 
 @Injectable()
 export class DirectMessagesService {
@@ -63,7 +64,13 @@ export class DirectMessagesService {
             tokenValue = '?token=' + token;
         }
         const url = 'https://localhost:44390/';
-        this._hubConnection = new HubConnection(`${url}usersdm${tokenValue}`);
+
+        this._hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl(`${url}usersdm${tokenValue}`)
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        this._hubConnection.start().catch(err => console.error(err.toString()));
 
         this._hubConnection.on('NewOnlineUser', (onlineUser: OnlineUser) => {
             console.log('NewOnlineUser received');
