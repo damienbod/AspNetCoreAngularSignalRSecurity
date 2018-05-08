@@ -75,7 +75,6 @@ export function directMessagesReducer(state = initialState, action: directMessag
                     connected: state.dm.connected,
                     onlineUsers: action.onlineUsers
                 }
-                
             });
 
         case directMessagesAction.JOIN_SENT:
