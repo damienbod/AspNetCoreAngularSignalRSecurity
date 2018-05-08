@@ -18,6 +18,8 @@
 
 ## History
 
+2018-05-08: Updated .NET Core 2.1 rc1
+
 2018-05-04: Updated Angular 6.0.0, STS to bootstrap 4
 
 2018-04-22: Updated Angular 5.2.10, latest ASP.NET Core SignalR preview2
