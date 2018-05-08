@@ -36,7 +36,7 @@
     "@angular/platform-server": "6.0.0",
     "@angular/router": "6.0.0",
     "@angular/upgrade": "6.0.0",
-    "@aspnet/signalr": "^1.0.0-preview2-final",
+    "@aspnet/signalr": "1.0.0-rc1-update1",
     "@ngrx/effects": "6.0.0-beta.1",
     "@ngrx/store": "6.0.0-beta.1",
     "@ngrx/store-devtools": "6.0.0-beta.1",

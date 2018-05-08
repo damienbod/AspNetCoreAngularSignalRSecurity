@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import * as NewsActions from './store/news.action';
 import { Configuration } from '../app.constants';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import * as signalR from '@aspnet/signalr';
 
 @Injectable()
 export class NewsService {
@@ -92,7 +93,12 @@ export class NewsService {
             tokenValue = '?token=' + token;
         }
 
-        this._hubConnection = new HubConnection(`${this.configuration.Server}looney${tokenValue}`);
+        this._hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl(`${this.configuration.Server}looney${tokenValue}`)
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        this._hubConnection.start().catch(err => console.error(err.toString()));
 
         this._hubConnection.on('Send', (newsItem: NewsItem) => {
             this.store.dispatch(new NewsActions.ReceivedItemAction(newsItem));
