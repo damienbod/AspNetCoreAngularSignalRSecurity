@@ -99,15 +99,5 @@ export class DirectMessagesService {
             console.log('UserLeft received');
             this.store.dispatch(new directMessagesActions.ReceivedUserLeft(name));
         });
-
-        this._hubConnection.start()
-            .then(() => {
-                console.log('Hub connection started')
-                this._hubConnection.invoke('Join');
-            })
-            .catch(() => {
-                console.log('Error while establishing connection')
-            });
     }
-
 }
