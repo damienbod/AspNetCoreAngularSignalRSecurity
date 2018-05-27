@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApiServer.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
-    [Authorize("dataEventRecords")]
     [Route("api/[controller]")]
     public class DataEventRecordsController : Controller
     {
@@ -18,7 +17,6 @@ namespace ApiServer.Controllers
             _dataEventRecordRepository = dataEventRecordRepository;
         }
 
-        [Authorize("dataEventRecordsUser")]
         [HttpGet]
         public IActionResult Get()
         {
@@ -26,15 +24,12 @@ namespace ApiServer.Controllers
             return Ok(_dataEventRecordRepository.GetAll(username));
         }
 
-        //[Authorize("correctUser")]
-        [Authorize("dataEventRecordsAdmin")]
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
             return Ok(_dataEventRecordRepository.Get(id));
         }
 
-        [Authorize("dataEventRecordsAdmin")]
         [HttpPost]
         public IActionResult Post([FromBody]DataEventRecordDto value)
         {
@@ -43,8 +38,6 @@ namespace ApiServer.Controllers
             return Created("/api/DataEventRecords", value);
         }
 
-        [Authorize("dataEventRecordsAdmin")]
-        [Authorize("correctUser")]
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody]DataEventRecordDto dataEventRecordDto)
         {
@@ -52,7 +45,6 @@ namespace ApiServer.Controllers
             return NoContent();
         }
 
-        [Authorize("dataEventRecordsAdmin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {

@@ -19,6 +19,8 @@
 
 ## History
 
+2018-05-08: Updated Angular 6.0.3 and npm packages
+
 2018-05-08: Updated .NET Core 2.1 rc1
 
 2018-05-04: Updated Angular 6.0.0, STS to bootstrap 4

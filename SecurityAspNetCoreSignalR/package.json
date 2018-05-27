@@ -23,7 +23,7 @@
     "lint": "tslint ./angularApp"
   },
   "dependencies": {
-    "@aspnet/signalr": "1.0.0-rc1-final",
+    "@aspnet/signalr": "1.0.0-rc1-update1",
     "@angular-devkit/core": "0.6.5",
     "@angular/animations": "6.0.3",
     "@angular/common": "6.0.3",

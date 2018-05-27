@@ -66,7 +66,6 @@ namespace ApiServer
                 ), ServiceLifetime.Singleton
             );
 
-            services.AddSingleton<IAuthorizationHandler, CorrectUserHandler>();
             services.AddSingleton<NewsStore>();
             services.AddSingleton<UserInfoInMemory>();
 
@@ -132,22 +131,6 @@ namespace ApiServer
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("dataEventRecordsAdmin", policyAdmin =>
-                {
-                    policyAdmin.RequireClaim("role", "dataEventRecords.admin");
-                });
-                options.AddPolicy("dataEventRecordsUser", policyUser =>
-                {
-                    policyUser.RequireClaim("role", "dataEventRecords.user");
-                });
-                options.AddPolicy("dataEventRecords", policyUser =>
-                {
-                    policyUser.RequireClaim("scope", "dataEventRecords");
-                });
-                options.AddPolicy("correctUser", policyCorrectUser =>
-                {
-                    policyCorrectUser.Requirements.Add(new CorrectUserRequirement());
-                });
             });
 
             services.AddSignalR();
@@ -160,7 +143,7 @@ namespace ApiServer
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
 
-            services.AddScoped<IDataEventRecordRepository, DataEventRecordRepository>();
+            services.AddTransient<IDataEventRecordRepository, DataEventRecordRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -172,7 +155,7 @@ namespace ApiServer
 
             app.UseExceptionHandler("/Home/Error");
             app.UseCors("corsGlobalPolicy");
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
 
             app.UseAuthentication();
 
