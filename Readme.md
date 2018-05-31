@@ -19,6 +19,8 @@
 
 ## History
 
+2018-05-31: Updated .NET Core 2.1
+
 2018-05-08: Updated Angular 6.0.3 and npm packages
 
 2018-05-08: Updated .NET Core 2.1 rc1
