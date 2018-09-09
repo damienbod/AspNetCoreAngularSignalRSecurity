@@ -19,6 +19,9 @@
 
 ## History
 
+
+2018-09-09: Updated Angular 6.1.7, OIDC Angular lib
+
 2018-08-18: Updated .NET Core 2.1.2, Angular 6.1.3, OIDC Angular lib
 
 2018-08-04: Updated .NET Core 2.1.2, Angular 6.1.1
