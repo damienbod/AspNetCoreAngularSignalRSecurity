@@ -19,6 +19,7 @@
 
 ## History
 
+2018-10-07: Updated to Angular 6.1.9, OIDC 6.0.12, Nuget packages
 
 2018-09-09: Updated Angular 6.1.7, OIDC Angular lib
 
