@@ -19,7 +19,7 @@
 
 ## History
 
-2018-10-14: Updated  Angular 6.1.10, .NET Core 2.1.5, ASP.NET Core SignalR 1.0.4
+2018-10-14: Updated  Angular 6.1.10, OIDC 7.0.0, ASP.NET Core SignalR 1.0.4
 
 2018-10-07: Updated to Angular 6.1.9, OIDC 6.0.12, Nuget packages
 
