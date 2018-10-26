@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { DirectMessagesService } from './directmessages.service';
 
-import { DirectMessagesComponent } from './components/direct-message.component'
+import { DirectMessagesComponent } from './components/direct-message.component';
 import { DirectMessagesRoutes } from './directmessages.routes';
 
 import { EffectsModule } from '@ngrx/effects';

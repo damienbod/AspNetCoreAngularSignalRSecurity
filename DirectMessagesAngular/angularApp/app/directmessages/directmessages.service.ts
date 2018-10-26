@@ -13,11 +13,11 @@ import * as signalR from '@aspnet/signalr';
 @Injectable()
 export class DirectMessagesService {
 
-    private _hubConnection: HubConnection;
-    private headers: HttpHeaders;
+    private _hubConnection: HubConnection | undefined;
+    private headers: HttpHeaders | undefined;
 
-    isAuthorizedSubscription: Subscription;
-    isAuthorized: boolean;
+    isAuthorizedSubscription: Subscription | undefined;
+    isAuthorized = false;
 
     constructor(
         private store: Store<any>,
@@ -32,17 +32,23 @@ export class DirectMessagesService {
 
     sendDirectMessage(message: string, userId: string): string {
 
-        this._hubConnection.invoke('SendDirectMessage', message, userId);
+        if (this._hubConnection) {
+            this._hubConnection.invoke('SendDirectMessage', message, userId);
+        }
         return message;
     }
 
     leave(): void {
-        this._hubConnection.invoke('Leave');
+        if (this._hubConnection) {
+            this._hubConnection.invoke('Leave');
+        }
     }
 
     join(): void {
         console.log('send join');
-        this._hubConnection.invoke('Join');
+        if (this._hubConnection) {
+            this._hubConnection.invoke('Join');
+        }
     }
 
     private init() {

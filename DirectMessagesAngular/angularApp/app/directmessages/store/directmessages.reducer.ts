@@ -9,7 +9,7 @@ export const initialState: DirectMessagesState = {
             directMessages: [],
             connected: false
     }
-}
+};
 
 export function directMessagesReducer(state = initialState, action: directMessagesAction.Actions): DirectMessagesState {
     switch (action.type) {
@@ -19,7 +19,7 @@ export function directMessagesReducer(state = initialState, action: directMessag
             const directMessage: DirectMessage = {
                 message: action.message,
                 fromOnlineUser: action.onlineUser
-            }
+            };
 
             return Object.assign({}, state, {
                 dm: {
@@ -48,7 +48,7 @@ export function directMessagesReducer(state = initialState, action: directMessag
             const directMessage: DirectMessage = {
                 message: action.message,
                 fromOnlineUser: null
-            }
+            };
 
             return Object.assign({}, state, {
                 dm: {
