@@ -45,13 +45,13 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-		if(this.isAuthorizedSubscription) {
-        this.isAuthorizedSubscription.unsubscribe();
-		}
+        if (this.isAuthorizedSubscription) {
+            this.isAuthorizedSubscription.unsubscribe();
+        }
         this.oidcSecurityService.onModuleSetup.unsubscribe();
-		if(this.userDataSubscription) {
-			this.userDataSubscription.unsubscribe();
-		}
+        if (this.userDataSubscription) {
+            this.userDataSubscription.unsubscribe();
+        }
     }
 
     login() {

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription ,  Observable } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { DirectMessagesState } from '../store/directmessages.state';
 import * as directMessagesAction from '../store/directmessages.action';
@@ -13,10 +13,10 @@ import { DirectMessage } from '../models/direct-message';
 })
 
 export class DirectMessagesComponent implements OnInit, OnDestroy {
-    
-	public async: any;
+
+    public async: any;
     onlineUsers: OnlineUser[] = [];
-    onlineUser: OnlineUser = {connectionId: '', userName: ''};
+    onlineUser: OnlineUser = { connectionId: '', userName: '' };
     directMessages: DirectMessage[] = [];
     selectedOnlineUserName = '';
     dmState$: Observable<DirectMessagesState>;
@@ -54,12 +54,12 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-		if(this.isAuthorizedSubscription) {
-			this.isAuthorizedSubscription.unsubscribe();
-		}
-		if(this.dmStateSubscription) {
-			this.dmStateSubscription.unsubscribe();
-		}
+        if (this.isAuthorizedSubscription) {
+            this.isAuthorizedSubscription.unsubscribe();
+        }
+        if (this.dmStateSubscription) {
+            this.dmStateSubscription.unsubscribe();
+        }
     }
 
     selectChat(onlineuserUserName: string): void {

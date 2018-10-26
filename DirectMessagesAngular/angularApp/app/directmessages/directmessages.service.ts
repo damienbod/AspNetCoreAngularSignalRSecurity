@@ -14,7 +14,7 @@ import * as signalR from '@aspnet/signalr';
 export class DirectMessagesService {
 
     private _hubConnection: HubConnection | undefined;
-    private headers: HttpHeaders| undefined;
+    private headers: HttpHeaders | undefined;
 
     isAuthorizedSubscription: Subscription | undefined;
     isAuthorized = false;
@@ -32,23 +32,23 @@ export class DirectMessagesService {
 
     sendDirectMessage(message: string, userId: string): string {
 
-		if(this._hubConnection) {
-			this._hubConnection.invoke('SendDirectMessage', message, userId);
-		}
+        if (this._hubConnection) {
+            this._hubConnection.invoke('SendDirectMessage', message, userId);
+        }
         return message;
     }
 
     leave(): void {
-		if(this._hubConnection) {
-			this._hubConnection.invoke('Leave');
-		}
+        if (this._hubConnection) {
+            this._hubConnection.invoke('Leave');
+        }
     }
 
     join(): void {
         console.log('send join');
-		if(this._hubConnection) {
-			this._hubConnection.invoke('Join');
-		}
+        if (this._hubConnection) {
+            this._hubConnection.invoke('Join');
+        }
     }
 
     private init() {
