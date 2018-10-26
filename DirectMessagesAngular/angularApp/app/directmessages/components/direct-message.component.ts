@@ -58,7 +58,7 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     }
 
     selectChat(onlineuserUserName: string): void {
-        this.selectedOnlineUserName = onlineuserUserName
+        this.selectedOnlineUserName = onlineuserUserName;
     }
 
     sendMessage() {
