@@ -37,7 +37,7 @@ export class NewsEffects {
                     return new newsAction.SelectAllGroupsActionComplete(data);
                 }),
                 catchError((error: any) => of(error)
-                ))
+                ));
         }));
 
     constructor(
