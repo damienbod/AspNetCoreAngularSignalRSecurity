@@ -10,13 +10,13 @@ import './app.component.css';
 
 export class AppComponent implements OnInit, OnDestroy {
 
-    title: string;
-    email: string;
+    title = '';
+    email = '';
 
-    isAuthorizedSubscription: Subscription;
-    isAuthorized: boolean;
-    userDataSubscription: Subscription;
-    userData: boolean;
+    isAuthorizedSubscription: Subscription | undefined;
+    isAuthorized = false;
+    userDataSubscription: Subscription | undefined;
+    userData = false;
 
     constructor(
         public oidcSecurityService: OidcSecurityService
@@ -45,9 +45,13 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+		if(this.isAuthorizedSubscription) {
         this.isAuthorizedSubscription.unsubscribe();
+		}
         this.oidcSecurityService.onModuleSetup.unsubscribe();
-        this.userDataSubscription.unsubscribe();
+		if(this.userDataSubscription) {
+			this.userDataSubscription.unsubscribe();
+		}
     }
 
     login() {

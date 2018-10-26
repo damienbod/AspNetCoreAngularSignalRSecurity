@@ -13,16 +13,17 @@ import { DirectMessage } from '../models/direct-message';
 })
 
 export class DirectMessagesComponent implements OnInit, OnDestroy {
-    public async: any;
-    onlineUsers: OnlineUser[];
-    onlineUser: OnlineUser;
-    directMessages: DirectMessage[];
+    
+	public async: any;
+    onlineUsers: OnlineUser[] = [];
+    onlineUser: OnlineUser = {connectionId: '', userName: ''};
+    directMessages: DirectMessage[] = [];
     selectedOnlineUserName = '';
     dmState$: Observable<DirectMessagesState>;
-    dmStateSubscription: Subscription;
-    isAuthorizedSubscription: Subscription;
-    isAuthorized: boolean;
-    connected: boolean;
+    dmStateSubscription: Subscription | undefined;
+    isAuthorizedSubscription: Subscription | undefined;
+    isAuthorized = false;
+    connected = false;
     message = '';
 
     constructor(
@@ -53,8 +54,12 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.isAuthorizedSubscription.unsubscribe();
-        this.dmStateSubscription.unsubscribe();
+		if(this.isAuthorizedSubscription) {
+			this.isAuthorizedSubscription.unsubscribe();
+		}
+		if(this.dmStateSubscription) {
+			this.dmStateSubscription.unsubscribe();
+		}
     }
 
     selectChat(onlineuserUserName: string): void {
