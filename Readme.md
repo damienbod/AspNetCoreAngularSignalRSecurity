@@ -19,6 +19,8 @@
 
 ## History
 
+2018-10-30: Added User Admin to STS, custom claims with policies
+
 2018-10-26: Updated  Angular 7.0.1, OIDC 7.0.3
 
 2018-10-14: Updated  Angular 6.1.10, OIDC 7.0.0, ASP.NET Core SignalR 1.0.4
