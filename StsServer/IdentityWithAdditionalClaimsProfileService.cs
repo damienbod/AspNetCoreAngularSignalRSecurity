@@ -7,10 +7,10 @@ using IdentityModel;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
-using IdentityServerWithAspNetIdentity.Models;
+using StsServer.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace QuickstartIdentityServer
+namespace StsServer
 {
     using IdentityServer4;
 
@@ -35,10 +35,7 @@ namespace QuickstartIdentityServer
             var claims = principal.Claims.ToList();
 
             claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
-            
-
             claims.Add(new Claim(JwtClaimTypes.GivenName, user.UserName));
-
 
             if (user.IsAdmin)
             {
@@ -49,18 +46,12 @@ namespace QuickstartIdentityServer
                 claims.Add(new Claim(JwtClaimTypes.Role, "user"));
             }
 
+            claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords"));
+            claims.Add(new Claim(JwtClaimTypes.Scope, "dataEventRecords"));
+            claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords.user"));
             if (user.DataEventRecordsRole == "dataEventRecords.admin")
             {
                 claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords.admin"));
-                claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords.user"));
-                claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords"));
-                claims.Add(new Claim(JwtClaimTypes.Scope, "dataEventRecords"));
-            }
-            else
-            {
-                claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords.user"));
-                claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords"));
-                claims.Add(new Claim(JwtClaimTypes.Scope, "dataEventRecords"));
             }
 
             claims.Add(new Claim(JwtClaimTypes.Name, user.Email));
