@@ -36,7 +36,6 @@ namespace StsServer
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-				
 
 			if (env.IsDevelopment())
             {
@@ -66,6 +65,18 @@ namespace StsServer
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AdditionalUserClaimsPrincipalFactory>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsAdmin", policyIsAdminRequirement =>
+                {
+                    policyIsAdminRequirement.Requirements.Add(new IsAdminRequirement());
+                });
+            });
+
+            services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+
             services.AddAuthentication()
                  .AddMicrosoftAccount(options =>
                  {
@@ -75,10 +86,6 @@ namespace StsServer
                  });
 
             services.AddMvc();
-
-            services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
-
-            services.AddTransient<IEmailSender, AuthMessageSender>();
 
             services.AddIdentityServer()
                 .AddSigningCredential(cert)
