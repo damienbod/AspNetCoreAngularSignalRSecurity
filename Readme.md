@@ -15,6 +15,7 @@
 <li><a href="https://damienbod.com/2017/12/05/sending-direct-messages-using-signalr-with-asp-net-core-and-angular/">Sending Direct Messages using SignalR with ASP.NET core and Angular</a> </li>
 <li><a href="https://damienbod.com/2018/03/19/using-message-pack-with-asp-net-core-signalr/">Using Message Pack with ASP.NET Core SignalR</a> </li>
 <li><a href="https://damienbod.com/2018/05/13/uploading-and-sending-image-messages-with-asp-net-core-signalr/">Uploading and sending image messages with ASP.NET Core SignalR</a></li>
+<li><a href="https://damienbod.com/2018/10/30/implementing-user-management-with-asp-net-core-identity-and-custom-claims/">Implementing User Management with ASP.NET Core Identity and custom claims</a></li>
 </ul>
 
 ## History
