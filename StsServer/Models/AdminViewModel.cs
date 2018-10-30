@@ -4,7 +4,7 @@ namespace StsServer.Models
 {
     public class AdminViewModel
     {
-        [Key]
+        [Required]
         public string Email { get; set; }
         public bool IsAdmin { get; set; }
         public string DataEventRecordsRole { get; set; }
