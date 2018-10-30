@@ -12,6 +12,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StsServer
 {
@@ -66,6 +67,7 @@ namespace StsServer
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AdditionalUserClaimsPrincipalFactory>();
+            services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("IsAdmin", policyIsAdminRequirement =>
@@ -115,7 +117,6 @@ namespace StsServer
             app.UseStaticFiles();
 
             app.UseIdentityServer();
-            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
