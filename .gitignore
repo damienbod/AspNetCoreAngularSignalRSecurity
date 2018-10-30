@@ -17,3 +17,4 @@
 /DirectMessagesAngular/bin
 /DirectMessagesAngular/angularApp/*.js
 /DirectMessagesAngular/DirectMessagesAngular.csproj.user
+/StsServer/node_modules/

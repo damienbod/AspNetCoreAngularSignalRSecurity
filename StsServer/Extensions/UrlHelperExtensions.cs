@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityServerWithAspNetIdentity.Controllers;
+using StsServer.Controllers;
 
 namespace Microsoft.AspNetCore.Mvc
 {

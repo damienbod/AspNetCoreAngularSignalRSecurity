@@ -1,0 +1,40 @@
+﻿@model StsServer.Models.AdminViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="card" style="width: 30rem;">
+    <div class="card-body">
+        <h5 class="card-title">User @Model.Email</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Details</h6>
+        <hr />
+        <div class="card-text">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsAdmin)
+                </dt>
+                <dd>
+                    @Model.IsAdmin
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DataEventRecordsRole)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DataEventRecordsRole)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.SecuredFilesRole)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.SecuredFilesRole)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Email">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+

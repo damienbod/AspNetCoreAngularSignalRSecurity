@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace IdentityServerWithAspNetIdentity.Filters
+namespace StsServer.Filters
 {
     public class SecurityHeadersAttribute : ActionFilterAttribute
     {
@@ -23,7 +22,7 @@ namespace IdentityServerWithAspNetIdentity.Filters
                     context.HttpContext.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
                 }
 
-                var csp = "default-src 'self'";
+                var csp = "default-src 'self'; img-src 'self' data:";
                 // once for standards compliant browsers
                 if (!context.HttpContext.Response.Headers.ContainsKey("Content-Security-Policy"))
                 {

@@ -4,17 +4,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using IdentityServerWithAspNetIdentity.Data;
-using IdentityServerWithAspNetIdentity.Models;
-using IdentityServerWithAspNetIdentity.Services;
+using StsServer.Data;
+using StsServer.Models;
+using StsServer.Services;
 using IdentityServer4.Services;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Serilog;
+using Microsoft.AspNetCore.Authorization;
 
-namespace QuickstartIdentityServer
+namespace StsServer
 {
     public class Startup
     {
@@ -37,7 +37,6 @@ namespace QuickstartIdentityServer
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-				
 
 			if (env.IsDevelopment())
             {
@@ -67,6 +66,19 @@ namespace QuickstartIdentityServer
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AdditionalUserClaimsPrincipalFactory>();
+            services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsAdmin", policyIsAdminRequirement =>
+                {
+                    policyIsAdminRequirement.Requirements.Add(new IsAdminRequirement());
+                });
+            });
+
+            services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+
             services.AddAuthentication()
                  .AddMicrosoftAccount(options =>
                  {
@@ -76,10 +88,6 @@ namespace QuickstartIdentityServer
                  });
 
             services.AddMvc();
-
-            services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
-
-            services.AddTransient<IEmailSender, AuthMessageSender>();
 
             services.AddIdentityServer()
                 .AddSigningCredential(cert)
@@ -109,7 +117,6 @@ namespace QuickstartIdentityServer
             app.UseStaticFiles();
 
             app.UseIdentityServer();
-            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

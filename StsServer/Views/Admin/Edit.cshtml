@@ -1,0 +1,45 @@
+﻿@model StsServer.Models.AdminViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit user:  @Model.Email</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Email" />
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataEventRecordsRole" class="control-label"></label>
+                <input asp-for="DataEventRecordsRole" class="form-control" />
+                <span asp-validation-for="DataEventRecordsRole" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecuredFilesRole" class="control-label"></label>
+                <input asp-for="SecuredFilesRole" class="form-control" />
+                <span asp-validation-for="SecuredFilesRole" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
