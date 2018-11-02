@@ -20,6 +20,8 @@
 
 ## History
 
+2018-11-02: updated npm packages
+
 2018-10-30: Added User Admin to STS, custom claims with policies
 
 2018-10-26: Updated  Angular 7.0.1, OIDC 7.0.3
