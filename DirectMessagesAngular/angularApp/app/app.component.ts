@@ -48,7 +48,6 @@ export class AppComponent implements OnInit, OnDestroy {
         if (this.isAuthorizedSubscription) {
             this.isAuthorizedSubscription.unsubscribe();
         }
-        this.oidcSecurityService.onModuleSetup.unsubscribe();
         if (this.userDataSubscription) {
             this.userDataSubscription.unsubscribe();
         }

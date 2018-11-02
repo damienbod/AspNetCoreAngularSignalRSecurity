@@ -36,7 +36,6 @@ export class AppComponent implements OnInit, OnDestroy {
         if (this.isAuthorizedSubscription) {
             this.isAuthorizedSubscription.unsubscribe();
         }
-        this.oidcSecurityService.onModuleSetup.unsubscribe();
     }
 
     private doCallbackLogicIfRequired() {
