@@ -1,11 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace StsServerIdentity.Models.AccountViewModels
+namespace StsServer.Models.AccountViewModels
 {
     public class LoginWithRecoveryCodeViewModel
     {
-        [Required(ErrorMessage = "ACCOUNT_RECOVERY_CODE_REQUIRED")]
-        [DataType(DataType.Text)]
-        public string RecoveryCode { get; set; }
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Recovery Code")]
+            public string RecoveryCode { get; set; }
     }
 }

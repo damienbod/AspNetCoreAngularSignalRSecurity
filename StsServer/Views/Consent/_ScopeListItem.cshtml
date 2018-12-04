@@ -1,6 +1,4 @@
-﻿@using StsServerIdentity.Resources
-@inject LocService SharedLocalizer
-@model StsServerIdentity.Models.ScopeViewModel
+﻿@model StsServer.Models.ScopeViewModel
 
 <li class="list-group-item">
     <label>
@@ -20,7 +18,7 @@
 
     @if (Model.Required)
     {
-        <span class="consent-middle"><em>@SharedLocalizer.GetLocalizedHtmlString("CONSENT_REQUIRED")</em></span>
+        <span class="consent-middle"><em>CONSENT_REQUIRED</em></span>
     }
     @if (Model.Description != null)
     {

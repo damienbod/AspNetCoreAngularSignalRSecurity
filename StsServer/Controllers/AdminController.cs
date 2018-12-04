@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StsServerIdentity.Models;
-using StsServerIdentity.Data;
+using StsServer.Data;
+using StsServer.Models;
 
-namespace StsServerIdentity.Controllers
+namespace StsServer.Controllers
 {
     [Authorize(AuthenticationSchemes = "Identity.Application", Policy = "IsAdmin")]
     public class AdminController : Controller

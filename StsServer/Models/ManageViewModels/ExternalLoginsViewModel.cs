@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace StsServerIdentity.Models.ManageViewModels
+namespace StsServer.Models.ManageViewModels
 {
     public class ExternalLoginsViewModel
     {

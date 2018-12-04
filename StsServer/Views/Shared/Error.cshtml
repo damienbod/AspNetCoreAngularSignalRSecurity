@@ -1,14 +1,15 @@
-﻿@using StsServerIdentity.Resources
-@inject LocService SharedLocalizer
-@model StsServerIdentity.Models.ErrorViewModel
+﻿@model StsServer.Models.ErrorViewModel
+
 @{
     var error = Model?.Error?.Error;
     var request_id = Model?.Error?.RequestId;
 }
+
 <div class="error-page">
     <div class="page-header">
         <h1>Error</h1>
     </div>
+
     <div class="row">
         <div class="col-sm-6">
             <div class="alert alert-danger">
@@ -23,6 +24,7 @@
                     </strong>
                 }
             </div>
+
             @if (request_id != null)
             {
                 <div class="request-id">Request Id: @request_id</div>

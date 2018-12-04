@@ -1,33 +1,17 @@
-﻿using Microsoft.Extensions.Options;
-using SendGrid;
-using SendGrid.Helpers.Mail;
-using StsServerIdentity.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace StsServerIdentity.Services
+namespace StsServer.Services
 {
+    // This class is used by the application to send email for account confirmation and password reset.
+    // For more details see https://go.microsoft.com/fwlink/?LinkID=532713
     public class EmailSender : IEmailSender
     {
-        private readonly IOptions<EmailSettings> _optionsEmailSettings;
-
-        public EmailSender(IOptions<EmailSettings> optionsEmailSettings)
+        public Task SendEmailAsync(string email, string subject, string message)
         {
-            _optionsEmailSettings = optionsEmailSettings;
-        }
-
-        public async Task SendEmail(string email, string subject, string message, string toUsername)
-        {
-            var client = new SendGridClient(_optionsEmailSettings.Value.SendGridApiKey);
-            var msg = new SendGridMessage();
-            msg.SetFrom(new EmailAddress(_optionsEmailSettings.Value.SenderEmailAddress, "damienbod"));
-            msg.AddTo(new EmailAddress(email, toUsername));
-            msg.SetSubject(subject);
-            msg.AddContent(MimeType.Text, message);
-            //msg.AddContent(MimeType.Html, message);
-
-            msg.SetReplyTo(new EmailAddress(_optionsEmailSettings.Value.SenderEmailAddress, "damienbod"));
-            
-            var response = await client.SendEmailAsync(msg);
+            return Task.CompletedTask;
         }
     }
 }

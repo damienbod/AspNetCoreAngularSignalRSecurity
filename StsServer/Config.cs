@@ -4,7 +4,7 @@
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
-namespace StsServerIdentity
+namespace StsServer
 {
     public class Config
     {

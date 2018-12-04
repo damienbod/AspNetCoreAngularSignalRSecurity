@@ -1,17 +1,18 @@
-﻿using IdentityServer4.Services;
+﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+
+
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
-using StsServerIdentity.Models;
-using StsServerIdentity.Filters;
-using Microsoft.Extensions.Localization;
-using StsServerIdentity.Resources;
-using System.Reflection;
+using StsServer.Models;
+using StsServer.Filters;
 
-namespace StsServerIdentity.Controllers
+namespace StsServer.Controllers
 {
     /// <summary>
     /// This controller implements the consent logic
@@ -23,23 +24,17 @@ namespace StsServerIdentity.Controllers
         private readonly IClientStore _clientStore;
         private readonly IResourceStore _resourceStore;
         private readonly IIdentityServerInteractionService _interaction;
-        private readonly IStringLocalizer _sharedLocalizer;
-
+        
         public ConsentController(
             ILogger<ConsentController> logger,
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
-            IResourceStore resourceStore,
-            IStringLocalizerFactory factory)
+            IResourceStore resourceStore)
         {
             _logger = logger;
             _interaction = interaction;
             _clientStore = clientStore;
             _resourceStore = resourceStore;
-
-            var type = typeof(SharedResource);
-            var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
-            _sharedLocalizer = factory.Create("SharedResource", assemblyName.Name);
         }
 
         /// <summary>
@@ -89,12 +84,12 @@ namespace StsServerIdentity.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", _sharedLocalizer["INVALID_CONSENT_PERMISSION"]);
+                    ModelState.AddModelError("", "You must pick at least one permission.");
                 }
             }
             else
             {
-                ModelState.AddModelError("", _sharedLocalizer["INVALID_CONSENT_SELECTION"]);
+                ModelState.AddModelError("", "Invalid Selection");
             }
 
             if (response != null)

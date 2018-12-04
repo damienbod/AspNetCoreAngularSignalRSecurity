@@ -1,50 +1,43 @@
-﻿@using StsServerIdentity.Resources
-@inject LocService SharedLocalizer
-
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StsServerIdentity</title>
+    <title>@ViewData["Title"] - StsServer</title>
+
     <link rel="stylesheet" href="~/css/vendor.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/fontawesome-free-5.4.1-web/css/all.min.css" asp-append-version="true"  />
+    <link rel="stylesheet" href="~/css/fontawesome-free-5.4.1-web/css/all.min.css" asp-append-version="true" />
 </head>
 <body>
-    <div>
-        <nav class="bg-dark mb-4 navbar navbar-dark navbar-expand-md">
-            <a asp-controller="Home" asp-action="Index" class="navbar-brand">
-                <em>ID4 Identity</em>
-            </a>
-            <button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#topNavbarCollapse" data-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="topNavbarCollapse">
+    <nav class="bg-dark mb-4 navbar navbar-dark navbar-expand-md">
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ID4 with external Providers and Identity</a>
+        <button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#topNavbarCollapse" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="topNavbarCollapse">
+
+            @if ((await AuthorizationService.AuthorizeAsync(User, "IsAdmin")).Succeeded)
+            {
                 <ul class="mr-auto navbar-nav">
                     <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Index" class="nav-link">@SharedLocalizer.GetLocalizedHtmlString("HOME")</a>
+                        <a class="nav-link" asp-controller="Admin" asp-action="Index">ADMIN</a>
                     </li>
                 </ul>
-                <partial name="_LoginPartial" />
-            </div>
-        </nav>
+            }
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+    </nav>
 
-    </div>
-
-    <div class="container body-content">
+    <div class="col-md-12">
         @RenderBody()
-       
-    </div>
-
-    <footer>
         <hr />
-        <nav class="navbar transparent navbar-inverse">
-            <p>&copy; 2018 - StsServerIdentity</p>
-
-            @await Html.PartialAsync("_SelectLanguagePartial")
-        </nav>
-    </footer>
+        <footer>
+            <p>&copy; 2018 - ID4 with external Providers and Identity</p>
+        </footer>
+    </div>
 
     <script src="~/js/vendor.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>

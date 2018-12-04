@@ -1,12 +1,12 @@
 ﻿using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using StsServerIdentity.Models;
+using StsServer.Models;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace StsServerIdentity
+namespace StsServer
 {
     public class AdditionalUserClaimsPrincipalFactory : UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>
     {

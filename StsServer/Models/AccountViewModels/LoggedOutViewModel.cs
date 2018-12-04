@@ -1,5 +1,12 @@
-﻿namespace StsServerIdentity.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace StsServer.Models.AccountViewModels
 {
+
     public class LoggedOutViewModel
     {
         public string PostLogoutRedirectUri { get; set; }

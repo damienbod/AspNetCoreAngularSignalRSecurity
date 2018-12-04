@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -6,18 +7,19 @@ using IdentityModel;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
-using StsServerIdentity.Models;
+using StsServer.Models;
 using Microsoft.AspNetCore.Identity;
-using IdentityServer4;
 
-namespace StsServerIdentity
+namespace StsServer
 {
+    using IdentityServer4;
+
     public class IdentityWithAdditionalClaimsProfileService : IProfileService
     {
         private readonly IUserClaimsPrincipalFactory<ApplicationUser> _claimsFactory;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IdentityWithAdditionalClaimsProfileService(UserManager<ApplicationUser> userManager, IUserClaimsPrincipalFactory<ApplicationUser> claimsFactory)
+        public IdentityWithAdditionalClaimsProfileService(UserManager<ApplicationUser> userManager,  IUserClaimsPrincipalFactory<ApplicationUser> claimsFactory)
         {
             _userManager = userManager;
             _claimsFactory = claimsFactory;
@@ -31,13 +33,8 @@ namespace StsServerIdentity
             var principal = await _claimsFactory.CreateAsync(user);
 
             var claims = principal.Claims.ToList();
+
             claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
-            claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords.user"));
-            claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords"));
-            claims.Add(new Claim(JwtClaimTypes.Scope, "dataEventRecords"));
-            claims.Add(new Claim(JwtClaimTypes.Role, "securedFiles.user"));
-            claims.Add(new Claim(JwtClaimTypes.Role, "securedFiles"));
-            claims.Add(new Claim(JwtClaimTypes.Scope, "securedFiles"));
             claims.Add(new Claim(JwtClaimTypes.GivenName, user.UserName));
 
             if (user.IsAdmin)
@@ -49,17 +46,16 @@ namespace StsServerIdentity
                 claims.Add(new Claim(JwtClaimTypes.Role, "user"));
             }
 
+            claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords"));
+            claims.Add(new Claim(JwtClaimTypes.Scope, "dataEventRecords"));
+            claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords.user"));
             if (user.DataEventRecordsRole == "dataEventRecords.admin")
             {
                 claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords.admin"));
             }
 
-            if (user.SecuredFilesRole == "securedFiles.admin")
-            {
-                claims.Add(new Claim(JwtClaimTypes.Role, "securedFiles.admin"));
-            }
-
-            claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
+            claims.Add(new Claim(JwtClaimTypes.Name, user.Email));
+            claims.Add(new Claim(JwtClaimTypes.Email, user.Email));
 
             context.IssuedClaims = claims;
         }
