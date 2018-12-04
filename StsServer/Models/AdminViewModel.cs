@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace StsServer.Models
+namespace StsServerIdentity.Models
 {
     public class AdminViewModel
     {
