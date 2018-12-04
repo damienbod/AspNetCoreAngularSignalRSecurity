@@ -140,7 +140,7 @@ namespace ApiServer
             }).AddJsonOptions(options =>
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            });
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddTransient<IDataEventRecordRepository, DataEventRecordRepository>();
         }

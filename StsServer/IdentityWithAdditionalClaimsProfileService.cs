@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -7,19 +6,18 @@ using IdentityModel;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
-using StsServer.Models;
+using StsServerIdentity.Models;
 using Microsoft.AspNetCore.Identity;
+using IdentityServer4;
 
-namespace StsServer
+namespace StsServerIdentity
 {
-    using IdentityServer4;
-
     public class IdentityWithAdditionalClaimsProfileService : IProfileService
     {
         private readonly IUserClaimsPrincipalFactory<ApplicationUser> _claimsFactory;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IdentityWithAdditionalClaimsProfileService(UserManager<ApplicationUser> userManager,  IUserClaimsPrincipalFactory<ApplicationUser> claimsFactory)
+        public IdentityWithAdditionalClaimsProfileService(UserManager<ApplicationUser> userManager, IUserClaimsPrincipalFactory<ApplicationUser> claimsFactory)
         {
             _userManager = userManager;
             _claimsFactory = claimsFactory;
@@ -46,16 +44,7 @@ namespace StsServer
                 claims.Add(new Claim(JwtClaimTypes.Role, "user"));
             }
 
-            claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords"));
-            claims.Add(new Claim(JwtClaimTypes.Scope, "dataEventRecords"));
-            claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords.user"));
-            if (user.DataEventRecordsRole == "dataEventRecords.admin")
-            {
-                claims.Add(new Claim(JwtClaimTypes.Role, "dataEventRecords.admin"));
-            }
-
-            claims.Add(new Claim(JwtClaimTypes.Name, user.Email));
-            claims.Add(new Claim(JwtClaimTypes.Email, user.Email));
+            claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
 
             context.IssuedClaims = claims;
         }

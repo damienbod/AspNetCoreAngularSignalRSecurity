@@ -4,44 +4,39 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using StsServer.Data;
-using StsServer.Models;
-using StsServer.Services;
 using IdentityServer4.Services;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using Microsoft.AspNetCore.Identity;
+using System.Globalization;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
+using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using StsServerIdentity.Services.Certificate;
+using StsServerIdentity.Models;
+using StsServerIdentity.Data;
+using StsServerIdentity.Resources;
+using StsServerIdentity.Services;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using Microsoft.AspNetCore.Authorization;
+using Serilog.Sinks.SystemConsole.Themes;
+using StsServerIdentity.Filters;
 
-namespace StsServer
+namespace StsServerIdentity
 {
     public class Startup
     {
         private readonly IHostingEnvironment _environment;
 
-		private string _clientId = "xxxxxx";
-        private string _clientSecret = "xxxxx";
-		
         public Startup(IHostingEnvironment env)
         {
-           Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .Enrich.WithProperty("App", "StsServer")
-                .Enrich.FromLogContext()
-                .WriteTo.Seq("http://localhost:5341")
-                .WriteTo.RollingFile("../Logs/StsServer")
-                .CreateLogger();
-
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
-			if (env.IsDevelopment())
-            {
-                builder.AddUserSecrets("AspNetCoreID4External-c23d2237a4-eb8832a1-452ac7");
-            }
 
             _environment = env;
 
@@ -51,59 +46,117 @@ namespace StsServer
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			_clientId = Configuration["MicrosoftClientId"];
-            _clientSecret = Configuration["MircosoftClientSecret"];
+            var stsConfig = Configuration.GetSection("StsConfig");
+            var useLocalCertStore = Convert.ToBoolean(Configuration["UseLocalCertStore"]);
+            var certificateThumbprint = Configuration["CertificateThumbprint"];
 
-            var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "damienbodserver.pfx"), "");
+            X509Certificate2 cert;
+
+            if (_environment.IsProduction())
+            {
+                if (useLocalCertStore)
+                {
+                    using (X509Store store = new X509Store(StoreName.My, StoreLocation.LocalMachine))
+                    {
+                        store.Open(OpenFlags.ReadOnly);
+                        var certs = store.Certificates.Find(X509FindType.FindByThumbprint, certificateThumbprint, false);
+                        cert = certs[0];
+                        store.Close();
+                    }
+                }
+                else
+                {
+                    // Azure deployment, will be used if deployed to Azure
+                    var vaultConfigSection = Configuration.GetSection("Vault");
+                    var keyVaultService = new KeyVaultCertificateService(vaultConfigSection["Url"], vaultConfigSection["ClientId"], vaultConfigSection["ClientSecret"]);
+                    cert = keyVaultService.GetCertificateFromKeyVault(vaultConfigSection["CertificateName"]);
+                }
+            }
+            else
+            {
+                cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "sts_dev_cert.pfx"), "1234");
+            }
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                   options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.Configure<StsConfig>(Configuration.GetSection("StsConfig"));
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+
+            services.AddSingleton<LocService>();
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            services.AddAuthentication()
+                 .AddOpenIdConnect("aad", "Login with Azure AD", options =>
+                 {
+                     options.Authority = $"https://login.microsoftonline.com/common";
+                     options.TokenValidationParameters = new TokenValidationParameters { ValidateIssuer = false };
+                     options.ClientId = "99eb0b9d-ca40-476e-b5ac-6f4c32bfb530";
+                     options.CallbackPath = "/signin-oidc";
+                 });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddErrorDescriber<StsIdentityErrorDescriber>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AdditionalUserClaimsPrincipalFactory>();
-            services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("IsAdmin", policyIsAdminRequirement =>
+            services.Configure<RequestLocalizationOptions>(
+                options =>
                 {
-                    policyIsAdminRequirement.Requirements.Add(new IsAdminRequirement());
+                    var supportedCultures = new List<CultureInfo>
+                        {
+                            new CultureInfo("en-US"),
+                            new CultureInfo("de-DE"),
+                            new CultureInfo("de-CH"),
+                            new CultureInfo("it-IT"),
+                            new CultureInfo("gsw-CH"),
+                            new CultureInfo("fr-FR"),
+                            new CultureInfo("zh-Hans")
+                        };
+
+                    options.DefaultRequestCulture = new RequestCulture(culture: "de-DE", uiCulture: "de-DE");
+                    options.SupportedCultures = supportedCultures;
+                    options.SupportedUICultures = supportedCultures;
+
+                    var providerQuery = new LocalizationQueryProvider
+                    {
+                        QureyParamterName = "ui_locales"
+                    };
+
+                    options.RequestCultureProviders.Insert(0, providerQuery);
                 });
-            });
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new SecurityHeadersAttribute());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    {
+                        var assemblyName = new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName);
+                        return factory.Create("SharedResource", assemblyName.Name);
+                    };
+                });
 
             services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
-            services.AddTransient<IEmailSender, AuthMessageSender>();
 
-            services.AddAuthentication()
-                 .AddMicrosoftAccount(options =>
-                 {
-                     options.ClientId = _clientId;
-                     options.SignInScheme = "Identity.External";
-                     options.ClientSecret = _clientSecret;
-                 });
-
-            services.AddMvc();
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddIdentityServer()
                 .AddSigningCredential(cert)
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryClients(Config.GetClients())
+                .AddInMemoryClients(Config.GetClients(stsConfig))
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -114,8 +167,45 @@ namespace StsServer
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+            app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains());
+            app.UseXContentTypeOptions();
+            app.UseReferrerPolicy(opts => opts.NoReferrer());
+            app.UseXXssProtection(options => options.EnabledWithBlockMode());
 
+            app.UseCsp(opts => opts
+                .BlockAllMixedContent()
+                .StyleSources(s => s.Self())
+                .StyleSources(s => s.UnsafeInline())
+                .FontSources(s => s.Self())
+                .FrameAncestors(s => s.Self())
+                .ImageSources(imageSrc => imageSrc.Self())
+                .ImageSources(imageSrc => imageSrc.CustomSources("data:"))
+                .ScriptSources(s => s.Self())
+                .ScriptSources(s => s.UnsafeInline())
+            );
+
+            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                OnPrepareResponse = context =>
+                {
+                    if (context.Context.Response.Headers["feature-policy"].Count == 0)
+                    {
+                        var featurePolicy = "accelerometer 'none'; camera 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; payment 'none'; usb 'none'";
+
+                        context.Context.Response.Headers["feature-policy"] = featurePolicy;
+                    }
+
+                    if (context.Context.Response.Headers["X-Content-Security-Policy"].Count == 0)
+                    {
+                        var csp = "script-src 'self';style-src 'self';img-src 'self' data:;font-src 'self';form-action 'self';frame-ancestors 'self';block-all-mixed-content";
+                        // IE
+                        context.Context.Response.Headers["X-Content-Security-Policy"] = csp;
+                    }
+                }
+            });
             app.UseIdentityServer();
 
             app.UseMvc(routes =>
