@@ -69,13 +69,18 @@ namespace ApiServer
             services.AddSingleton<NewsStore>();
             services.AddSingleton<UserInfoInMemory>();
 
-            var policy = new Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy();
-            policy.Headers.Add("*");
-            policy.Methods.Add("*");
-            policy.Origins.Add("*");
-            policy.SupportsCredentials = true;
-
-            services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowMyOrigins",
+                    builder =>
+                    {
+                        builder
+                            .AllowCredentials()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .WithOrigins("https://localhost:44311", "https://localhost:44395");
+                    });
+            });
 
             var guestPolicy = new AuthorizationPolicyBuilder()
                 .RequireClaim("scope", "dataEventRecords")
@@ -148,13 +153,10 @@ namespace ApiServer
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole();
-            loggerFactory.AddDebug();
-
             loggerFactory.AddSerilog();
+            app.UseCors("AllowMyOrigins");
 
             app.UseExceptionHandler("/Home/Error");
-            app.UseCors("corsGlobalPolicy");
             //app.UseStaticFiles();
 
             app.UseAuthentication();

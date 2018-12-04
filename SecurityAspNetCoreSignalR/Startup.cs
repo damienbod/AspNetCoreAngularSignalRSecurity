@@ -44,7 +44,9 @@ namespace SecurityAspNetCoreSignalR
                     builder =>
                     {
                         builder
+                            .AllowCredentials()
                             .AllowAnyOrigin()
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                     });
@@ -57,6 +59,8 @@ namespace SecurityAspNetCoreSignalR
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddSerilog();
+
+            app.UseCors("AllowAllOrigins");
 
             var angularRoutes = new[] {
                  "/home",
@@ -75,8 +79,6 @@ namespace SecurityAspNetCoreSignalR
 
                 await next();
             });
-
-            app.UseCors("AllowAllOrigins");
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
