@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SecurityAspNetCoreSignalR.ViewModel;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Angular2WebpackVisualStudio
 {
@@ -40,7 +41,7 @@ namespace Angular2WebpackVisualStudio
                     });
             });
 
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

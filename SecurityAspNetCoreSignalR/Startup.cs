@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SecurityAspNetCoreSignalR.ViewModel;
 using Serilog;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SecurityAspNetCoreSignalR
 {
@@ -43,22 +44,23 @@ namespace SecurityAspNetCoreSignalR
                     builder =>
                     {
                         builder
+                            .AllowCredentials()
                             .AllowAnyOrigin()
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                     });
             });
 
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             loggerFactory.AddSerilog();
+
+            app.UseCors("AllowAllOrigins");
 
             var angularRoutes = new[] {
                  "/home",
@@ -77,8 +79,6 @@ namespace SecurityAspNetCoreSignalR
 
                 await next();
             });
-
-            app.UseCors("AllowAllOrigins");
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

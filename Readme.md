@@ -20,6 +20,8 @@
 
 ## History
 
+2018-12-04: updated .NET Core 2.2, npm packages
+
 2018-11-02: updated npm packages
 
 2018-10-30: Added User Admin to STS, custom claims with policies

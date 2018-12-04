@@ -13,6 +13,7 @@ using System.IO;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StsServer
 {
@@ -87,7 +88,7 @@ namespace StsServer
                      options.ClientSecret = _clientSecret;
                  });
 
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddIdentityServer()
                 .AddSigningCredential(cert)
