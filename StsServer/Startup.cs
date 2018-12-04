@@ -179,6 +179,9 @@ namespace StsServerIdentity
                 .StyleSources(s => s.UnsafeInline())
                 .FontSources(s => s.Self())
                 .FrameAncestors(s => s.Self())
+                .FrameAncestors(s => s.CustomSources(
+                    "https://localhost:44395", "https://localhost:44311")
+                 )
                 .ImageSources(imageSrc => imageSrc.Self())
                 .ImageSources(imageSrc => imageSrc.CustomSources("data:"))
                 .ScriptSources(s => s.Self())
