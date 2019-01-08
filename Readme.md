@@ -20,6 +20,8 @@
 
 ## History
 
+2019-01-08: switch to OIDC Code Flow with PKCE
+
 2018-12-04: updated .NET Core 2.2, npm packages
 
 2018-11-02: updated npm packages
