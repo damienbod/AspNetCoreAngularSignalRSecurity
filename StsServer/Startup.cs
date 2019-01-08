@@ -182,7 +182,7 @@ namespace StsServerIdentity
             //app.UseXXssProtection(options => options.EnabledWithBlockMode());
 
             var stsConfig = Configuration.GetSection("StsConfig");
-            var angularClientIdTokenOnlyUrl = stsConfig["AngularClientIdTokenOnlyUrl"];
+            var angularClient2Url = stsConfig["AngularClient2Url"];
             var angularClientUrl = stsConfig["AngularClientUrl"];
 
             app.UseCsp(opts => opts
@@ -192,7 +192,7 @@ namespace StsServerIdentity
                 .FontSources(s => s.Self())
                 .FrameAncestors(s => s.Self())
                 .FrameAncestors(s => s.CustomSources(
-                   "https://localhost:44311", "https://localhost:44395")
+                   angularClientUrl, angularClient2Url)
                  )
                 .ImageSources(imageSrc => imageSrc.Self())
                 .ImageSources(imageSrc => imageSrc.CustomSources("data:"))
