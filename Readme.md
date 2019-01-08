@@ -20,7 +20,7 @@
 
 ## History
 
-2019-01-08: switch to OIDC Code Flow with PKCE
+2019-01-08: switch to OIDC Code Flow with PKCE, OIDC 9.0.0, angular 7.2.1
 
 2018-12-04: updated .NET Core 2.2, npm packages
 
