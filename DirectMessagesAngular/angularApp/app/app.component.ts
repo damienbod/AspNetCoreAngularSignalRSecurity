@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import './app.component.css';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
     selector: 'app-component',
@@ -69,8 +70,18 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     private doCallbackLogicIfRequired() {
-        if (window.location.hash) {
-            this.oidcSecurityService.authorizedImplicitFlowCallback();
+        console.log(window.location);
+
+        const urlParts = window.location.toString().split('?');
+        const params = new HttpParams({
+            fromString: urlParts[1]
+        });
+        const code = params.get('code');
+        const state = params.get('state');
+        const session_state = params.get('session_state');
+
+        if (code && state && session_state) {
+            this.oidcSecurityService.requestTokensWithCode(code, state, session_state);
         }
     }
 }

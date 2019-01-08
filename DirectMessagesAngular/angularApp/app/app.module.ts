@@ -86,7 +86,7 @@ export class AppModule {
         // The ID Token MUST be rejected if the ID Token does not list the Client as a valid audience,
         // or if it contains additional audiences not trusted by the Client.
         openIDImplicitFlowConfiguration.client_id = 'angularclient';
-        openIDImplicitFlowConfiguration.response_type = 'id_token token';
+        openIDImplicitFlowConfiguration.response_type = 'code';
         openIDImplicitFlowConfiguration.scope = 'dataEventRecords openid profile email';
         openIDImplicitFlowConfiguration.post_logout_redirect_uri = 'https://localhost:44395/unauthorized';
         openIDImplicitFlowConfiguration.start_checksession = false;

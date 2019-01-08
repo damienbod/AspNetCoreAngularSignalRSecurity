@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace StsServer.Models.ManageViewModels
+namespace StsServerIdentity.Models.ManageViewModels
 {
     public class IndexViewModel
     {
@@ -12,8 +8,8 @@ namespace StsServer.Models.ManageViewModels
 
         public bool IsEmailConfirmed { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "EMAIL_REQUIRED")]
+        [EmailAddress(ErrorMessage = "EMAIL_INVALID")]
         public string Email { get; set; }
 
         [Phone]

@@ -4,7 +4,7 @@
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
-namespace StsServer
+namespace StsServerIdentity
 {
     public class Config
     {
@@ -56,7 +56,11 @@ namespace StsServer
                     AccessTokenType = AccessTokenType.Jwt,
                     AccessTokenLifetime = 3300,// 330 seconds, default 60 minutes
                     IdentityTokenLifetime = 3000,
-                    AllowedGrantTypes = GrantTypes.Implicit,
+
+                    RequireClientSecret = false,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+
                     AllowAccessTokensViaBrowser = true,
                     AllowOfflineAccess =true,
                     AlwaysIncludeUserClaimsInIdToken = true,

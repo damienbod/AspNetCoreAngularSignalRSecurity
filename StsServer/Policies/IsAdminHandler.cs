@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StsServer
+namespace StsServerIdentity
 {
     public class IsAdminHandler : AuthorizationHandler<IsAdminRequirement>
     {
