@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 
-
 @Component({
     selector: 'app-component',
     templateUrl: 'app.component.html',
@@ -39,9 +38,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     private doCallbackLogicIfRequired() {
-        if (window.location.hash) {
-            console.log('doing stuff');
-            this.oidcSecurityService.authorizedCallback();
-        }
+        console.log(window.location);
+        // Will do a callback, if the url has a code and state parameter.
+        this.oidcSecurityService.authorizedCallbackWithCode(window.location.toString());
     }
 }

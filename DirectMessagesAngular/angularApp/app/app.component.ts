@@ -69,8 +69,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     private doCallbackLogicIfRequired() {
-        if (window.location.hash) {
-            this.oidcSecurityService.authorizedCallback();
-        }
+        console.log(window.location);
+        // Will do a callback, if the url has a code and state parameter.
+        this.oidcSecurityService.authorizedCallbackWithCode(window.location.toString());
     }
 }

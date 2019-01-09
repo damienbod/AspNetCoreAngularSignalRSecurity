@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace StsServer.Models.AccountViewModels
+namespace StsServerIdentity.Models.AccountViewModels
 {
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "EMAIL_REQUIRED")]
+        [EmailAddress(ErrorMessage = "EMAIL_INVALID")]
         public string Email { get; set; }
     }
 }

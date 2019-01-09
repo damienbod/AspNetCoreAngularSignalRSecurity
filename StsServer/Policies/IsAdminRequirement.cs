@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
  
-namespace StsServer
+namespace StsServerIdentity
 {
     public class IsAdminRequirement : IAuthorizationRequirement{}
 }
