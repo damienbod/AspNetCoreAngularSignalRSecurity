@@ -38,7 +38,7 @@
         "@ngrx/effects": "6.1.2",
         "@ngrx/store": "6.1.2",
         "@ngrx/store-devtools": "6.1.2",
-        "angular-auth-oidc-client": "file:../../../angular-projects/angular-auth-oidc-client/angular-auth-oidc-client-9.0.0.tgz",
+        "angular-auth-oidc-client": "9.0.0",
         "bootstrap": "4.2.1",
         "core-js": "^2.6.1",
         "ie-shim": "0.1.0",
