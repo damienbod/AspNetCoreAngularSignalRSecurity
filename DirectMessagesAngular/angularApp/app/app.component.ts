@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import './app.component.css';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
     selector: 'app-component',
