@@ -90,7 +90,7 @@ export class AppModule {
         openIDImplicitFlowConfiguration.scope = 'dataEventRecords openid profile email';
         openIDImplicitFlowConfiguration.post_logout_redirect_uri = 'https://localhost:44395/unauthorized';
         openIDImplicitFlowConfiguration.start_checksession = false;
-        openIDImplicitFlowConfiguration.silent_renew = false;
+        openIDImplicitFlowConfiguration.silent_renew = true;
         openIDImplicitFlowConfiguration.post_login_route = '/dm';
         // HTTP 403
         openIDImplicitFlowConfiguration.forbidden_route = '/unauthorized';
