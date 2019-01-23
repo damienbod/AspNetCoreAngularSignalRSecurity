@@ -60,6 +60,7 @@ namespace StsServerIdentity
             }
 
             claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
+            claims.Add(new Claim("name", user.Email));
 
             context.IssuedClaims = claims;
         }
