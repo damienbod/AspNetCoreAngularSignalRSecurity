@@ -77,8 +77,9 @@ namespace ApiServer
                         builder
                             .AllowCredentials()
                             .AllowAnyHeader()
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
                             .AllowAnyMethod()
-                            .WithOrigins("https://localhost:44311", "https://localhost:44395");
+                            .WithOrigins("https://localhost:44311", "https://localhost:44390", "https://localhost:44395", "https://localhost:44318");
                     });
             });
 
@@ -91,7 +92,7 @@ namespace ApiServer
                 ValidIssuer = "https://localhost:44318/",
                 ValidAudience = "dataEventRecords",
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("dataEventRecordsSecret")),
-                NameClaimType = "name",
+                NameClaimType = "email",
                 RoleClaimType = "role", 
             };
 
