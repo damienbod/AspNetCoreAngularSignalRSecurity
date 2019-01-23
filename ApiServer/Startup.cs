@@ -92,7 +92,7 @@ namespace ApiServer
                 ValidIssuer = "https://localhost:44318/",
                 ValidAudience = "dataEventRecords",
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("dataEventRecordsSecret")),
-                NameClaimType = "name",
+                NameClaimType = "email",
                 RoleClaimType = "role", 
             };
 
