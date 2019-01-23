@@ -45,7 +45,7 @@ namespace SecurityAspNetCoreSignalR
                     {
                         builder
                             .AllowCredentials()
-                            .AllowAnyOrigin()
+                            .WithOrigins("https://localhost:44311", "https://localhost:44390", "https://localhost:44395", "https://localhost:44318")
                             .SetIsOriginAllowedToAllowWildcardSubdomains()
                             .AllowAnyHeader()
                             .AllowAnyMethod();

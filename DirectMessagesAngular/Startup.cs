@@ -35,7 +35,9 @@ namespace Angular2WebpackVisualStudio
                     builder =>
                     {
                         builder
-                            .AllowAnyOrigin()
+                            .AllowCredentials()
+                            .WithOrigins("https://localhost:44311", "https://localhost:44390", "https://localhost:44395", "https://localhost:44318")
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                     });
@@ -47,9 +49,6 @@ namespace Angular2WebpackVisualStudio
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             var angularRoutes = new[] {
                  "/home",
                  "/unauthorized",

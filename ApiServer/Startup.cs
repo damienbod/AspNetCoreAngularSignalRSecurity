@@ -77,8 +77,9 @@ namespace ApiServer
                         builder
                             .AllowCredentials()
                             .AllowAnyHeader()
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
                             .AllowAnyMethod()
-                            .WithOrigins("https://localhost:44311", "https://localhost:44395");
+                            .WithOrigins("https://localhost:44311", "https://localhost:44390", "https://localhost:44395", "https://localhost:44318");
                     });
             });
 
