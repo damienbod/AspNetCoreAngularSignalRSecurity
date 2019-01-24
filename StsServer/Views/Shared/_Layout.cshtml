@@ -23,11 +23,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="topNavbarCollapse">
-                <ul class="mr-auto navbar-nav">
-                    <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Index" class="nav-link">@SharedLocalizer.GetLocalizedHtmlString("HOME")</a>
-                    </li>
-                </ul>
+               
                 @if ((await AuthorizationService.AuthorizeAsync(User, "IsAdmin")).Succeeded)
                 {
                     <ul class="mr-auto navbar-nav">
