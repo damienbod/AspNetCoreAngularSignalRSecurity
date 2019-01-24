@@ -90,9 +90,13 @@ namespace StsServerIdentity
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddErrorDescriber<StsIdentityErrorDescriber>()
-                .AddDefaultTokenProviders();
+               .AddEntityFrameworkStores<ApplicationDbContext>()
+               .AddErrorDescriber<StsIdentityErrorDescriber>()
+               .AddDefaultTokenProviders();
+
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AdditionalUserClaimsPrincipalFactory>();
+
+           
 
             services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
             services.AddTransient<IEmailSender, EmailSender>();
