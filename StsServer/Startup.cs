@@ -89,6 +89,19 @@ namespace StsServerIdentity
             services.AddSingleton<LocService>();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+               .AddEntityFrameworkStores<ApplicationDbContext>()
+               .AddErrorDescriber<StsIdentityErrorDescriber>()
+               .AddDefaultTokenProviders();
+
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AdditionalUserClaimsPrincipalFactory>();
+
+           
+
+            services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
+
             services.AddAuthentication()
                  .AddOpenIdConnect("aad", "Login with Azure AD", options =>
                  {
@@ -98,12 +111,13 @@ namespace StsServerIdentity
                      options.CallbackPath = "/signin-oidc";
                  });
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddErrorDescriber<StsIdentityErrorDescriber>()
-                .AddDefaultTokenProviders();
-
-            services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsAdmin", policyIsAdminRequirement =>
+                {
+                    policyIsAdminRequirement.Requirements.Add(new IsAdminRequirement());
+                });
+            });
 
             services.Configure<RequestLocalizationOptions>(
                 options =>
@@ -141,19 +155,6 @@ namespace StsServerIdentity
                         return factory.Create("SharedResource", assemblyName.Name);
                     };
                 });
-
-            services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
-
-            services.AddAuthentication()
-                 .AddMicrosoftAccount(options =>
-                 {
-                     options.ClientId = _clientId;
-                     options.SignInScheme = "Identity.External";
-                     options.ClientSecret = _clientSecret;
-                 });
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddIdentityServer()
                 .AddSigningCredential(cert)
