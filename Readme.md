@@ -20,6 +20,8 @@
 
 ## History
 
+2019-02-06: Updating ngrx 
+
 2019-01-23: Updating npm packages
 
 2019-01-08: switch to OIDC Code Flow with PKCE, OIDC 9.0.0, angular 7.2.1
