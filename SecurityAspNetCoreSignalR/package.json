@@ -65,7 +65,7 @@
         "karma-jasmine-html-reporter": "1.4.0",
         "protractor": "~5.4.2",
         "@ngtools/webpack": "6.2.5",
-        "typescript": "~3.2.4",
+        "typescript": "~3.1.6",
         "ts-node": "~8.0.2",
         "tslint": "~5.12.1",
         "angular-router-loader": "0.8.5",
