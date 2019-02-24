@@ -20,6 +20,8 @@
 
 ## History
 
+2019-02-24: Updating npm packages, nuget packages 
+
 2019-02-06: Updating ngrx 
 
 2019-01-23: Updating npm packages
