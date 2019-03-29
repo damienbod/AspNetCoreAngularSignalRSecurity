@@ -20,6 +20,8 @@
 
 ## History
 
+2019-03-29: Updating npm packages, angular 7.2.11, nuget packages 
+
 2019-03-15: Updating npm packages, nuget packages 
 
 2019-02-24: Updating npm packages, nuget packages 
