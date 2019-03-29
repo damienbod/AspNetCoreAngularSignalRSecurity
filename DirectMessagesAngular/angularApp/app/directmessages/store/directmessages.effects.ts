@@ -12,7 +12,7 @@ import { DirectMessagesService } from '../directmessages.service';
 export class DirectMessagesEffects {
 
 
-    @Effect() 
+    @Effect()
     sendDirectMessage$: Observable<Action> = this.actions$.pipe(
         ofType<directMessagesAction.SendDirectMessageAction>(directMessagesAction.SEND_DIRECT_MESSAGE),
         switchMap((action: directMessagesAction.SendDirectMessageAction) => {
@@ -20,7 +20,7 @@ export class DirectMessagesEffects {
             return observableOf(new directMessagesAction.SendDirectMessageActionComplete(action.message));
         }));
 
-    @Effect() 
+    @Effect()
     Leave$: Observable<Action> = this.actions$.pipe(
         ofType<directMessagesAction.Leave>(directMessagesAction.LEAVE),
         switchMap(() => {
