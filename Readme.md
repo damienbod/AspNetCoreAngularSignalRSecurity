@@ -20,7 +20,7 @@
 
 ## History
 
-2019-04-26: Updating npm packages
+2019-04-26: Switch to in-process hosting, updated npm packages
 
 2019-04-14: Updating npm packages, angular 7.2.13, nuget packages 
 
