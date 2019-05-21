@@ -77,35 +77,29 @@ export class AppModule {
         private oidcConfigService: OidcConfigService,
     ) {
         this.oidcConfigService.onConfigurationLoaded.subscribe(() => {
-        const openIDImplicitFlowConfiguration = new OpenIDImplicitFlowConfiguration();
+            const config = new OpenIDImplicitFlowConfiguration();
 
-        openIDImplicitFlowConfiguration.stsServer = 'https://localhost:44318';
-        openIDImplicitFlowConfiguration.redirect_url = 'https://localhost:44395';
-        // The Client MUST validate that the aud (audience) Claim contains its client_id value registered at the Issuer
-        // identified by the iss (issuer) Claim as an audience.
-        // The ID Token MUST be rejected if the ID Token does not list the Client as a valid audience,
-        // or if it contains additional audiences not trusted by the Client.
-        openIDImplicitFlowConfiguration.client_id = 'angularclient';
-        openIDImplicitFlowConfiguration.response_type = 'code';
-        openIDImplicitFlowConfiguration.scope = 'dataEventRecords openid profile email';
-        openIDImplicitFlowConfiguration.post_logout_redirect_uri = 'https://localhost:44395/unauthorized';
-        openIDImplicitFlowConfiguration.start_checksession = false;
-        openIDImplicitFlowConfiguration.silent_renew = true;
-        openIDImplicitFlowConfiguration.post_login_route = '/dm';
-        // HTTP 403
-        openIDImplicitFlowConfiguration.forbidden_route = '/unauthorized';
-        // HTTP 401
-        openIDImplicitFlowConfiguration.unauthorized_route = '/unauthorized';
-        openIDImplicitFlowConfiguration.log_console_warning_active = true;
-        openIDImplicitFlowConfiguration.log_console_debug_active = false;
-        // id_token C8: The iat Claim can be used to reject tokens that were issued too far away from the current time,
-        // limiting the amount of time that nonces need to be stored to prevent attacks.The acceptable range is Client specific.
-        openIDImplicitFlowConfiguration.max_id_token_iat_offset_allowed_in_seconds = 10;
+            config.stsServer = 'https://localhost:44318';
+            config.redirect_url = 'https://localhost:44395';
+            config.client_id = 'angularclient2';
+            config.response_type = 'code';
+            config.scope = 'dataEventRecords openid profile email';
+            config.post_logout_redirect_uri = 'https://localhost:44395/unauthorized';
+            config.start_checksession = false;
+            config.silent_renew = true;
+            config.silent_renew_url = 'https://localhost:44395/silent-renew.html',
+            config.silent_redirect_url = 'https://localhost:44395',
+            config.post_login_route = '/dm';
+            config.forbidden_route = '/unauthorized';
+            config.unauthorized_route = '/unauthorized';
+            config.log_console_warning_active = true;
+            config.log_console_debug_active = false;
+            config.max_id_token_iat_offset_allowed_in_seconds = 10;
 
-        const authWellKnownEndpoints = new AuthWellKnownEndpoints();
-        authWellKnownEndpoints.setWellKnownEndpoints(this.oidcConfigService.wellKnownEndpoints);
+            const authWellKnownEndpoints = new AuthWellKnownEndpoints();
+            authWellKnownEndpoints.setWellKnownEndpoints(this.oidcConfigService.wellKnownEndpoints);
 
-        this.oidcSecurityService.setupModule(openIDImplicitFlowConfiguration, authWellKnownEndpoints);
+            this.oidcSecurityService.setupModule(config, authWellKnownEndpoints);
 
         });
 

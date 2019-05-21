@@ -80,6 +80,20 @@ namespace StsServerIdentity
                 cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "damienbodserver.pfx"), "");
             }
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder
+                            .AllowCredentials()
+                            .WithOrigins("https://localhost:44311", "https://localhost:44390", "https://localhost:44395", "https://localhost:44318")
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -177,6 +191,8 @@ namespace StsServerIdentity
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseCors("AllowAllOrigins");
+
             app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains());
             //app.UseXContentTypeOptions();
             //app.UseReferrerPolicy(opts => opts.NoReferrer());
@@ -193,7 +209,7 @@ namespace StsServerIdentity
                 .FontSources(s => s.Self())
                 .FrameAncestors(s => s.Self())
                 .FrameAncestors(s => s.CustomSources(
-                   angularClientUrl, angularClient2Url)
+                   "https://localhost:44311", "https://localhost:44390", "https://localhost:44395", "https://localhost:44318")
                  )
                 .ImageSources(imageSrc => imageSrc.Self())
                 .ImageSources(imageSrc => imageSrc.CustomSources("data:"))
