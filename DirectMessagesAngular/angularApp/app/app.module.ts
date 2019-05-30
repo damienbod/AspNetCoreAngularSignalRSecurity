@@ -88,7 +88,7 @@ export class AppModule {
             config.start_checksession = false;
             config.silent_renew = true;
             config.silent_renew_url = 'https://localhost:44395/silent-renew.html',
-            //config.silent_redirect_url = 'https://localhost:44395/silent-renew.html',
+            // config.silent_redirect_url = 'https://localhost:44395/silent-renew.html',
             config.post_login_route = '/dm';
             config.forbidden_route = '/unauthorized';
             config.unauthorized_route = '/unauthorized';
