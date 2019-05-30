@@ -1,4 +1,3 @@
-import { of as observableOf } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
@@ -16,7 +15,7 @@ export class NewsEffects {
         ofType<newsAction.SendNewsItemAction>(newsAction.SEND_NEWS_ITEM),
         switchMap((action: newsAction.SendNewsItemAction) => {
             this.newsService.send(action.newsItem);
-            return observableOf(new newsAction.SendNewsItemActionComplete(action.newsItem));
+            return of(new newsAction.SendNewsItemActionComplete(action.newsItem));
         })
     );
 
@@ -25,7 +24,7 @@ export class NewsEffects {
         ofType<newsAction.JoinGroupAction>(newsAction.JOIN_GROUP),
         switchMap((action: newsAction.JoinGroupAction ) => {
             this.newsService.joinGroup(action.group);
-            return observableOf(new newsAction.JoinGroupActionComplete(action.group));
+            return of(new newsAction.JoinGroupActionComplete(action.group));
         })
     );
 
@@ -34,7 +33,7 @@ export class NewsEffects {
         ofType<newsAction.LeaveGroupAction>(newsAction.LEAVE_GROUP),
         switchMap((action: newsAction.LeaveGroupAction) => {
             this.newsService.leaveGroup(action.group);
-            return observableOf(new newsAction.LeaveGroupActionComplete(action.group));
+            return of(new newsAction.LeaveGroupActionComplete(action.group));
         })
     );
 
