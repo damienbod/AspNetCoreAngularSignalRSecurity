@@ -20,6 +20,8 @@
 
 ## History
 
+2019-06-10: Updating npm packages, angular-oidc
+
 2019-05-30: Updating npm packages, angular 8.0.0
 
 2019-05-21: Updating npm packages, angular 7.2.15, oidc 9.0.8
