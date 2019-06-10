@@ -24,11 +24,6 @@
         "lint": "tslint -p tsconfig.json angularApp/**/*.ts"
     },
     "dependencies": {
-        "@aspnet/signalr": "1.1.4",
-        "angular-auth-oidc-client": "9.0.8",
-        "@ngrx/effects": "7.4.0",
-        "@ngrx/store": "7.4.0",
-        "@ngrx/store-devtools": "7.4.0",
         "@angular/animations": "~8.0.0",
         "@angular/common": "~8.0.0",
         "@angular/compiler": "~8.0.0",
@@ -38,6 +33,11 @@
         "@angular/platform-browser": "~8.0.0",
         "@angular/platform-browser-dynamic": "~8.0.0",
         "@angular/router": "~8.0.0",
+        "@aspnet/signalr": "1.1.4",
+        "@ngrx/effects": "7.4.0",
+        "@ngrx/store": "7.4.0",
+        "@ngrx/store-devtools": "7.4.0",
+        "angular-auth-oidc-client": "file:../../../angular-projects/angular-auth-oidc-client/angular-auth-oidc-client-10.0.0.tgz",
         "bootstrap": "4.3.1",
         "core-js": "^2.6.5",
         "ie-shim": "0.1.0",
