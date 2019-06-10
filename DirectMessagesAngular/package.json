@@ -27,7 +27,7 @@
         "@angular/cdk": "8.0.0",
         "@angular/material": "8.0.0",
         "@angular/flex-layout": "7.0.0-beta.23",
-        "angular-auth-oidc-client": "9.0.8",
+        "angular-auth-oidc-client": "file:../../../angular-projects/angular-auth-oidc-client/angular-auth-oidc-client-10.0.0.tgz",
         "@angular-devkit/core": "8.0.0",
         "@aspnet/signalr": "1.1.4",
         "@ngrx/effects": "7.4.0",
