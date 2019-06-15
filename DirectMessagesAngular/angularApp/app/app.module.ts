@@ -24,9 +24,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     AuthModule,
     OidcSecurityService,
-    OpenIDImplicitFlowConfiguration,
+    ConfigResult,
     OidcConfigService,
-    AuthWellKnownEndpoints
+    OpenIdConfiguration
 } from 'angular-auth-oidc-client';
 
 export function loadConfig(oidcConfigService: OidcConfigService) {
@@ -76,31 +76,30 @@ export class AppModule {
         private oidcSecurityService: OidcSecurityService,
         private oidcConfigService: OidcConfigService,
     ) {
-        this.oidcConfigService.onConfigurationLoaded.subscribe(() => {
-            const config = new OpenIDImplicitFlowConfiguration();
+        this.oidcConfigService.onConfigurationLoaded.subscribe((configResult: ConfigResult) => {
 
-            config.stsServer = 'https://localhost:44318';
-            config.redirect_url = 'https://localhost:44395';
-            config.client_id = 'angularclient2';
-            config.response_type = 'code';
-            config.scope = 'dataEventRecords openid profile email';
-            config.post_logout_redirect_uri = 'https://localhost:44395/unauthorized';
-            config.start_checksession = false;
-            config.silent_renew = true;
-            config.silent_renew_url = 'https://localhost:44395/silent-renew.html',
-            // config.silent_redirect_url = 'https://localhost:44395/silent-renew.html',
-            config.post_login_route = '/dm';
-            config.forbidden_route = '/unauthorized';
-            config.unauthorized_route = '/unauthorized';
-            config.log_console_warning_active = true;
-            config.log_console_debug_active = false;
-            config.max_id_token_iat_offset_allowed_in_seconds = 10;
+            const config: OpenIdConfiguration = {
+                stsServer: 'https://localhost:44318',
+                redirect_url: 'https://localhost:44395',
+                client_id: 'angularclient2',
+                response_type: 'code',
+                scope: 'dataEventRecords openid profile email',
+                post_logout_redirect_uri: 'https://localhost:44395/unauthorized',
+                start_checksession: false,
+                silent_renew: true,
+                silent_renew_url: 'https://localhost:44395/silent-renew.html',
+                post_login_route: '/dm',
+                forbidden_route: '/unauthorized',
+                unauthorized_route: '/unauthorized',
+                log_console_warning_active: true,
+                log_console_debug_active: false,
+                max_id_token_iat_offset_allowed_in_seconds: 10,
+                history_cleanup_off: true
+                // iss_validation_off: false
+                // disable_iat_offset_validation: true
+            };
 
-            const authWellKnownEndpoints = new AuthWellKnownEndpoints();
-            authWellKnownEndpoints.setWellKnownEndpoints(this.oidcConfigService.wellKnownEndpoints);
-
-            this.oidcSecurityService.setupModule(config, authWellKnownEndpoints);
-
+            this.oidcSecurityService.setupModule(config, configResult.authWellknownEndpoints);
         });
 
         console.log('APP STARTING');

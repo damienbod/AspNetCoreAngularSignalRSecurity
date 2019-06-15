@@ -17,9 +17,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
     AuthModule,
     OidcSecurityService,
-    OpenIDImplicitFlowConfiguration,
+    ConfigResult,
     OidcConfigService,
-    AuthWellKnownEndpoints
+    OpenIdConfiguration
 } from 'angular-auth-oidc-client';
 
 export function loadConfig(oidcConfigService: OidcConfigService) {
@@ -69,33 +69,30 @@ export class AppModule {
         private oidcSecurityService: OidcSecurityService,
         private oidcConfigService: OidcConfigService,
     ) {
-        this.oidcConfigService.onConfigurationLoaded.subscribe(() => {
+        this.oidcConfigService.onConfigurationLoaded.subscribe((configResult: ConfigResult) => {
 
-            const openIDImplicitFlowConfiguration = new OpenIDImplicitFlowConfiguration();
-            openIDImplicitFlowConfiguration.stsServer = this.oidcConfigService.clientConfiguration.stsServer;
-            openIDImplicitFlowConfiguration.redirect_url = this.oidcConfigService.clientConfiguration.redirect_url;
-            openIDImplicitFlowConfiguration.client_id = this.oidcConfigService.clientConfiguration.client_id;
-            openIDImplicitFlowConfiguration.response_type = this.oidcConfigService.clientConfiguration.response_type;
-            openIDImplicitFlowConfiguration.scope = this.oidcConfigService.clientConfiguration.scope;
-            openIDImplicitFlowConfiguration.post_logout_redirect_uri = this.oidcConfigService.clientConfiguration.post_logout_redirect_uri;
-            openIDImplicitFlowConfiguration.start_checksession = this.oidcConfigService.clientConfiguration.start_checksession;
-            openIDImplicitFlowConfiguration.silent_renew = this.oidcConfigService.clientConfiguration.silent_renew;
-            openIDImplicitFlowConfiguration.silent_renew_url = 'https://localhost:44311/silent-renew.html',
-            openIDImplicitFlowConfiguration.post_login_route = this.oidcConfigService.clientConfiguration.startup_route;
-            openIDImplicitFlowConfiguration.forbidden_route = this.oidcConfigService.clientConfiguration.forbidden_route;
-            openIDImplicitFlowConfiguration.unauthorized_route = this.oidcConfigService.clientConfiguration.unauthorized_route;
-            openIDImplicitFlowConfiguration.log_console_warning_active =
-                this.oidcConfigService.clientConfiguration.log_console_warning_active;
-            openIDImplicitFlowConfiguration.log_console_debug_active = this.oidcConfigService.clientConfiguration.log_console_debug_active;
-            openIDImplicitFlowConfiguration.max_id_token_iat_offset_allowed_in_seconds =
-                this.oidcConfigService.clientConfiguration.max_id_token_iat_offset_allowed_in_seconds;
+            const config: OpenIdConfiguration = {
+                stsServer: configResult.customConfig.stsServer,
+                redirect_url: configResult.customConfig.redirect_url,
+                client_id: configResult.customConfig.client_id,
+                response_type: configResult.customConfig.response_type,
+                scope: configResult.customConfig.scope,
+                post_logout_redirect_uri: configResult.customConfig.post_logout_redirect_uri,
+                start_checksession: configResult.customConfig.start_checksession,
+                silent_renew: configResult.customConfig.silent_renew,
+                silent_renew_url: 'https://localhost:44311/silent-renew.html',
+                post_login_route: configResult.customConfig.startup_route,
+                forbidden_route: configResult.customConfig.forbidden_route,
+                unauthorized_route: configResult.customConfig.unauthorized_route,
+                log_console_warning_active: configResult.customConfig.log_console_warning_active,
+                log_console_debug_active: configResult.customConfig.log_console_debug_active,
+                max_id_token_iat_offset_allowed_in_seconds: configResult.customConfig.max_id_token_iat_offset_allowed_in_seconds,
+                history_cleanup_off: true
+                // iss_validation_off: false
+                // disable_iat_offset_validation: true
+            };
 
-            // configuration.Server = this.clientConfiguration.apiServer;
-            const authWellKnownEndpoints = new AuthWellKnownEndpoints();
-            authWellKnownEndpoints.setWellKnownEndpoints(this.oidcConfigService.wellKnownEndpoints);
-
-            this.oidcSecurityService.setupModule(openIDImplicitFlowConfiguration, authWellKnownEndpoints);
-
+            this.oidcSecurityService.setupModule(config, configResult.authWellknownEndpoints);
         });
 
         console.log('APP STARTING');
