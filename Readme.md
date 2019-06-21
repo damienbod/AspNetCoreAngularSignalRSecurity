@@ -20,6 +20,8 @@
 
 ## History
 
+2019-06-21: Updating npm packages, angular 8.0.2, oidc 10.0.1, nuget packages
+
 2019-06-10: Updating npm packages, angular-oidc
 
 2019-05-30: Updating npm packages, angular 8.0.0
