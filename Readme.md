@@ -3,9 +3,9 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/y3m83q53ql5g3ywl?svg=true)](https://ci.appveyor.com/project/damienbod/aspnetcoreangularsignalrsecurity)
 
 
-### Posts in this series:
+## Posts in this series:
 
-## ASP.NET Core 3.0:
+### ASP.NET Core 3.0:
 
 <ul>	
 	
@@ -16,7 +16,7 @@
 <li><a href="https://damienbod.com/2018/05/13/uploading-and-sending-image-messages-with-asp-net-core-signalr/">Uploading and sending image messages with ASP.NET Core SignalR</a></li>
 </ul>
 
-## ASP.NET Core 2.2
+### ASP.NET Core 2.2
 
 <ul>		
 <li><a href="https://damienbod.com/2017/10/16/securing-an-angular-signalr-client-using-jwt-tokens-with-asp-net-core-and-identityserver4/">Securing an Angular SignalR client using JWT tokens with ASP.NET Core and IdentityServer4</a></li>
@@ -24,6 +24,7 @@
 <li><a href="https://damienbod.com/2017/12/05/sending-direct-messages-using-signalr-with-asp-net-core-and-angular/">Sending Direct Messages using SignalR with ASP.NET core and Angular</a> </li> 
 <li><a href="https://damienbod.com/2018/10/30/implementing-user-management-with-asp-net-core-identity-and-custom-claims/">Implementing User Management with ASP.NET Core Identity and custom claims</a></li>
 </ul>
+
 ## History
 
 2019-07-30: Updating npm packages, angular 8.1.3, oidc 10.0.3, nuget packages
