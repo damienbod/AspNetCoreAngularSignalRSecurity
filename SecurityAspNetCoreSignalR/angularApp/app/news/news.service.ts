@@ -3,13 +3,13 @@ import { Subscription ,  Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { HubConnection } from '@aspnet/signalr';
+import { HubConnection } from '@microsoft/signalr';
 import { NewsItem } from './models/news-item';
 import { Store } from '@ngrx/store';
 import * as NewsActions from './store/news.action';
 import { Configuration } from '../app.constants';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import * as signalR from '@aspnet/signalr';
+import * as signalR from '@microsoft/signalr';
 
 @Injectable()
 export class NewsService {

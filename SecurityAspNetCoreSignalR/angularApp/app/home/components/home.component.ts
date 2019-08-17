@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { HubConnection } from '@aspnet/signalr';
+import { HubConnection } from '@microsoft/signalr';
 import { Configuration } from '../../app.constants';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import * as signalR from '@aspnet/signalr';
+import * as signalR from '@microsoft/signalr';
 
 @Component({
     selector: 'app-home-component',
