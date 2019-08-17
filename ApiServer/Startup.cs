@@ -26,19 +26,22 @@ namespace ApiServer
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             Configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services, IWebHostEnvironment webHostEnvironment)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public void ConfigureServices(IServiceCollection services)
         {
             var sqliteConnectionString = Configuration.GetConnectionString("SqliteConnectionString");
             var defaultConnection = Configuration.GetConnectionString("DefaultConnection");
 
-            var cert = new X509Certificate2(Path.Combine(webHostEnvironment.ContentRootPath, "damienbodserver.pfx"), "");
+            var cert = new X509Certificate2(Path.Combine(_webHostEnvironment.ContentRootPath, "damienbodserver.pfx"), "");
 
             services.AddDbContext<DataEventRecordContext>(options =>
                 options.UseSqlite(sqliteConnectionString)
