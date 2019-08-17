@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Primitives;
 using System.Threading.Tasks;
 using ApiServer.Data;
-using Serilog;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
@@ -27,39 +26,24 @@ namespace ApiServer
 {
     public class Startup
     {
-        public IConfigurationRoot Configuration { get; set; }
-        
-        private IHostingEnvironment _env { get; set; }
-
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .Enrich.WithProperty("App", "ApiServer")
-                .Enrich.FromLogContext()
-                .WriteTo.Seq("http://localhost:5341")
-                .WriteTo.RollingFile("../Logs/ApiServer")
-                .CreateLogger();
-
-            _env = env;
-            var builder = new ConfigurationBuilder()
-                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json");
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IConfiguration Configuration { get; }
+
+        public void ConfigureServices(IServiceCollection services, IWebHostEnvironment webHostEnvironment)
         {
             var sqliteConnectionString = Configuration.GetConnectionString("SqliteConnectionString");
             var defaultConnection = Configuration.GetConnectionString("DefaultConnection");
 
-            var cert = new X509Certificate2(Path.Combine(_env.ContentRootPath, "damienbodserver.pfx"), "");
+            var cert = new X509Certificate2(Path.Combine(webHostEnvironment.ContentRootPath, "damienbodserver.pfx"), "");
 
             services.AddDbContext<DataEventRecordContext>(options =>
                 options.UseSqlite(sqliteConnectionString)
             );
 
-            // used for the new items which belong to the signalr hub
             services.AddDbContext<NewsContext>(options =>
                 options.UseSqlite(
                     defaultConnection
@@ -141,20 +125,20 @@ namespace ApiServer
 
             services.AddSignalR();
 
-            services.AddMvc(options =>
-            {
-               //options.Filters.Add(new AuthorizeFilter(guestPolicy));
-            }).AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers()
+                .AddNewtonsoftJson()
+                .AddJsonOptions(options =>
+                {
+                    //options.JsonSerializerOptions.ContractResolver = new DefaultContractResolver();
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+           
 
             services.AddTransient<IDataEventRecordRepository, DataEventRecordRepository>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
-            loggerFactory.AddSerilog();
             app.UseCors("AllowMyOrigins");
 
             app.UseExceptionHandler("/Home/Error");
@@ -162,18 +146,15 @@ namespace ApiServer
 
             app.UseAuthentication();
 
-            app.UseSignalR(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapHub<UsersDmHub>("/usersdm");
-                routes.MapHub<SignalRHomeHub>("/signalrhome");
-                routes.MapHub<NewsHub>("/looney");
-            });
+                endpoints.MapHub<UsersDmHub>("/usersdm");
+                endpoints.MapHub<SignalRHomeHub>("/signalrhome");
+                endpoints.MapHub<NewsHub>("/looney");
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
