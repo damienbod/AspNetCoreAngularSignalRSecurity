@@ -1,6 +1,5 @@
 # Security with ASP.NET Core, SignalR and Angular
 
-[![Build status](https://ci.appveyor.com/api/projects/status/y3m83q53ql5g3ywl?svg=true)](https://ci.appveyor.com/project/damienbod/aspnetcoreangularsignalrsecurity)
 
 
 ## Posts in this series:
@@ -87,3 +86,7 @@
 
 2018-03-15: Updated signalr Microsoft.AspNetCore.SignalR 1.0.0-preview1-final, Angular 5.2.8, @aspnet/signalr 1.0.0-preview1-update1
 
+
+
+// TODO fix when build is running, preview 8 not supported
+[![Build status](https://ci.appveyor.com/api/projects/status/y3m83q53ql5g3ywl?svg=true)](https://ci.appveyor.com/project/damienbod/aspnetcoreangularsignalrsecurity)
