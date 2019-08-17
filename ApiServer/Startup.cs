@@ -146,6 +146,8 @@ namespace ApiServer
 
             app.UseAuthentication();
 
+            app.UseRouting();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<UsersDmHub>("/usersdm");
