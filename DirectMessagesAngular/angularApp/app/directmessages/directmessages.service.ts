@@ -3,12 +3,12 @@ import { Subscription } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { HubConnection } from '@aspnet/signalr';
+import { HubConnection } from '@microsoft/signalr';
 import { Store } from '@ngrx/store';
 import * as directMessagesActions from './store/directmessages.action';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { OnlineUser } from './models/online-user';
-import * as signalR from '@aspnet/signalr';
+import * as signalR from '@microsoft/signalr';
 
 @Injectable()
 export class DirectMessagesService {
