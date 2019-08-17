@@ -122,9 +122,7 @@ namespace ApiServer
                 };
             });
 
-            services.AddAuthorization(options =>
-            {
-            });
+            services.AddAuthorization(options => { });
 
             services.AddSignalR();
 
@@ -145,9 +143,10 @@ namespace ApiServer
             app.UseCors("AllowMyOrigins");
 
             app.UseExceptionHandler("/Home/Error");
-            //app.UseStaticFiles();
+            app.UseStaticFiles();
 
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseRouting();
 
