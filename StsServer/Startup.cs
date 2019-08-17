@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using IdentityServer4.Services;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
@@ -23,39 +22,34 @@ using StsServerIdentity.Services;
 using Microsoft.IdentityModel.Tokens;
 using StsServerIdentity.Filters;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Hosting;
 
 namespace StsServerIdentity
 {
     public class Startup
     {
-        private readonly IHostingEnvironment _environment;
         private string _clientId = "xxxxxx";
         private string _clientSecret = "xxxxx";
-
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-				
+            Configuration = configuration;
             _environment = env;
-
-            builder.AddEnvironmentVariables();
-            Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
+        public IWebHostEnvironment _environment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             var stsConfig = Configuration.GetSection("StsConfig");
+            _clientId = Configuration["MicrosoftClientId"];
+            _clientSecret = Configuration["MircosoftClientSecret"];
             var useLocalCertStore = Convert.ToBoolean(Configuration["UseLocalCertStore"]);
             var certificateThumbprint = Configuration["CertificateThumbprint"];
 
             X509Certificate2 cert;
 
-            if (_environment.IsProduction() )
+            if (_environment.IsProduction())
             {
                 if (useLocalCertStore)
                 {
@@ -110,12 +104,9 @@ namespace StsServerIdentity
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AdditionalUserClaimsPrincipalFactory>();
 
-           
-
             services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
-
             services.AddAuthentication()
                  .AddOpenIdConnect("aad", "Login with Azure AD", options =>
                  {
@@ -156,10 +147,11 @@ namespace StsServerIdentity
                     options.RequestCultureProviders.Insert(0, providerQuery);
                 });
 
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(new SecurityHeadersAttribute());
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            services.AddControllersWithViews(options =>
+                {
+                    options.Filters.Add(new SecurityHeadersAttribute());
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization(options =>
                 {
@@ -170,6 +162,8 @@ namespace StsServerIdentity
                     };
                 });
 
+            services.AddRazorPages();
+
             services.AddIdentityServer()
                 .AddSigningCredential(cert)
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
@@ -179,7 +173,7 @@ namespace StsServerIdentity
                 .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -188,7 +182,8 @@ namespace StsServerIdentity
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
+                app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains());
             }
 
             app.UseCors("AllowAllOrigins");
@@ -239,13 +234,20 @@ namespace StsServerIdentity
                     }
                 }
             });
+
             app.UseIdentityServer();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
