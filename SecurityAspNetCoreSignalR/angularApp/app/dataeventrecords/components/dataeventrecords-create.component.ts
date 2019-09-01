@@ -29,7 +29,7 @@ export class DataEventRecordsCreateComponent implements OnInit, OnDestroy {
             (isAuthorized: boolean) => {
                 this.isAuthorized = isAuthorized;
             });
-        this.DataEventRecord = { Id: 0, Name: '', Description: '' };
+        this.DataEventRecord = { id: 0, name: '', Ddescription: '' };
         console.log('IsAuthorized:' + this.isAuthorized);
     }
 
