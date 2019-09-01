@@ -21,6 +21,8 @@
 
 ## History
 
+2019-09-01 Updated nuget packages, Angular 8.2.4, oidc 10.0.4
+
 2019-08-18 Updated ASP.NET Core 3.0, Angular 8.2.2
 
 2019-07-30: Updating npm packages, angular 8.1.3, oidc 10.0.3, nuget packages
