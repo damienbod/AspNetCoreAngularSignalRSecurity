@@ -107,6 +107,7 @@ namespace StsServerIdentity
             services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
+			
             services.AddAuthentication()
                  .AddOpenIdConnect("aad", "Login with Azure AD", options =>
                  {
@@ -161,8 +162,6 @@ namespace StsServerIdentity
                         return factory.Create("SharedResource", assemblyName.Name);
                     };
                 });
-
-            services.AddRazorPages();
 
             services.AddIdentityServer()
                 .AddSigningCredential(cert)
@@ -247,7 +246,6 @@ namespace StsServerIdentity
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
             });
         }
     }
