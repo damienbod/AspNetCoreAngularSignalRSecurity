@@ -156,9 +156,7 @@ namespace ApiServer
                 endpoints.MapHub<SignalRHomeHub>("/signalrhome");
                 endpoints.MapHub<NewsHub>("/looney");
 
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }
