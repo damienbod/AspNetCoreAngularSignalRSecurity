@@ -38,7 +38,6 @@ namespace Angular2WebpackVisualStudio
             });
 
             services.AddControllersWithViews().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            services.AddRazorPages().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,7 +73,6 @@ namespace Angular2WebpackVisualStudio
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
             });
         }
     }
