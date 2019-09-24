@@ -21,6 +21,8 @@
 
 ## History
 
+2019-09-24 updated to .NET Core 3.0, Angular 8.2.7
+
 2019-09-20 updated to .NET Core 3.0 rc1
 
 2019-09-14 updated to .NET Core 3.0 preview 9, Angular 8.2.6

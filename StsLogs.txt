@@ -1,0 +1,362 @@
+2019-09-24 11:38:11.476 +02:00 [INF] User profile is available. Using 'C:\Users\stduser\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2019-09-24 11:38:11.708 +02:00 [INF] Starting IdentityServer4 version 3.0.1.0
+2019-09-24 11:38:11.717 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-09-24 11:38:11.720 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2019-09-24 11:38:12.042 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2019-09-24 11:38:12.042 +02:00 [INF] Hosting environment: Development
+2019-09-24 11:38:12.042 +02:00 [INF] Content root path: C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer
+2019-09-24 11:38:12.101 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/  
+2019-09-24 11:38:12.101 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/.well-known/openid-configuration  
+2019-09-24 11:38:12.115 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:12.168 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:12.376 +02:00 [INF] Executing endpoint 'StsServerIdentity.Controllers.HomeController.Index (StsServer)'
+2019-09-24 11:38:12.437 +02:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller StsServerIdentity.Controllers.HomeController (StsServer).
+2019-09-24 11:38:12.636 +02:00 [INF] Executing action method StsServerIdentity.Controllers.HomeController.Index (StsServer) - Validation state: "Valid"
+2019-09-24 11:38:12.645 +02:00 [INF] Executed action method StsServerIdentity.Controllers.HomeController.Index (StsServer), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.7988000000000001ms.
+2019-09-24 11:38:12.674 +02:00 [INF] Executing ViewResult, running view Index.
+2019-09-24 11:38:12.706 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-09-24 11:38:12.852 +02:00 [INF] Authorization failed.
+2019-09-24 11:38:12.959 +02:00 [INF] Request finished in 860.3481ms 200 application/json; charset=UTF-8
+2019-09-24 11:38:13.001 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/connect/authorize?client_id=angularclient2&redirect_uri=https%3A%2F%2Flocalhost%3A44395%2Fsilent-renew.html&response_type=code&scope=dataEventRecords%20openid%20profile%20email&nonce=N0.65337040136307681569317892978&state=15693178929770.00147462450480428940.539552286706485&code_challenge=XFGS0jl4WvdWOw_Pm1BXYfuBZDC9XUBLUcBS-VYi3_Y&code_challenge_method=S256&prompt=none  
+2019-09-24 11:38:13.023 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.AuthorizeEndpoint for /connect/authorize
+2019-09-24 11:38:14.204 +02:00 [INF] Showing error: prompt=none was requested but user is not authenticated
+2019-09-24 11:38:14.207 +02:00 [INF] Executed ViewResult - view Index executed in 1538.8041ms.
+2019-09-24 11:38:14.209 +02:00 [INF] Executed action StsServerIdentity.Controllers.HomeController.Index (StsServer) in 1771.5379ms
+2019-09-24 11:38:14.209 +02:00 [INF] Executed endpoint 'StsServerIdentity.Controllers.HomeController.Index (StsServer)'
+2019-09-24 11:38:14.212 +02:00 [INF] Request finished in 2113.8703ms 200 text/html; charset=utf-8
+2019-09-24 11:38:14.217 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/css/vendor.min.css?v=Ys2tdmcpFt9_JIC5cHGffY2F4u0Qd-RaZ-yE2vb3ODE  
+2019-09-24 11:38:14.219 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/css/site.min.css?v=k4LdJEYVdK14NWKswjTI5OPoLMXwvrTWVpiATgjClkA  
+2019-09-24 11:38:14.220 +02:00 [INF] {"ClientId":"angularclient2","ClientName":"angularclient2","RedirectUri":"https://localhost:44395/silent-renew.html","AllowedRedirectUris":["https://localhost:44395","https://localhost:44395/silent-renew.html"],"SubjectId":"anonymous","ResponseType":"code","ResponseMode":"query","GrantType":"authorization_code","RequestedScopes":"dataEventRecords openid profile email","State":"15693178929770.00147462450480428940.539552286706485","UiLocales":null,"Nonce":"N0.65337040136307681569317892978","AuthenticationContextReferenceClasses":null,"DisplayMode":null,"PromptMode":"none","MaxAge":null,"LoginHint":null,"SessionId":null,"Raw":{"client_id":"angularclient2","redirect_uri":"https://localhost:44395/silent-renew.html","response_type":"code","scope":"dataEventRecords openid profile email","nonce":"N0.65337040136307681569317892978","state":"15693178929770.00147462450480428940.539552286706485","code_challenge":"XFGS0jl4WvdWOw_Pm1BXYfuBZDC9XUBLUcBS-VYi3_Y","code_challenge_method":"S256","prompt":"none"},"$type":"AuthorizeRequestValidationLog"}
+2019-09-24 11:38:14.221 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/js/vendor.min.js?v=fU2o7grwU_-VlGi02urdutdOf4zItrve6iWt8pM8rys  
+2019-09-24 11:38:14.221 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/js/site.min.js?v=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU  
+2019-09-24 11:38:14.268 +02:00 [INF] Sending file. Request path: '/css/site.min.css'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\css\site.min.css'
+2019-09-24 11:38:14.268 +02:00 [INF] Sending file. Request path: '/js/site.min.js'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\js\site.min.js'
+2019-09-24 11:38:14.268 +02:00 [INF] Request finished in 51.211600000000004ms 200 text/css
+2019-09-24 11:38:14.270 +02:00 [INF] Request finished in 48.398700000000005ms 200 application/javascript
+2019-09-24 11:38:14.272 +02:00 [INF] Sending file. Request path: '/css/vendor.min.css'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\css\vendor.min.css'
+2019-09-24 11:38:14.272 +02:00 [INF] Sending file. Request path: '/js/vendor.min.js'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\js\vendor.min.js'
+2019-09-24 11:38:14.283 +02:00 [INF] Request finished in 61.496500000000005ms 200 application/javascript
+2019-09-24 11:38:14.283 +02:00 [INF] Request finished in 65.9738ms 200 text/css
+2019-09-24 11:38:14.287 +02:00 [INF] Request finished in 1286.9450000000002ms 302 
+2019-09-24 11:38:16.761 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/.well-known/openid-configuration  
+2019-09-24 11:38:16.763 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:16.765 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:16.771 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-09-24 11:38:16.789 +02:00 [INF] Request finished in 27.3823ms 200 application/json; charset=UTF-8
+2019-09-24 11:38:16.965 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/connect/authorize?client_id=angularclient&redirect_uri=https%3A%2F%2Flocalhost%3A44311%2Fsilent-renew.html&response_type=code&scope=dataEventRecords%20openid%20profile%20email&nonce=N0.032458384950516671569317896896&state=15693178968960.114797173986822990.7491425757611334&code_challenge=W_ZZBrCULsah7-89fnQdapUjwWxigKjaFCb3T3tfwQw&code_challenge_method=S256&prompt=none  
+2019-09-24 11:38:16.968 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.AuthorizeEndpoint for /connect/authorize
+2019-09-24 11:38:16.969 +02:00 [INF] Showing error: prompt=none was requested but user is not authenticated
+2019-09-24 11:38:16.969 +02:00 [INF] {"ClientId":"angularclient","ClientName":"angularclient","RedirectUri":"https://localhost:44311/silent-renew.html","AllowedRedirectUris":["https://localhost:44311","https://localhost:44311/silent-renew.html"],"SubjectId":"anonymous","ResponseType":"code","ResponseMode":"query","GrantType":"authorization_code","RequestedScopes":"dataEventRecords openid profile email","State":"15693178968960.114797173986822990.7491425757611334","UiLocales":null,"Nonce":"N0.032458384950516671569317896896","AuthenticationContextReferenceClasses":null,"DisplayMode":null,"PromptMode":"none","MaxAge":null,"LoginHint":null,"SessionId":null,"Raw":{"client_id":"angularclient","redirect_uri":"https://localhost:44311/silent-renew.html","response_type":"code","scope":"dataEventRecords openid profile email","nonce":"N0.032458384950516671569317896896","state":"15693178968960.114797173986822990.7491425757611334","code_challenge":"W_ZZBrCULsah7-89fnQdapUjwWxigKjaFCb3T3tfwQw","code_challenge_method":"S256","prompt":"none"},"$type":"AuthorizeRequestValidationLog"}
+2019-09-24 11:38:17.008 +02:00 [INF] Request finished in 43.494600000000005ms 302 
+2019-09-24 11:38:19.248 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/connect/authorize?client_id=angularclient&redirect_uri=https%3A%2F%2Flocalhost%3A44311&response_type=code&scope=dataEventRecords%20openid%20profile%20email&nonce=N0.52069726050288571569317899236&state=15693178968960.114797173986822990.7491425757611334&code_challenge=EkhtV4dnH7adZ5-rzjFynhNOzAwMpRk4rSs3MWcWzSs&code_challenge_method=S256  
+2019-09-24 11:38:19.271 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.AuthorizeEndpoint for /connect/authorize
+2019-09-24 11:38:19.274 +02:00 [INF] Showing login: User is not authenticated
+2019-09-24 11:38:19.282 +02:00 [INF] Request finished in 34.653400000000005ms 302 
+2019-09-24 11:38:19.288 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/Account/Login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dangularclient%26redirect_uri%3Dhttps%253A%252F%252Flocalhost%253A44311%26response_type%3Dcode%26scope%3DdataEventRecords%2520openid%2520profile%2520email%26nonce%3DN0.52069726050288571569317899236%26state%3D15693178968960.114797173986822990.7491425757611334%26code_challenge%3DEkhtV4dnH7adZ5-rzjFynhNOzAwMpRk4rSs3MWcWzSs%26code_challenge_method%3DS256  
+2019-09-24 11:38:19.304 +02:00 [INF] Executing endpoint 'StsServerIdentity.Controllers.AccountController.Login (StsServer)'
+2019-09-24 11:38:19.338 +02:00 [INF] Route matched with {action = "Login", controller = "Account"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(System.String) on controller StsServerIdentity.Controllers.AccountController (StsServer).
+2019-09-24 11:38:19.393 +02:00 [INF] Executing action method StsServerIdentity.Controllers.AccountController.Login (StsServer) - Validation state: "Valid"
+2019-09-24 11:38:19.406 +02:00 [INF] Executed action method StsServerIdentity.Controllers.AccountController.Login (StsServer), returned result Microsoft.AspNetCore.Mvc.ViewResult in 12.582ms.
+2019-09-24 11:38:19.408 +02:00 [INF] Executing ViewResult, running view Login.
+2019-09-24 11:38:19.451 +02:00 [INF] Authorization failed.
+2019-09-24 11:38:19.527 +02:00 [INF] Executed ViewResult - view Login executed in 120.26870000000001ms.
+2019-09-24 11:38:19.527 +02:00 [INF] Executed action StsServerIdentity.Controllers.AccountController.Login (StsServer) in 188.57430000000002ms
+2019-09-24 11:38:19.527 +02:00 [INF] Executed endpoint 'StsServerIdentity.Controllers.AccountController.Login (StsServer)'
+2019-09-24 11:38:19.527 +02:00 [INF] Request finished in 239.7226ms 200 text/html; charset=utf-8
+2019-09-24 11:38:19.546 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/css/site.min.css?v=k4LdJEYVdK14NWKswjTI5OPoLMXwvrTWVpiATgjClkA  
+2019-09-24 11:38:19.546 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/css/vendor.min.css?v=Ys2tdmcpFt9_JIC5cHGffY2F4u0Qd-RaZ-yE2vb3ODE  
+2019-09-24 11:38:19.551 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/js/vendor-validation.min.js?v=aC1VG4hxjpPBvsiSEtLN0QLwkl8eUjtlXoDDVBBDQug  
+2019-09-24 11:38:19.551 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/css/fontawesome-free-5.4.1-web/css/all.min.css?v=TTtNXZn5LcwfHBadsA92qh3GXV2CGSr8_wTPigGKe6E  
+2019-09-24 11:38:19.552 +02:00 [INF] Sending file. Request path: '/css/site.min.css'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\css\site.min.css'
+2019-09-24 11:38:19.555 +02:00 [INF] Request finished in 9.773900000000001ms 200 text/css
+2019-09-24 11:38:19.562 +02:00 [INF] Sending file. Request path: '/css/vendor.min.css'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\css\vendor.min.css'
+2019-09-24 11:38:19.563 +02:00 [INF] Request finished in 17.708000000000002ms 200 text/css
+2019-09-24 11:38:19.568 +02:00 [INF] Sending file. Request path: '/css/fontawesome-free-5.4.1-web/css/all.min.css'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\css\fontawesome-free-5.4.1-web\css\all.min.css'
+2019-09-24 11:38:19.568 +02:00 [INF] Request finished in 17.0047ms 200 text/css
+2019-09-24 11:38:19.570 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/js/site.min.js?v=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU  
+2019-09-24 11:38:19.571 +02:00 [INF] Sending file. Request path: '/js/vendor-validation.min.js'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\js\vendor-validation.min.js'
+2019-09-24 11:38:19.571 +02:00 [INF] Sending file. Request path: '/js/site.min.js'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\js\site.min.js'
+2019-09-24 11:38:19.571 +02:00 [INF] Request finished in 20.184900000000003ms 200 application/javascript
+2019-09-24 11:38:19.576 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/js/vendor.min.js?v=fU2o7grwU_-VlGi02urdutdOf4zItrve6iWt8pM8rys  
+2019-09-24 11:38:19.583 +02:00 [INF] Request finished in 6.2146ms 200 application/javascript
+2019-09-24 11:38:19.587 +02:00 [INF] Sending file. Request path: '/js/vendor.min.js'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\js\vendor.min.js'
+2019-09-24 11:38:19.587 +02:00 [INF] Request finished in 11.521500000000001ms 200 application/javascript
+2019-09-24 11:38:21.396 +02:00 [INF] Request starting HTTP/2.0 POST https://localhost:44318/Account/Login?returnurl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dangularclient%26redirect_uri%3Dhttps%253A%252F%252Flocalhost%253A44311%26response_type%3Dcode%26scope%3DdataEventRecords%2520openid%2520profile%2520email%26nonce%3DN0.52069726050288571569317899236%26state%3D15693178968960.114797173986822990.7491425757611334%26code_challenge%3DEkhtV4dnH7adZ5-rzjFynhNOzAwMpRk4rSs3MWcWzSs%26code_challenge_method%3DS256 application/x-www-form-urlencoded 252
+2019-09-24 11:38:21.398 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:21.400 +02:00 [INF] No CORS policy found for the specified request.
+2019-09-24 11:38:21.415 +02:00 [INF] Executing endpoint 'StsServerIdentity.Controllers.AccountController.Login (StsServer)'
+2019-09-24 11:38:21.423 +02:00 [INF] Route matched with {action = "Login", controller = "Account"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(StsServerIdentity.Models.LoginInputModel) on controller StsServerIdentity.Controllers.AccountController (StsServer).
+2019-09-24 11:38:21.497 +02:00 [INF] Executing action method StsServerIdentity.Controllers.AccountController.Login (StsServer) - Validation state: "Valid"
+2019-09-24 11:38:21.972 +02:00 [INF] Entity Framework Core 3.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: None
+2019-09-24 11:38:22.452 +02:00 [INF] Executing DbCommand [Parameters=[@__normalizedUserName_0='?' (Size = 22)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DataEventRecordsRole", "a"."Email", "a"."EmailConfirmed", "a"."IsAdmin", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecuredFilesRole", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE (("a"."NormalizedUserName" = @__normalizedUserName_0) AND ("a"."NormalizedUserName" IS NOT NULL AND @__normalizedUserName_0 IS NOT NULL)) OR ("a"."NormalizedUserName" IS NULL AND @__normalizedUserName_0 IS NULL)
+LIMIT 1
+2019-09-24 11:38:22.607 +02:00 [INF] Executing DbCommand [Parameters=[@__user_Id_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ClaimType", "a"."ClaimValue", "a"."UserId"
+FROM "AspNetUserClaims" AS "a"
+WHERE ("a"."UserId" = @__user_Id_0) AND @__user_Id_0 IS NOT NULL
+2019-09-24 11:38:22.635 +02:00 [INF] Executing DbCommand [Parameters=[@__userId_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a0"."Name"
+FROM "AspNetUserRoles" AS "a"
+INNER JOIN "AspNetRoles" AS "a0" ON "a"."RoleId" = "a0"."Id"
+WHERE ("a"."UserId" = @__userId_0) AND @__userId_0 IS NOT NULL
+2019-09-24 11:38:22.649 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2019-09-24 11:38:22.649 +02:00 [INF] User logged in.
+2019-09-24 11:38:22.650 +02:00 [INF] Executed action method StsServerIdentity.Controllers.AccountController.Login (StsServer), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 1152.0153ms.
+2019-09-24 11:38:22.650 +02:00 [INF] Executing RedirectResult, redirecting to /connect/authorize/callback?client_id=angularclient&redirect_uri=https%3A%2F%2Flocalhost%3A44311&response_type=code&scope=dataEventRecords%20openid%20profile%20email&nonce=N0.52069726050288571569317899236&state=15693178968960.114797173986822990.7491425757611334&code_challenge=EkhtV4dnH7adZ5-rzjFynhNOzAwMpRk4rSs3MWcWzSs&code_challenge_method=S256.
+2019-09-24 11:38:22.650 +02:00 [INF] Executed action StsServerIdentity.Controllers.AccountController.Login (StsServer) in 1227.0320000000002ms
+2019-09-24 11:38:22.650 +02:00 [INF] Executed endpoint 'StsServerIdentity.Controllers.AccountController.Login (StsServer)'
+2019-09-24 11:38:22.654 +02:00 [INF] Request finished in 1259.4327ms 302 
+2019-09-24 11:38:22.660 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/connect/authorize/callback?client_id=angularclient&redirect_uri=https%3A%2F%2Flocalhost%3A44311&response_type=code&scope=dataEventRecords%20openid%20profile%20email&nonce=N0.52069726050288571569317899236&state=15693178968960.114797173986822990.7491425757611334&code_challenge=EkhtV4dnH7adZ5-rzjFynhNOzAwMpRk4rSs3MWcWzSs&code_challenge_method=S256  
+2019-09-24 11:38:22.665 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.AuthorizeCallbackEndpoint for /connect/authorize/callback
+2019-09-24 11:38:22.700 +02:00 [INF] Entity Framework Core 3.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: None
+2019-09-24 11:38:22.710 +02:00 [INF] Executing DbCommand [Parameters=[@__p_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DataEventRecordsRole", "a"."Email", "a"."EmailConfirmed", "a"."IsAdmin", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecuredFilesRole", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE ("a"."Id" = @__p_0) AND @__p_0 IS NOT NULL
+LIMIT 1
+2019-09-24 11:38:22.717 +02:00 [INF] Showing consent: User has not yet consented
+2019-09-24 11:38:22.719 +02:00 [INF] Request finished in 59.679ms 302 
+2019-09-24 11:38:22.724 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/consent?returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dangularclient%26redirect_uri%3Dhttps%253A%252F%252Flocalhost%253A44311%26response_type%3Dcode%26scope%3DdataEventRecords%2520openid%2520profile%2520email%26nonce%3DN0.52069726050288571569317899236%26state%3D15693178968960.114797173986822990.7491425757611334%26code_challenge%3DEkhtV4dnH7adZ5-rzjFynhNOzAwMpRk4rSs3MWcWzSs%26code_challenge_method%3DS256  
+2019-09-24 11:38:22.725 +02:00 [INF] Executing endpoint 'StsServerIdentity.Controllers.ConsentController.Index (StsServer)'
+2019-09-24 11:38:22.729 +02:00 [INF] Route matched with {action = "Index", controller = "Consent"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String) on controller StsServerIdentity.Controllers.ConsentController (StsServer).
+2019-09-24 11:38:22.755 +02:00 [INF] Executing action method StsServerIdentity.Controllers.ConsentController.Index (StsServer) - Validation state: "Valid"
+2019-09-24 11:38:22.761 +02:00 [INF] Executed action method StsServerIdentity.Controllers.ConsentController.Index (StsServer), returned result Microsoft.AspNetCore.Mvc.ViewResult in 6.064900000000001ms.
+2019-09-24 11:38:22.762 +02:00 [INF] Executing ViewResult, running view Index.
+2019-09-24 11:38:22.782 +02:00 [INF] Authorization was successful.
+2019-09-24 11:38:22.789 +02:00 [INF] Executed ViewResult - view Index executed in 27.258100000000002ms.
+2019-09-24 11:38:22.789 +02:00 [INF] Executed action StsServerIdentity.Controllers.ConsentController.Index (StsServer) in 59.636500000000005ms
+2019-09-24 11:38:22.789 +02:00 [INF] Executed endpoint 'StsServerIdentity.Controllers.ConsentController.Index (StsServer)'
+2019-09-24 11:38:22.789 +02:00 [INF] Request finished in 65.8108ms 200 text/html; charset=utf-8
+2019-09-24 11:38:22.805 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/css/vendor.min.css?v=Ys2tdmcpFt9_JIC5cHGffY2F4u0Qd-RaZ-yE2vb3ODE  
+2019-09-24 11:38:22.805 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/css/site.min.css?v=k4LdJEYVdK14NWKswjTI5OPoLMXwvrTWVpiATgjClkA  
+2019-09-24 11:38:22.809 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/js/vendor.min.js?v=fU2o7grwU_-VlGi02urdutdOf4zItrve6iWt8pM8rys  
+2019-09-24 11:38:22.809 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/js/site.min.js?v=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU  
+2019-09-24 11:38:22.810 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/css/fontawesome-free-5.4.1-web/css/all.min.css?v=TTtNXZn5LcwfHBadsA92qh3GXV2CGSr8_wTPigGKe6E  
+2019-09-24 11:38:22.812 +02:00 [INF] Sending file. Request path: '/js/site.min.js'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\js\site.min.js'
+2019-09-24 11:38:22.812 +02:00 [INF] Sending file. Request path: '/css/site.min.css'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\css\site.min.css'
+2019-09-24 11:38:22.813 +02:00 [INF] Request finished in 4.5458ms 200 application/javascript
+2019-09-24 11:38:22.814 +02:00 [INF] Sending file. Request path: '/css/fontawesome-free-5.4.1-web/css/all.min.css'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\css\fontawesome-free-5.4.1-web\css\all.min.css'
+2019-09-24 11:38:22.815 +02:00 [INF] Request finished in 5.0741000000000005ms 200 text/css
+2019-09-24 11:38:22.820 +02:00 [INF] Request finished in 7.2769ms 200 text/css
+2019-09-24 11:38:22.830 +02:00 [INF] Sending file. Request path: '/js/vendor.min.js'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\js\vendor.min.js'
+2019-09-24 11:38:22.831 +02:00 [INF] Request finished in 21.9423ms 200 application/javascript
+2019-09-24 11:38:22.834 +02:00 [INF] Sending file. Request path: '/css/vendor.min.css'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\css\vendor.min.css'
+2019-09-24 11:38:22.838 +02:00 [INF] Request finished in 32.7166ms 200 text/css
+2019-09-24 11:38:22.909 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/css/fontawesome-free-5.4.1-web/webfonts/fa-solid-900.woff2  
+2019-09-24 11:38:22.910 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:22.926 +02:00 [INF] Sending file. Request path: '/css/fontawesome-free-5.4.1-web/webfonts/fa-solid-900.woff2'. Physical path: 'C:\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServer\wwwroot\css\fontawesome-free-5.4.1-web\webfonts\fa-solid-900.woff2'
+2019-09-24 11:38:22.927 +02:00 [INF] Request finished in 17.9617ms 200 font/woff2
+2019-09-24 11:38:24.839 +02:00 [INF] Request starting HTTP/2.0 POST https://localhost:44318/Consent application/x-www-form-urlencoded 791
+2019-09-24 11:38:24.843 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:24.851 +02:00 [INF] No CORS policy found for the specified request.
+2019-09-24 11:38:24.874 +02:00 [INF] Executing endpoint 'StsServerIdentity.Controllers.ConsentController.Index (StsServer)'
+2019-09-24 11:38:24.905 +02:00 [INF] Route matched with {action = "Index", controller = "Consent"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(StsServerIdentity.Models.ConsentInputModel) on controller StsServerIdentity.Controllers.ConsentController (StsServer).
+2019-09-24 11:38:24.957 +02:00 [INF] Executing action method StsServerIdentity.Controllers.ConsentController.Index (StsServer) - Validation state: "Valid"
+2019-09-24 11:38:25.008 +02:00 [INF] Executed action method StsServerIdentity.Controllers.ConsentController.Index (StsServer), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 50.6921ms.
+2019-09-24 11:38:25.008 +02:00 [INF] Executing RedirectResult, redirecting to /connect/authorize/callback?client_id=angularclient&redirect_uri=https%3A%2F%2Flocalhost%3A44311&response_type=code&scope=dataEventRecords%20openid%20profile%20email&nonce=N0.52069726050288571569317899236&state=15693178968960.114797173986822990.7491425757611334&code_challenge=EkhtV4dnH7adZ5-rzjFynhNOzAwMpRk4rSs3MWcWzSs&code_challenge_method=S256.
+2019-09-24 11:38:25.009 +02:00 [INF] Executed action StsServerIdentity.Controllers.ConsentController.Index (StsServer) in 102.91130000000001ms
+2019-09-24 11:38:25.009 +02:00 [INF] Executed endpoint 'StsServerIdentity.Controllers.ConsentController.Index (StsServer)'
+2019-09-24 11:38:25.010 +02:00 [INF] Request finished in 172.13680000000002ms 302 
+2019-09-24 11:38:25.016 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/connect/authorize/callback?client_id=angularclient&redirect_uri=https%3A%2F%2Flocalhost%3A44311&response_type=code&scope=dataEventRecords%20openid%20profile%20email&nonce=N0.52069726050288571569317899236&state=15693178968960.114797173986822990.7491425757611334&code_challenge=EkhtV4dnH7adZ5-rzjFynhNOzAwMpRk4rSs3MWcWzSs&code_challenge_method=S256  
+2019-09-24 11:38:25.018 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.AuthorizeCallbackEndpoint for /connect/authorize/callback
+2019-09-24 11:38:25.084 +02:00 [INF] Entity Framework Core 3.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: None
+2019-09-24 11:38:25.089 +02:00 [INF] Executing DbCommand [Parameters=[@__p_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DataEventRecordsRole", "a"."Email", "a"."EmailConfirmed", "a"."IsAdmin", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecuredFilesRole", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE ("a"."Id" = @__p_0) AND @__p_0 IS NOT NULL
+LIMIT 1
+2019-09-24 11:38:25.095 +02:00 [INF] User consented to scopes: ["openid","profile","email","dataEventRecords"]
+2019-09-24 11:38:25.136 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2019-09-24 11:38:25.137 +02:00 [INF] Request finished in 120.4636ms 302 
+2019-09-24 11:38:26.063 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/.well-known/openid-configuration  
+2019-09-24 11:38:26.064 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:26.067 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:26.075 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-09-24 11:38:26.081 +02:00 [INF] Request finished in 18.125ms 200 application/json; charset=UTF-8
+2019-09-24 11:38:26.138 +02:00 [INF] Request starting HTTP/2.0 POST https://localhost:44318/connect/token application/x-www-form-urlencoded 218
+2019-09-24 11:38:26.138 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:26.139 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:26.148 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2019-09-24 11:38:26.251 +02:00 [INF] Entity Framework Core 3.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: None
+2019-09-24 11:38:26.255 +02:00 [INF] Executing DbCommand [Parameters=[@__p_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DataEventRecordsRole", "a"."Email", "a"."EmailConfirmed", "a"."IsAdmin", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecuredFilesRole", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE ("a"."Id" = @__p_0) AND @__p_0 IS NOT NULL
+LIMIT 1
+2019-09-24 11:38:26.263 +02:00 [INF] Token request validation success, {"ClientId":"angularclient","ClientName":"angularclient","GrantType":"authorization_code","Scopes":null,"AuthorizationCode":"Afy0j1DB0fWGb-_zgb4H4hOYh9hXcDe2ob1kZFxaebA","RefreshToken":null,"UserName":null,"AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"authorization_code","client_id":"angularclient","code_verifier":"C0.8298820927821076156931789923615693178992360.12231425123281858","code":"Afy0j1DB0fWGb-_zgb4H4hOYh9hXcDe2ob1kZFxaebA","redirect_uri":"https://localhost:44311"},"$type":"TokenRequestValidationLog"}
+2019-09-24 11:38:26.323 +02:00 [INF] Executing DbCommand [Parameters=[@__user_Id_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ClaimType", "a"."ClaimValue", "a"."UserId"
+FROM "AspNetUserClaims" AS "a"
+WHERE ("a"."UserId" = @__user_Id_0) AND @__user_Id_0 IS NOT NULL
+2019-09-24 11:38:26.328 +02:00 [INF] Executing DbCommand [Parameters=[@__userId_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a0"."Name"
+FROM "AspNetUserRoles" AS "a"
+INNER JOIN "AspNetRoles" AS "a0" ON "a"."RoleId" = "a0"."Id"
+WHERE ("a"."UserId" = @__userId_0) AND @__userId_0 IS NOT NULL
+2019-09-24 11:38:26.481 +02:00 [INF] Executing DbCommand [Parameters=[@__user_Id_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ClaimType", "a"."ClaimValue", "a"."UserId"
+FROM "AspNetUserClaims" AS "a"
+WHERE ("a"."UserId" = @__user_Id_0) AND @__user_Id_0 IS NOT NULL
+2019-09-24 11:38:26.483 +02:00 [INF] Executing DbCommand [Parameters=[@__userId_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a0"."Name"
+FROM "AspNetUserRoles" AS "a"
+INNER JOIN "AspNetRoles" AS "a0" ON "a"."RoleId" = "a0"."Id"
+WHERE ("a"."UserId" = @__userId_0) AND @__userId_0 IS NOT NULL
+2019-09-24 11:38:26.494 +02:00 [INF] Request finished in 356.079ms 200 application/json; charset=UTF-8
+2019-09-24 11:38:26.503 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/.well-known/openid-configuration/jwks  
+2019-09-24 11:38:26.503 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:26.503 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:26.504 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2019-09-24 11:38:26.521 +02:00 [INF] Request finished in 17.911ms 200 application/jwk-set+json; charset=UTF-8
+2019-09-24 11:38:26.599 +02:00 [INF] Request starting HTTP/2.0 OPTIONS https://localhost:44318/connect/userinfo  
+2019-09-24 11:38:26.599 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:26.601 +02:00 [INF] Request finished in 1.8306ms 204 
+2019-09-24 11:38:26.637 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/connect/userinfo  
+2019-09-24 11:38:26.637 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:26.637 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:26.639 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.UserInfoEndpoint for /connect/userinfo
+2019-09-24 11:38:26.730 +02:00 [INF] Entity Framework Core 3.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: None
+2019-09-24 11:38:26.732 +02:00 [INF] Executing DbCommand [Parameters=[@__p_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DataEventRecordsRole", "a"."Email", "a"."EmailConfirmed", "a"."IsAdmin", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecuredFilesRole", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE ("a"."Id" = @__p_0) AND @__p_0 IS NOT NULL
+LIMIT 1
+2019-09-24 11:38:26.745 +02:00 [INF] Executing DbCommand [Parameters=[@__user_Id_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ClaimType", "a"."ClaimValue", "a"."UserId"
+FROM "AspNetUserClaims" AS "a"
+WHERE ("a"."UserId" = @__user_Id_0) AND @__user_Id_0 IS NOT NULL
+2019-09-24 11:38:26.748 +02:00 [INF] Executing DbCommand [Parameters=[@__userId_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a0"."Name"
+FROM "AspNetUserRoles" AS "a"
+INNER JOIN "AspNetRoles" AS "a0" ON "a"."RoleId" = "a0"."Id"
+WHERE ("a"."UserId" = @__userId_0) AND @__userId_0 IS NOT NULL
+2019-09-24 11:38:26.749 +02:00 [INF] Profile service returned the following claim types: sub preferred_username name email email_verified role role scope role role scope given_name role role role email name
+2019-09-24 11:38:26.751 +02:00 [INF] Request finished in 114.7714ms 200 application/json; charset=UTF-8
+2019-09-24 11:38:26.917 +02:00 [INF] Request starting HTTP/1.1 GET https://localhost:44318/.well-known/openid-configuration  
+2019-09-24 11:38:26.918 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-09-24 11:38:26.921 +02:00 [INF] Request finished in 4.1145000000000005ms 200 application/json; charset=UTF-8
+2019-09-24 11:38:27.160 +02:00 [INF] Request starting HTTP/1.1 GET https://localhost:44318/.well-known/openid-configuration/jwks  
+2019-09-24 11:38:27.162 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2019-09-24 11:38:27.164 +02:00 [INF] Request finished in 3.5978000000000003ms 200 application/jwk-set+json; charset=UTF-8
+2019-09-24 11:38:41.738 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/connect/authorize?client_id=angularclient2&redirect_uri=https%3A%2F%2Flocalhost%3A44395&response_type=code&scope=dataEventRecords%20openid%20profile%20email&nonce=N0.160505339114582981569317921703&state=15693178929770.00147462450480428940.539552286706485&code_challenge=kPhYaom-ir-11KgrLyfND9MiG78fy_MedROnDNXDvrk&code_challenge_method=S256  
+2019-09-24 11:38:41.762 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.AuthorizeEndpoint for /connect/authorize
+2019-09-24 11:38:41.771 +02:00 [INF] Entity Framework Core 3.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: None
+2019-09-24 11:38:41.788 +02:00 [INF] Executing DbCommand [Parameters=[@__p_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DataEventRecordsRole", "a"."Email", "a"."EmailConfirmed", "a"."IsAdmin", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecuredFilesRole", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE ("a"."Id" = @__p_0) AND @__p_0 IS NOT NULL
+LIMIT 1
+2019-09-24 11:38:41.798 +02:00 [INF] Showing consent: User has not yet consented
+2019-09-24 11:38:41.803 +02:00 [INF] Request finished in 66.1049ms 302 
+2019-09-24 11:38:41.818 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/consent?returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dangularclient2%26redirect_uri%3Dhttps%253A%252F%252Flocalhost%253A44395%26response_type%3Dcode%26scope%3DdataEventRecords%2520openid%2520profile%2520email%26nonce%3DN0.160505339114582981569317921703%26state%3D15693178929770.00147462450480428940.539552286706485%26code_challenge%3DkPhYaom-ir-11KgrLyfND9MiG78fy_MedROnDNXDvrk%26code_challenge_method%3DS256  
+2019-09-24 11:38:41.823 +02:00 [INF] Executing endpoint 'StsServerIdentity.Controllers.ConsentController.Index (StsServer)'
+2019-09-24 11:38:41.824 +02:00 [INF] Route matched with {action = "Index", controller = "Consent"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String) on controller StsServerIdentity.Controllers.ConsentController (StsServer).
+2019-09-24 11:38:41.866 +02:00 [INF] Executing action method StsServerIdentity.Controllers.ConsentController.Index (StsServer) - Validation state: "Valid"
+2019-09-24 11:38:41.867 +02:00 [INF] Executed action method StsServerIdentity.Controllers.ConsentController.Index (StsServer), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.1660000000000001ms.
+2019-09-24 11:38:41.867 +02:00 [INF] Executing ViewResult, running view Index.
+2019-09-24 11:38:41.870 +02:00 [INF] Authorization was successful.
+2019-09-24 11:38:41.872 +02:00 [INF] Executed ViewResult - view Index executed in 5.224ms.
+2019-09-24 11:38:41.873 +02:00 [INF] Executed action StsServerIdentity.Controllers.ConsentController.Index (StsServer) in 47.767500000000005ms
+2019-09-24 11:38:41.873 +02:00 [INF] Executed endpoint 'StsServerIdentity.Controllers.ConsentController.Index (StsServer)'
+2019-09-24 11:38:41.873 +02:00 [INF] Request finished in 55.1907ms 200 text/html; charset=utf-8
+2019-09-24 11:38:41.895 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/css/site.min.css?v=k4LdJEYVdK14NWKswjTI5OPoLMXwvrTWVpiATgjClkA  
+2019-09-24 11:38:41.895 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/css/vendor.min.css?v=Ys2tdmcpFt9_JIC5cHGffY2F4u0Qd-RaZ-yE2vb3ODE  
+2019-09-24 11:38:41.897 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/js/vendor.min.js?v=fU2o7grwU_-VlGi02urdutdOf4zItrve6iWt8pM8rys  
+2019-09-24 11:38:41.897 +02:00 [INF] The file /css/vendor.min.css was not modified
+2019-09-24 11:38:41.897 +02:00 [INF] The file /css/site.min.css was not modified
+2019-09-24 11:38:41.897 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/js/site.min.js?v=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU  
+2019-09-24 11:38:41.898 +02:00 [INF] The file /js/vendor.min.js was not modified
+2019-09-24 11:38:41.898 +02:00 [INF] Request finished in 2.5724ms 304 text/css
+2019-09-24 11:38:41.898 +02:00 [INF] The file /js/site.min.js was not modified
+2019-09-24 11:38:41.898 +02:00 [INF] Request finished in 0.994ms 304 application/javascript
+2019-09-24 11:38:41.898 +02:00 [INF] Request finished in 2.5724ms 304 text/css
+2019-09-24 11:38:41.898 +02:00 [INF] Request finished in 0.9597ms 304 application/javascript
+2019-09-24 11:38:44.138 +02:00 [INF] Request starting HTTP/2.0 POST https://localhost:44318/Consent application/x-www-form-urlencoded 794
+2019-09-24 11:38:44.139 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:44.140 +02:00 [INF] No CORS policy found for the specified request.
+2019-09-24 11:38:44.145 +02:00 [INF] Executing endpoint 'StsServerIdentity.Controllers.ConsentController.Index (StsServer)'
+2019-09-24 11:38:44.146 +02:00 [INF] Route matched with {action = "Index", controller = "Consent"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(StsServerIdentity.Models.ConsentInputModel) on controller StsServerIdentity.Controllers.ConsentController (StsServer).
+2019-09-24 11:38:44.186 +02:00 [INF] Executing action method StsServerIdentity.Controllers.ConsentController.Index (StsServer) - Validation state: "Valid"
+2019-09-24 11:38:44.188 +02:00 [INF] Executed action method StsServerIdentity.Controllers.ConsentController.Index (StsServer), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 1.8035ms.
+2019-09-24 11:38:44.188 +02:00 [INF] Executing RedirectResult, redirecting to /connect/authorize/callback?client_id=angularclient2&redirect_uri=https%3A%2F%2Flocalhost%3A44395&response_type=code&scope=dataEventRecords%20openid%20profile%20email&nonce=N0.160505339114582981569317921703&state=15693178929770.00147462450480428940.539552286706485&code_challenge=kPhYaom-ir-11KgrLyfND9MiG78fy_MedROnDNXDvrk&code_challenge_method=S256.
+2019-09-24 11:38:44.189 +02:00 [INF] Executed action StsServerIdentity.Controllers.ConsentController.Index (StsServer) in 42.6941ms
+2019-09-24 11:38:44.189 +02:00 [INF] Executed endpoint 'StsServerIdentity.Controllers.ConsentController.Index (StsServer)'
+2019-09-24 11:38:44.189 +02:00 [INF] Request finished in 51.5495ms 302 
+2019-09-24 11:38:44.196 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/connect/authorize/callback?client_id=angularclient2&redirect_uri=https%3A%2F%2Flocalhost%3A44395&response_type=code&scope=dataEventRecords%20openid%20profile%20email&nonce=N0.160505339114582981569317921703&state=15693178929770.00147462450480428940.539552286706485&code_challenge=kPhYaom-ir-11KgrLyfND9MiG78fy_MedROnDNXDvrk&code_challenge_method=S256  
+2019-09-24 11:38:44.205 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.AuthorizeCallbackEndpoint for /connect/authorize/callback
+2019-09-24 11:38:44.206 +02:00 [INF] Entity Framework Core 3.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: None
+2019-09-24 11:38:44.212 +02:00 [INF] Executing DbCommand [Parameters=[@__p_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DataEventRecordsRole", "a"."Email", "a"."EmailConfirmed", "a"."IsAdmin", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecuredFilesRole", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE ("a"."Id" = @__p_0) AND @__p_0 IS NOT NULL
+LIMIT 1
+2019-09-24 11:38:44.215 +02:00 [INF] User consented to scopes: ["openid","profile","email","dataEventRecords"]
+2019-09-24 11:38:44.217 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2019-09-24 11:38:44.218 +02:00 [INF] Request finished in 21.5245ms 302 
+2019-09-24 11:38:44.782 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/.well-known/openid-configuration  
+2019-09-24 11:38:44.782 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:44.783 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:44.783 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-09-24 11:38:44.785 +02:00 [INF] Request finished in 3.2764ms 200 application/json; charset=UTF-8
+2019-09-24 11:38:44.880 +02:00 [INF] Request starting HTTP/2.0 POST https://localhost:44318/connect/token application/x-www-form-urlencoded 218
+2019-09-24 11:38:44.880 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:44.881 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:44.882 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2019-09-24 11:38:44.884 +02:00 [INF] Entity Framework Core 3.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: None
+2019-09-24 11:38:44.886 +02:00 [INF] Executing DbCommand [Parameters=[@__p_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DataEventRecordsRole", "a"."Email", "a"."EmailConfirmed", "a"."IsAdmin", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecuredFilesRole", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE ("a"."Id" = @__p_0) AND @__p_0 IS NOT NULL
+LIMIT 1
+2019-09-24 11:38:44.888 +02:00 [INF] Token request validation success, {"ClientId":"angularclient2","ClientName":"angularclient2","GrantType":"authorization_code","Scopes":null,"AuthorizationCode":"bO33nTw4pD_F7Kx7Stbc15vTboRlivDG8z2k2iakUWo","RefreshToken":null,"UserName":null,"AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"authorization_code","client_id":"angularclient2","code_verifier":"C0.9113433970758067156931792170315693179217030.7002723753071314","code":"bO33nTw4pD_F7Kx7Stbc15vTboRlivDG8z2k2iakUWo","redirect_uri":"https://localhost:44395"},"$type":"TokenRequestValidationLog"}
+2019-09-24 11:38:44.889 +02:00 [INF] Executing DbCommand [Parameters=[@__user_Id_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ClaimType", "a"."ClaimValue", "a"."UserId"
+FROM "AspNetUserClaims" AS "a"
+WHERE ("a"."UserId" = @__user_Id_0) AND @__user_Id_0 IS NOT NULL
+2019-09-24 11:38:44.890 +02:00 [INF] Executing DbCommand [Parameters=[@__userId_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a0"."Name"
+FROM "AspNetUserRoles" AS "a"
+INNER JOIN "AspNetRoles" AS "a0" ON "a"."RoleId" = "a0"."Id"
+WHERE ("a"."UserId" = @__userId_0) AND @__userId_0 IS NOT NULL
+2019-09-24 11:38:44.898 +02:00 [INF] Executing DbCommand [Parameters=[@__user_Id_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ClaimType", "a"."ClaimValue", "a"."UserId"
+FROM "AspNetUserClaims" AS "a"
+WHERE ("a"."UserId" = @__user_Id_0) AND @__user_Id_0 IS NOT NULL
+2019-09-24 11:38:44.900 +02:00 [INF] Executing DbCommand [Parameters=[@__userId_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a0"."Name"
+FROM "AspNetUserRoles" AS "a"
+INNER JOIN "AspNetRoles" AS "a0" ON "a"."RoleId" = "a0"."Id"
+WHERE ("a"."UserId" = @__userId_0) AND @__userId_0 IS NOT NULL
+2019-09-24 11:38:44.903 +02:00 [INF] Request finished in 22.7883ms 200 application/json; charset=UTF-8
+2019-09-24 11:38:44.924 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/.well-known/openid-configuration/jwks  
+2019-09-24 11:38:44.924 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:44.925 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:44.931 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2019-09-24 11:38:44.933 +02:00 [INF] Request finished in 9.0754ms 200 application/jwk-set+json; charset=UTF-8
+2019-09-24 11:38:44.983 +02:00 [INF] Request starting HTTP/2.0 OPTIONS https://localhost:44318/connect/userinfo  
+2019-09-24 11:38:44.984 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:44.984 +02:00 [INF] Request finished in 0.38630000000000003ms 204 
+2019-09-24 11:38:44.995 +02:00 [INF] Request starting HTTP/2.0 GET https://localhost:44318/connect/userinfo  
+2019-09-24 11:38:44.995 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:44.995 +02:00 [INF] CORS policy execution successful.
+2019-09-24 11:38:44.996 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.UserInfoEndpoint for /connect/userinfo
+2019-09-24 11:38:44.997 +02:00 [INF] Entity Framework Core 3.0.0 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: None
+2019-09-24 11:38:44.998 +02:00 [INF] Executing DbCommand [Parameters=[@__p_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DataEventRecordsRole", "a"."Email", "a"."EmailConfirmed", "a"."IsAdmin", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecuredFilesRole", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE ("a"."Id" = @__p_0) AND @__p_0 IS NOT NULL
+LIMIT 1
+2019-09-24 11:38:45.000 +02:00 [INF] Executing DbCommand [Parameters=[@__user_Id_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ClaimType", "a"."ClaimValue", "a"."UserId"
+FROM "AspNetUserClaims" AS "a"
+WHERE ("a"."UserId" = @__user_Id_0) AND @__user_Id_0 IS NOT NULL
+2019-09-24 11:38:45.001 +02:00 [INF] Executing DbCommand [Parameters=[@__userId_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a0"."Name"
+FROM "AspNetUserRoles" AS "a"
+INNER JOIN "AspNetRoles" AS "a0" ON "a"."RoleId" = "a0"."Id"
+WHERE ("a"."UserId" = @__userId_0) AND @__userId_0 IS NOT NULL
+2019-09-24 11:38:45.002 +02:00 [INF] Profile service returned the following claim types: sub preferred_username name email email_verified role role scope role role scope given_name role role role email name
+2019-09-24 11:38:45.003 +02:00 [INF] Request finished in 7.3899ms 200 application/json; charset=UTF-8
