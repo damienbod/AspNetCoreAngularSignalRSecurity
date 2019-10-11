@@ -40,9 +40,7 @@ namespace ApiServer
         {
             var sqliteConnectionString = Configuration.GetConnectionString("SqliteConnectionString");
             var defaultConnection = Configuration.GetConnectionString("DefaultConnection");
-
-            var cert = new X509Certificate2(Path.Combine(_webHostEnvironment.ContentRootPath, "damienbodserver.pfx"), "");
-
+			
             services.AddDbContext<DataEventRecordContext>(options =>
                 options.UseSqlite(sqliteConnectionString)
             );
