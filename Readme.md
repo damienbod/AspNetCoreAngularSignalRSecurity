@@ -4,7 +4,7 @@
 
 ## Posts in this series:
 
-### ASP.NET Core 3.0:
+### ASP.NET Core 3.1
 
 <ul>	
 	
@@ -20,6 +20,8 @@
 </ul>
 
 ## History
+
+2019-12-06 updated to ASP.NET Core 3.1
 
 2019-11-17 updated to Nuget packages, updated to Angular 8.2.14, npm packages
 
