@@ -4,7 +4,7 @@
 
 ## Posts in this series:
 
-### ASP.NET Core 3.0:
+### ASP.NET Core 3.1
 
 <ul>	
 	
