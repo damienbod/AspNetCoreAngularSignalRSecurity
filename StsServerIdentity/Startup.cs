@@ -29,8 +29,6 @@ namespace StsServerIdentity
 {
     public class Startup
     {
-        private string _clientId = "xxxxxx";
-        private string _clientSecret = "xxxxx";
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
@@ -43,8 +41,8 @@ namespace StsServerIdentity
         public void ConfigureServices(IServiceCollection services)
         {
             var stsConfig = Configuration.GetSection("StsConfig");
-            _clientId = Configuration["MicrosoftClientId"];
-            _clientSecret = Configuration["MircosoftClientSecret"];
+            var _clientId = Configuration["MicrosoftClientId"];
+            var _clientSecret = Configuration["MircosoftClientSecret"];
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
