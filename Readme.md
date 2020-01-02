@@ -21,6 +21,8 @@
 
 ## History
 
+2020-01-02 updated npm and nuget packages
+
 2019-12-15 updated STS middleware configuration
 
 2019-12-06 updated to ASP.NET Core 3.1
