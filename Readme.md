@@ -21,7 +21,7 @@
 
 ## History
 
-2020-02-10 updated Angular 6 and nuget packages
+2020-02-10 updated Angular 9 and nuget packages
 
 2020-01-02 updated npm and nuget packages
 
