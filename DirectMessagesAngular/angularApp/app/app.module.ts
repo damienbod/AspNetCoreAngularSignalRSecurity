@@ -14,10 +14,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {
-    MatToolbarModule,
-    MatButtonModule,
-} from '@angular/material';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+import {MatButtonModule} from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
