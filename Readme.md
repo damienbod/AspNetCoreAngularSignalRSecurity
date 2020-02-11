@@ -21,6 +21,8 @@
 
 ## History
 
+2020-02-10 updated Angular 9 and nuget packages
+
 2020-01-02 updated npm and nuget packages
 
 2019-12-15 updated STS middleware configuration
