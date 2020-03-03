@@ -24,6 +24,7 @@ using StsServerIdentity.Services.Certificate;
 using Serilog;
 using Microsoft.AspNetCore.Http;
 using Fido2NetLib;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StsServerIdentity
 {
@@ -124,8 +125,8 @@ namespace StsServerIdentity
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
 
-            services.Configure<Fido2Configuration>(_configuration.GetSection("fido2"));
-            services.Configure<Fido2MdsConfiguration>(_configuration.GetSection("fido2mds"));
+            services.Configure<Fido2Configuration>(Configuration.GetSection("fido2"));
+            services.Configure<Fido2MdsConfiguration>(Configuration.GetSection("fido2mds"));
             services.AddScoped<Fido2Storage>();
             // Adds a default in-memory implementation of IDistributedCache.
             services.AddDistributedMemoryCache();
