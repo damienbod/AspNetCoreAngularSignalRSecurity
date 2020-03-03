@@ -9,8 +9,8 @@ using StsServerIdentity.Data;
 namespace IdentityServerWithAspNetIdentity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200303133957_fido2Update")]
-    partial class fido2Update
+    [Migration("20200303170725_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
