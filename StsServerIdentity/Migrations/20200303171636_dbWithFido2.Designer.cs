@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StsServerIdentity.Data;
 
-namespace IdentityServerWithAspNetIdentity.Migrations
+namespace StsServerIdentity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200303170725_init")]
-    partial class init
+    [Migration("20200303171636_dbWithFido2")]
+    partial class dbWithFido2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
