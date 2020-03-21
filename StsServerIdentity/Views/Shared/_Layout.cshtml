@@ -1,4 +1,4 @@
-﻿﻿@using Microsoft.AspNetCore.Authorization
+﻿@using Microsoft.AspNetCore.Authorization
 @using StsServerIdentity.Resources
 @inject IAuthorizationService AuthorizationService
 @inject LocService SharedLocalizer
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="~/css/fontawesome-free-5.4.1-web/css/all.min.css" asp-append-version="true" />
 </head>
 <body>
+
     <div>
         <nav class="bg-dark mb-4 navbar navbar-dark navbar-expand-md">
             <a asp-controller="Home" asp-action="Index" class="navbar-brand">
@@ -23,43 +24,44 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="topNavbarCollapse">
-@if ((await AuthorizationService.AuthorizeAsync(User, "IsAdmin")).Succeeded)
-                {
                 <ul class="mr-auto navbar-nav">
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "IsAdmin")).Succeeded)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Admin" asp-action="Index">ADMIN</a>
+                        </li>
+
+                    }
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Admin" asp-action="Index">ADMIN</a>
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">HOME</a>
                     </li>
-                    </ul>
-}
-<ul class="mr-auto navbar-nav">
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </nav>
 
-    <li class="nav-item">
-        <a asp-controller="Home" asp-action="Index" class="nav-link">)</a>
-    </li>
-</ul>
-<partial name="_LoginPartial" />
-</div>
-</nav>
+    </div>
 
-</div>
+    <div class="container body-content">
 
-<div class="container body-content">
-@RenderBody()
+        @RenderBody()
 
-</div>
+    </div>
 
-<footer>
-    <hr />
-    <nav class="navbar transparent navbar-inverse">
-        <p>&copy; 2020 - StsServerIdentity</p>
+    <footer>
+        <hr />
+        <nav class="navbar transparent navbar-inverse">
+            <p>&copy; 2020 - StsServerIdentity</p>
 
-@await Html.PartialAsync("_SelectLanguagePartial")
-</nav>
-</footer>
 
-<script src="~/js/vendor.min.js" asp-append-version="true"></script>
-<script src="~/js/site.min.js" asp-append-version="true"></script>
+            @await Html.PartialAsync("_SelectLanguagePartial")
+        </nav>
+    </footer>
 
-@RenderSection("scripts", required: false)
+    <script src="~/js/vendor.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>
