@@ -86,6 +86,10 @@ namespace StsServerIdentity
                 .AddDefaultTokenProviders()
                 .AddTokenProvider<Fifo2UserTwoFactorTokenProvider>("FIDO2");
 
+
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, 
+                AdditionalUserClaimsPrincipalFactory>();
+	 
             services.AddAuthentication()
                  .AddOpenIdConnect("aad", "Login with Azure AD", options =>
                  {
