@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HubConnection } from '@microsoft/signalr';
 import { Configuration } from '../../app.constants';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
@@ -10,15 +10,14 @@ import * as signalR from '@microsoft/signalr';
     templateUrl: './home.component.html'
 })
 
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
     private _hubConnection: HubConnection | undefined;
     async: any;
     message = '';
     messages: string[] = [];
 
-    isAuthorizedSubscription: Subscription | undefined;
-    isAuthorized = false;
-
+    isAuthenticated$: Observable<boolean>;
+	
     constructor(
         private configuration: Configuration,
         private oidcSecurityService: OidcSecurityService
@@ -26,20 +25,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.isAuthorizedSubscription = this.oidcSecurityService.getIsAuthorized().subscribe(
+		this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$
+		
+		this.isAuthenticated$.subscribe(
             (isAuthorized: boolean) => {
-                this.isAuthorized = isAuthorized;
-                if (this.isAuthorized) {
+                if (isAuthorized) {
                     this.init();
                 }
             });
-        console.log('IsAuthorized:' + this.isAuthorized);
-    }
-
-    ngOnDestroy(): void {
-        if (this.isAuthorizedSubscription) {
-            this.isAuthorizedSubscription.unsubscribe();
-        }
     }
 
     sendMessage(): void {
