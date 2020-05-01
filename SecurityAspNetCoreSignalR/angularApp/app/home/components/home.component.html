@@ -1,4 +1,4 @@
-﻿<div class="container-fluid" *ngIf="isAuthorized">
+﻿<div class="container-fluid" *ngIf="isAuthenticated">
     <form (ngSubmit)="sendMessage()" #messageForm="ngForm">
         <div class="form-group row">
             <label for="message" class="col-sm-2 col-form-label">Message</label>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { HubConnection } from '@microsoft/signalr';
 import { Configuration } from '../../app.constants';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
@@ -16,7 +15,7 @@ export class HomeComponent implements OnInit {
     message = '';
     messages: string[] = [];
 
-    isAuthenticated$: Observable<boolean>;
+    isAuthenticated: boolean;
 	
     constructor(
         private configuration: Configuration,
@@ -25,11 +24,11 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-		this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$
-		
-		this.isAuthenticated$.subscribe(
-            (isAuthorized: boolean) => {
-                if (isAuthorized) {
+
+		this.oidcSecurityService.isAuthenticated$.subscribe(
+            (isAuthenticated: boolean) => {
+				this.isAuthenticated = isAuthenticated;
+                if (isAuthenticated) {
                     this.init();
                 }
             });
