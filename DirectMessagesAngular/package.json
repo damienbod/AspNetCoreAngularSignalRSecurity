@@ -44,6 +44,7 @@
         "angular-auth-oidc-client": "file:../../../angular-projects/angular-auth-oidc-client/angular-auth-oidc-client-11.0.0.tgz",
         "bootstrap": "4.4.1",
         "common-tags": "^1.8.0",
+        "jsrsasign-reduced": "^8.0.15",
         "core-js": "^2.6.5",
         "ie-shim": "0.1.0",
         "msgpack5": "4.2.1",

@@ -19,7 +19,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AuthModule, OidcConfigService } from 'angular-auth-oidc-client';
+import { AuthModule, OidcConfigService, LogLevel } from 'angular-auth-oidc-client';
 
 export function configureAuth(oidcConfigService: OidcConfigService) {
     return () =>
