@@ -1,37 +1,31 @@
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-navigation',
     templateUrl: 'navigation.component.html'
 })
 
-export class NavigationComponent implements OnInit, OnDestroy {
+export class NavigationComponent implements OnInit {
 
     hasAdminRole = false;
     hasDataEventRecordsAdminRole = false;
-
-    isAuthorizedSubscription: Subscription | undefined;
     isAuthorized = false;
-
-    userDataSubscription: Subscription | undefined;
     userData: any;
 
     constructor(public oidcSecurityService: OidcSecurityService) {
     }
 
     ngOnInit() {
-        this.isAuthorizedSubscription = this.oidcSecurityService.getIsAuthorized().subscribe(
+		this.oidcSecurityService.isAuthenticated$.subscribe(
             (isAuthorized: boolean) => {
-                this.isAuthorized = isAuthorized;
-
-                if (this.isAuthorized) {
+				this.isAuthorized = isAuthorized;
+                if (isAuthorized) {
                     console.log('isAuthorized getting data');
                 }
             });
 
-        this.userDataSubscription = this.oidcSecurityService.getUserData().subscribe(
+        this.oidcSecurityService.userData$.subscribe(
             (userData: any) => {
 
                 if (userData && userData !== '' && userData.role) {
@@ -47,15 +41,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
                 console.log('userData getting data');
             });
-    }
-
-    ngOnDestroy(): void {
-        if (this.isAuthorizedSubscription) {
-            this.isAuthorizedSubscription.unsubscribe();
-        }
-        if (this.userDataSubscription) {
-            this.userDataSubscription.unsubscribe();
-        }
     }
 
     login() {

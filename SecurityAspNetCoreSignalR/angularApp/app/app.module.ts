@@ -47,8 +47,6 @@ export function configureAuth(oidcConfigService: OidcConfigService, httpClient: 
     return () => setupAction$.toPromise();
 }
 
-
-}
 @NgModule({
     imports: [
         BrowserModule,
