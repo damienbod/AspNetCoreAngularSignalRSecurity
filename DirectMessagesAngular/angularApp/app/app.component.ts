@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
     constructor(public oidcSecurityService: OidcSecurityService) {}
 
     ngOnInit() {
+        this.oidcSecurityService.checkAuth().subscribe((isAuthenticated) => console.log('app authenticated', isAuthenticated));
 		this.oidcSecurityService.isAuthenticated$.subscribe(
             (isAuthorized: boolean) => {
 				this.isAuthorized = isAuthorized;
