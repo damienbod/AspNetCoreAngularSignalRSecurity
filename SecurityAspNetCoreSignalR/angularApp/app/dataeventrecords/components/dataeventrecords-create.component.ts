@@ -26,10 +26,10 @@ export class DataEventRecordsCreateComponent implements OnInit {
         private _router: Router
     ) {
         this.message = 'DataEventRecords Create';
+        this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
     }
 
     ngOnInit() {
-        this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
         this.isAuthenticated$.pipe(
             map((isAuthorized: boolean) => {
                 console.log('isAuthorized: ' + isAuthorized);

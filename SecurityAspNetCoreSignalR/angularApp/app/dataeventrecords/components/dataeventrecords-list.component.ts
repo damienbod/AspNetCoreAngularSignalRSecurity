@@ -24,11 +24,10 @@ export class DataEventRecordsListComponent implements OnInit {
         public oidcSecurityService: OidcSecurityService,
     ) {
         this.message = 'DataEventRecords';
+        this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
     }
 
     ngOnInit() {
-        this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
-
         this.isAuthenticated$.pipe(
             switchMap((isAuthorized) => this.getData(isAuthorized))
         ).subscribe(
@@ -67,6 +66,6 @@ export class DataEventRecordsListComponent implements OnInit {
         if (isAuthenticated) {
             return this.dataEventRecordsService.GetAll();
         }
-        return of(null);
+        return of([]);
     }
 }

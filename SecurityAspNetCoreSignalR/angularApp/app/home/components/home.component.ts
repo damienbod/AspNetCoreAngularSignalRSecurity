@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
     message = '';
     messages: string[] = [];
 
-    isAuthenticated: boolean;
+    isAuthenticated = false;
 	
     constructor(
         private configuration: Configuration,
