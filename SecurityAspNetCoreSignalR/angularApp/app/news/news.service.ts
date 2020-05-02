@@ -1,4 +1,4 @@
-import { Subscription ,  Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -18,7 +18,6 @@ export class NewsService {
     private actionUrl: string;
     private headers: HttpHeaders;
 
-    isAuthorizedSubscription: Subscription | undefined;
     isAuthorized = false;
 
     constructor(private http: HttpClient,
@@ -75,13 +74,14 @@ export class NewsService {
     }
 
     private init() {
-        this.isAuthorizedSubscription = this.oidcSecurityService.getIsAuthorized().subscribe(
+		this.oidcSecurityService.isAuthenticated$.subscribe(
             (isAuthorized: boolean) => {
-                this.isAuthorized = isAuthorized;
-                if (this.isAuthorized) {
+				this.isAuthorized = isAuthorized;
+                if (isAuthorized) {
                     this.initHub();
                 }
             });
+	
         console.log('IsAuthorized:' + this.isAuthorized);
     }
 

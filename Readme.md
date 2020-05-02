@@ -21,6 +21,8 @@
 
 ## History
 
+2020-05-02 Updated to OIDC lib version 11, updated nuget packages, npm packages
+
 2020-03-21 updated packages, fixed Admin UI STS
 
 2020-03-03 updated STS, support for FIDO2

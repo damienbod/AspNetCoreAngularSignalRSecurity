@@ -52,13 +52,14 @@ export class DirectMessagesService {
     }
 
     private init() {
-        this.isAuthorizedSubscription = this.oidcSecurityService.getIsAuthorized().subscribe(
+		this.oidcSecurityService.isAuthenticated$.subscribe(
             (isAuthorized: boolean) => {
-                this.isAuthorized = isAuthorized;
+				this.isAuthorized = isAuthorized;
                 if (this.isAuthorized) {
                     this.initHub();
                 }
             });
+			
         console.log('IsAuthorized:' + this.isAuthorized);
     }
 

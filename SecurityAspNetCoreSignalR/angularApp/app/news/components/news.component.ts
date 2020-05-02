@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription ,  Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NewsState } from '../store/news.state';
 import * as NewsActions from '../store/news.action';
@@ -11,7 +11,7 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
     templateUrl: './news.component.html'
 })
 
-export class NewsComponent implements OnInit, OnDestroy {
+export class NewsComponent implements OnInit {
     public async: any;
     newsItem: NewsItem;
     newsItems: NewsItem[] = [];
@@ -20,7 +20,6 @@ export class NewsComponent implements OnInit, OnDestroy {
     newsState$: Observable<NewsState>;
     groups = ['IT', 'global', 'sport'];
 
-    isAuthorizedSubscription: Subscription | undefined;
     isAuthorized = false;
 
     constructor(
@@ -56,20 +55,16 @@ export class NewsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.isAuthorizedSubscription = this.oidcSecurityService.getIsAuthorized().subscribe(
-            (isAuthorized: boolean) => {
-                this.isAuthorized = isAuthorized;
-                if (this.isAuthorized) {
-                    console.log('this.store.dispatch(new NewsActions.SelectAllGroupsAction()');
+		
+		this.oidcSecurityService.isAuthenticated$.subscribe(
+            (isAuthenticated: boolean) => {
+				this.isAuthorized = isAuthenticated;
+                if (isAuthenticated) {
+                     console.log('this.store.dispatch(new NewsActions.SelectAllGroupsAction()');
                     this.store.dispatch(new NewsActions.SelectAllGroupsAction());
                 }
             });
-        console.log('IsAuthorized:' + this.isAuthorized);
-    }
 
-    ngOnDestroy(): void {
-        if (this.isAuthorizedSubscription) {
-            this.isAuthorizedSubscription.unsubscribe();
-        }
+        console.log('IsAuthorized:' + this.isAuthorized);
     }
 }

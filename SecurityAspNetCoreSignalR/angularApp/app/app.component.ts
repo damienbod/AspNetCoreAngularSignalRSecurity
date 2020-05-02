@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 
@@ -9,37 +9,16 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
     styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
-    isAuthorizedSubscription: Subscription | undefined;
-    isAuthorized = false;
+    isAuthenticated$: Observable<boolean>;
 
     constructor(public oidcSecurityService: OidcSecurityService) {
-        if (this.oidcSecurityService.moduleSetup) {
-            this.doCallbackLogicIfRequired();
-        } else {
-            this.oidcSecurityService.onModuleSetup.subscribe(() => {
-                this.doCallbackLogicIfRequired();
-            });
-        }
+        this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
     }
 
     ngOnInit() {
-        this.isAuthorizedSubscription = this.oidcSecurityService.getIsAuthorized().subscribe(
-            (isAuthorized: boolean) => {
-                this.isAuthorized = isAuthorized;
-            });
-    }
-
-    ngOnDestroy(): void {
-        if (this.isAuthorizedSubscription) {
-            this.isAuthorizedSubscription.unsubscribe();
-        }
-    }
-
-    private doCallbackLogicIfRequired() {
-        console.log(window.location);
-        // Will do a callback, if the url has a code and state parameter.
-        this.oidcSecurityService.authorizedCallbackWithCode(window.location.toString());
+         
+		 this.oidcSecurityService.checkAuth().subscribe((isAuthenticated) => console.log('app authenticated', isAuthenticated));
     }
 }

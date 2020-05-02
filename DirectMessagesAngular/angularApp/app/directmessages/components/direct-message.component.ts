@@ -21,7 +21,6 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     selectedOnlineUserName = '';
     dmState$: Observable<DirectMessagesState>;
     dmStateSubscription: Subscription | undefined;
-    isAuthorizedSubscription: Subscription | undefined;
     isAuthorized = false;
     connected = false;
     message = '';
@@ -44,19 +43,18 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.isAuthorizedSubscription = this.oidcSecurityService.getIsAuthorized().subscribe(
+		this.oidcSecurityService.isAuthenticated$.subscribe(
             (isAuthorized: boolean) => {
-                this.isAuthorized = isAuthorized;
-                if (this.isAuthorized) {
+				this.isAuthorized = isAuthorized;
+                if (isAuthorized) {
+                    console.log('isAuthorized getting data');
                 }
             });
+
         console.log('IsAuthorized:' + this.isAuthorized);
     }
 
     ngOnDestroy(): void {
-        if (this.isAuthorizedSubscription) {
-            this.isAuthorizedSubscription.unsubscribe();
-        }
         if (this.dmStateSubscription) {
             this.dmStateSubscription.unsubscribe();
         }
