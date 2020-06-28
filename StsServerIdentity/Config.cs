@@ -16,7 +16,6 @@ namespace StsServerIdentity
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
                 new IdentityResource("dataeventrecordsir",new []{ "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin" , "dataEventRecords.user" } ),
-                new IdentityResource("securedfilessir",new []{ "role", "admin", "user", "securedFiles", "securedFiles.admin", "securedFiles.user"} )
             };
         }
 
@@ -25,9 +24,7 @@ namespace StsServerIdentity
             return new List<ApiScope>
             {
                 new ApiScope("dataEventRecords", "Scope for the dataEventRecords ApiResource",
-                    new List<string> { "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin", "dataEventRecords.user"}),
-                new ApiScope("securedFiles",  "Scope for the securedFiles ApiResource",
-                    new List<string> { "role", "admin", "user", "securedFiles", "securedFiles.admin", "securedFiles.user" })
+                    new List<string> { "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin", "dataEventRecords.user"})
             };
         }
 
@@ -42,14 +39,6 @@ namespace StsServerIdentity
                         new Secret("dataEventRecordsSecret".Sha256())
                     },
                     Scopes = new List<string> { "dataEventRecords" }
-                },
-                new ApiResource("securedFilesApi")
-                {
-                    ApiSecrets =
-                    {
-                        new Secret("securedFilesSecret".Sha256())
-                    },
-                    Scopes = new List<string> { "securedFiles" }
                 }
             };
         }
