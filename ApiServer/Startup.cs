@@ -21,6 +21,8 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Logging;
+using Serilog;
 
 namespace ApiServer
 {
@@ -129,8 +131,7 @@ namespace ApiServer
                 .AddJsonOptions(options =>
                 {
                     //options.JsonSerializerOptions.ContractResolver = new DefaultContractResolver();
-                })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                });
            
 
             services.AddTransient<IDataEventRecordRepository, DataEventRecordRepository>();
@@ -138,7 +139,12 @@ namespace ApiServer
 
         public void Configure(IApplicationBuilder app)
         {
+            IdentityModelEventSource.ShowPII = true;
             app.UseCors("AllowMyOrigins");
+
+            // https://nblumhardt.com/2019/10/serilog-in-aspnetcore-3/
+            // https://nblumhardt.com/2019/10/serilog-mvc-logging/
+            app.UseSerilogRequestLogging();
 
             app.UseExceptionHandler("/Home/Error");
             app.UseStaticFiles();
