@@ -59,7 +59,7 @@ namespace ApiServer
                         .ReadFrom.Configuration(hostingContext.Configuration)
                         .Enrich.FromLogContext()
                         .WriteTo.Console(theme: AnsiConsoleTheme.Code)
-                        .WriteTo.File("../APIResourceServer.txt"));
+                        .WriteTo.File("../_ApiServer.txt"));
                 });
     }
 }
