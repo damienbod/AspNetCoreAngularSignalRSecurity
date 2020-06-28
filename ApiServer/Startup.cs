@@ -77,7 +77,7 @@ namespace ApiServer
             var tokenValidationParameters = new TokenValidationParameters()
             {
                 ValidIssuer = "https://localhost:44318/",
-                ValidAudience = "dataEventRecords",
+                ValidAudience = "dataEventRecordsApi",
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("dataEventRecordsSecret")),
                 NameClaimType = "email",
                 RoleClaimType = "role", 
@@ -92,7 +92,7 @@ namespace ApiServer
             .AddJwtBearer(options =>
             {
                 options.Authority = "https://localhost:44318/";
-                options.Audience = "dataEventRecords";
+                options.Audience = "dataEventRecordsApi";
                 options.IncludeErrorDetails = true;
                 options.SaveToken = true;
                 options.SecurityTokenValidators.Clear();
