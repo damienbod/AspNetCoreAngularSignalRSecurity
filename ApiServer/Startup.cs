@@ -21,6 +21,8 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Logging;
+using Serilog;
 
 namespace ApiServer
 {
@@ -75,7 +77,7 @@ namespace ApiServer
             var tokenValidationParameters = new TokenValidationParameters()
             {
                 ValidIssuer = "https://localhost:44318/",
-                ValidAudience = "dataEventRecords",
+                ValidAudience = "dataEventRecordsApi",
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("dataEventRecordsSecret")),
                 NameClaimType = "email",
                 RoleClaimType = "role", 
@@ -90,7 +92,7 @@ namespace ApiServer
             .AddJwtBearer(options =>
             {
                 options.Authority = "https://localhost:44318/";
-                options.Audience = "dataEventRecords";
+                options.Audience = "dataEventRecordsApi";
                 options.IncludeErrorDetails = true;
                 options.SaveToken = true;
                 options.SecurityTokenValidators.Clear();
@@ -129,8 +131,7 @@ namespace ApiServer
                 .AddJsonOptions(options =>
                 {
                     //options.JsonSerializerOptions.ContractResolver = new DefaultContractResolver();
-                })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                });
            
 
             services.AddTransient<IDataEventRecordRepository, DataEventRecordRepository>();
@@ -138,7 +139,12 @@ namespace ApiServer
 
         public void Configure(IApplicationBuilder app)
         {
+            IdentityModelEventSource.ShowPII = true;
             app.UseCors("AllowMyOrigins");
+
+            // https://nblumhardt.com/2019/10/serilog-in-aspnetcore-3/
+            // https://nblumhardt.com/2019/10/serilog-mvc-logging/
+            app.UseSerilogRequestLogging();
 
             app.UseExceptionHandler("/Home/Error");
             app.UseStaticFiles();

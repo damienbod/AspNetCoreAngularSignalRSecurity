@@ -14,3 +14,5 @@
 /DirectMessagesAngular/DirectMessagesAngular.csproj.user
 /StsLogs.txt
 **/wwwroot/dist/
+/_ApiServer.txt
+/_StsLogs.txt
