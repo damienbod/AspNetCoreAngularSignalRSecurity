@@ -14,9 +14,20 @@ namespace StsServerIdentity
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
-                new IdentityResources.Email(), 
-                new IdentityResource("dataeventrecordsscope",new []{ "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin" , "dataEventRecords.user" } ),
-                new IdentityResource("securedfilesscope",new []{ "role", "admin", "user", "securedFiles", "securedFiles.admin", "securedFiles.user"} )
+                new IdentityResources.Email(),
+                new IdentityResource("dataeventrecordsir",new []{ "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin" , "dataEventRecords.user" } ),
+                new IdentityResource("securedfilessir",new []{ "role", "admin", "user", "securedFiles", "securedFiles.admin", "securedFiles.user"} )
+            };
+        }
+
+        public static IEnumerable<ApiScope> GetApiScopes()
+        {
+            return new List<ApiScope>
+            {
+                new ApiScope("dataEventRecords", "Scope for the dataEventRecords ApiResource",
+                    new List<string> { "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin", "dataEventRecords.user"}),
+                new ApiScope("securedFiles",  "Scope for the securedFiles ApiResource",
+                    new List<string> { "role", "admin", "user", "securedFiles", "securedFiles.admin", "securedFiles.user" })
             };
         }
 
@@ -24,21 +35,21 @@ namespace StsServerIdentity
         {
             return new List<ApiResource>
             {
-                new ApiResource("dataEventRecords")
+                new ApiResource("dataEventRecordsApi")
                 {
                     ApiSecrets =
                     {
                         new Secret("dataEventRecordsSecret".Sha256())
                     },
-                    Scopes =
+                    Scopes = new List<string> { "dataEventRecords" }
+                },
+                new ApiResource("securedFilesApi")
+                {
+                    ApiSecrets =
                     {
-                        new Scope
-                        {
-                            Name = "dataeventrecords",
-                            DisplayName = "Scope for the dataEventRecords ApiResource"
-                        }
+                        new Secret("securedFilesSecret".Sha256())
                     },
-                    UserClaims = { "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin", "dataEventRecords.user" }
+                    Scopes = new List<string> { "securedFiles" }
                 }
             };
         }

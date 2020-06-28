@@ -90,7 +90,7 @@ namespace ApiServer
             .AddJwtBearer(options =>
             {
                 options.Authority = "https://localhost:44318/";
-                options.Audience = "dataEventRecords";
+                options.Audience = "dataEventRecordsApi";
                 options.IncludeErrorDetails = true;
                 options.SaveToken = true;
                 options.SecurityTokenValidators.Clear();
