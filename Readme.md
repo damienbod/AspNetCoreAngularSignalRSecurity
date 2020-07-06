@@ -21,6 +21,8 @@
 
 ## History
 
+2020-07-06 Updated to ID4, 4.0.2, angular-auth-oidc-client 11.1.4, Angular 10.0.2
+
 2020-06-28 Updated to Angular 10.0.1
 
 2020-06-28 Updated IdentityServer4 V4 + breaking changes and nuget packages
