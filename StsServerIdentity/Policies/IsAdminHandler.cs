@@ -14,7 +14,7 @@ namespace StsServerIdentity
             if (requirement == null)
                 throw new ArgumentNullException(nameof(requirement));
 
-            var adminClaim = context.User.Claims.FirstOrDefault(t => t.Value == "admin" && t.Type == "role"); 
+            var adminClaim = context.User.Claims.FirstOrDefault(t => t.Value == "admin" && t.Type == "role");
             if (adminClaim != null)
             {
                 context.Succeed(requirement);

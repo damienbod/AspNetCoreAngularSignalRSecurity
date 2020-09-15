@@ -24,8 +24,9 @@ namespace StsServerIdentity.Controllers
         // GET: Admin
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.Select(user => 
-                new AdminViewModel {
+            return View(await _context.Users.Select(user =>
+                new AdminViewModel
+                {
                     Email = user.Email,
                     IsAdmin = user.IsAdmin,
                     DataEventRecordsRole = user.DataEventRecordsRole,
