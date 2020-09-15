@@ -1,6 +1,4 @@
-﻿@using Microsoft.AspNetCore.Authorization
-@using StsServerIdentity.Resources
-@inject IAuthorizationService AuthorizationService
+﻿@using StsServerIdentity.Resources
 @inject LocService SharedLocalizer
 
 <!DOCTYPE html>
@@ -11,10 +9,9 @@
     <title>StsServerIdentity</title>
     <link rel="stylesheet" href="~/css/vendor.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/fontawesome-free-5.4.1-web/css/all.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/fontawesome-free-5.4.1-web/css/all.min.css" asp-append-version="true"  />
 </head>
 <body>
-
     <div>
         <nav class="bg-dark mb-4 navbar navbar-dark navbar-expand-md">
             <a asp-controller="Home" asp-action="Index" class="navbar-brand">
@@ -25,27 +22,26 @@
             </button>
             <div class="collapse navbar-collapse" id="topNavbarCollapse">
                 <ul class="mr-auto navbar-nav">
-                    @if ((await AuthorizationService.AuthorizeAsync(User, "IsAdmin")).Succeeded)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Admin" asp-action="Index">ADMIN</a>
-                        </li>
-
-                    }
                     <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Index" class="nav-link">HOME</a>
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">@SharedLocalizer.GetLocalizedHtmlString("HOME")</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">
+                        @await Html.PartialAsync("_SelectLanguagePartial")
                     </li>
                 </ul>
                 <partial name="_LoginPartial" />
+
+
             </div>
         </nav>
 
     </div>
 
     <div class="container body-content">
-
         @RenderBody()
-
+       
     </div>
 
     <footer>
@@ -53,14 +49,11 @@
         <nav class="navbar transparent navbar-inverse">
             <p>&copy; 2020 - StsServerIdentity</p>
 
-
-            @await Html.PartialAsync("_SelectLanguagePartial")
         </nav>
     </footer>
 
     <script src="~/js/vendor.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
-
 
     @RenderSection("scripts", required: false)
 </body>
