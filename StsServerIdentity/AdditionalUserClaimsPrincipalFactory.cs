@@ -10,10 +10,10 @@ namespace StsServerIdentity
 {
     public class AdditionalUserClaimsPrincipalFactory : UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>
     {
-        public AdditionalUserClaimsPrincipalFactory( 
+        public AdditionalUserClaimsPrincipalFactory(
             UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager, 
-            IOptions<IdentityOptions> optionsAccessor) 
+            RoleManager<IdentityRole> roleManager,
+            IOptions<IdentityOptions> optionsAccessor)
             : base(userManager, roleManager, optionsAccessor)
         {
         }
