@@ -25,6 +25,12 @@
                     <li class="nav-item">
                         <a asp-controller="Home" asp-action="Index" class="nav-link">@SharedLocalizer.GetLocalizedHtmlString("HOME")</a>
                     </li>
+					@if ((await AuthorizationService.AuthorizeAsync(User, "IsAdmin")).Succeeded)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Admin" asp-action="Index">ADMIN</a>
+                        </li>
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav-item">
