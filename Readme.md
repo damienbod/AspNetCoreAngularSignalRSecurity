@@ -4,7 +4,7 @@
 
 ## Posts in this series:
 
-### ASP.NET Core 3.1
+### ASP.NET Core 5
 
 <ul>	
 	
@@ -20,6 +20,8 @@
 </ul>
 
 ## History
+
+2020-09-15 Updated to .NET 5
 
 2020-09-15 Updated to IdentityServer4 4.1.0, .NET Core 3.1.8
 
