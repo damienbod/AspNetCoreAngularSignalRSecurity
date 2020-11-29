@@ -3,12 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System.IO;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Serialization;
 using IdentityServer4.AccessTokenValidation;
 using ApiServer.Providers;
 using ApiServer.SignalRHubs;
@@ -20,9 +16,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Logging;
 using Serilog;
+using Microsoft.OpenApi.Models;
 
 namespace ApiServer
 {
@@ -40,6 +35,14 @@ namespace ApiServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            //IdentityModelEventSource.ShowPII = true;
+            //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            services.AddTransient<IDataEventRecordRepository, DataEventRecordRepository>();
+            services.AddSingleton<NewsStore>();
+            services.AddSingleton<UserInfoInMemory>();
+
             var sqliteConnectionString = Configuration.GetConnectionString("SqliteConnectionString");
             var defaultConnection = Configuration.GetConnectionString("DefaultConnection");
 			
@@ -52,9 +55,6 @@ namespace ApiServer
                     defaultConnection
                 ), ServiceLifetime.Singleton
             );
-
-            services.AddSingleton<NewsStore>();
-            services.AddSingleton<UserInfoInMemory>();
 
             services.AddCors(options =>
             {
@@ -89,7 +89,7 @@ namespace ApiServer
             };
 
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
+                .AddJwtBearer(options =>
             {
                 options.Authority = "https://localhost:44318/";
                 options.Audience = "dataEventRecordsApi";
@@ -122,32 +122,56 @@ namespace ApiServer
                 };
             });
 
-            services.AddAuthorization(options => { });
+            services.AddAuthorization();
 
             services.AddSignalR();
 
             services.AddControllers()
-                .AddNewtonsoftJson()
-                .AddJsonOptions(options =>
+                .AddNewtonsoftJson();
+ 
+            services.AddSwaggerGen(c =>
+            {
+                // add JWT Authentication
+                var securityScheme = new OpenApiSecurityScheme
                 {
-                    //options.JsonSerializerOptions.ContractResolver = new DefaultContractResolver();
+                    Name = "JWT Authentication",
+                    Description = "Enter JWT Bearer token **_only_**",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer", // must be lower case
+                    BearerFormat = "JWT",
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+                c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {securityScheme, new string[] { }}
                 });
-           
 
-            services.AddTransient<IDataEventRecordRepository, DataEventRecordRepository>();
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIs", Version = "v1" });
+            });
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            IdentityModelEventSource.ShowPII = true;
+            app.UseDeveloperExceptionPage();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "APIs");
+                c.RoutePrefix = string.Empty;
+            });
+
             app.UseCors("AllowMyOrigins");
 
             // https://nblumhardt.com/2019/10/serilog-in-aspnetcore-3/
             // https://nblumhardt.com/2019/10/serilog-mvc-logging/
             app.UseSerilogRequestLogging();
-
-            app.UseExceptionHandler("/Home/Error");
-            app.UseStaticFiles();
 
             app.UseRouting();
 
