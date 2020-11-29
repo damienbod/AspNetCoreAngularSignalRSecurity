@@ -27,6 +27,8 @@ namespace ApiServer.Controllers
             return Created("AddGroup", group);
         }
 
+        [HttpGet]
+        [Route("")]
         public List<string> GetAllGroups()
         {
             var data = _newsStore.GetAllGroups();
