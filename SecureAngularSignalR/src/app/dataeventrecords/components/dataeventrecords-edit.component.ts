@@ -41,7 +41,8 @@ export class DataEventRecordsEditComponent implements OnInit {
     );
 
     this.route.params.subscribe((params) => {
-      const id = +params['id']; // (+) converts string 'id' to a number
+      const idToConvert = 'id';
+      const id = +params[idToConvert]; // (+) converts string 'id' to a number
       this.id = id;
       if (this.dataEventRecord.id === 0) {
         this.dataEventRecordsService.GetById(id).subscribe(
