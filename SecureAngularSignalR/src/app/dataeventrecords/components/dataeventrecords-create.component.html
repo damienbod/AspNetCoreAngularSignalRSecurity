@@ -2,13 +2,13 @@
   <h3 class="panel-heading">
     {{ message }}
   </h3>
-  <div class="form-group row" *ngIf="DataEventRecord">
+  <div class="form-group row" *ngIf="dataEventRecord">
     <label for="staticEmail" class="col-sm-2 col-form-label">Id</label>
     <div class="col-sm-10">
       <input
         type="text"
         class="form-control"
-        [(ngModel)]="DataEventRecord.id"
+        [(ngModel)]="dataEventRecord.id"
         name="id"
         id="staticEmail"
       />
@@ -20,7 +20,7 @@
       <input
         type="text"
         class="form-control"
-        [(ngModel)]="DataEventRecord.name"
+        [(ngModel)]="dataEventRecord.name"
         name="name"
         id="inputPassword"
       />
@@ -32,7 +32,7 @@
       <input
         type="text"
         class="form-control"
-        [(ngModel)]="DataEventRecord.description"
+        [(ngModel)]="dataEventRecord.description"
         name="description"
         id="Description"
       />

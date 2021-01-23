@@ -13,7 +13,7 @@ import { DataEventRecord } from '../models/DataEventRecord';
 })
 export class DataEventRecordsCreateComponent implements OnInit {
   message: string;
-  DataEventRecord: DataEventRecord = {
+  dataEventRecord: DataEventRecord = {
     id: 0,
     name: '',
     description: '',
@@ -23,7 +23,7 @@ export class DataEventRecordsCreateComponent implements OnInit {
   isAuthenticated$: Observable<boolean>;
 
   constructor(
-    private _dataEventRecordsService: DataEventRecordsService,
+    private dataEventRecordsService: DataEventRecordsService,
     public oidcSecurityService: OidcSecurityService,
     private _router: Router
   ) {
@@ -43,7 +43,7 @@ export class DataEventRecordsCreateComponent implements OnInit {
 
   Create() {
     // router navigate to DataEventRecordsList
-    this._dataEventRecordsService.Add(this.DataEventRecord).subscribe(
+    this.dataEventRecordsService.Add(this.DataEventRecord).subscribe(
       (data: any) => (this.DataEventRecord = data),
       () => this._router.navigate(['/dataeventrecords'])
     );

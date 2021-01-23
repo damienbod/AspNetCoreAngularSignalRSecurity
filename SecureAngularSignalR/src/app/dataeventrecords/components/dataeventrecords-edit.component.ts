@@ -14,7 +14,7 @@ import { DataEventRecord } from '../models/DataEventRecord';
 export class DataEventRecordsEditComponent implements OnInit {
   private id = 0;
   public message: string;
-  public DataEventRecord: DataEventRecord = {
+  public dataEventRecord: DataEventRecord = {
     id: 0,
     name: '',
     description: '',
@@ -24,7 +24,7 @@ export class DataEventRecordsEditComponent implements OnInit {
   isAuthenticated$: Observable<boolean>;
 
   constructor(
-    private _dataEventRecordsService: DataEventRecordsService,
+    private dataEventRecordsService: DataEventRecordsService,
     public oidcSecurityService: OidcSecurityService,
     private _route: ActivatedRoute,
     private _router: Router
@@ -44,7 +44,7 @@ export class DataEventRecordsEditComponent implements OnInit {
       const id = +params['id']; // (+) converts string 'id' to a number
       this.id = id;
       if (this.DataEventRecord.id === 0) {
-        this._dataEventRecordsService.GetById(id).subscribe(
+        this.dataEventRecordsService.GetById(id).subscribe(
           (data) => (this.DataEventRecord = data),
           () => console.log('DataEventRecordsEditComponent:Get by Id complete')
         );
@@ -53,7 +53,7 @@ export class DataEventRecordsEditComponent implements OnInit {
   }
 
   Update() {
-    this._dataEventRecordsService
+    this.dataEventRecordsService
       .Update(this.id, this.DataEventRecord)
       .subscribe(
         () => console.log('subscribed'),
