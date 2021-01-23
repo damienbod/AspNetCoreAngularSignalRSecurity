@@ -62,7 +62,7 @@
             "browserTarget": "angular-signalr:build",
             "sslKey": "certs/dev_localhost.key",
             "sslCert": "certs/dev_localhost.pem",
-            "port": 4200
+            "port": 44311
           },
           "configurations": {
             "production": {
