@@ -25,14 +25,11 @@ export class NavigationComponent implements OnInit {
 
     this.oidcSecurityService.userData$.subscribe((userData: any) => {
       if (userData && userData !== '' && userData.role) {
-        for (let i = 0; i < userData.role.length; i++) {
-          if (userData.role[i] === 'dataEventRecords.admin') {
-            this.hasDataEventRecordsAdminRole = true;
-          }
-          if (userData.role[i] === 'admin') {
-            this.hasAdminRole = true;
-          }
-        }
+        this.hasDataEventRecordsAdminRole = userData.role.every(
+          (row) => row === 'dataEventRecords.admin'
+        );
+
+        this.hasAdminRole = userData.role.every((row) => row === 'admin');
       }
 
       console.log('userData getting data');
