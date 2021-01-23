@@ -18,6 +18,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Collections.Generic;
 using Serilog;
 using Microsoft.OpenApi.Models;
+using ApiServer.Model;
 
 namespace ApiServer
 {
@@ -38,6 +39,8 @@ namespace ApiServer
             //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             //IdentityModelEventSource.ShowPII = true;
             //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            services.Configure<ClientAppSettingsNewsApp>(Configuration.GetSection("ClientAppSettingsNewsApp"));
 
             services.AddTransient<IDataEventRecordRepository, DataEventRecordRepository>();
             services.AddSingleton<NewsStore>();

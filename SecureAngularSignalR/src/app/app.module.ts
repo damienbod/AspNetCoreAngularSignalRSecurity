@@ -24,7 +24,7 @@ export function configureAuth(
   httpClient: HttpClient
 ) {
   const setupAction$ = httpClient
-    .get<any>(`${window.location.origin}/api/ClientAppSettings`)
+    .get<any>(`https://localhost:44390/api/ClientAppSettingsNewsApp`)
     .pipe(
       map((customConfig) => {
         return {
