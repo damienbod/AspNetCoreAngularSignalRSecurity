@@ -22,7 +22,7 @@
 ## History
 
 
-2021-01-23 Updated to .NET 5, Azure SDK access
+2021-01-23 Updated to .NET 5, Azure SDK access, ngrx re-write, updated Angular project
 
 2020-09-15 Updated to .NET 5, Angular 11.0.2
 
