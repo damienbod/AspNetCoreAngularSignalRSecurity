@@ -16,3 +16,5 @@
 **/wwwroot/dist/
 /_ApiServer.txt
 /_StsLogs.txt
+/SecureAngularSignalR/dist/
+/SecureAngularSignalR/debug.log

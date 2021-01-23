@@ -13,10 +13,10 @@ install:
 build_script:
 - dotnet build
 - npm -g install npm@latest
-- cd SecurityAspNetCoreSignalR
+- cd SecureAngularSignalR
 - npm install
-- npm run build-production
-- npm run build-dev
+- npm run build
+- npm run lint
 before_build:
 - appveyor-retry dotnet restore -v Minimal
 
