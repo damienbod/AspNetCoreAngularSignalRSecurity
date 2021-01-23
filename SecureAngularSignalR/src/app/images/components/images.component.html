@@ -1,0 +1,16 @@
+﻿<div class="container-fluid">
+  <h1>Images</h1>
+
+  <a href="https://localhost:44324/FileClient/Index" target="_blank"
+    >Upload Images</a
+  >
+
+  <div *ngIf="images.length > 0">
+    <img
+      *ngFor="let image of images"
+      width="150"
+      style="margin-right: 5px"
+      [src]="image.imageHeaders + image.imageBinary"
+    />
+  </div>
+</div>
