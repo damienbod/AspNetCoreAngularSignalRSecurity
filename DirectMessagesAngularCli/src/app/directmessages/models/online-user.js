@@ -1,7 +1,7 @@
 export class OnlineUser {
-    constructor() {
-        this.connectionId = '';
-        this.userName = '';
-    }
+  constructor() {
+    this.connectionId = "";
+    this.userName = "";
+  }
 }
 //# sourceMappingURL=online-user.js.map

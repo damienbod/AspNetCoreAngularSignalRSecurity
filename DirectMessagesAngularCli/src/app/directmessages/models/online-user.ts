@@ -1,4 +1,4 @@
 export class OnlineUser {
-    public connectionId = '';
-    public userName = '';
+  public connectionId = '';
+  public userName = '';
 }

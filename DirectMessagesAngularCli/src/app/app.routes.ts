@@ -4,10 +4,13 @@ import { HomeComponent } from './home/home.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 const appRoutes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'home', component: HomeComponent },
-    { path: 'unauthorized', component: UnauthorizedComponent },
-    { path: 'dm', loadChildren: './directmessages/directmessages.module#DirectMessagesModule' }
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'unauthorized', component: UnauthorizedComponent },
+  {
+    path: 'dm',
+    loadChildren: './directmessages/directmessages.module#DirectMessagesModule',
+  },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

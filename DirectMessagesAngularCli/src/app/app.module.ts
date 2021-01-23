@@ -14,67 +14,66 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
-import {MatButtonModule} from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AuthModule, OidcConfigService, LogLevel } from 'angular-auth-oidc-client';
+import {
+  AuthModule,
+  OidcConfigService,
+  LogLevel,
+} from 'angular-auth-oidc-client';
 
 export function configureAuth(oidcConfigService: OidcConfigService) {
-    return () =>
-        oidcConfigService.withConfig({
-            stsServer: 'https://localhost:44318',
-            redirectUrl: window.location.origin,
-            postLogoutRedirectUri: 'https://localhost:44395/unauthorized',
-            clientId: 'angularclient2',
-            scope: 'dataEventRecords openid profile email',
-            responseType: 'code',
-            silentRenew: true,
-            silentRenewUrl: `${window.location.origin}/silent-renew.html`,
-            renewTimeBeforeTokenExpiresInSeconds: 10,
-            logLevel: LogLevel.Debug,
-			postLoginRoute: '/dm',
-			forbiddenRoute: '/unauthorized',
-            unauthorizedRoute: '/unauthorized',
-            historyCleanupOff: true
-        });
+  return () =>
+    oidcConfigService.withConfig({
+      stsServer: 'https://localhost:44318',
+      redirectUrl: window.location.origin,
+      postLogoutRedirectUri: 'https://localhost:44395/unauthorized',
+      clientId: 'angularclient2',
+      scope: 'dataEventRecords openid profile email',
+      responseType: 'code',
+      silentRenew: true,
+      silentRenewUrl: `${window.location.origin}/silent-renew.html`,
+      renewTimeBeforeTokenExpiresInSeconds: 10,
+      logLevel: LogLevel.Debug,
+      postLoginRoute: '/dm',
+      forbiddenRoute: '/unauthorized',
+      unauthorizedRoute: '/unauthorized',
+      historyCleanupOff: true,
+    });
 }
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        CommonModule,
-        FormsModule,
-        routing,
-        HttpClientModule,
-        AuthModule.forRoot(),
-        FlexLayoutModule,
-        StoreDevtoolsModule.instrument({
-            maxAge: 25 //  Retains last 25 states
-        }),
-        StoreModule.forRoot({}),
-        EffectsModule.forRoot([]),
-        MatToolbarModule,
-        MatButtonModule
-    ],
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        UnauthorizedComponent
-    ],
-    providers: [
-        OidcConfigService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: configureAuth,
-            deps: [OidcConfigService, HttpClient],
-            multi: true,
-        },
-        Configuration
-    ],
-    bootstrap:    [AppComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    CommonModule,
+    FormsModule,
+    routing,
+    HttpClientModule,
+    AuthModule.forRoot(),
+    FlexLayoutModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, //  Retains last 25 states
+    }),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    MatToolbarModule,
+    MatButtonModule,
+  ],
+  declarations: [AppComponent, HomeComponent, UnauthorizedComponent],
+  providers: [
+    OidcConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: configureAuth,
+      deps: [OidcConfigService, HttpClient],
+      multi: true,
+    },
+    Configuration,
+  ],
+  bootstrap: [AppComponent],
 })
-
 export class AppModule {}

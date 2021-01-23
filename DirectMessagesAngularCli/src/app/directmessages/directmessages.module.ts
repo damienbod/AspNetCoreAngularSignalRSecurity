@@ -14,47 +14,40 @@ import { DirectMessagesEffects } from './store/directmessages.effects';
 import { directMessagesReducer } from './store/directmessages.reducer';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select'; 
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatListModule} from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        HttpClientModule,
-        DirectMessagesRoutes,
-        StoreModule.forFeature('dm', directMessagesReducer),
-        EffectsModule.forFeature([DirectMessagesEffects]),
-        MatListModule,
-        MatIconModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatMenuModule,
-        MatSelectModule,
-        MatInputModule,
-        MatFormFieldModule,
-        FlexLayoutModule,
-        MatChipsModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    DirectMessagesRoutes,
+    StoreModule.forFeature('dm', directMessagesReducer),
+    EffectsModule.forFeature([DirectMessagesEffects]),
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FlexLayoutModule,
+    MatChipsModule,
+  ],
 
-    declarations: [
-        DirectMessagesComponent
-    ],
+  declarations: [DirectMessagesComponent],
 
-    providers: [
-        DirectMessagesService
-    ],
+  providers: [DirectMessagesService],
 
-    exports: [
-        DirectMessagesComponent
-    ]
+  exports: [DirectMessagesComponent],
 })
-
-export class DirectMessagesModule { }
+export class DirectMessagesModule {}
