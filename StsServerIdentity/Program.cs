@@ -1,7 +1,7 @@
 ﻿using System;
+using Azure.Identity;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -48,9 +48,7 @@ namespace StsServerIdentity
                     if (!string.IsNullOrEmpty(keyVaultEndpoint))
                     {
                         var azureServiceTokenProvider = new AzureServiceTokenProvider();
-                        var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
-
-                        config.AddAzureKeyVault(keyVaultEndpoint);
+                        config.AddAzureKeyVault(new Uri(keyVaultEndpoint), new DefaultAzureCredential());
                     }
                     else
                     {
@@ -68,6 +66,7 @@ namespace StsServerIdentity
                         .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
                         .ReadFrom.Configuration(hostingContext.Configuration)
                         .Enrich.FromLogContext()
+                        .WriteTo.File("../StsLogs.txt")
                         .WriteTo.Console(theme: AnsiConsoleTheme.Code)
                 );
                 });
