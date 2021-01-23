@@ -24,7 +24,7 @@ export class NewsService {
     private oidcSecurityService: OidcSecurityService
   ) {
     this.init();
-    this.actionUrl = 'https://localhost:44324/api/news/';
+    this.actionUrl = 'https://localhost:44390/api/news/';
 
     this.headers = new HttpHeaders();
     this.headers = this.headers.set('Content-Type', 'application/json');
