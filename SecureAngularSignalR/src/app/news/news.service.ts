@@ -1,11 +1,14 @@
+import { Observable } from 'rxjs';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HubConnection } from '@microsoft/signalr';
 import { NewsItem } from './models/news-item';
 import { Store } from '@ngrx/store';
 import * as newsAction from './store/news.action';
+import { Configuration } from '../app.constants';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 import * as signalR from '@microsoft/signalr';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class NewsService {
@@ -29,6 +32,13 @@ export class NewsService {
     return newsItem;
   }
 
+  sendDirectMessage(message: string, userId: string): string {
+    if (this._hubConnection) {
+      this._hubConnection.invoke('SendDM', message, userId);
+    }
+    return message;
+  }
+
   joinGroup(group: string): void {
     if (this._hubConnection) {
       this._hubConnection.invoke('JoinGroup', group);
@@ -42,12 +52,40 @@ export class NewsService {
   }
 
   getAllGroups(): Observable<string[]> {
+    const token = this.oidcSecurityService.getToken();
+    console.log('getAllGroups token:');
+    console.log(token);
+    if (token !== '') {
+      const tokenValue = 'Bearer ' + token;
+      this.headers = this.headers.append('Authorization', tokenValue);
+    }
+
     return this.http.get<string[]>(this.actionUrl, { headers: this.headers });
   }
 
   private init() {
+    this.oidcSecurityService.isAuthenticated$.subscribe(
+      (isAuthorized: boolean) => {
+        this.isAuthorized = isAuthorized;
+        if (isAuthorized) {
+          this.initHub();
+        }
+      }
+    );
+
+    console.log('IsAuthorized:' + this.isAuthorized);
+  }
+
+  private initHub() {
+    console.log('initHub');
+    const token = this.oidcSecurityService.getToken();
+    let tokenValue = '';
+    if (token !== '') {
+      tokenValue = '?token=' + token;
+    }
+
     this._hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:44324/looney')
+      .withUrl(`${this.configuration.Server}looney${tokenValue}`)
       .configureLogging(signalR.LogLevel.Information)
       .build();
 
