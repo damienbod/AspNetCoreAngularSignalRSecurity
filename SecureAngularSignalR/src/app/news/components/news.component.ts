@@ -20,7 +20,10 @@ export class NewsComponent implements OnInit {
   group$: Observable<string[]>;
   newsItems$: Observable<NewsItem[]>;
 
-  constructor(private store: Store<any>, private oidcSecurityService: OidcSecurityService) {
+  constructor(
+    private store: Store<any>,
+    private oidcSecurityService: OidcSecurityService
+  ) {
     this.group$ = this.store.pipe(select(fromSelectorsStore.selectGroups));
     this.newsItems$ = this.store.pipe(
       select(fromSelectorsStore.selectNewsItems)
@@ -48,6 +51,19 @@ export class NewsComponent implements OnInit {
 
   ngOnInit() {
     console.log('go');
-    this.store.dispatch(newsAction.selectAllNewsGroupsAction());
+
+    this.oidcSecurityService.isAuthenticated$.subscribe(
+      (isAuthenticated: boolean) => {
+        this.isAuthorized = isAuthenticated;
+        if (isAuthenticated) {
+          console.log(
+            'this.store.dispatch(new NewsActions.SelectAllGroupsAction()'
+          );
+          this.store.dispatch(newsAction.selectAllNewsGroupsAction());
+        }
+      }
+    );
+
+    console.log('IsAuthorized:' + this.isAuthorized);
   }
 }
