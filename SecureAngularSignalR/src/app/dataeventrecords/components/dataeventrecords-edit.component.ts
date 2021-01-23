@@ -26,8 +26,8 @@ export class DataEventRecordsEditComponent implements OnInit {
   constructor(
     private dataEventRecordsService: DataEventRecordsService,
     public oidcSecurityService: OidcSecurityService,
-    private _route: ActivatedRoute,
-    private _router: Router
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.message = 'DataEventRecords Edit';
     this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
@@ -40,12 +40,12 @@ export class DataEventRecordsEditComponent implements OnInit {
       })
     );
 
-    this._route.params.subscribe((params) => {
-      const id = +params['id']; // (+) converts string 'id' to a number
+    this.route.params.subscribe((params) => {
+      let id = +params['id']; // (+) converts string 'id' to a number
       this.id = id;
-      if (this.DataEventRecord.id === 0) {
+      if (this.dataEventRecord.id === 0) {
         this.dataEventRecordsService.GetById(id).subscribe(
-          (data) => (this.DataEventRecord = data),
+          (data) => (this.dataEventRecord = data),
           () => console.log('DataEventRecordsEditComponent:Get by Id complete')
         );
       }
@@ -54,10 +54,10 @@ export class DataEventRecordsEditComponent implements OnInit {
 
   Update() {
     this.dataEventRecordsService
-      .Update(this.id, this.DataEventRecord)
+      .Update(this.id, this.dataEventRecord)
       .subscribe(
         () => console.log('subscribed'),
-        () => this._router.navigate(['/dataeventrecords'])
+        () => this.router.navigate(['/dataeventrecords'])
       );
   }
 }

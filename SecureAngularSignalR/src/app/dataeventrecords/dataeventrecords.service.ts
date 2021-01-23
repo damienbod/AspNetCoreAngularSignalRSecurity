@@ -14,7 +14,7 @@ export class DataEventRecordsService {
   constructor(
     private http: HttpClient,
     configuration: Configuration,
-    private _securityService: OidcSecurityService
+    private oidcSecurityService: OidcSecurityService
   ) {
     this.actionUrl = `${configuration.Server}api/DataEventRecords/`;
   }
@@ -24,7 +24,7 @@ export class DataEventRecordsService {
     this.headers = this.headers.set('Content-Type', 'application/json');
     this.headers = this.headers.set('Accept', 'application/json');
 
-    const token = this._securityService.getToken();
+    const token = this.oidcSecurityService.getToken();
     if (token !== '') {
       const tokenValue = 'Bearer ' + token;
       this.headers = this.headers.append('Authorization', tokenValue);
@@ -37,7 +37,7 @@ export class DataEventRecordsService {
     return this.http.get<DataEventRecord[]>(this.actionUrl, {
       headers: this.headers,
     });
-  };
+  }
 
   public GetById(id: number): Observable<DataEventRecord> {
     this.setHeaders();
