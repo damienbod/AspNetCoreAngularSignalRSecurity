@@ -1,39 +1,65 @@
 import { Component, OnInit } from '@angular/core';
 import { HubConnection } from '@microsoft/signalr';
+import { Configuration } from '../../app.constants';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 import * as signalR from '@microsoft/signalr';
 
 @Component({
-  selector: 'app-home-component',
-  templateUrl: './home.component.html',
+    selector: 'app-home-component',
+    templateUrl: './home.component.html'
 })
+
 export class HomeComponent implements OnInit {
-  private _hubConnection: HubConnection | undefined;
-  public async: any;
-  message = '';
-  messages: string[] = [];
+    private _hubConnection: HubConnection | undefined;
+    async: any;
+    message = '';
+    messages: string[] = [];
 
-  constructor() {}
-
-  public sendMessage(): void {
-    const data = `Sent: ${this.message}`;
-
-    if (this._hubConnection) {
-      this._hubConnection.invoke('Send', data);
+    isAuthenticated = false;
+	
+    constructor(
+        private configuration: Configuration,
+        private oidcSecurityService: OidcSecurityService
+    ) {
     }
-    this.messages.push(data);
-  }
 
-  ngOnInit() {
-    this._hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:44324/loopy')
-      .configureLogging(signalR.LogLevel.Trace)
-      .build();
+    ngOnInit() {
 
-    this._hubConnection.start().catch((err) => console.error(err.toString()));
+		this.oidcSecurityService.isAuthenticated$.subscribe(
+            (isAuthenticated: boolean) => {
+				this.isAuthenticated = isAuthenticated;
+                if (isAuthenticated) {
+                    this.init();
+                }
+            });
+    }
 
-    this._hubConnection.on('Send', (data: any) => {
-      const received = `Received: ${data}`;
-      this.messages.push(received);
-    });
-  }
+    sendMessage(): void {
+        const data = `Sent: ${this.message}`;
+        if (this._hubConnection) {
+            this._hubConnection.invoke('Send', data);
+        }
+        this.messages.push(data);
+    }
+
+    private init() {
+
+        const token = this.oidcSecurityService.getToken();
+        let tokenValue = '';
+        if (token !== '') {
+            tokenValue = '?token=' + token;
+        }
+
+        this._hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl(`${this.configuration.Server}signalrhome${tokenValue}`)
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        this._hubConnection.start().catch(err => console.error(err.toString()));
+
+        this._hubConnection.on('Send', (data: any) => {
+            const received = `Received: ${data}`;
+            this.messages.push(received);
+        });
+    }
 }

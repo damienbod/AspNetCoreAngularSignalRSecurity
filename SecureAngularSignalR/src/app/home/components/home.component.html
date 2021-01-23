@@ -1,50 +1,35 @@
-﻿<div class="container-fluid">
-  <h1>Send some basic messages</h1>
-  <form class="form-inline" (ngSubmit)="sendMessage()" #messageForm="ngForm">
-    <div class="row">
-      <div class="col">
-        <label class="sr-only" for="message">Message</label>
-        <input
-          type="text"
-          class="form-control"
-          id="message"
-          placeholder="your message..."
-          name="message"
-          [(ngModel)]="message"
-          required
-        />
-      </div>
-      <div class="col">
-        <button
-          type="submit"
-          class="btn btn-primary"
-          [disabled]="!messageForm.valid"
-        >
-          Send SignalR Message
-        </button>
-      </div>
+﻿<div class="container-fluid" *ngIf="isAuthenticated">
+    <form (ngSubmit)="sendMessage()" #messageForm="ngForm">
+        <div class="form-group row">
+            <label for="message" class="col-sm-2 col-form-label">Message</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="message" placeholder="your message..." name="message" [(ngModel)]="message" required>
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary" [disabled]="!messageForm.valid">Send SignalR Message</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row" *ngIf="messages.length > 0">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Messages</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let message of messages; let i = index">
+                        <td>{{i + 1}}</td>
+                        <td>{{message}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </form>
-  <div style="padding: 10px"></div>
-  <div class="row" *ngIf="messages.length > 0">
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Messages</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let message of messages; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ message }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row" *ngIf="messages.length <= 0">
+        <span>No messages</span>
     </div>
-  </div>
-  <div class="row" *ngIf="messages.length <= 0">
-    <span>No messages</span>
-  </div>
 </div>
