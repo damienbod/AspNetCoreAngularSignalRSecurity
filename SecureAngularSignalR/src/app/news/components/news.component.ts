@@ -1,3 +1,4 @@
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 import * as newsAction from './../store/news.action';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -19,7 +20,7 @@ export class NewsComponent implements OnInit {
   group$: Observable<string[]>;
   newsItems$: Observable<NewsItem[]>;
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<any>, private oidcSecurityService: OidcSecurityService) {
     this.group$ = this.store.pipe(select(fromSelectorsStore.selectGroups));
     this.newsItems$ = this.store.pipe(
       select(fromSelectorsStore.selectNewsItems)
