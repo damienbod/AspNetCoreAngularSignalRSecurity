@@ -15,8 +15,14 @@ export class NewsService {
   private _hubConnection: HubConnection | undefined;
   private actionUrl: string;
   private headers: HttpHeaders;
+  isAuthorized = false;
 
-  constructor(private http: HttpClient, private store: Store<any>) {
+  constructor(
+    private http: HttpClient,
+    private store: Store<any>,
+    private configuration: Configuration,
+    private oidcSecurityService: OidcSecurityService
+  ) {
     this.init();
     this.actionUrl = 'https://localhost:44324/api/news/';
 
