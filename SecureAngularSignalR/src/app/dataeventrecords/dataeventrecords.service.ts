@@ -37,7 +37,7 @@ export class DataEventRecordsService {
     return this.http.get<DataEventRecord[]>(this.actionUrl, {
       headers: this.headers,
     });
-  };
+  }
 
   public GetById(id: number): Observable<DataEventRecord> {
     this.setHeaders();
