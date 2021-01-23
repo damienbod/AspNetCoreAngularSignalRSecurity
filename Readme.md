@@ -21,6 +21,9 @@
 
 ## History
 
+
+2021-01-23 Updated to .NET 5, Azure SDK access
+
 2020-09-15 Updated to .NET 5, Angular 11.0.2
 
 2020-09-15 Updated to IdentityServer4 4.1.0, .NET Core 3.1.8
