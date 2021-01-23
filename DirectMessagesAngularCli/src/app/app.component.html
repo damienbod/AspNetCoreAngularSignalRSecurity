@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+    <a mat-button routerLinkActive="active" *ngIf="!isAuthorized" (click)="login()">Login</a>
+    <a mat-button routerLinkActive="active" *ngIf="isAuthorized" [routerLink]="'/dm'">Direct Message</a>
+    <a mat-button routerLinkActive="active" *ngIf="isAuthorized" (click)="logout()">Logout</a>
+    <p *ngIf="isAuthorized">{{email}}</p>
+</mat-toolbar>
+<div class="basic-container">
+    <router-outlet></router-outlet>
+</div>
+
