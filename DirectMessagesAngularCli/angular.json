@@ -68,7 +68,10 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "DirectMessagesAngularCli:build"
+            "browserTarget": "DirectMessagesAngularCli:build",
+            "sslKey": "certs/dev_localhost.key",
+            "sslCert": "certs/dev_localhost.pem",
+            "port": 44395
           },
           "configurations": {
             "production": {
