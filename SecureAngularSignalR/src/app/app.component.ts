@@ -1,8 +1,24 @@
-﻿import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-component',
+    templateUrl: 'app.component.html',
+    styleUrls: ['./app.component.scss']
 })
-export class AppComponent {}
+
+export class AppComponent implements OnInit {
+
+    isAuthenticated$: Observable<boolean>;
+
+    constructor(public oidcSecurityService: OidcSecurityService) {
+        this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
+    }
+
+    ngOnInit() {
+         
+		 this.oidcSecurityService.checkAuth().subscribe((isAuthenticated) => console.log('app authenticated', isAuthenticated));
+    }
+}
