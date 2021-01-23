@@ -8,41 +8,44 @@ import { DataEventRecordsService } from '../dataeventrecords.service';
 import { DataEventRecord } from '../models/DataEventRecord';
 
 @Component({
-    selector: 'app-dataeventrecords-create',
-    templateUrl: 'dataeventrecords-create.component.html'
+  selector: 'app-dataeventrecords-create',
+  templateUrl: 'dataeventrecords-create.component.html',
 })
-
 export class DataEventRecordsCreateComponent implements OnInit {
+  message: string;
+  DataEventRecord: DataEventRecord = {
+    id: 0,
+    name: '',
+    description: '',
+    timestamp: '',
+  };
 
-    message: string;
-    DataEventRecord: DataEventRecord = {
-        id: 0, name: '', description: '', timestamp: ''
-    };
+  isAuthenticated$: Observable<boolean>;
 
-    isAuthenticated$: Observable<boolean>;
+  constructor(
+    private _dataEventRecordsService: DataEventRecordsService,
+    public oidcSecurityService: OidcSecurityService,
+    private _router: Router
+  ) {
+    this.message = 'DataEventRecords Create';
+    this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
+  }
 
-    constructor(private _dataEventRecordsService: DataEventRecordsService,
-        public oidcSecurityService: OidcSecurityService,
-        private _router: Router
-    ) {
-        this.message = 'DataEventRecords Create';
-        this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
-    }
+  ngOnInit() {
+    this.isAuthenticated$.pipe(
+      map((isAuthorized: boolean) => {
+        console.log('isAuthorized: ' + isAuthorized);
+      })
+    );
 
-    ngOnInit() {
-        this.isAuthenticated$.pipe(
-            map((isAuthorized: boolean) => {
-                console.log('isAuthorized: ' + isAuthorized);
-            }));
+    this.DataEventRecord = { id: 0, name: '', description: '', timestamp: '' };
+  }
 
-        this.DataEventRecord = { id: 0, name: '', description: '', timestamp: '' };
-    }
-
-     Create() {
-        // router navigate to DataEventRecordsList
-        this._dataEventRecordsService
-            .Add(this.DataEventRecord)
-            .subscribe((data: any) => this.DataEventRecord = data,
-            () => this._router.navigate(['/dataeventrecords']));
-    }
+  Create() {
+    // router navigate to DataEventRecordsList
+    this._dataEventRecordsService.Add(this.DataEventRecord).subscribe(
+      (data: any) => (this.DataEventRecord = data),
+      () => this._router.navigate(['/dataeventrecords'])
+    );
+  }
 }

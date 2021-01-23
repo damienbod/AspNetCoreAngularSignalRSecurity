@@ -10,28 +10,25 @@ import { DataEventRecordsEditComponent } from './components/dataeventrecords-edi
 import { DataEventRecordsRoutes } from './dataeventrecords.routes';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        HttpClientModule,
-        DataEventRecordsRoutes
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    DataEventRecordsRoutes,
+  ],
 
-    declarations: [
-        DataEventRecordsListComponent,
-        DataEventRecordsCreateComponent,
-        DataEventRecordsEditComponent
-    ],
+  declarations: [
+    DataEventRecordsListComponent,
+    DataEventRecordsCreateComponent,
+    DataEventRecordsEditComponent,
+  ],
 
-    providers: [
-        DataEventRecordsService
-    ],
+  providers: [DataEventRecordsService],
 
-    exports: [
-        DataEventRecordsListComponent,
-        DataEventRecordsCreateComponent,
-        DataEventRecordsEditComponent
-    ]
+  exports: [
+    DataEventRecordsListComponent,
+    DataEventRecordsCreateComponent,
+    DataEventRecordsEditComponent,
+  ],
 })
-
-export class DataEventRecordsModule { }
+export class DataEventRecordsModule {}

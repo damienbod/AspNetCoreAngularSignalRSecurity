@@ -7,20 +7,10 @@ import { HomeComponent } from './components/home.component';
 import { HomeRoutes } from './home.routes';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        HttpClientModule,
-        HomeRoutes
-    ],
+  imports: [CommonModule, FormsModule, HttpClientModule, HomeRoutes],
 
-    declarations: [
-        HomeComponent
-    ],
+  declarations: [HomeComponent],
 
-    exports: [
-        HomeComponent
-    ]
+  exports: [HomeComponent],
 })
-
-export class HomeModule { }
+export class HomeModule {}

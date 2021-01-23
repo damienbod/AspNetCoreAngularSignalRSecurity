@@ -5,7 +5,7 @@
         <label class="col-sm-2 control-label" for="group">Group: </label>
         <div class="col-sm-9">
           <select class="form-control" type="number" [(ngModel)]="group">
-            <option *ngFor="let g of (group$ | async)" [ngValue]="g" >
+            <option *ngFor="let g of group$ | async" [ngValue]="g">
               {{ g }}
             </option>
           </select>
@@ -125,5 +125,4 @@
       <span>No items found</span>
     </div>
   </ng-template>
-
 </div>

@@ -51,13 +51,13 @@ const newsReducerInternal = createReducer(
   on(newsAction.recieveNewsItemAction, (state, { payload }) => {
     return {
       ...state,
-      newsItems: [...state.newsItems, payload]
+      newsItems: [...state.newsItems, payload],
     };
   }),
   on(newsAction.recieveNewsGroupHistoryAction, (state, { payload }) => {
     return {
       ...state,
-      newsItems: [...payload]
+      newsItems: [...payload],
     };
   }),
   on(newsAction.selectAllNewsGroupsFinishedAction, (state, { payload }) => {
@@ -84,6 +84,9 @@ const newsReducerInternal = createReducer(
   })
 );
 
-export function newsReducer(state: NewsState | undefined, action: Action): NewsState {
+export function newsReducer(
+  state: NewsState | undefined,
+  action: Action
+): NewsState {
   return newsReducerInternal(state, action);
 }

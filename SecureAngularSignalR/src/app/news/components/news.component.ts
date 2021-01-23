@@ -21,7 +21,9 @@ export class NewsComponent implements OnInit {
 
   constructor(private store: Store<any>) {
     this.group$ = this.store.pipe(select(fromSelectorsStore.selectGroups));
-    this.newsItems$ = this.store.pipe(select(fromSelectorsStore.selectNewsItems));
+    this.newsItems$ = this.store.pipe(
+      select(fromSelectorsStore.selectNewsItems)
+    );
 
     this.newsItem = new NewsItem();
     this.newsItem.AddData('', '', this.author, this.group);

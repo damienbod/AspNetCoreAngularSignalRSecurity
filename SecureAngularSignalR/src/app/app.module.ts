@@ -19,68 +19,71 @@ import { AuthModule, OidcConfigService } from 'angular-auth-oidc-client';
 
 import { map, switchMap } from 'rxjs/operators';
 
-export function configureAuth(oidcConfigService: OidcConfigService, httpClient: HttpClient) {
-    const setupAction$ = httpClient.get<any>(`${window.location.origin}/api/ClientAppSettings`).pipe(
-        map((customConfig) => {
-            return {
-                stsServer: customConfig.stsServer,
-                redirectUrl: customConfig.redirect_url,
-                clientId: customConfig.client_id,
-                responseType: customConfig.response_type,
-                scope: customConfig.scope,
-                postLogoutRedirectUri: customConfig.post_logout_redirect_uri,
-                startCheckSession: customConfig.start_checksession,
-                silentRenew:  true,
-                silentRenewUrl: customConfig.redirect_url + '/silent-renew.html',
-                postLoginRoute: customConfig.startup_route,
-                forbiddenRoute: customConfig.forbidden_route,
-                unauthorizedRoute: customConfig.unauthorized_route,
-                logLevel: 0, // LogLevel.Debug, // customConfig.logLevel
-                maxIdTokenIatOffsetAllowedInSeconds: customConfig.max_id_token_iat_offset_allowed_in_seconds,
-                historyCleanupOff: true,
-                // autoUserinfo: false,
-            };
-        }),
-        switchMap((config) => oidcConfigService.withConfig(config))
+export function configureAuth(
+  oidcConfigService: OidcConfigService,
+  httpClient: HttpClient
+) {
+  const setupAction$ = httpClient
+    .get<any>(`${window.location.origin}/api/ClientAppSettings`)
+    .pipe(
+      map((customConfig) => {
+        return {
+          stsServer: customConfig.stsServer,
+          redirectUrl: customConfig.redirect_url,
+          clientId: customConfig.client_id,
+          responseType: customConfig.response_type,
+          scope: customConfig.scope,
+          postLogoutRedirectUri: customConfig.post_logout_redirect_uri,
+          startCheckSession: customConfig.start_checksession,
+          silentRenew: true,
+          silentRenewUrl: customConfig.redirect_url + '/silent-renew.html',
+          postLoginRoute: customConfig.startup_route,
+          forbiddenRoute: customConfig.forbidden_route,
+          unauthorizedRoute: customConfig.unauthorized_route,
+          logLevel: 0, // LogLevel.Debug, // customConfig.logLevel
+          maxIdTokenIatOffsetAllowedInSeconds:
+            customConfig.max_id_token_iat_offset_allowed_in_seconds,
+          historyCleanupOff: true,
+          // autoUserinfo: false,
+        };
+      }),
+      switchMap((config) => oidcConfigService.withConfig(config))
     );
 
-    return () => setupAction$.toPromise();
+  return () => setupAction$.toPromise();
 }
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        AppRoutes,
-        SharedModule,
-        HttpClientModule,
-        AuthModule.forRoot(),
-        CoreModule.forRoot(),
-        HomeModule,
-        NewsModule,
-        DataEventRecordsModule,
-        StoreDevtoolsModule.instrument({
-            maxAge: 25 //  Retains last 25 states
-        }),
-        StoreModule.forRoot({}),
-        EffectsModule.forRoot([])
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutes,
+    SharedModule,
+    HttpClientModule,
+    AuthModule.forRoot(),
+    CoreModule.forRoot(),
+    HomeModule,
+    NewsModule,
+    DataEventRecordsModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, //  Retains last 25 states
+    }),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+  ],
 
-    declarations: [
-        AppComponent
-    ],
+  declarations: [AppComponent],
 
-    providers: [
-        OidcConfigService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: configureAuth,
-            deps: [OidcConfigService, HttpClient],
-            multi: true,
-        },
-        Configuration
-    ],
+  providers: [
+    OidcConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: configureAuth,
+      deps: [OidcConfigService, HttpClient],
+      multi: true,
+    },
+    Configuration,
+  ],
 
-    bootstrap: [AppComponent],
+  bootstrap: [AppComponent],
 })
-
 export class AppModule {}
