@@ -14,6 +14,7 @@ import { select } from '@ngrx/store';
 })
 export class NewsComponent implements OnInit {
   public async: any;
+  isAuthorized = false;
   newsItem: NewsItem;
   group = 'IT';
   author = 'unknown';
