@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --ssl true -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "format": "npx prettier --write ./src"
   },
   "private": true,
   "dependencies": {
@@ -22,9 +23,8 @@
 	"@angular/platform-browser": "~11.0.2",
 	"@angular/platform-browser-dynamic": "~11.0.2",
 	"@angular/router": "~11.0.2",
-    "@angular/router": "~11.1.0",
-    "tslib": "^2.0.0",
-    "zone.js": "~0.11.3",
+  "tslib": "^2.0.0",
+  "zone.js": "~0.11.3",
 	"@microsoft/signalr": "5.0.0",
 	"@ngrx/effects": "10.0.1",
 	"@ngrx/store": "10.0.1",
@@ -37,8 +37,7 @@
 	"ie-shim": "0.1.0",
 	"msgpack5": "4.2.1",
 	"rxjs": "~6.6.3",
-	"rxjs-compat": "^6.6.3",
-     
+  "rxjs-compat": "^6.6.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1101.0",
@@ -54,6 +53,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "prettier": "2.2.1",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
