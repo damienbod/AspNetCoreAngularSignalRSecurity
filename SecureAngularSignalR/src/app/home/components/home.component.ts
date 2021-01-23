@@ -9,7 +9,7 @@ import * as signalR from '@microsoft/signalr';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  private _hubConnection: HubConnection | undefined;
+  private hubConnection: HubConnection | undefined;
   async: any;
   message = '';
   messages: string[] = [];
@@ -34,8 +34,8 @@ export class HomeComponent implements OnInit {
 
   sendMessage(): void {
     const data = `Sent: ${this.message}`;
-    if (this._hubConnection) {
-      this._hubConnection.invoke('Send', data);
+    if (this.hubConnection) {
+      this.hubConnection.invoke('Send', data);
     }
     this.messages.push(data);
   }
@@ -47,14 +47,14 @@ export class HomeComponent implements OnInit {
       tokenValue = '?token=' + token;
     }
 
-    this._hubConnection = new signalR.HubConnectionBuilder()
+    this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${this.configuration.Server}signalrhome${tokenValue}`)
       .configureLogging(signalR.LogLevel.Information)
       .build();
 
-    this._hubConnection.start().catch((err) => console.error(err.toString()));
+    this.hubConnection.start().catch((err) => console.error(err.toString()));
 
-    this._hubConnection.on('Send', (data: any) => {
+    this.hubConnection.on('Send', (data: any) => {
       const received = `Received: ${data}`;
       this.messages.push(received);
     });

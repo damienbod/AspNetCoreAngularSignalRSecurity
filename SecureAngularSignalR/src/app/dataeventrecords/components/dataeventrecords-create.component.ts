@@ -25,7 +25,7 @@ export class DataEventRecordsCreateComponent implements OnInit {
   constructor(
     private dataEventRecordsService: DataEventRecordsService,
     public oidcSecurityService: OidcSecurityService,
-    private _router: Router
+    private router: Router
   ) {
     this.message = 'DataEventRecords Create';
     this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
@@ -38,14 +38,14 @@ export class DataEventRecordsCreateComponent implements OnInit {
       })
     );
 
-    this.DataEventRecord = { id: 0, name: '', description: '', timestamp: '' };
+    this.dataEventRecord = { id: 0, name: '', description: '', timestamp: '' };
   }
 
   Create() {
     // router navigate to DataEventRecordsList
-    this.dataEventRecordsService.Add(this.DataEventRecord).subscribe(
-      (data: any) => (this.DataEventRecord = data),
-      () => this._router.navigate(['/dataeventrecords'])
+    this.dataEventRecordsService.Add(this.dataEventRecord).subscribe(
+      (data: any) => (this.dataEventRecord = data),
+      () => this.router.navigate(['/dataeventrecords'])
     );
   }
 }
