@@ -100,7 +100,6 @@ export class DirectMessagesService {
 
     this.hubConnection.on('Joined', (onlineUser: OnlineUser) => {
       console.log('DMS: Joined received');
-     // this.store.dispatch(directMessagesActions.joinAction());
       console.log(onlineUser);
     });
 
