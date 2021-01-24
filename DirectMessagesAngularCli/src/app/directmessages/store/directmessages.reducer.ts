@@ -1,102 +1,113 @@
 import { DirectMessagesState } from './directmessages.state';
 import * as directMessagesAction from './directmessages.action';
 import { DirectMessage } from '../models/direct-message';
+import { createReducer, on, Action } from '@ngrx/store';
 
 export const initialState: DirectMessagesState = {
-  dm: {
-    onlineUsers: [],
-    directMessages: [],
-    connected: false,
-  },
+  onlineUsers: [],
+  directMessages: [],
+  connected: false,
 };
 
-export function directMessagesReducer(
-  state = initialState,
-  action: directMessagesAction.Actions
-): DirectMessagesState {
-  switch (action.type) {
-    case directMessagesAction.RECEIVED_DIRECT_MESSAGE: {
+// on(
+//   YOUR_ACTION(S)_HERE,
+//   (state, { payload }) => {
+//   const { news } = state;
+//   const { newsItems, groups } = news;
+//     return {
+//       ...state,
+//       news: {
+//     newsItems,
+//     groups: [...groups, action.group]
+//   }
+//     };
+//   }
+// ),
+
+// or
+
+// on(
+//   YOUR_ACTION(S)_HERE,
+//   (state, { payload }) => {
+//   const { news } = state;
+//     return {
+//       ...state,
+//       news: {
+//     newsItems: news.newsItems,
+//     groups: [...news.groups, action.group]
+//   }
+//     };
+//   }
+// ),
+
+const directMessagesReducerInternal = createReducer(
+  initialState,
+  on(
+    directMessagesAction.receivedDirectMessageForUserAction,
+    (state, { payload }) => {
       const directMessage: DirectMessage = {
-        message: action.message,
-        fromOnlineUser: action.onlineUser,
+        message: payload.message,
+        fromOnlineUser: payload.onlineUser,
       };
 
-      return Object.assign({}, state, {
-        dm: {
-          directMessages: state.dm.directMessages.concat(directMessage),
-          connected: state.dm.connected,
-          onlineUsers: state.dm.onlineUsers,
-        },
-      });
+      return {
+        ...state,
+        directMessages: [...state.directMessages, directMessage],
+      };
     }
-
-    case directMessagesAction.RECEIVED_USER_LEFT: {
-      const index = state.dm.onlineUsers.findIndex(
-        (obj) => obj.userName === action.name
-      );
-      const list = [...state.dm.onlineUsers]; // clone the array
-      list.splice(index, 1);
-      return Object.assign({}, state, {
-        dm: {
-          directMessages: state.dm.directMessages,
-          connected: state.dm.connected,
-          onlineUsers: list,
-        },
-      });
-    }
-
-    case directMessagesAction.SEND_DIRECT_MESSAGE_COMPLETE: {
+  ),
+  on(
+    directMessagesAction.sendDirectMessageActionFinished,
+    (state, { payload }) => {
       const directMessage: DirectMessage = {
-        message: action.message,
+        message: payload,
         fromOnlineUser: null,
       };
 
-      return Object.assign({}, state, {
-        dm: {
-          directMessages: state.dm.directMessages.concat(directMessage),
-          connected: state.dm.connected,
-          onlineUsers: state.dm.onlineUsers,
-        },
-      });
+      return {
+        ...state,
+        directMessages: [...state.directMessages, directMessage],
+      };
     }
+  ),
+  on(directMessagesAction.receivedNewOnlineUserAction, (state, { payload }) => {
+    return {
+      ...state,
+      onlineUsers: [...state.onlineUsers, payload],
+    };
+  }),
+  on(directMessagesAction.receivedOnlineUsersAction, (state, { payload }) => {
+    return {
+      ...state,
+      onlineUsers: [...payload],
+    };
+  }),
+  on(directMessagesAction.joinActionFinished, (state, {}) => {
+    return {
+      ...state,
+      connected: true,
+    };
+  }),
+  on(directMessagesAction.leaveActionFinished, (state, {}) => {
+    return {
+      ...state,
+      connected: false,
+    };
+  }),
+  on(directMessagesAction.receivedUserLeftAction, (state, { payload }) => {
+    const usersWithoutTheOneLeft = state.onlineUsers.filter(
+      (x) => x.userName !== payload
+    );
+    return {
+      ...state,
+      onlineUsers: [...usersWithoutTheOneLeft],
+    };
+  })
+);
 
-    case directMessagesAction.RECEIVED_NEW_ONLINE_USER:
-      return Object.assign({}, state, {
-        dm: {
-          directMessages: state.dm.directMessages,
-          connected: state.dm.connected,
-          onlineUsers: state.dm.onlineUsers.concat(action.onlineUser),
-        },
-      });
-
-    case directMessagesAction.RECEIVED_ONLINE_USERS:
-      return Object.assign({}, state, {
-        dm: {
-          directMessages: state.dm.directMessages,
-          connected: state.dm.connected,
-          onlineUsers: action.onlineUsers,
-        },
-      });
-
-    case directMessagesAction.JOIN_SENT:
-      return Object.assign({}, state, {
-        dm: {
-          directMessages: state.dm.directMessages,
-          connected: true,
-          onlineUsers: state.dm.onlineUsers,
-        },
-      });
-
-    case directMessagesAction.LEAVE_SENT:
-      return Object.assign({}, state, {
-        dm: {
-          directMessages: state.dm.directMessages,
-          connected: false,
-          onlineUsers: state.dm.onlineUsers,
-        },
-      });
-
-    default:
-      return state;
-  }
+export function directMessagesReducer(
+  state: DirectMessagesState | undefined,
+  action: Action
+): DirectMessagesState {
+  return directMessagesReducerInternal(state, action);
 }
