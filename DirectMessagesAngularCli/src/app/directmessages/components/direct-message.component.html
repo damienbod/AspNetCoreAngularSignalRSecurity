@@ -1,6 +1,6 @@
 ﻿<div class="full-width" *ngIf="isAuthorized">
   <div class="left-navigation-container">
-    <nav>
+    <nav *ngIf="connected">
       <mat-list>
         <mat-list-item *ngFor="let onlineuser of (onlineUsers$ | async)">
           <a mat-button (click)="selectChat(onlineuser.userName)">{{onlineuser.userName}}</a>
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="content"  *ngIf="selectedOnlineUserName">
+  <div class="content" *ngIf="selectedOnlineUserName">
     <mat-form-field style="width: 95%">
       <textarea
         matInput
