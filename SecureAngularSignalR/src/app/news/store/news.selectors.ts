@@ -3,7 +3,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export const newsStoreName = 'news';
 
-export const selectNewsStore = createFeatureSelector(newsStoreName);
+export const selectNewsStore = createFeatureSelector<NewsState>(newsStoreName);
 
 export const selectNewsItems = createSelector(
   selectNewsStore,
