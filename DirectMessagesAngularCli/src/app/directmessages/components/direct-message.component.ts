@@ -21,15 +21,19 @@ export class DirectMessagesComponent implements OnInit {
   message = '';
   onlineUsers$: Observable<OnlineUser[]>;
   directMessages$: Observable<DirectMessage[]>;
-  connected$: Observable<boolean>;
-
+  //connected$: Observable<boolean>;
+  connected = false;
   constructor(
     private store: Store<any>,
     private oidcSecurityService: OidcSecurityService
   ) {
     this.onlineUsers$ = this.store.pipe(select(fromSelectorsStore.selectOnlineUsers));
     this.directMessages$ = this.store.pipe(select(fromSelectorsStore.selectDirectMessages));
-    this.connected$ = this.store.pipe(select(fromSelectorsStore.selectConnected));
+
+    this.store.pipe(select(fromSelectorsStore.selectConnected)).subscribe(data => {
+      console.log(data);
+      this.connected = data;
+    });
 
   }
 
@@ -47,12 +51,13 @@ export class DirectMessagesComponent implements OnInit {
   }
 
   selectChat(onlineuserUserName: string): void {
+    console.log('DMC: selectedOnlineUserName' + onlineuserUserName);
     this.selectedOnlineUserName = onlineuserUserName;
   }
 
   sendMessage(): void {
     console.log(
-      'send message to:' + this.selectedOnlineUserName + ':' + this.message
+      'DMC: send message to:' + this.selectedOnlineUserName + ':' + this.message
     );
 
     const message = {
