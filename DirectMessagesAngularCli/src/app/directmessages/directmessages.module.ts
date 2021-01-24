@@ -23,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
+import { directMessageStoreName } from './store/directmessages.selectors';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import { MatListModule } from '@angular/material/list';
     FormsModule,
     HttpClientModule,
     DirectMessagesRoutes,
-    StoreModule.forFeature('dm', directMessagesReducer),
+    StoreModule.forFeature(directMessageStoreName, directMessagesReducer),
     EffectsModule.forFeature([DirectMessagesEffects]),
     MatListModule,
     MatIconModule,
