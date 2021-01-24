@@ -13,33 +13,24 @@ import * as fromSelectorsStore from '../store/directmessages.selectors';
   selector: 'app-direct-message-component',
   templateUrl: './direct-message.component.html',
 })
-export class DirectMessagesComponent implements OnInit, OnDestroy {
+export class DirectMessagesComponent implements OnInit {
   public async: any;
-  onlineUsers: OnlineUser[] = [];
   onlineUser: OnlineUser = { connectionId: '', userName: '' };
-  directMessages: DirectMessage[] = [];
   selectedOnlineUserName = '';
-  dmState$: Observable<DirectMessagesState>;
-  dmStateSubscription: Subscription | undefined;
   isAuthorized = false;
-  connected = false;
   message = '';
+  onlineUsers$: Observable<OnlineUser[]>;
+  directMessages$: Observable<DirectMessage[]>;
+  connected$: Observable<boolean>;
 
   constructor(
     private store: Store<any>,
     private oidcSecurityService: OidcSecurityService
   ) {
-    this.onlineUser$ = this.store.pipe(select(fromSelectorsStore.selectOnlineUsers));
+    this.onlineUsers$ = this.store.pipe(select(fromSelectorsStore.selectOnlineUsers));
     this.directMessages$ = this.store.pipe(select(fromSelectorsStore.selectDirectMessages));
+    this.connected$ = this.store.pipe(select(fromSelectorsStore.selectConnected));
 
-    this.dmState$ = this.store.select<DirectMessagesState>((state) => state.dm);
-    this.dmStateSubscription = this.store
-      .select<DirectMessagesState>((state) => state.dm)
-      .subscribe((o: DirectMessagesState) => {
-        this.connected = o.connected;
-        console.log('o');
-        console.log(o);
-      });
   }
 
   ngOnInit(): void {
@@ -53,12 +44,6 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     );
 
     console.log('IsAuthorized:' + this.isAuthorized);
-  }
-
-  ngOnDestroy(): void {
-    if (this.dmStateSubscription) {
-      this.dmStateSubscription.unsubscribe();
-    }
   }
 
   selectChat(onlineuserUserName: string): void {

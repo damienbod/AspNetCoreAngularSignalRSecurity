@@ -14,3 +14,9 @@ export const selectOnlineUsers = createSelector(
   selectDirectMessageStore,
   (state: DirectMessagesState) => state.onlineUsers
 );
+
+export const selectConnected = createSelector(
+  selectDirectMessageStore,
+  (state: DirectMessagesState) => state.connected
+);
+
