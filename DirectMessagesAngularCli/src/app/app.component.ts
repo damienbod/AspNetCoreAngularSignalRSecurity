@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import './app.component.css';
 
 @Component({
   selector: 'app-component',
   templateUrl: 'app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   title = '';
