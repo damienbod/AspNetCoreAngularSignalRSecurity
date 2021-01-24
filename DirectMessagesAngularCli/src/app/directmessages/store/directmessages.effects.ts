@@ -34,7 +34,8 @@ export class DirectMessagesEffects {
     })
   );
 
-  @Effect() Join$: Observable<Action> = this.actions$.pipe(
+  @Effect()
+  Join$: Observable<Action> = this.actions$.pipe(
     ofType<directMessagesAction.Join>(directMessagesAction.JOIN),
     switchMap(() => {
       this.directMessagesService.join();
