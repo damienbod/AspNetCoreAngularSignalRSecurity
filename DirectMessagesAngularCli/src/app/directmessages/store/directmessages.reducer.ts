@@ -95,15 +95,12 @@ const directMessagesReducerInternal = createReducer(
     };
   }),
   on(directMessagesAction.receivedUserLeftAction, (state, { payload }) => {
-    const index = state.onlineUsers.findIndex(
-      (obj) => obj.userName === payload
+    const usersWithoutTheOneLeft = state.onlineUsers.filter(
+      (x) => x.userName !== payload
     );
-    const list = [...state.onlineUsers]; // clone the array
-    list.splice(index, 1);
-
     return {
       ...state,
-      onlineUsers: [...list],
+      onlineUsers: [...usersWithoutTheOneLeft],
     };
   })
 );
