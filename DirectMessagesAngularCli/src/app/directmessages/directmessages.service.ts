@@ -105,9 +105,7 @@ export class DirectMessagesService {
       (message: string, onlineUser: OnlineUser) => {
         console.log('SendDM received');
         this.store.dispatch(
-
           directMessagesActions.receivedDirectMessageForUserAction({ payload: {onlineUser, message} })
-
         );
       }
     );

@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { createAction, props } from '@ngrx/store';
 import { OnlineUser } from '../models/online-user';
-import { ReceivedUserMessageDto } from '../models/ReceivedUserMessageDto';
+import { ReceivedDirectMessageForUserDto } from '../models/ReceivedUserMessageDto';
 import { SendDirectMessageDto } from '../models/SendDirectMessageDto';
 
 export const receivedNewOnlineUserAction = createAction(
@@ -31,7 +31,7 @@ export const sendDirectMessageAction = createAction(
 );
 export const receivedDirectMessageForUserAction = createAction(
   '[DM] RECEIVED_DIRECT_MESSAGE',
-  props<{ payload: ReceivedUserMessageDto }>()
+  props<{ payload: ReceivedDirectMessageForUserDto }>()
 );
 
 

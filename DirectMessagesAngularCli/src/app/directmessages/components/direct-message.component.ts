@@ -1,3 +1,4 @@
+import { sendDirectMessageAction } from './../store/directmessages.action';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -31,19 +32,10 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     this.dmStateSubscription = this.store
       .select<DirectMessagesState>((state) => state.dm)
       .subscribe((o: DirectMessagesState) => {
-        this.connected = o.dm.connected;
-        console.log('o.dm');
-        console.log(o.dm);
+        this.connected = o.connected;
+        console.log('o');
+        console.log(o);
       });
-  }
-
-  public sendDm(): void {
-    this.store.dispatch(
-      new directMessagesAction.SendDirectMessageAction(
-        this.message,
-        this.onlineUser.userName
-      )
-    );
   }
 
   ngOnInit(): void {
@@ -73,12 +65,13 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     console.log(
       'send message to:' + this.selectedOnlineUserName + ':' + this.message
     );
-    this.store.dispatch(
-      new directMessagesAction.SendDirectMessageAction(
-        this.message,
-        this.selectedOnlineUserName
-      )
-    );
+
+    const message = { payload: {
+      message: this.message,
+      userNameTarget: this.selectedOnlineUserName
+    }};
+
+    this.store.dispatch(directMessagesAction.sendDirectMessageAction(message));
   }
 
   getUserInfoName(directMessage: DirectMessage): string {
@@ -90,10 +83,10 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
   }
 
   disconnect(): void {
-    this.store.dispatch(new directMessagesAction.Leave());
+    this.store.dispatch(directMessagesAction.leaveAction());
   }
 
   connect(): void {
-    this.store.dispatch(new directMessagesAction.Join());
+    this.store.dispatch(directMessagesAction.joinAction());
   }
 }
