@@ -17,6 +17,10 @@ build_script:
   - npm install
   - npm run build
   - npm run lint
+  - cd ../DirectMessagesAngularCli
+  - npm install
+  - npm run build
+  - npm run lint
 before_build:
 - appveyor-retry dotnet restore -v Minimal
 
