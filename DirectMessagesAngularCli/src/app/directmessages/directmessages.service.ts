@@ -12,7 +12,7 @@ import * as signalR from '@microsoft/signalr';
 
 @Injectable()
 export class DirectMessagesService {
-  private _hubConnection: HubConnection | undefined;
+  private hubConnection: HubConnection | undefined;
   private headers: HttpHeaders | undefined;
 
   isAuthorizedSubscription: Subscription | undefined;
@@ -30,26 +30,26 @@ export class DirectMessagesService {
   }
 
   sendDirectMessage(message: string, userId: string): string {
-    if (this._hubConnection) {
-      this._hubConnection.invoke('SendDirectMessage', message, userId);
+    if (this.hubConnection) {
+      this.hubConnection.invoke('SendDirectMessage', message, userId);
     }
     return message;
   }
 
   leave(): void {
-    if (this._hubConnection) {
-      this._hubConnection.invoke('Leave');
+    if (this.hubConnection) {
+      this.hubConnection.invoke('Leave');
     }
   }
 
   join(): void {
     console.log('send join');
-    if (this._hubConnection) {
-      this._hubConnection.invoke('Join');
+    if (this.hubConnection) {
+      this.hubConnection.invoke('Join');
     }
   }
 
-  private init() {
+  private init(): void {
     this.oidcSecurityService.isAuthenticated$.subscribe(
       (isAuthorized: boolean) => {
         this.isAuthorized = isAuthorized;
@@ -62,7 +62,7 @@ export class DirectMessagesService {
     console.log('IsAuthorized:' + this.isAuthorized);
   }
 
-  private initHub() {
+  private initHub(): void {
     console.log('initHub');
     const token = this.oidcSecurityService.getToken();
     let tokenValue = '';
@@ -71,14 +71,14 @@ export class DirectMessagesService {
     }
     const url = 'https://localhost:44390/';
 
-    this._hubConnection = new signalR.HubConnectionBuilder()
+    this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${url}usersdm${tokenValue}`)
       .configureLogging(signalR.LogLevel.Information)
       .build();
 
-    this._hubConnection.start().catch((err) => console.error(err.toString()));
+    this.hubConnection.start().catch((err) => console.error(err.toString()));
 
-    this._hubConnection.on('NewOnlineUser', (onlineUser: OnlineUser) => {
+    this.hubConnection.on('NewOnlineUser', (onlineUser: OnlineUser) => {
       console.log('NewOnlineUser received');
       console.log(onlineUser);
       this.store.dispatch(
@@ -86,7 +86,7 @@ export class DirectMessagesService {
       );
     });
 
-    this._hubConnection.on('OnlineUsers', (onlineUsers: OnlineUser[]) => {
+    this.hubConnection.on('OnlineUsers', (onlineUsers: OnlineUser[]) => {
       console.log('OnlineUsers received');
       console.log(onlineUsers);
       this.store.dispatch(
@@ -94,13 +94,13 @@ export class DirectMessagesService {
       );
     });
 
-    this._hubConnection.on('Joined', (onlineUser: OnlineUser) => {
+    this.hubConnection.on('Joined', (onlineUser: OnlineUser) => {
       console.log('Joined received');
       this.store.dispatch(new directMessagesActions.JoinSent());
       console.log(onlineUser);
     });
 
-    this._hubConnection.on(
+    this.hubConnection.on(
       'SendDM',
       (message: string, onlineUser: OnlineUser) => {
         console.log('SendDM received');
@@ -110,7 +110,7 @@ export class DirectMessagesService {
       }
     );
 
-    this._hubConnection.on('UserLeft', (name: string) => {
+    this.hubConnection.on('UserLeft', (name: string) => {
       console.log('UserLeft received');
       this.store.dispatch(new directMessagesActions.ReceivedUserLeft(name));
     });

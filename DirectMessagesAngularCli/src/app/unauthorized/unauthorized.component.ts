@@ -4,13 +4,11 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-unauthorized',
   templateUrl: 'unauthorized.component.html',
 })
-export class UnauthorizedComponent implements OnInit {
+export class UnauthorizedComponent {
   public message: string;
   public values: any[] = [];
 
   constructor() {
     this.message = 'UnauthorizedComponent constructor';
   }
-
-  ngOnInit() {}
 }

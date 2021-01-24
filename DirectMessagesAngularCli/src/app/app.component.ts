@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   constructor(public oidcSecurityService: OidcSecurityService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.oidcSecurityService
       .checkAuth()
       .subscribe((isAuthenticated) =>
@@ -37,17 +37,17 @@ export class AppComponent implements OnInit {
     });
   }
 
-  login() {
+  login(): void {
     console.log('start login');
     this.oidcSecurityService.authorize();
   }
 
-  refreshSession() {
+  refreshSession(): void {
     console.log('start refreshSession');
     this.oidcSecurityService.authorize();
   }
 
-  logout() {
+  logout(): void {
     console.log('start logoff');
     this.oidcSecurityService.logoff();
   }

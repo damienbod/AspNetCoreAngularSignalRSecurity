@@ -25,8 +25,9 @@ import {
   LogLevel,
 } from 'angular-auth-oidc-client';
 import { DirectMessagesModule } from './directmessages/directmessages.module';
+import { AnyARecord } from 'dns';
 
-export function configureAuth(oidcConfigService: OidcConfigService) {
+export function configureAuth(oidcConfigService: OidcConfigService): any {
   return () =>
     oidcConfigService.withConfig({
       stsServer: 'https://localhost:44318',

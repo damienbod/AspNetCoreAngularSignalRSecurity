@@ -46,7 +46,7 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.oidcSecurityService.isAuthenticated$.subscribe(
       (isAuthorized: boolean) => {
         this.isAuthorized = isAuthorized;
@@ -69,7 +69,7 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     this.selectedOnlineUserName = onlineuserUserName;
   }
 
-  sendMessage() {
+  sendMessage(): void {
     console.log(
       'send message to:' + this.selectedOnlineUserName + ':' + this.message
     );
@@ -81,7 +81,7 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     );
   }
 
-  getUserInfoName(directMessage: DirectMessage) {
+  getUserInfoName(directMessage: DirectMessage): string {
     if (directMessage.fromOnlineUser) {
       return directMessage.fromOnlineUser.userName;
     }
@@ -89,11 +89,11 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  disconnect() {
+  disconnect(): void {
     this.store.dispatch(new directMessagesAction.Leave());
   }
 
-  connect() {
+  connect(): void {
     this.store.dispatch(new directMessagesAction.Join());
   }
 }
