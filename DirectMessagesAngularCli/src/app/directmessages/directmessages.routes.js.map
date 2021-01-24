@@ -1,1 +1,0 @@
-{"version":3,"file":"directmessages.routes.js","sourceRoot":"","sources":["directmessages.routes.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAU,MAAM,iBAAiB,CAAC;AAEvD,OAAO,EAAE,uBAAuB,EAAE,MAAM,uCAAuC,CAAC;AAEhF,MAAM,MAAM,GAAW;IACnB,EAAE,IAAI,EAAE,EAAE,EAAE,SAAS,EAAE,uBAAuB,EAAE;CACnD,CAAC;AAEF,MAAM,CAAC,MAAM,oBAAoB,GAAG,YAAY,CAAC,QAAQ,CAAC,MAAM,CAAC,CAAC"}
