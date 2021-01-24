@@ -2,8 +2,9 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { DirectMessagesState } from './directmessages.state';
 
 export const directMessageStoreName = 'dm';
-export const selectDirectMessageStore = createFeatureSelector(directMessageStoreName);
-
+export const selectDirectMessageStore = createFeatureSelector<DirectMessagesState>(
+  directMessageStoreName
+);
 export const selectDirectMessages = createSelector(
   selectDirectMessageStore,
   (state: DirectMessagesState) => state.directMessages
