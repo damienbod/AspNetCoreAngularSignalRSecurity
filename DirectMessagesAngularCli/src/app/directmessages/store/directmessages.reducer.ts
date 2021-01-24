@@ -42,48 +42,54 @@ export const initialState: DirectMessagesState = {
 
 const directMessagesReducerInternal = createReducer(
   initialState,
-  on(directMessagesAction.receivedDirectMessageForUserAction, (state, { payload }) => {
-    const directMessage: DirectMessage = {
-      message: payload.message,
-      fromOnlineUser: payload.onlineUser,
-    };
+  on(
+    directMessagesAction.receivedDirectMessageForUserAction,
+    (state, { payload }) => {
+      const directMessage: DirectMessage = {
+        message: payload.message,
+        fromOnlineUser: payload.onlineUser,
+      };
 
-    return  {
-      ...state,
-      directMessages: [...state.directMessages, directMessage]
-    };
-  }),
-  on(directMessagesAction.sendDirectMessageActionFinished, (state, { payload }) => {
-    const directMessage: DirectMessage = {
-      message: payload,
-      fromOnlineUser: null,
-    };
+      return {
+        ...state,
+        directMessages: [...state.directMessages, directMessage],
+      };
+    }
+  ),
+  on(
+    directMessagesAction.sendDirectMessageActionFinished,
+    (state, { payload }) => {
+      const directMessage: DirectMessage = {
+        message: payload,
+        fromOnlineUser: null,
+      };
 
-    return  {
-      ...state,
-      directMessages: [...state.directMessages, directMessage]
-    };
-  }),
+      return {
+        ...state,
+        directMessages: [...state.directMessages, directMessage],
+      };
+    }
+  ),
   on(directMessagesAction.receivedNewOnlineUserAction, (state, { payload }) => {
-    return  {
+    return {
       ...state,
-      onlineUsers: [...state.onlineUsers, payload]
+      onlineUsers: [...state.onlineUsers, payload],
     };
   }),
   on(directMessagesAction.receivedOnlineUsersAction, (state, { payload }) => {
-    return  {
+    return {
       ...state,
-      onlineUsers: [...payload]
+      onlineUsers: [...payload],
     };
   }),
-  on(directMessagesAction.joinActionFinished, (state, {  }) => {
-    return  {
+  on(directMessagesAction.joinActionFinished, (state, {}) => {
+    return {
       ...state,
       connected: true,
     };
   }),
-  on(directMessagesAction.leaveActionFinished, (state, {  }) => {
-    return  {
+  on(directMessagesAction.leaveActionFinished, (state, {}) => {
+    return {
       ...state,
       connected: false,
     };
@@ -95,12 +101,11 @@ const directMessagesReducerInternal = createReducer(
     const list = [...state.onlineUsers]; // clone the array
     list.splice(index, 1);
 
-    return  {
+    return {
       ...state,
-      onlineUsers: [...list]
+      onlineUsers: [...list],
     };
   })
-
 );
 
 export function directMessagesReducer(

@@ -66,10 +66,12 @@ export class DirectMessagesComponent implements OnInit, OnDestroy {
       'send message to:' + this.selectedOnlineUserName + ':' + this.message
     );
 
-    const message = { payload: {
-      message: this.message,
-      userNameTarget: this.selectedOnlineUserName
-    }};
+    const message = {
+      payload: {
+        message: this.message,
+        userNameTarget: this.selectedOnlineUserName,
+      },
+    };
 
     this.store.dispatch(directMessagesAction.sendDirectMessageAction(message));
   }
