@@ -39,7 +39,7 @@ export function configureAuth(oidcConfigService: OidcConfigService): any {
       silentRenew: true,
       silentRenewUrl: `${window.location.origin}/silent-renew.html`,
       renewTimeBeforeTokenExpiresInSeconds: 10,
-      logLevel: LogLevel.Debug,
+      logLevel: LogLevel.Warn,
       postLoginRoute: '/dm',
       forbiddenRoute: '/unauthorized',
       unauthorizedRoute: '/unauthorized',

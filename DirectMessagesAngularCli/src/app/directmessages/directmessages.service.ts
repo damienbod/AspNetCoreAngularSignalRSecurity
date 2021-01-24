@@ -43,7 +43,7 @@ export class DirectMessagesService {
   }
 
   join(): void {
-    console.log('send join');
+    console.log('DMS: send join');
     if (this.hubConnection) {
       this.hubConnection.invoke('Join');
     }
@@ -63,7 +63,7 @@ export class DirectMessagesService {
   }
 
   private initHub(): void {
-    console.log('initHub');
+    console.log('DMS: initHub');
     const token = this.oidcSecurityService.getToken();
     let tokenValue = '';
     if (token !== '') {
@@ -79,7 +79,7 @@ export class DirectMessagesService {
     this.hubConnection.start().catch((err) => console.error(err.toString()));
 
     this.hubConnection.on('NewOnlineUser', (onlineUser: OnlineUser) => {
-      console.log('NewOnlineUser received');
+      console.log('DMS: NewOnlineUser received');
       console.log(onlineUser);
       this.store.dispatch(
         directMessagesActions.receivedNewOnlineUserAction({
@@ -89,7 +89,7 @@ export class DirectMessagesService {
     });
 
     this.hubConnection.on('OnlineUsers', (onlineUsers: OnlineUser[]) => {
-      console.log('OnlineUsers received');
+      console.log('DMS: OnlineUsers received');
       console.log(onlineUsers);
       this.store.dispatch(
         directMessagesActions.receivedOnlineUsersAction({
@@ -99,15 +99,15 @@ export class DirectMessagesService {
     });
 
     this.hubConnection.on('Joined', (onlineUser: OnlineUser) => {
-      console.log('Joined received');
-      this.store.dispatch(directMessagesActions.joinAction());
+      console.log('DMS: Joined received');
+     // this.store.dispatch(directMessagesActions.joinAction());
       console.log(onlineUser);
     });
 
     this.hubConnection.on(
       'SendDM',
       (message: string, onlineUser: OnlineUser) => {
-        console.log('SendDM received');
+        console.log('DMS: SendDM received');
         this.store.dispatch(
           directMessagesActions.receivedDirectMessageForUserAction({
             payload: { onlineUser, message },
@@ -117,7 +117,7 @@ export class DirectMessagesService {
     );
 
     this.hubConnection.on('UserLeft', (name: string) => {
-      console.log('UserLeft received');
+      console.log('DMS: UserLeft received');
       this.store.dispatch(
         directMessagesActions.receivedUserLeftAction({ payload: name })
       );
