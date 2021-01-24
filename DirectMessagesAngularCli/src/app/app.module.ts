@@ -24,6 +24,7 @@ import {
   OidcConfigService,
   LogLevel,
 } from 'angular-auth-oidc-client';
+import { DirectMessagesModule } from './directmessages/directmessages.module';
 
 export function configureAuth(oidcConfigService: OidcConfigService) {
   return () =>
@@ -53,6 +54,7 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
     FormsModule,
     routing,
     HttpClientModule,
+    DirectMessagesModule,
     AuthModule.forRoot(),
     FlexLayoutModule,
     StoreModule.forRoot({}),

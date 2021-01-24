@@ -3,7 +3,7 @@
     <nav>
       <mat-list>
         <mat-list-item
-          *ngFor="let onlineuser of (dmState$ | async)?.dm.onlineUsers"
+          *ngFor="let onlineuser of (dmState$ | async)?.dm?.onlineUsers"
         >
           <a mat-button (click)="selectChat(onlineuser.userName)">{{
             onlineuser.userName
@@ -39,15 +39,15 @@
           matInput
           placeholder="your message"
           [(ngModel)]="message"
-          matTextareaAutosize
-          matAutosizeMinRows="2"
-          matAutosizeMaxRows="5"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="2"
+          cdkAutosizeMaxRows="5"
         ></textarea>
       </mat-form-field>
 
       <mat-chip-list class="mat-chip-list-stacked">
         <ng-container
-          *ngFor="let directMessage of (dmState$ | async)?.dm.directMessages"
+          *ngFor="let directMessage of (dmState$ | async)?.dm?.directMessages"
         >
           <ng-container *ngIf="getUserInfoName(directMessage) !== ''">
             <mat-chip selected="true" style="width: 95%">
