@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 import { createAction, props } from '@ngrx/store';
 import { OnlineUser } from '../models/online-user';
-import { ReceivedDirectMessageForUserDto } from '../models/ReceivedUserMessageDto';
-import { SendDirectMessageDto } from '../models/SendDirectMessageDto';
+import { ReceivedDirectMessageForUserDto } from '../models/received-user-message';
+import { SendDirectMessageDto } from '../models/send-direct-message';
 
 export const receivedNewOnlineUserAction = createAction(
   '[DM] RECEIVED_NEW_ONLINE_USER',
