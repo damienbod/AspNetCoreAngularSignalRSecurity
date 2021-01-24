@@ -21,6 +21,7 @@
 
 ## History
 
+2021-01-24 Updated Direct messages to Angular CLI version, linted, prettier
 
 2021-01-23 Updated to .NET 5, Azure SDK access, ngrx re-write, updated Angular project
 

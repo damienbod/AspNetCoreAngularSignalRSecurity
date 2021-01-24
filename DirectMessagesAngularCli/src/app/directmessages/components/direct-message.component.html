@@ -1,0 +1,67 @@
+﻿<div class="full-width" *ngIf="isAuthorized">
+  <div class="left-navigation-container">
+    <nav>
+      <mat-list>
+        <mat-list-item
+          *ngFor="let onlineuser of (dmState$ | async)?.dm?.onlineUsers"
+        >
+          <a mat-button (click)="selectChat(onlineuser.userName)">{{
+            onlineuser.userName
+          }}</a>
+        </mat-list-item>
+      </mat-list>
+    </nav>
+  </div>
+  <div class="column-container content-container">
+    <div class="row-container info-bar">
+      <h3 style="padding-left: 20px">{{ selectedOnlineUserName }}</h3>
+      <a
+        mat-button
+        (click)="sendMessage()"
+        *ngIf="
+          connected &&
+          selectedOnlineUserName &&
+          selectedOnlineUserName !== '' &&
+          message !== ''
+        "
+        >SEND</a
+      >
+      <a mat-button (click)="disconnect()" *ngIf="connected">Disconnect</a>
+      <a mat-button (click)="connect()" *ngIf="!connected">Connect</a>
+    </div>
+
+    <div
+      class="content"
+      *ngIf="selectedOnlineUserName && selectedOnlineUserName !== ''"
+    >
+      <mat-form-field style="width: 95%">
+        <textarea
+          matInput
+          placeholder="your message"
+          [(ngModel)]="message"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="2"
+          cdkAutosizeMaxRows="5"
+        ></textarea>
+      </mat-form-field>
+
+      <mat-chip-list class="mat-chip-list-stacked">
+        <ng-container
+          *ngFor="let directMessage of (dmState$ | async)?.dm?.directMessages"
+        >
+          <ng-container *ngIf="getUserInfoName(directMessage) !== ''">
+            <mat-chip selected="true" style="width: 95%">
+              {{ getUserInfoName(directMessage) }} {{ directMessage.message }}
+            </mat-chip>
+          </ng-container>
+
+          <ng-container *ngIf="getUserInfoName(directMessage) === ''">
+            <mat-chip style="width: 95%">
+              {{ getUserInfoName(directMessage) }} {{ directMessage.message }}
+            </mat-chip>
+          </ng-container>
+        </ng-container>
+      </mat-chip-list>
+    </div>
+  </div>
+</div>

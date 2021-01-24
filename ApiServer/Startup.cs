@@ -41,6 +41,8 @@ namespace ApiServer
             //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
             services.Configure<ClientAppSettingsNewsApp>(Configuration.GetSection("ClientAppSettingsNewsApp"));
+            services.Configure<ClientAppSettingsDirectMessage>(Configuration.GetSection("ClientAppSettingsDirectMessage"));
+            
 
             services.AddTransient<IDataEventRecordRepository, DataEventRecordRepository>();
             services.AddSingleton<NewsStore>();
