@@ -21,20 +21,25 @@ export class DirectMessagesComponent implements OnInit {
   message = '';
   onlineUsers$: Observable<OnlineUser[]>;
   directMessages$: Observable<DirectMessage[]>;
-  //connected$: Observable<boolean>;
+  // connected$: Observable<boolean>;
   connected = false;
   constructor(
     private store: Store<any>,
     private oidcSecurityService: OidcSecurityService
   ) {
-    this.onlineUsers$ = this.store.pipe(select(fromSelectorsStore.selectOnlineUsers));
-    this.directMessages$ = this.store.pipe(select(fromSelectorsStore.selectDirectMessages));
+    this.onlineUsers$ = this.store.pipe(
+      select(fromSelectorsStore.selectOnlineUsers)
+    );
+    this.directMessages$ = this.store.pipe(
+      select(fromSelectorsStore.selectDirectMessages)
+    );
 
-    this.store.pipe(select(fromSelectorsStore.selectConnected)).subscribe(data => {
-      console.log(data);
-      this.connected = data;
-    });
-
+    this.store
+      .pipe(select(fromSelectorsStore.selectConnected))
+      .subscribe((data) => {
+        console.log(data);
+        this.connected = data;
+      });
   }
 
   ngOnInit(): void {
