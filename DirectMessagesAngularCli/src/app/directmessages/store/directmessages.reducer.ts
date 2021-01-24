@@ -15,6 +15,7 @@ export function directMessagesReducer(
   action: directMessagesAction.Actions
 ): DirectMessagesState {
   switch (action.type) {
+
     case directMessagesAction.RECEIVED_DIRECT_MESSAGE: {
       const directMessage: DirectMessage = {
         message: action.message,
