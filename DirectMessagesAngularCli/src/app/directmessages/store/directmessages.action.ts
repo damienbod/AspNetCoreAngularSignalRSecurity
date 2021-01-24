@@ -29,7 +29,7 @@ export const sendDirectMessageAction = createAction(
   '[DM] SEND_DIRECT_MESSAGE',
   props<{ payload: SendDirectMessageDto }>()
 );
-export const receivedUserMessageAction = createAction(
+export const receivedDirectMessageForUserAction = createAction(
   '[DM] RECEIVED_DIRECT_MESSAGE',
   props<{ payload: ReceivedUserMessageDto }>()
 );

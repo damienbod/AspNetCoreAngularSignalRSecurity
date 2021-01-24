@@ -82,7 +82,7 @@ export class DirectMessagesService {
       console.log('NewOnlineUser received');
       console.log(onlineUser);
       this.store.dispatch(
-        new directMessagesActions.ReceivedNewOnlineUser(onlineUser)
+        directMessagesActions.receivedNewOnlineUserAction({ payload: onlineUser })
       );
     });
 
@@ -90,13 +90,13 @@ export class DirectMessagesService {
       console.log('OnlineUsers received');
       console.log(onlineUsers);
       this.store.dispatch(
-        new directMessagesActions.ReceivedOnlineUsers(onlineUsers)
+        directMessagesActions.receivedOnlineUsersAction({ payload: onlineUsers })
       );
     });
 
     this.hubConnection.on('Joined', (onlineUser: OnlineUser) => {
       console.log('Joined received');
-      this.store.dispatch(new directMessagesActions.JoinSent());
+      this.store.dispatch(directMessagesActions.joinAction());
       console.log(onlineUser);
     });
 
@@ -105,14 +105,16 @@ export class DirectMessagesService {
       (message: string, onlineUser: OnlineUser) => {
         console.log('SendDM received');
         this.store.dispatch(
-          new directMessagesActions.ReceivedDirectMessage(message, onlineUser)
+
+          directMessagesActions.receivedDirectMessageForUserAction({ payload: {onlineUser, message} })
+
         );
       }
     );
 
     this.hubConnection.on('UserLeft', (name: string) => {
       console.log('UserLeft received');
-      this.store.dispatch(new directMessagesActions.ReceivedUserLeft(name));
+      this.store.dispatch(directMessagesActions.receivedUserLeftAction({ payload: name }));
     });
   }
 }

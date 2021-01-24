@@ -1,7 +1,7 @@
 import { OnlineUser } from "./online-user";
 
 
-export class ReceivedUserMessageDto {
+export class ReceivedDirectMessageForUserDto {
   public onlineUser: OnlineUser = { connectionId: '', userName: '' };
   public message = '';
 }

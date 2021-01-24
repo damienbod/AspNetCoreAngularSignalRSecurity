@@ -1,16 +1,69 @@
 import { DirectMessagesState } from './directmessages.state';
 import * as directMessagesAction from './directmessages.action';
 import { DirectMessage } from '../models/direct-message';
+import { createReducer, on, Action } from '@ngrx/store';
 
 export const initialState: DirectMessagesState = {
-  dm: {
-    onlineUsers: [],
-    directMessages: [],
-    connected: false,
-  },
+  onlineUsers: [],
+  directMessages: [],
+  connected: false,
 };
 
+// on(
+//   YOUR_ACTION(S)_HERE,
+//   (state, { payload }) => {
+//   const { news } = state;
+//   const { newsItems, groups } = news;
+//     return {
+//       ...state,
+//       news: {
+//     newsItems,
+//     groups: [...groups, action.group]
+//   }
+//     };
+//   }
+// ),
+
+// or
+
+// on(
+//   YOUR_ACTION(S)_HERE,
+//   (state, { payload }) => {
+//   const { news } = state;
+//     return {
+//       ...state,
+//       news: {
+//     newsItems: news.newsItems,
+//     groups: [...news.groups, action.group]
+//   }
+//     };
+//   }
+// ),
+
+const directMessagesReducerInternal = createReducer(
+  initialState,
+  on(directMessagesAction.joinActionFinished, (state, { payload }) => {
+    const allGroups = [...state.groups, payload];
+    const allGroupsWithoutDuplicates = [...new Set(allGroups)];
+    return {
+      ...state,
+      groups: [...allGroupsWithoutDuplicates],
+    };
+  })
+
+  );
+
 export function directMessagesReducer(
+  state: DirectMessagesState | undefined,
+  action: Action
+): DirectMessagesState {
+  return directMessagesReducerInternal(state, action);
+}
+
+
+
+
+export function directMessagesReducerOld(
   state = initialState,
   action: directMessagesAction.Actions
 ): DirectMessagesState {
