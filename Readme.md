@@ -21,6 +21,8 @@
 
 ## History
 
+2021-03-05 Updated npm, nuget packages
+
 2021-02-28 Updated npm, nuget packages
 
 2021-01-24 Updated Direct messages to Angular CLI version, linted, prettier
