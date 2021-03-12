@@ -34,7 +34,7 @@
     "angular-auth-oidc-client": "11.6.2",
     "bootstrap": "4.6.0",
     "ie-shim": "0.1.0",
-    "msgpack5": "5.0.0",
+    "msgpack5": "5.2.1",
     "rxjs": "~6.6.6",
     "rxjs-compat": "^6.6.3"
   },
