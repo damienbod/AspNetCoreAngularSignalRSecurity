@@ -33,7 +33,7 @@
     "@ngrx/router-store": "11.0.1",
     "@ngrx/store": "11.0.1",
     "@ngrx/store-devtools": "11.0.1",
-    "msgpack5": "5.0.0"
+    "msgpack5": "5.2.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1102.3",
