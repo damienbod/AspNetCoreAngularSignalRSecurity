@@ -26,7 +26,7 @@
     "@ngrx/router-store": "12.0.0",
     "@ngrx/store": "12.0.0",
     "@ngrx/store-devtools": "12.0.0",
-    "angular-auth-oidc-client": "^11.6.4",
+    "angular-auth-oidc-client": "^11.6.8",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
     "msgpack5": "5.2.1",
