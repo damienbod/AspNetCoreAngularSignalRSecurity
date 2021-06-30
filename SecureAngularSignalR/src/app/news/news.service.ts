@@ -58,7 +58,7 @@ export class NewsService {
   }
 
   getAllGroups(): Observable<string[]> {
-    const token = this.oidcSecurityService.getToken();
+    const token = this.oidcSecurityService.getAccessToken();
     console.log('getAllGroups token:');
     console.log(token);
     if (token !== '') {
@@ -84,7 +84,7 @@ export class NewsService {
 
   private initHub() {
     console.log('initHub');
-    const token = this.oidcSecurityService.getToken();
+    const token = this.oidcSecurityService.getAccessToken();
     let tokenValue = '';
     if (token !== '') {
       tokenValue = '?token=' + token;
