@@ -20,7 +20,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 export const httpLoaderFactory = (httpClient: HttpClient) => {
   const config$ = httpClient
-    .get<any>(`https://offeringsolutions-sts.azurewebsites.net/api/ClientAppSettings`)
+    .get<any>(`https://localhost:44390/api/ClientAppSettingsNewsApp`)
     .pipe(
       map((customConfig: any) => {
         return {

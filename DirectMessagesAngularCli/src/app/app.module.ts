@@ -26,7 +26,7 @@ import { DirectMessagesModule } from './directmessages/directmessages.module';
 
 export const httpLoaderFactory = (httpClient: HttpClient) => {
   const config$ = httpClient
-    .get<any>(`https://offeringsolutions-sts.azurewebsites.net/api/ClientAppSettings`)
+  .get<any>(`https://localhost:44390/api/ClientAppSettingsDirectMessage`)
     .pipe(
       map((customConfig: any) => {
         return {
