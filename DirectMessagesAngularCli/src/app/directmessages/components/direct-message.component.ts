@@ -43,14 +43,13 @@ export class DirectMessagesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.oidcSecurityService.isAuthenticated$.subscribe(
-      (isAuthorized: boolean) => {
-        this.isAuthorized = isAuthorized;
-        if (isAuthorized) {
-          console.log('isAuthorized getting data');
-        }
+
+    this.oidcSecurityService.isAuthenticated$.subscribe((authn) => {
+      this.isAuthorized = authn as boolean;
+      if (this.isAuthorized) {
+        console.log('isAuthorized getting data');
       }
-    );
+    });
 
     console.log('IsAuthorized:' + this.isAuthorized);
   }

@@ -17,16 +17,12 @@ export class AppComponent implements OnInit {
   constructor(public oidcSecurityService: OidcSecurityService) {}
 
   ngOnInit(): void {
-    this.oidcSecurityService
-      .checkAuth()
-      .subscribe((isAuthenticated) =>
-        console.log('app authenticated', isAuthenticated)
-      );
-    this.oidcSecurityService.isAuthenticated$.subscribe(
-      (isAuthorized: boolean) => {
-        this.isAuthorized = isAuthorized;
-      }
-    );
+
+    this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated, accessToken }) => {
+      console.log('app authenticated', isAuthenticated);
+      this.isAuthorized = isAuthenticated;
+      console.log(`Current access token is '${accessToken}'`);
+    });
 
     this.oidcSecurityService.userData$.subscribe((userData: any) => {
       if (userData) {

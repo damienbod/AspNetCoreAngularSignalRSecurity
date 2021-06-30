@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -50,21 +50,20 @@ export class DirectMessagesService {
   }
 
   private init(): void {
-    this.oidcSecurityService.isAuthenticated$.subscribe(
-      (isAuthorized: boolean) => {
-        this.isAuthorized = isAuthorized;
-        if (this.isAuthorized) {
-          this.initHub();
-        }
+
+    this.oidcSecurityService.isAuthenticated$.subscribe((authn) => {
+      this.isAuthorized = authn as boolean;
+      if (this.isAuthorized) {
+        this.initHub();
       }
-    );
+    });
 
     console.log('IsAuthorized:' + this.isAuthorized);
   }
 
   private initHub(): void {
     console.log('DMS: initHub');
-    const token = this.oidcSecurityService.getToken();
+    const token = this.oidcSecurityService.getAccessToken();
     let tokenValue = '';
     if (token !== '') {
       tokenValue = '?token=' + token;
