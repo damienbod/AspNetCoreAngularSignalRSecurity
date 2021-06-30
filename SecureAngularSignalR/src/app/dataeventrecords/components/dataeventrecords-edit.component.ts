@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
-import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { ConfigAuthenticatedResult, OidcSecurityService } from 'angular-auth-oidc-client';
 
 import { DataEventRecordsService } from '../dataeventrecords.service';
 import { DataEventRecord } from '../models/DataEventRecord';
@@ -21,7 +21,7 @@ export class DataEventRecordsEditComponent implements OnInit {
     timestamp: '',
   };
 
-  isAuthenticated$: Observable<boolean>;
+  isAuthenticated$: Observable<boolean | ConfigAuthenticatedResult[]>;
 
   constructor(
     private dataEventRecordsService: DataEventRecordsService,

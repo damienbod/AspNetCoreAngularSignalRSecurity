@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { ConfigAuthenticatedResult, OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-component',
@@ -9,7 +9,7 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  isAuthenticated$: Observable<boolean>;
+  isAuthenticated$: Observable<boolean | ConfigAuthenticatedResult[]>;
 
   constructor(public oidcSecurityService: OidcSecurityService) {
     this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
