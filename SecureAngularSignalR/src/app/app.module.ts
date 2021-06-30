@@ -1,4 +1,8 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { AuthModule, LogLevel, StsConfigHttpLoader, StsConfigLoader } from 'angular-auth-oidc-client';
+import { map, switchMap } from 'rxjs/operators';
+
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -7,7 +11,6 @@ import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { NewsModule } from './news/news.module';
 import { Configuration } from './app.constants';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DataEventRecordsModule } from './dataeventrecords/dataeventrecords.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -15,18 +18,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { AuthModule, OidcConfigService } from 'angular-auth-oidc-client';
-
-import { map, switchMap } from 'rxjs/operators';
-
-export function configureAuth(
-  oidcConfigService: OidcConfigService,
-  httpClient: HttpClient
-) {
-  const setupAction$ = httpClient
-    .get<any>(`https://localhost:44390/api/ClientAppSettingsNewsApp`)
+export const httpLoaderFactory = (httpClient: HttpClient) => {
+  const config$ = httpClient
+    .get<any>(`https://offeringsolutions-sts.azurewebsites.net/api/ClientAppSettings`)
     .pipe(
-      map((customConfig) => {
+      map((customConfig: any) => {
         return {
           stsServer: customConfig.stsServer,
           redirectUrl: customConfig.redirect_url,
@@ -46,20 +42,20 @@ export function configureAuth(
           historyCleanupOff: true,
           // autoUserinfo: false,
         };
-      }),
-      switchMap((config) => oidcConfigService.withConfig(config))
-    );
+      })
+    )
+    .toPromise();
 
-  return () => setupAction$.toPromise();
-}
+  return new StsConfigHttpLoader(config$);
+};
 
 @NgModule({
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutes,
     SharedModule,
     HttpClientModule,
-    AuthModule.forRoot(),
     CoreModule.forRoot(),
     HomeModule,
     NewsModule,
@@ -69,21 +65,15 @@ export function configureAuth(
     StoreDevtoolsModule.instrument({
       maxAge: 25, //  Retains last 25 states
     }),
+    AuthModule.forRoot({
+      loader: {
+        provide: StsConfigLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
-
-  declarations: [AppComponent],
-
-  providers: [
-    OidcConfigService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: configureAuth,
-      deps: [OidcConfigService, HttpClient],
-      multi: true,
-    },
-    Configuration,
-  ],
-
+  providers: [Configuration],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
