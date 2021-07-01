@@ -49,14 +49,6 @@ export class DirectMessagesService {
     }
   }
 
-  test(): void {
-    this.oidcSecurityService.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
-      this.isAuthorized = isAuthenticated;
-    });
-
-    console.log('IsAuthorized:' + this.isAuthorized);
-  }
-
   private init(): void {
 
     this.oidcSecurityService.isAuthenticated$.subscribe((authn) => {
@@ -64,9 +56,8 @@ export class DirectMessagesService {
       if (this.isAuthorized) {
         this.initHub();
       }
+      console.log('IsAuthorized:' + this.isAuthorized);
     });
-
-    console.log('IsAuthorized:' + this.isAuthorized);
   }
 
   private initHub(): void {
