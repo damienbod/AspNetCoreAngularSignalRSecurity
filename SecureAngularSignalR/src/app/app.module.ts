@@ -24,7 +24,7 @@ export const httpLoaderFactory = (httpClient: HttpClient) => {
     .pipe(
       map((customConfig: any) => {
         return {
-          stsServer: customConfig.stsServer,
+          authority: customConfig.stsServer,
           redirectUrl: customConfig.redirect_url,
           clientId: customConfig.client_id,
           responseType: customConfig.response_type,
@@ -38,9 +38,9 @@ export const httpLoaderFactory = (httpClient: HttpClient) => {
           unauthorizedRoute: customConfig.unauthorized_route,
           logLevel: 0, // LogLevel.Debug, // customConfig.logLevel
           maxIdTokenIatOffsetAllowedInSeconds:
-            customConfig.max_id_token_iat_offset_allowed_in_seconds,
+          customConfig.max_id_token_iat_offset_allowed_in_seconds,
           historyCleanupOff: true,
-          // autoUserinfo: false,
+          // autoUserInfo: false,
         };
       })
     )

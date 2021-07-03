@@ -30,7 +30,7 @@ export const httpLoaderFactory = (httpClient: HttpClient) => {
     .pipe(
       map((customConfig: any) => {
         return {
-          stsServer: 'https://localhost:44318',
+          authority: 'https://localhost:44318',
           redirectUrl: window.location.origin,
           postLogoutRedirectUri: 'https://localhost:44395/unauthorized',
           clientId: 'angularclient2',

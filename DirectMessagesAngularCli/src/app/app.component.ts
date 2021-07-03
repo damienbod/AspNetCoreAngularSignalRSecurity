@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
       console.log(`Current access token is '${accessToken}'`);
     });
 
-    this.oidcSecurityService.userData$.subscribe((userData: any) => {
+    this.oidcSecurityService.userData$.subscribe(({ userData }) => {
       if (userData) {
         this.email = userData.email;
       }

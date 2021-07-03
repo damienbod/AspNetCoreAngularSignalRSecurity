@@ -71,9 +71,9 @@ export class NewsService {
 
   private init() {
     this.oidcSecurityService.isAuthenticated$.subscribe(
-      (isAuthorized: boolean) => {
-        this.isAuthorized = isAuthorized;
-        if (isAuthorized) {
+      ({isAuthenticated}) => {
+        this.isAuthorized = isAuthenticated;
+        if (isAuthenticated) {
           this.initHub();
         }
       }

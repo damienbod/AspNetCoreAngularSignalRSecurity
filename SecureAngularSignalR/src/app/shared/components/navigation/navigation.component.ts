@@ -15,15 +15,15 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     this.oidcSecurityService.isAuthenticated$.subscribe(
-      (isAuthorized: boolean) => {
-        this.isAuthorized = isAuthorized;
-        if (isAuthorized) {
+      ({isAuthenticated}) => {
+        this.isAuthorized = isAuthenticated;
+        if (isAuthenticated) {
           console.log('isAuthorized getting data');
         }
       }
     );
 
-    this.oidcSecurityService.userData$.subscribe((userData: any) => {
+    this.oidcSecurityService.userData$.subscribe(({userData}) => {
       if (userData && userData !== '' && userData.role) {
         this.hasDataEventRecordsAdminRole = userData.role.every(
           (row) => row === 'dataEventRecords.admin'

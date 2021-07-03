@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.oidcSecurityService.isAuthenticated$.subscribe(
-      (isAuthenticated: boolean) => {
+      ({isAuthenticated}) => {
         this.isAuthenticated = isAuthenticated;
         if (isAuthenticated) {
           this.init();

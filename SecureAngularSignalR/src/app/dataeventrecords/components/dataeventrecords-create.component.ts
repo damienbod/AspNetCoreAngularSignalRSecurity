@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { OidcSecurityService, ConfigAuthenticatedResult } from 'angular-auth-oidc-client';
+import { AuthenticatedResult, OidcSecurityService } from 'angular-auth-oidc-client';
 
 import { DataEventRecordsService } from '../dataeventrecords.service';
 import { DataEventRecord } from '../models/DataEventRecord';
@@ -20,7 +20,7 @@ export class DataEventRecordsCreateComponent implements OnInit {
     timestamp: '',
   };
 
-  isAuthenticated$: Observable<boolean | ConfigAuthenticatedResult[]>;
+  isAuthenticated$: Observable<AuthenticatedResult>;
 
   constructor(
     private dataEventRecordsService: DataEventRecordsService,
@@ -33,8 +33,8 @@ export class DataEventRecordsCreateComponent implements OnInit {
 
   ngOnInit() {
     this.isAuthenticated$.pipe(
-      map((isAuthorized: boolean) => {
-        console.log('isAuthorized: ' + isAuthorized);
+      map(({isAuthenticated}) => {
+        console.log('isAuthorized: ' + isAuthenticated);
       })
     );
 
