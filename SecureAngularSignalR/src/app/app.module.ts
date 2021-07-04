@@ -1,4 +1,8 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { AuthModule, LogLevel, StsConfigHttpLoader, StsConfigLoader } from 'angular-auth-oidc-client';
+import { map, switchMap } from 'rxjs/operators';
+
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -7,7 +11,6 @@ import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { NewsModule } from './news/news.module';
 import { Configuration } from './app.constants';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DataEventRecordsModule } from './dataeventrecords/dataeventrecords.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -15,20 +18,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { AuthModule, OidcConfigService } from 'angular-auth-oidc-client';
-
-import { map, switchMap } from 'rxjs/operators';
-
-export function configureAuth(
-  oidcConfigService: OidcConfigService,
-  httpClient: HttpClient
-) {
-  const setupAction$ = httpClient
+export const httpLoaderFactory = (httpClient: HttpClient) => {
+  const config$ = httpClient
     .get<any>(`https://localhost:44390/api/ClientAppSettingsNewsApp`)
     .pipe(
-      map((customConfig) => {
+      map((customConfig: any) => {
         return {
-          stsServer: customConfig.stsServer,
+          authority: customConfig.stsServer,
           redirectUrl: customConfig.redirect_url,
           clientId: customConfig.client_id,
           responseType: customConfig.response_type,
@@ -42,24 +38,24 @@ export function configureAuth(
           unauthorizedRoute: customConfig.unauthorized_route,
           logLevel: 0, // LogLevel.Debug, // customConfig.logLevel
           maxIdTokenIatOffsetAllowedInSeconds:
-            customConfig.max_id_token_iat_offset_allowed_in_seconds,
+          customConfig.max_id_token_iat_offset_allowed_in_seconds,
           historyCleanupOff: true,
-          // autoUserinfo: false,
+          // autoUserInfo: false,
         };
-      }),
-      switchMap((config) => oidcConfigService.withConfig(config))
-    );
+      })
+    )
+    .toPromise();
 
-  return () => setupAction$.toPromise();
-}
+  return new StsConfigHttpLoader(config$);
+};
 
 @NgModule({
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutes,
     SharedModule,
     HttpClientModule,
-    AuthModule.forRoot(),
     CoreModule.forRoot(),
     HomeModule,
     NewsModule,
@@ -69,21 +65,15 @@ export function configureAuth(
     StoreDevtoolsModule.instrument({
       maxAge: 25, //  Retains last 25 states
     }),
+    AuthModule.forRoot({
+      loader: {
+        provide: StsConfigLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
-
-  declarations: [AppComponent],
-
-  providers: [
-    OidcConfigService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: configureAuth,
-      deps: [OidcConfigService, HttpClient],
-      multi: true,
-    },
-    Configuration,
-  ],
-
+  providers: [Configuration],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

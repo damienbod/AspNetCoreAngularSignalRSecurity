@@ -54,7 +54,7 @@ export class NewsComponent implements OnInit {
     console.log('go');
 
     this.oidcSecurityService.isAuthenticated$.subscribe(
-      (isAuthenticated: boolean) => {
+      ({isAuthenticated}) => {
         this.isAuthorized = isAuthenticated;
         if (isAuthenticated) {
           console.log(

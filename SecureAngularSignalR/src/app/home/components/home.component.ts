@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.oidcSecurityService.isAuthenticated$.subscribe(
-      (isAuthenticated: boolean) => {
+      ({isAuthenticated}) => {
         this.isAuthenticated = isAuthenticated;
         if (isAuthenticated) {
           this.init();
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   }
 
   private init() {
-    const token = this.oidcSecurityService.getToken();
+    const token = this.oidcSecurityService.getAccessToken();
     let tokenValue = '';
     if (token !== '') {
       tokenValue = '?token=' + token;
