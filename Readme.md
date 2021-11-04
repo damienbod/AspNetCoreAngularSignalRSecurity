@@ -23,7 +23,8 @@
 
 2021-11-04 Updated to .NET 6
 
-2021-06-30 Updated to OIDC V12, updated nuget packages
+2021-07-04 Updated to OIDC V12, updated nuget packages
+
 
 2021-05-14 Updated npm, nuget packages
 
