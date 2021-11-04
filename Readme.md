@@ -4,7 +4,7 @@
 
 ## Posts in this series:
 
-### ASP.NET Core 5
+### ASP.NET Core 6
 
 <ul>	
 	
@@ -24,7 +24,6 @@
 2021-11-04 Updated to .NET 6
 
 2021-07-04 Updated to OIDC V12, updated nuget packages
-
 
 2021-05-14 Updated npm, nuget packages
 
