@@ -18,3 +18,7 @@
 /_StsLogs.txt
 /SecureAngularSignalR/dist/
 /SecureAngularSignalR/debug.log
+/DirectMessagesAngularCli/.angular
+/SecureAngularSignalR/.angular
+/StsServerIdentity/usersdatabase.sqlite-shm
+/StsServerIdentity/usersdatabase.sqlite-wal
