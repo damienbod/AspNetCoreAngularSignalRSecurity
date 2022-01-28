@@ -21,6 +21,8 @@
 
 ## History
 
+2022-01-28 Updated nuget packages
+
 2021-11-04 Updated to .NET 6
 
 2021-07-04 Updated to OIDC V12, updated nuget packages
