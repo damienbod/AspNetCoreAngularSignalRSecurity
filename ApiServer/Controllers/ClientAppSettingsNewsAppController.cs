@@ -11,9 +11,9 @@ public class ClientAppSettingsNewsAppController : Controller
 {
     private readonly ClientAppSettings _clientAppSettings;
 
-    public ClientAppSettingsNewsAppController(IOptions<ClientAppSettings> clientAppSettings)
+    public ClientAppSettingsNewsAppController(IOptionsMonitor<ClientAppSettings> clientAppSettings)
     {
-        _clientAppSettings = clientAppSettings.Value;
+        _clientAppSettings = clientAppSettings.Get("NEWS");
     }
 
     [HttpGet]

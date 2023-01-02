@@ -11,9 +11,9 @@ public class ClientAppSettingsDirectMessageController : Controller
 {
     private readonly ClientAppSettings _clientAppSettings;
 
-    public ClientAppSettingsDirectMessageController(IOptions<ClientAppSettings> clientAppSettings)
+    public ClientAppSettingsDirectMessageController(IOptionsMonitor<ClientAppSettings> clientAppSettings)
     {
-        _clientAppSettings = clientAppSettings.Value;
+        _clientAppSettings = clientAppSettings.Get("DM");
     }
 
     [HttpGet]

@@ -31,8 +31,8 @@ public class Startup
         //IdentityModelEventSource.ShowPII = true;
         //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
-        services.Configure<ClientAppSettings>(Configuration.GetSection("ClientAppSettingsNewsApp"));
-        services.Configure<ClientAppSettings>(Configuration.GetSection("ClientAppSettingsDirectMessage"));
+        services.Configure<ClientAppSettings>("NEWS", Configuration.GetSection("ClientAppSettingsNewsApp"));
+        services.Configure<ClientAppSettings>("DM", Configuration.GetSection("ClientAppSettingsDirectMessage"));
 
         services.AddTransient<DataEventRecordRepository>();
         services.AddSingleton<NewsStore>();
