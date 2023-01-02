@@ -18,7 +18,7 @@ public class NewsHub : Hub
     {
         if(!_newsStore.GroupExists(newsItem.NewsGroup))
         {
-            throw new System.Exception("cannot send a news item to a group which does not exist.");
+            throw new Exception("cannot send a news item to a group which does not exist.");
         }
 
         _newsStore.CreateNewItem(newsItem);
@@ -29,7 +29,7 @@ public class NewsHub : Hub
     {
         if (!_newsStore.GroupExists(groupName))
         {
-            throw new System.Exception("cannot join a group which does not exist.");
+            throw new Exception("cannot join a group which does not exist.");
         }
 
         await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
@@ -43,7 +43,7 @@ public class NewsHub : Hub
     {
         if (!_newsStore.GroupExists(groupName))
         {
-            throw new System.Exception("cannot leave a group which does not exist.");
+            throw new Exception("cannot leave a group which does not exist.");
         }
 
         await Clients.Group(groupName).SendAsync("LeaveGroup", groupName);
