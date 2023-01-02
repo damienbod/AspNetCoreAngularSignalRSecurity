@@ -23,7 +23,7 @@ public class UserInfoInMemory
             return userAlreadyExists;
         }
 
-        throw new ArgumentNullException("name is null");
+        throw new ArgumentNullException(nameof(name));
     }
 
     public void Remove(string? name)
@@ -44,9 +44,10 @@ public class UserInfoInMemory
         if (!string.IsNullOrEmpty(username))
         {
             _onlineUser.TryGetValue(username, out UserInfo? userInfo);
-            return userInfo;
+            if(userInfo != null)
+                return userInfo;
         }
 
-        throw new ArgumentNullException("username is null");
+        throw new ArgumentNullException(nameof(username));
     }
 }

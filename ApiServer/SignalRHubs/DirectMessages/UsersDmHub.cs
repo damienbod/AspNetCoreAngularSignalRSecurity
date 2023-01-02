@@ -15,7 +15,7 @@ public class UsersDmHub : Hub
 
     public async Task Leave()
     {
-        _userInfoInMemory.Remove(Context.User.Identity.Name);
+        _userInfoInMemory.Remove(Context.User!.Identity!.Name);
         await Clients.AllExcept(new List<string> { Context.ConnectionId }).SendAsync(
                "UserLeft",
                Context.User.Identity.Name
@@ -24,11 +24,10 @@ public class UsersDmHub : Hub
 
     public async Task Join()
     {
-        if (!_userInfoInMemory.AddUpdate(Context.User.Identity.Name, Context.ConnectionId))
+        if (!_userInfoInMemory.AddUpdate(Context.User!.Identity!.Name, Context.ConnectionId))
         {
             // new user
-
-            var list = _userInfoInMemory.GetAllUsersExceptThis(Context.User.Identity.Name).ToList();
+            // var list = _userInfoInMemory.GetAllUsersExceptThis(Context.User.Identity.Name).ToList();
             await Clients.AllExcept(new List<string> { Context.ConnectionId }).SendAsync(
                 "NewOnlineUser",
                 _userInfoInMemory.GetUserInfo(Context.User.Identity.Name)
