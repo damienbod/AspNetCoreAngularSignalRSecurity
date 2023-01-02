@@ -34,7 +34,7 @@ namespace StsServerIdentity.Controllers
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
 
         private readonly IStringLocalizer _sharedLocalizer;
-        private readonly Fido2Storage _fido2Storage;
+        private readonly Fido2Store _fido2Storage;
 
         public ManageController(
           UserManager<ApplicationUser> userManager,
@@ -43,7 +43,7 @@ namespace StsServerIdentity.Controllers
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder,
           IStringLocalizerFactory factory,
-          Fido2Storage fido2Storage)
+          Fido2Store fido2Storage)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -386,7 +386,7 @@ namespace StsServerIdentity.Controllers
             }
 
             // remove Fido2 MFA if it exists
-            await _fido2Storage.RemoveCredentialsByUsername(user.UserName);
+            await _fido2Storage.RemoveCredentialsByUserNameAsync(user.UserName);
 
             var disable2faResult = await _userManager.SetTwoFactorEnabledAsync(user, false);
             if (!disable2faResult.Succeeded)

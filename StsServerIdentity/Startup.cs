@@ -87,7 +87,11 @@ namespace StsServerIdentity
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddErrorDescriber<StsIdentityErrorDescriber>()
                 .AddDefaultTokenProviders()
-                .AddTokenProvider<Fifo2UserTwoFactorTokenProvider>("FIDO2");
+                .AddTokenProvider<Fido2UserTwoFactorTokenProvider>("FIDO2");
+
+            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddTokenProvider<Fido2UserTwoFactorTokenProvider>("FIDO2");
 
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>,
@@ -135,8 +139,8 @@ namespace StsServerIdentity
                 .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
 
             services.Configure<Fido2Configuration>(Configuration.GetSection("fido2"));
-            services.Configure<Fido2MdsConfiguration>(Configuration.GetSection("fido2mds"));
-            services.AddScoped<Fido2Storage>();
+            services.AddScoped<Fido2Store>();
+
             // Adds a default in-memory implementation of IDistributedCache.
             services.AddDistributedMemoryCache();
             services.AddSession(options =>

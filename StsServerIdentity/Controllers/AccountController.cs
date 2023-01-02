@@ -1,12 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
 using StsServerIdentity.Models.AccountViewModels;
 using StsServerIdentity.Models;
 using IdentityServer4.Services;
@@ -28,7 +24,7 @@ namespace StsServerIdentity.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly Fido2Storage _fido2Storage;
+        private readonly Fido2Store _fido2Storage;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -49,7 +45,7 @@ namespace StsServerIdentity.Controllers
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IStringLocalizerFactory factory,
-            Fido2Storage fido2Storage,
+            Fido2Store fido2Storage,
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events)
 
@@ -116,7 +112,7 @@ namespace StsServerIdentity.Controllers
                 }
                 if (result.RequiresTwoFactor)
                 {
-                    var fido2ItemExistsForUser = await _fido2Storage.GetCredentialsByUsername(model.Email);
+                    var fido2ItemExistsForUser = await _fido2Storage.GetCredentialsByUserNameAsync(model.Email);
                     if (fido2ItemExistsForUser.Count > 0)
                     {
                         return RedirectToAction(nameof(LoginFido2Mfa), new { ReturnUrl = returnUrl, RememberMe = model.RememberLogin });
@@ -340,7 +336,7 @@ namespace StsServerIdentity.Controllers
             }
             if (result.RequiresTwoFactor)
             {
-                var fido2ItemExistsForUser = await _fido2Storage.GetCredentialsByUsername(email);
+                var fido2ItemExistsForUser = await _fido2Storage.GetCredentialsByUserNameAsync(email);
                 if (fido2ItemExistsForUser.Count > 0)
                 {
                     return RedirectToAction(nameof(LoginFido2Mfa), new { ReturnUrl = returnUrl });

@@ -54,7 +54,9 @@ async function handleRegisterSubmit(event) {
         return c;
     });
 
-    if (makeCredentialOptions.authenticatorSelection.authenticatorAttachment === null) makeCredentialOptions.authenticatorSelection.authenticatorAttachment = undefined;
+    if (makeCredentialOptions.authenticatorSelection.authenticatorAttachment === null) {
+        makeCredentialOptions.authenticatorSelection.authenticatorAttachment = undefined;
+    }
 
     //console.log("Credential Options Formatted", makeCredentialOptions);
 
@@ -155,7 +157,8 @@ async function registerNewCredential(newCredential) {
         timer: 2000
     });
 
-    window.location.href = "/Manage/GenerateRecoveryCodesWarning";
+    // possible values: true,false
+    window.location.href = "/Identity/Account/Manage/GenerateRecoveryCodes";
 }
 
 async function registerCredentialWithServer(formData) {
