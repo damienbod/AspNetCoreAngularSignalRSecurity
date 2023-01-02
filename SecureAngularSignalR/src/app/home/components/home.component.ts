@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
   private init() {
     let tokenValue = '';
     this.oidcSecurityService.getAccessToken().subscribe((token) => {
-      console.log(token)
+      // console.log(token)
       if (token !== '') {
         tokenValue = '?token=' + token;
       }

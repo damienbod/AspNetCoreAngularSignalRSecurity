@@ -25,7 +25,7 @@ export class DataEventRecordsService {
     this.headers = this.headers.set('Accept', 'application/json');
 
     this.oidcSecurityService.getAccessToken().subscribe((token) => {
-      console.log(token)
+      // console.log(token)
       if (token !== '') {
         const tokenValue = 'Bearer ' + token;
         this.headers = this.headers.append('Authorization', tokenValue);
