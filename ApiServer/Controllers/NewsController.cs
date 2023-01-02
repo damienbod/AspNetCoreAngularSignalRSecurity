@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ApiServer.Providers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ApiServer.Controllers;
 
-[Authorize(AuthenticationSchemes = "Bearer")]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/[controller]")]
 public class NewsController : Controller
 {

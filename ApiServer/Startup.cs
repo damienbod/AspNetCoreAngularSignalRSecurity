@@ -69,7 +69,7 @@ public class Startup
             .RequireClaim("scope", "dataEventRecords")
             .Build();
 
-        services.AddAuthentication("Bearer")
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
                 options.Authority = "https://localhost:44318/";
@@ -111,9 +111,7 @@ public class Startup
         });
 
         services.AddAuthorization();
-
         services.AddSignalR();
-
         services.AddControllers();
 
         services.AddSwaggerGen(c =>
