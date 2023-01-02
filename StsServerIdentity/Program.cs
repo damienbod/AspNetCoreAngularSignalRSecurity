@@ -40,35 +40,35 @@ namespace StsServerIdentity
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((context, config) =>
-                {
-                    var builder = config.Build();
-                    var keyVaultEndpoint = builder["AzureKeyVaultEndpoint"];
-                    if (!string.IsNullOrEmpty(keyVaultEndpoint))
-                    {
-                        var azureServiceTokenProvider = new AzureServiceTokenProvider();
-                        config.AddAzureKeyVault(new Uri(keyVaultEndpoint), new DefaultAzureCredential());
-                    }
-                    else
-                    {
-                        IHostEnvironment env = context.HostingEnvironment;
+       Host.CreateDefaultBuilder(args)
+           .ConfigureAppConfiguration((context, config) =>
+           {
+               var builder = config.Build();
+               var keyVaultEndpoint = builder["AzureKeyVaultEndpoint"];
+               if (!string.IsNullOrEmpty(keyVaultEndpoint))
+               {
+                   var azureServiceTokenProvider = new AzureServiceTokenProvider();
+                   config.AddAzureKeyVault(new Uri(keyVaultEndpoint), new DefaultAzureCredential());
+               }
+               else
+               {
+                   IHostEnvironment env = context.HostingEnvironment;
 
-                        config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                            .AddEnvironmentVariables();
-                        //.AddUserSecrets("your user secret....");
-                    }
-                })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>()
-                        .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
-                        .ReadFrom.Configuration(hostingContext.Configuration)
-                        .Enrich.FromLogContext()
-                        .WriteTo.File("../StsLogs.txt")
-                        .WriteTo.Console(theme: AnsiConsoleTheme.Code)
-                );
-                });
+                   config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                       .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                       .AddEnvironmentVariables();
+                   //.AddUserSecrets("your user secret....");
+               }
+
+           })
+           .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
+               .ReadFrom.Configuration(hostingContext.Configuration)
+               .Enrich.FromLogContext()
+               .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+               .WriteTo.File("../stsLogs.txt"))
+           .ConfigureWebHostDefaults(webBuilder =>
+           {
+               webBuilder.UseStartup<Startup>();
+           });
     }
 }
