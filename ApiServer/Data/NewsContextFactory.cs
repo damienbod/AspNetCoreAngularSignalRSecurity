@@ -1,30 +1,27 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
 
-namespace ApiServer.Data
+namespace ApiServer.Data;
+
+/// <summary>
+/// Required for migrations
+/// </summary>
+public class NewsContextFactory : IDesignTimeDbContextFactory<NewsContext>
 {
-    /// <summary>
-    /// Required for migrations
-    /// </summary>
-    public class NewsContextFactory : IDesignTimeDbContextFactory<NewsContext>
+    public NewsContext CreateDbContext(string[] args)
     {
-        public NewsContext CreateDbContext(string[] args)
-        {
-            var deploymentType = 
-                Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", EnvironmentVariableTarget.Machine);
+        var deploymentType = 
+            Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", EnvironmentVariableTarget.Machine);
 
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{deploymentType}.json", optional: true)
-                .Build();
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .AddJsonFile($"appsettings.{deploymentType}.json", optional: true)
+            .Build();
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
-            var optionsBuilder = new DbContextOptionsBuilder<NewsContext>();
-            optionsBuilder.UseSqlite(connectionString);
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var optionsBuilder = new DbContextOptionsBuilder<NewsContext>();
+        optionsBuilder.UseSqlite(connectionString);
 
-            return new NewsContext(optionsBuilder.Options);
-        }
+        return new NewsContext(optionsBuilder.Options);
     }
 }

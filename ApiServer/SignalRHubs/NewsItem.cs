@@ -1,10 +1,9 @@
-﻿namespace ApiServer.SignalRHubs
+﻿namespace ApiServer.SignalRHubs;
+
+public class NewsItem
 {
-    public class NewsItem
-    {
-        public string Header { get; set; }
-        public string NewsText { get; set; }
-        public string Author { get; set; }
-        public string NewsGroup { get; set; }
-    }
+    public string Header { get; set; } = string.Empty;
+    public string NewsText { get; set; } = string.Empty;
+    public string Author { get; set; } = string.Empty;
+    public string NewsGroup { get; set; } = string.Empty;
 }
