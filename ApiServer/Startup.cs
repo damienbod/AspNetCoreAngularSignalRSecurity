@@ -28,7 +28,6 @@ public class Startup
     {
         //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
         //IdentityModelEventSource.ShowPII = true;
-        //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
         services.Configure<ClientAppSettings>("NEWS", Configuration.GetSection("ClientAppSettingsNewsApp"));
         services.Configure<ClientAppSettings>("DM", Configuration.GetSection("ClientAppSettingsDirectMessage"));
@@ -58,7 +57,11 @@ public class Startup
                         .AllowAnyHeader()
                         .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyMethod()
-                        .WithOrigins("https://localhost:44311", "https://localhost:44390", "https://localhost:44395", "https://localhost:44318");
+                        .WithOrigins(
+                            "https://localhost:44311", 
+                            "https://localhost:44390", 
+                            "https://localhost:44395", 
+                            "https://localhost:44318");
                 });
         });
 
