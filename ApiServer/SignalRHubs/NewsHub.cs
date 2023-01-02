@@ -7,7 +7,7 @@ namespace ApiServer.SignalRHubs;
 [Authorize(AuthenticationSchemes = "Bearer")]
 public class NewsHub : Hub
 {
-    private NewsStore _newsStore;
+    private readonly NewsStore _newsStore;
 
     public NewsHub(NewsStore newsStore)
     {

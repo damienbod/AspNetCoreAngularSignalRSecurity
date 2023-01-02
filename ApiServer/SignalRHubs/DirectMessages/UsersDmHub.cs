@@ -46,13 +46,13 @@ public class UsersDmHub : Hub
 
         await Clients.Client(Context.ConnectionId).SendAsync(
             "OnlineUsers",
-            _userInfoInMemory.GetAllUsersExceptThis(Context.User.Identity.Name)
+            _userInfoInMemory.GetAllUsersExceptThis(Context.User!.Identity!.Name)
         );
     }
 
     public Task SendDirectMessage(string message, string targetUserName)
     {
-        var userInfoSender = _userInfoInMemory.GetUserInfo(Context.User.Identity.Name);
+        var userInfoSender = _userInfoInMemory.GetUserInfo(Context.User!.Identity!.Name);
         var userInfoReciever = _userInfoInMemory.GetUserInfo(targetUserName);
         return Clients.Client(userInfoReciever.ConnectionId).SendAsync("SendDM", message, userInfoSender);
     }

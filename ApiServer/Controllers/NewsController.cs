@@ -8,7 +8,7 @@ namespace ApiServer.Controllers;
 [Route("api/[controller]")]
 public class NewsController : Controller
 {
-    private NewsStore _newsStore;
+    private readonly NewsStore _newsStore;
 
     public NewsController(NewsStore newsStore)
     {
@@ -22,7 +22,9 @@ public class NewsController : Controller
         {
             return BadRequest();
         }
+
         _newsStore.AddGroup(group);
+
         return Created("AddGroup", group);
     }
 
@@ -30,7 +32,6 @@ public class NewsController : Controller
     [Route("")]
     public List<string> GetAllGroups()
     {
-        var data = _newsStore.GetAllGroups();
         return _newsStore.GetAllGroups();
     }
 }

@@ -4,7 +4,7 @@ namespace ApiServer.SignalRHubs;
 
 public class UserInfoInMemory
 {
-    private ConcurrentDictionary<string, UserInfo> _onlineUser { get; set; } = new ConcurrentDictionary<string, UserInfo>();
+    private readonly ConcurrentDictionary<string, UserInfo> _onlineUser = new();
 
     public bool AddUpdate(string? name, string connectionId)
     {
@@ -34,8 +34,11 @@ public class UserInfoInMemory
         }
     }
 
-    public IEnumerable<UserInfo> GetAllUsersExceptThis(string username)
+    public IEnumerable<UserInfo> GetAllUsersExceptThis(string? username)
     {
+        if(!string.IsNullOrEmpty(username))
+            return new List<UserInfo>();
+
         return _onlineUser.Values.Where(item => item.UserName != username);
     }
 
