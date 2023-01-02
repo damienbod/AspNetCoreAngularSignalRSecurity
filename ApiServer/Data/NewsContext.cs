@@ -1,5 +1,4 @@
-﻿using ApiServer.Model;
-using ApiServer.Providers;
+﻿using ApiServer.Providers;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiServer.Data;

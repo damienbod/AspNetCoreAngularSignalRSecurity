@@ -16,6 +16,23 @@
 [https://damienbod.com/2017/12/05/sending-direct-messages-using-signalr-with-asp-net-core-and-angular/](Sending Direct Messages using SignalR with ASP.NET core and Angular)
 [https://damienbod.com/2018/10/30/implementing-user-management-with-asp-net-core-identity-and-custom-claims/](Implementing User Management with ASP.NET Core Identity and custom claims)
 
+## Run migrations
+
+### Console
+
+dotnet ef migrations add initSts -c DataEventRecordContext
+dotnet ef migrations add initSts -c NewsContext
+
+### Powershell
+
+Add-Migration "init_sts" -c DataEventRecordContext  
+Add-Migration "init_sts" -c NewsContext  
+
+## Running manually
+
+Update-Database -Context DataEventRecordContext
+Update-Database -Context NewsContext
+
 ## History
 
 2023-01-02 Updated .NET 7
