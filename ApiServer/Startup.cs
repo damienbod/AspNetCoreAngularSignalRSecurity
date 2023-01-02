@@ -12,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Serilog;
 using Microsoft.OpenApi.Models;
 using ApiServer.Model;
+using Microsoft.IdentityModel.Logging;
 
 namespace ApiServer;
 
@@ -26,8 +27,8 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-        //IdentityModelEventSource.ShowPII = true;
+        JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+        IdentityModelEventSource.ShowPII = true;
 
         services.Configure<ClientAppSettings>("NEWS", Configuration.GetSection("ClientAppSettingsNewsApp"));
         services.Configure<ClientAppSettings>("DM", Configuration.GetSection("ClientAppSettingsDirectMessage"));
@@ -69,52 +70,45 @@ public class Startup
             .RequireClaim("scope", "dataEventRecords")
             .Build();
 
-        var tokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidIssuer = "https://localhost:44318/",
-            ValidAudience = "dataEventRecordsApi",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("dataEventRecordsSecret")),
-            NameClaimType = "email",
-            RoleClaimType = "role", 
-        };
-
-        var jwtSecurityTokenHandler = new JwtSecurityTokenHandler
-        {
-            InboundClaimTypeMap = new Dictionary<string, string>()
-        };
-
         services.AddAuthentication("Bearer")
             .AddJwtBearer(options =>
-        {
-            options.Authority = "https://localhost:44318/";
-            options.Audience = "dataEventRecordsApi";
-            options.IncludeErrorDetails = true;
-            options.SaveToken = true;
-            options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(jwtSecurityTokenHandler);
-            options.TokenValidationParameters = tokenValidationParameters;
-            options.Events = new JwtBearerEvents
             {
-                OnMessageReceived = context =>
+                options.Authority = "https://localhost:44318/";
+                options.Audience = "dataEventRecordsApi";
+                options.IncludeErrorDetails = true;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    if ( ( context.Request.Path.Value!.StartsWith("/signalrhome")
-                        || context.Request.Path.Value!.StartsWith("/looney")
-                        || context.Request.Path.Value!.StartsWith("/usersdm") 
-                       )
-                        && context.Request.Query.TryGetValue("token", out StringValues token)
-                    )
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    NameClaimType = "email",
+                    RoleClaimType = "role",
+                    ValidAudiences = new List<string> { "dataEventRecordsApi" },
+                    ValidIssuers = new List<string> { "https://localhost:44318/" }
+                };
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
                     {
-                        context.Token = token;
-                    }
+                        if ( ( context.Request.Path.Value!.StartsWith("/signalrhome")
+                            || context.Request.Path.Value!.StartsWith("/looney")
+                            || context.Request.Path.Value!.StartsWith("/usersdm") 
+                           )
+                            && context.Request.Query.TryGetValue("token", out StringValues token)
+                        )
+                        {
+                            context.Token = token;
+                        }
 
-                    return Task.CompletedTask;
-                },
-                OnAuthenticationFailed = context =>
-                {
-                    var te = context.Exception;
-                    return Task.CompletedTask;
-                }
-            };
+                        return Task.CompletedTask;
+                    },
+                    OnAuthenticationFailed = context =>
+                    {
+                        var te = context.Exception;
+                        return Task.CompletedTask;
+                    }
+                };
         });
 
         services.AddAuthorization();
