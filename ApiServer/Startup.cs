@@ -40,10 +40,15 @@ public class Startup
         services.AddSingleton<UserInfoInMemory>();
 
         var defaultConnection = Configuration.GetConnectionString("DefaultConnection");
-        services.AddDbContext<NewsContext>(options => options.UseSqlite(defaultConnection), ServiceLifetime.Singleton);
+        services.AddDbContext<NewsContext>(options => 
+            options.UseSqlite(defaultConnection), 
+            ServiceLifetime.Singleton
+        );
 
         var sqliteConnectionString = Configuration.GetConnectionString("SqliteConnectionString");
-        services.AddDbContext<DataEventRecordContext>(options => options.UseSqlite(sqliteConnectionString) );
+        services.AddDbContext<DataEventRecordContext>(options =>
+            options.UseSqlite(sqliteConnectionString)
+        );
 
         services.AddCors(options =>
         {
