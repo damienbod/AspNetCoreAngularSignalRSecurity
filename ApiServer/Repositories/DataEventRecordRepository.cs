@@ -1,5 +1,4 @@
 ﻿using ApiServer.Model;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using ApiServer.Data;
 
@@ -10,15 +9,16 @@ public class DataEventRecordRepository
     private readonly DataEventRecordContext _context;
     private readonly ILogger _logger;
 
-    public DataEventRecordRepository(DataEventRecordContext context, ILoggerFactory loggerFactory, IDataProtectionProvider provider)
+    public DataEventRecordRepository(DataEventRecordContext context, ILoggerFactory loggerFactory)
     {
         _context = context;
-        _logger = loggerFactory.CreateLogger("IDataEventRecordResporitory");
+        _logger = loggerFactory.CreateLogger("DataEventRecordResporitory");
     }
 
     public IEnumerable<DataEventRecordDto> GetAll(string username)
     {
-        _logger.LogCritical("Getting a the existing records");
+        _logger.LogInformation("Getting a the existing records");
+
         return _context.DataEventRecords.Where(item => item.Username == username).Select(z =>
             new DataEventRecordDto
             {
