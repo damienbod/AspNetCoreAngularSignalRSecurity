@@ -51,7 +51,7 @@ public class NewsStore
         }
     }
 
-    public IEnumerable<NewsItem> GetAllNewsItems(string group)
+    public List<NewsItem> GetAllNewsItems(string group)
     {
         return _newsContext.NewsItemEntities.Where(item => item.NewsGroup == group).Select(z => 
             new NewsItem {
@@ -59,7 +59,7 @@ public class NewsStore
                 Header = z.Header,
                 NewsGroup = z.NewsGroup,
                 NewsText = z.NewsText
-            });
+            }).ToList();
     }
 
     public List<string> GetAllGroups()

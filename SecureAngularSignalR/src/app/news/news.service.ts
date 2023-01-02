@@ -23,6 +23,7 @@ export class NewsService {
     private configuration: Configuration,
     private oidcSecurityService: OidcSecurityService
   ) {
+    console.warn('BEGIN EWS ...')
     this.init();
     this.actionUrl = 'https://localhost:44390/api/news/';
 
