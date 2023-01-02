@@ -33,19 +33,19 @@ export const selectAllNewsGroupsFinishedAction = createAction(
   '[News] SELECTALL_GROUPS_COMPLETE',
   props<{ payload: string[] }>()
 );
-export const recieveNewsItemAction = createAction(
+export const receiveNewsItemAction = createAction(
   '[News] RECEIVED_NEWS_ITEM',
   props<{ payload: NewsItem }>()
 );
-export const recieveGroupJoinedAction = createAction(
+export const receiveGroupJoinedAction = createAction(
   '[News] RECEIVED_GROUP_JOINED',
   props<{ payload: string }>()
 );
-export const recieveGroupLeftAction = createAction(
+export const receiveGroupLeftAction = createAction(
   '[News] RECEIVED_GROUP_LEFT',
   props<{ payload: string }>()
 );
-export const recieveNewsGroupHistoryAction = createAction(
+export const receiveNewsGroupHistoryAction = createAction(
   '[News] RECEIVED_GROUP_HISTORY',
   props<{ payload: NewsItem[] }>()
 );

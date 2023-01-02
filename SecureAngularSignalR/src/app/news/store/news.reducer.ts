@@ -40,7 +40,7 @@ export const initialState: NewsState = {
 
 const newsReducerInternal = createReducer(
   initialState,
-  on(newsAction.recieveGroupJoinedAction, (state, { payload }) => {
+  on(newsAction.receiveGroupJoinedAction, (state, { payload }) => {
     const allGroups = [...state.groups, payload];
     const allGroupsWithoutDuplicates = [...new Set(allGroups)];
     return {
@@ -48,13 +48,13 @@ const newsReducerInternal = createReducer(
       groups: [...allGroupsWithoutDuplicates],
     };
   }),
-  on(newsAction.recieveNewsItemAction, (state, { payload }) => {
+  on(newsAction.receiveNewsItemAction, (state, { payload }) => {
     return {
       ...state,
       newsItems: [...state.newsItems, payload],
     };
   }),
-  on(newsAction.recieveNewsGroupHistoryAction, (state, { payload }) => {
+  on(newsAction.receiveNewsGroupHistoryAction, (state, { payload }) => {
     return {
       ...state,
       newsItems: [...payload],
@@ -68,7 +68,7 @@ const newsReducerInternal = createReducer(
       groups: [...allGroupsWithoutDuplicates],
     };
   }),
-  on(newsAction.recieveGroupLeftAction, (state, { payload }) => {
+  on(newsAction.receiveGroupLeftAction, (state, { payload }) => {
     const data = [];
     for (const entry of state.groups) {
       if (entry !== payload) {

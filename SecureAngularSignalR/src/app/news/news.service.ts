@@ -92,39 +92,39 @@ export class NewsService {
       if (token !== '') {
         tokenValue = '?token=' + token;
       }
-    });
 
-    this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${this.configuration.Server}looney${tokenValue}`)
-      .configureLogging(signalR.LogLevel.Information)
-      .build();
+      this.hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl(`${this.configuration.Server}looney${tokenValue}`)
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
 
-    this.hubConnection.start().catch((err) => console.error(err.toString()));
+      this.hubConnection.start().catch((err) => console.error(err.toString()));
 
-    this.hubConnection.on('Send', (newsItem: NewsItem) => {
-      this.store.dispatch(
-        newsAction.recieveNewsItemAction({ payload: newsItem })
-      );
-    });
+      this.hubConnection.on('Send', (newsItem: NewsItem) => {
+        this.store.dispatch(
+          newsAction.receiveNewsItemAction({ payload: newsItem })
+        );
+      });
 
-    this.hubConnection.on('JoinGroup', (data: string) => {
-      console.log('recieved data from the hub');
-      console.log(data);
-      this.store.dispatch(
-        newsAction.recieveGroupJoinedAction({ payload: data })
-      );
-    });
+      this.hubConnection.on('JoinGroup', (data: string) => {
+        console.log('received data from the hub');
+        console.log(data);
+        this.store.dispatch(
+          newsAction.receiveGroupJoinedAction({ payload: data })
+        );
+      });
 
-    this.hubConnection.on('LeaveGroup', (data: string) => {
-      this.store.dispatch(newsAction.recieveGroupLeftAction({ payload: data }));
-    });
+      this.hubConnection.on('LeaveGroup', (data: string) => {
+        this.store.dispatch(newsAction.receiveGroupLeftAction({ payload: data }));
+      });
 
-    this.hubConnection.on('History', (newsItems: NewsItem[]) => {
-      console.log('recieved history from the hub');
-      console.log(newsItems);
-      this.store.dispatch(
-        newsAction.recieveNewsGroupHistoryAction({ payload: newsItems })
-      );
+      this.hubConnection.on('History', (newsItems: NewsItem[]) => {
+        console.log('received history from the hub');
+        console.log(newsItems);
+        this.store.dispatch(
+          newsAction.receiveNewsGroupHistoryAction({ payload: newsItems })
+        );
+      });
     });
   }
 }
