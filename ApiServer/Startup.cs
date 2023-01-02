@@ -1,7 +1,6 @@
 using ApiServer.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using IdentityServer4.AccessTokenValidation;
 using ApiServer.Providers;
 using ApiServer.SignalRHubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -81,7 +80,7 @@ public class Startup
             InboundClaimTypeMap = new Dictionary<string, string>()
         };
 
-        services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+        services.AddAuthentication("Bearer")
             .AddJwtBearer(options =>
         {
             options.Authority = "https://localhost:44318/";
