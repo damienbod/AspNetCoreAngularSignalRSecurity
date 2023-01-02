@@ -131,8 +131,7 @@ namespace ApiServer
 
             services.AddSignalR();
 
-            services.AddControllers()
-                .AddNewtonsoftJson();
+            services.AddControllers();
  
             services.AddSwaggerGen(c =>
             {
