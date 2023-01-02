@@ -20,13 +20,13 @@
 
 ### Console
 
-dotnet ef migrations add initSts -c DataEventRecordContext
-dotnet ef migrations add initSts -c NewsContext
+dotnet ef migrations add init_api -c DataEventRecordContext
+dotnet ef migrations add init_hub_db -c NewsContext
 
 ### Powershell
 
-Add-Migration "init_sts" -c DataEventRecordContext  
-Add-Migration "init_sts" -c NewsContext  
+Add-Migration "init_api" -c DataEventRecordContext  
+Add-Migration "init_hub_db" -c NewsContext  
 
 ## Running manually
 
