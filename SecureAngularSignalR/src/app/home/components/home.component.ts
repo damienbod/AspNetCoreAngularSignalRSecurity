@@ -41,11 +41,13 @@ export class HomeComponent implements OnInit {
   }
 
   private init() {
-    const token = this.oidcSecurityService.getAccessToken();
     let tokenValue = '';
-    if (token !== '') {
-      tokenValue = '?token=' + token;
-    }
+    this.oidcSecurityService.getAccessToken().subscribe((token) => {
+      console.log(token)
+      if (token !== '') {
+        tokenValue = '?token=' + token;
+      }
+    });
 
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${this.configuration.Server}signalrhome${tokenValue}`)

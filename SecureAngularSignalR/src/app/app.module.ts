@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AuthModule, LogLevel, StsConfigHttpLoader, StsConfigLoader } from 'angular-auth-oidc-client';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -19,10 +19,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 export const httpLoaderFactory = (httpClient: HttpClient) => {
-  const config$ = httpClient
-    .get<any>(`https://localhost:44390/api/ClientAppSettingsNewsApp`)
-    .pipe(
-      map((customConfig: any) => {
+  const config$ = httpClient.get<any>(`https://localhost:44390/api/ClientAppSettingsNewsApp`).pipe(
+    map((customConfig: any) => {
         return {
           authority: customConfig.stsServer,
           redirectUrl: customConfig.redirect_url,
@@ -43,11 +41,10 @@ export const httpLoaderFactory = (httpClient: HttpClient) => {
           // autoUserInfo: false,
         };
       })
-    )
-    .toPromise();
+    );
 
-  return new StsConfigHttpLoader(config$);
-};
+    return new StsConfigHttpLoader(config$);
+  };
 
 @NgModule({
   declarations: [AppComponent],
