@@ -10,9 +10,9 @@ namespace ApiServer.Controllers;
 [Route("api/[controller]")]
 public class DataEventRecordsController : Controller
 {
-    private readonly IDataEventRecordRepository _dataEventRecordRepository;
+    private readonly DataEventRecordRepository _dataEventRecordRepository;
 
-    public DataEventRecordsController(IDataEventRecordRepository dataEventRecordRepository)
+    public DataEventRecordsController(DataEventRecordRepository dataEventRecordRepository)
     {
         _dataEventRecordRepository = dataEventRecordRepository;
     }

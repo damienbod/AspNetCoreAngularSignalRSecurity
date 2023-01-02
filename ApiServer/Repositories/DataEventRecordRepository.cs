@@ -5,7 +5,7 @@ using ApiServer.Data;
 
 namespace ApiServer.Repositories;
 
-public class DataEventRecordRepository : IDataEventRecordRepository
+public class DataEventRecordRepository
 {
     private readonly DataEventRecordContext _context;
     private readonly ILogger _logger;

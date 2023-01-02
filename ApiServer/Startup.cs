@@ -26,8 +26,6 @@ public class Startup
 
     public IConfiguration Configuration { get; }
 
-    private readonly IWebHostEnvironment _webHostEnvironment;
-
     public void ConfigureServices(IServiceCollection services)
     {
         //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
@@ -38,7 +36,7 @@ public class Startup
         services.Configure<ClientAppSettingsDirectMessage>(Configuration.GetSection("ClientAppSettingsDirectMessage"));
         
 
-        services.AddTransient<IDataEventRecordRepository, DataEventRecordRepository>();
+        services.AddTransient<DataEventRecordRepository>();
         services.AddSingleton<NewsStore>();
         services.AddSingleton<UserInfoInMemory>();
 
