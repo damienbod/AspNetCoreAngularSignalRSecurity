@@ -9,9 +9,9 @@ namespace ApiServer.Controllers;
 [Route("api/[controller]")]
 public class ClientAppSettingsDirectMessageController : Controller
 {
-    private readonly ClientAppSettingsDirectMessage _clientAppSettings;
+    private readonly ClientAppSettings _clientAppSettings;
 
-    public ClientAppSettingsDirectMessageController(IOptions<ClientAppSettingsDirectMessage> clientAppSettings)
+    public ClientAppSettingsDirectMessageController(IOptions<ClientAppSettings> clientAppSettings)
     {
         _clientAppSettings = clientAppSettings.Value;
     }

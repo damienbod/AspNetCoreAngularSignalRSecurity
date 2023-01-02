@@ -29,7 +29,7 @@ public class DataEventRecordRepository
             });
     }
 
-    public DataEventRecordDto Get(long id)
+    public DataEventRecordDto Get(int id)
     {
         var dataEventRecord = _context.DataEventRecords.Select(z =>
             new DataEventRecordDto
@@ -43,7 +43,7 @@ public class DataEventRecordRepository
     }
 
 
-    public string GetUsername(long id)
+    public string GetUsername(int id)
     {
         var data = _context.DataEventRecords.First(t => t.Id == id);
         return data.Username;
@@ -56,25 +56,25 @@ public class DataEventRecordRepository
         {
             Name = dataEventRecord.Name,
             Description = dataEventRecord.Description,
-            Timestamp = DateTime.UtcNow,
+            Timestamp = DateTime.UtcNow.ToString("O"),
             Id = dataEventRecord.Id,
             Username = username
         });
         _context.SaveChanges();
     }
 
-    public void Put(long id, DataEventRecordDto dataEventRecordDto)
+    public void Put(int id, DataEventRecordDto dataEventRecordDto)
     {
         var dataEventRecord = _context.DataEventRecords.First(t => t.Id == id);
         dataEventRecord.Name = dataEventRecordDto.Name;
         dataEventRecord.Description = dataEventRecordDto.Description;
-        dataEventRecord.Timestamp = DateTime.UtcNow;
+        dataEventRecord.Timestamp = DateTime.UtcNow.ToString("O");
 
         _context.DataEventRecords.Update(dataEventRecord);
         _context.SaveChanges();
     }
 
-    public void Delete(long id)
+    public void Delete(int id)
     {
         var entity = _context.DataEventRecords.First(t => t.Id == id);
         _context.DataEventRecords.Remove(entity);

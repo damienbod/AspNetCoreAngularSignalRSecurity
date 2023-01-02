@@ -9,9 +9,9 @@ namespace ApiServer.Controllers;
 [Route("api/[controller]")]
 public class ClientAppSettingsNewsAppController : Controller
 {
-    private readonly ClientAppSettingsNewsApp _clientAppSettings;
+    private readonly ClientAppSettings _clientAppSettings;
 
-    public ClientAppSettingsNewsAppController(IOptions<ClientAppSettingsNewsApp> clientAppSettings)
+    public ClientAppSettingsNewsAppController(IOptions<ClientAppSettings> clientAppSettings)
     {
         _clientAppSettings = clientAppSettings.Value;
     }

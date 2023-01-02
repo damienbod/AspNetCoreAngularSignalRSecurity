@@ -18,10 +18,9 @@ namespace ApiServer;
 
 public class Startup
 {
-    public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
+    public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
-        _webHostEnvironment = webHostEnvironment;
     }
 
     public IConfiguration Configuration { get; }
@@ -32,8 +31,8 @@ public class Startup
         //IdentityModelEventSource.ShowPII = true;
         //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
-        services.Configure<ClientAppSettingsNewsApp>(Configuration.GetSection("ClientAppSettingsNewsApp"));
-        services.Configure<ClientAppSettingsDirectMessage>(Configuration.GetSection("ClientAppSettingsDirectMessage"));
+        services.Configure<ClientAppSettings>(Configuration.GetSection("ClientAppSettingsNewsApp"));
+        services.Configure<ClientAppSettings>(Configuration.GetSection("ClientAppSettingsDirectMessage"));
         
 
         services.AddTransient<DataEventRecordRepository>();

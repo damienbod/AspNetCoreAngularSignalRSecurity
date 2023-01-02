@@ -25,7 +25,7 @@ public class DataEventRecordsController : Controller
     }
 
     [HttpGet("{id}")]
-    public IActionResult Get(long id)
+    public IActionResult Get(int id)
     {
         return Ok(_dataEventRecordRepository.Get(id));
     }
@@ -39,14 +39,14 @@ public class DataEventRecordsController : Controller
     }
 
     [HttpPut("{id}")]
-    public IActionResult Put(long id, [FromBody]DataEventRecordDto dataEventRecordDto)
+    public IActionResult Put(int id, [FromBody]DataEventRecordDto dataEventRecordDto)
     {
         _dataEventRecordRepository.Put(id, dataEventRecordDto);
         return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(long id)
+    public IActionResult Delete(int id)
     {
         _dataEventRecordRepository.Delete(id);
         return NoContent();
