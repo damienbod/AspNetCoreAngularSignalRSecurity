@@ -29,7 +29,7 @@
     "@ngrx/store-devtools": "12.2.0",
     "@popperjs/core": "^2.9.1",
     "@types/common-tags": "^1.8.0",
-    "angular-auth-oidc-client": "12.0.3",
+    "angular-auth-oidc-client": "15.0.2",
     "bootstrap": "4.6.0",
     "msgpack5": "5.2.1",
     "rxjs": "~6.6.7",
