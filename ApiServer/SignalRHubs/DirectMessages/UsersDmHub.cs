@@ -6,7 +6,7 @@ namespace ApiServer.SignalRHubs;
 [Authorize(AuthenticationSchemes = "Bearer")]
 public class UsersDmHub : Hub
 {
-    private UserInfoInMemory _userInfoInMemory;
+    private readonly UserInfoInMemory _userInfoInMemory;
 
     public UsersDmHub(UserInfoInMemory userInfoInMemory)
     {

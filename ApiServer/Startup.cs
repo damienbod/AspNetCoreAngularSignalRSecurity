@@ -33,7 +33,6 @@ public class Startup
 
         services.Configure<ClientAppSettings>(Configuration.GetSection("ClientAppSettingsNewsApp"));
         services.Configure<ClientAppSettings>(Configuration.GetSection("ClientAppSettingsDirectMessage"));
-        
 
         services.AddTransient<DataEventRecordRepository>();
         services.AddSingleton<NewsStore>();
@@ -96,9 +95,9 @@ public class Startup
             {
                 OnMessageReceived = context =>
                 {
-                    if ( ( context.Request.Path.Value.StartsWith("/signalrhome")
-                        || context.Request.Path.Value.StartsWith("/looney")
-                        || context.Request.Path.Value.StartsWith("/usersdm") 
+                    if ( ( context.Request.Path.Value!.StartsWith("/signalrhome")
+                        || context.Request.Path.Value!.StartsWith("/looney")
+                        || context.Request.Path.Value!.StartsWith("/usersdm") 
                        )
                         && context.Request.Query.TryGetValue("token", out StringValues token)
                     )
@@ -142,7 +141,7 @@ public class Startup
             c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
             c.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
-                {securityScheme, new string[] { }}
+                {securityScheme, Array.Empty<string>()}
             });
 
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIs", Version = "v1" });

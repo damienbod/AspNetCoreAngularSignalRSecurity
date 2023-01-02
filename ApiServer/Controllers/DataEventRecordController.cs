@@ -20,7 +20,7 @@ public class DataEventRecordsController : Controller
     [HttpGet]
     public IActionResult Get()
     {
-        var username = HttpContext.User.FindFirst("name").Value;
+        var username = HttpContext.User.FindFirst("name")!.Value;
         return Ok(_dataEventRecordRepository.GetAll(username));
     }
 
@@ -33,7 +33,7 @@ public class DataEventRecordsController : Controller
     [HttpPost]
     public IActionResult Post([FromBody]DataEventRecordDto value)
     {
-        var username = HttpContext.User.FindFirst("name").Value;
+        var username = HttpContext.User.FindFirst("name")!.Value;
         _dataEventRecordRepository.Post(value, username);
         return Created("/api/DataEventRecords", value);
     }
