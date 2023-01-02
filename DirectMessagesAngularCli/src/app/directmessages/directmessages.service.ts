@@ -14,6 +14,7 @@ import * as signalR from '@microsoft/signalr';
 export class DirectMessagesService {
   private hubConnection: HubConnection | undefined;
   private headers: HttpHeaders | undefined;
+  private token: string = '';
 
   isAuthorizedSubscription: Subscription | undefined;
   isAuthorized = false;
@@ -64,62 +65,69 @@ export class DirectMessagesService {
 
   private initHub(): void {
     console.log('DMS: initHub');
-    const token = this.oidcSecurityService.getAccessToken();
-    let tokenValue = '';
-    if (token !== '') {
+
+    this.oidcSecurityService.getAccessToken().subscribe((token) => {
+
+      let tokenValue = '';
+      this.token = token;
+      const tokenApiHeader = 'Bearer ' + this.token;
+      this.headers = this.headers.append('Authorization', tokenApiHeader);
+      console.log(tokenApiHeader)
       tokenValue = '?token=' + token;
-    }
-    const url = 'https://localhost:44390/';
 
-    this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${url}usersdm${tokenValue}`)
-      .configureLogging(signalR.LogLevel.Information)
-      .build();
 
-    this.hubConnection.start().catch((err) => console.error(err.toString()));
+      const url = 'https://localhost:44390/';
 
-    this.hubConnection.on('NewOnlineUser', (onlineUser: OnlineUser) => {
-      console.log('DMS: NewOnlineUser received');
-      console.log(onlineUser);
-      this.store.dispatch(
-        directMessagesActions.receivedNewOnlineUserAction({
-          payload: onlineUser,
-        })
-      );
-    });
+      this.hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl(`${url}usersdm${tokenValue}`)
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
 
-    this.hubConnection.on('OnlineUsers', (onlineUsers: OnlineUser[]) => {
-      console.log('DMS: OnlineUsers received');
-      console.log(onlineUsers);
-      this.store.dispatch(
-        directMessagesActions.receivedOnlineUsersAction({
-          payload: onlineUsers,
-        })
-      );
-    });
+      this.hubConnection.start().catch((err) => console.error(err.toString()));
 
-    this.hubConnection.on('Joined', (onlineUser: OnlineUser) => {
-      console.log('DMS: Joined received');
-      console.log(onlineUser);
-    });
-
-    this.hubConnection.on(
-      'SendDM',
-      (message: string, onlineUser: OnlineUser) => {
-        console.log('DMS: SendDM received');
+      this.hubConnection.on('NewOnlineUser', (onlineUser: OnlineUser) => {
+        console.log('DMS: NewOnlineUser received');
+        console.log(onlineUser);
         this.store.dispatch(
-          directMessagesActions.receivedDirectMessageForUserAction({
-            payload: { onlineUser, message },
+          directMessagesActions.receivedNewOnlineUserAction({
+            payload: onlineUser,
           })
         );
-      }
-    );
+      });
 
-    this.hubConnection.on('UserLeft', (name: string) => {
-      console.log('DMS: UserLeft received');
-      this.store.dispatch(
-        directMessagesActions.receivedUserLeftAction({ payload: name })
+      this.hubConnection.on('OnlineUsers', (onlineUsers: OnlineUser[]) => {
+        console.log('DMS: OnlineUsers received');
+        console.log(onlineUsers);
+        this.store.dispatch(
+          directMessagesActions.receivedOnlineUsersAction({
+            payload: onlineUsers,
+          })
+        );
+      });
+
+      this.hubConnection.on('Joined', (onlineUser: OnlineUser) => {
+        console.log('DMS: Joined received');
+        console.log(onlineUser);
+      });
+
+      this.hubConnection.on(
+        'SendDM',
+        (message: string, onlineUser: OnlineUser) => {
+          console.log('DMS: SendDM received');
+          this.store.dispatch(
+            directMessagesActions.receivedDirectMessageForUserAction({
+              payload: { onlineUser, message },
+            })
+          );
+        }
       );
+
+      this.hubConnection.on('UserLeft', (name: string) => {
+        console.log('DMS: UserLeft received');
+        this.store.dispatch(
+          directMessagesActions.receivedUserLeftAction({ payload: name })
+        );
+      });
     });
   }
 }

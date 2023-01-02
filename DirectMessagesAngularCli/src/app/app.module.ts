@@ -25,32 +25,32 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DirectMessagesModule } from './directmessages/directmessages.module';
 
 export const httpLoaderFactory = (httpClient: HttpClient) => {
-  const config$ = httpClient
-  .get<any>(`https://localhost:44390/api/ClientAppSettingsDirectMessage`)
-    .pipe(
-      map((customConfig: any) => {
+  const config$ = httpClient.get<any>(`https://localhost:44390/api/ClientAppSettingsDirectMessage`).pipe(
+    map((customConfig: any) => {
         return {
-          authority: 'https://localhost:44318',
-          redirectUrl: window.location.origin,
-          postLogoutRedirectUri: 'https://localhost:44395/unauthorized',
-          clientId: 'angularclient2',
-          scope: 'dataEventRecords openid profile email',
-          responseType: 'code',
+          authority: customConfig.stsServer,
+          redirectUrl: customConfig.redirect_url,
+          clientId: customConfig.client_id,
+          responseType: customConfig.response_type,
+          scope: customConfig.scope,
+          postLogoutRedirectUri: customConfig.post_logout_redirect_uri,
+          startCheckSession: customConfig.start_checksession,
           silentRenew: true,
-          silentRenewUrl: `${window.location.origin}/silent-renew.html`,
-          renewTimeBeforeTokenExpiresInSeconds: 10,
-          logLevel: LogLevel.Warn,
-          postLoginRoute: '/dm',
-          forbiddenRoute: '/unauthorized',
-          unauthorizedRoute: '/unauthorized',
+          silentRenewUrl: customConfig.redirect_url + '/silent-renew.html',
+          postLoginRoute: customConfig.startup_route,
+          forbiddenRoute: customConfig.forbidden_route,
+          unauthorizedRoute: customConfig.unauthorized_route,
+          logLevel: 0, // LogLevel.Debug, // customConfig.logLevel
+          maxIdTokenIatOffsetAllowedInSeconds:
+          customConfig.max_id_token_iat_offset_allowed_in_seconds,
           historyCleanupOff: true,
+          // autoUserInfo: false,
         };
       })
-    )
-    .toPromise();
+    );
 
-  return new StsConfigHttpLoader(config$);
-};
+    return new StsConfigHttpLoader(config$);
+  };
 
 
 @NgModule({

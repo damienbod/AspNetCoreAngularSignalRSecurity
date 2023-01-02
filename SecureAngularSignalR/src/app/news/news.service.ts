@@ -93,7 +93,6 @@ export class NewsService {
             console.log(tokenApiHeader)
             tokenValue = '?token=' + token;
 
-
             this.hubConnection = new signalR.HubConnectionBuilder()
               .withUrl(`${this.configuration.Server}looney${tokenValue}`)
               .configureLogging(signalR.LogLevel.Information)
