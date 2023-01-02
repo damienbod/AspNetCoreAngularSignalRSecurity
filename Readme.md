@@ -4,22 +4,21 @@
 
 ## Posts in this series:
 
-### ASP.NET Core 6
+### ASP.NET Core 7
 
-<ul>	
-	
-<li><a href="https://damienbod.com/2017/09/12/getting-started-with-signalr-using-asp-net-core-and-angular/">Getting started with SignalR using ASP.NET Core and Angular</a></li>
-<li><a href="https://damienbod.com/2017/09/18/signalr-group-messages-with-ngrx-and-angular/">SignalR Group messages with ngrx and Angular</a></li>
-<li><a href="https://damienbod.com/2017/09/29/using-ef-core-and-sqlite-to-persist-signalr-group-messages-in-asp-net-core/">Using EF Core and SQLite to persist SignalR Group messages in ASP.NET Core</a></li>
-<li><a href="https://damienbod.com/2018/03/19/using-message-pack-with-asp-net-core-signalr/">Using Message Pack with ASP.NET Core SignalR</a> </li>
-<li><a href="https://damienbod.com/2018/05/13/uploading-and-sending-image-messages-with-asp-net-core-signalr/">Uploading and sending image messages with ASP.NET Core SignalR</a></li>		
-<li><a href="https://damienbod.com/2017/10/16/securing-an-angular-signalr-client-using-jwt-tokens-with-asp-net-core-and-identityserver4/">Securing an Angular SignalR client using JWT tokens with ASP.NET Core and IdentityServer4</a></li>
-<li><a href="https://damienbod.com/2017/10/23/implementing-custom-policies-in-asp-net-core-using-the-httpcontext/">Implementing custom policies in ASP.NET Core using the HttpContext</a></li>
-<li><a href="https://damienbod.com/2017/12/05/sending-direct-messages-using-signalr-with-asp-net-core-and-angular/">Sending Direct Messages using SignalR with ASP.NET core and Angular</a> </li> 
-<li><a href="https://damienbod.com/2018/10/30/implementing-user-management-with-asp-net-core-identity-and-custom-claims/">Implementing User Management with ASP.NET Core Identity and custom claims</a></li>
-</ul>
+[https://damienbod.com/2017/09/12/getting-started-with-signalr-using-asp-net-core-and-angular/](Getting started with SignalR using ASP.NET Core and Angular)
+[https://damienbod.com/2017/09/18/signalr-group-messages-with-ngrx-and-angular/](SignalR Group messages with ngrx and Angular)
+[https://damienbod.com/2017/09/29/using-ef-core-and-sqlite-to-persist-signalr-group-messages-in-asp-net-core/](Using EF Core and SQLite to persist SignalR Group messages in ASP.NET Core)
+[https://damienbod.com/2018/03/19/using-message-pack-with-asp-net-core-signalr/](Using Message Pack with ASP.NET Core SignalR)
+[https://damienbod.com/2018/05/13/uploading-and-sending-image-messages-with-asp-net-core-signalr/](Uploading and sending image messages with ASP.NET Core SignalR)	
+[https://damienbod.com/2017/10/16/securing-an-angular-signalr-client-using-jwt-tokens-with-asp-net-core-and-identityserver4/](Securing an Angular SignalR client using JWT tokens with ASP.NET Core and IdentityServer4)
+[https://damienbod.com/2017/10/23/implementing-custom-policies-in-asp-net-core-using-the-httpcontext/](Implementing custom policies in ASP.NET Core using the HttpContext)
+[https://damienbod.com/2017/12/05/sending-direct-messages-using-signalr-with-asp-net-core-and-angular/](Sending Direct Messages using SignalR with ASP.NET core and Angular)
+[https://damienbod.com/2018/10/30/implementing-user-management-with-asp-net-core-identity-and-custom-claims/](Implementing User Management with ASP.NET Core Identity and custom claims)
 
 ## History
+
+2023-01-02 Updated .NET 7
 
 2022-01-28 Updated nuget packages
 
