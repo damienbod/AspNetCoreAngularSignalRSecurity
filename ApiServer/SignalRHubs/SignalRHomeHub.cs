@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using System.Threading.Tasks;
 
-namespace ApiServer.SignalRHubs
+namespace ApiServer.SignalRHubs;
+
+[Authorize(AuthenticationSchemes = "Bearer")]
+public class SignalRHomeHub : Hub
 {
-    [Authorize(AuthenticationSchemes = "Bearer")]
-    public class SignalRHomeHub : Hub
+    public Task Send(string data)
     {
-        public Task Send(string data)
-        {
-            return Clients.All.SendAsync("Send", data);
-        }
+        return Clients.All.SendAsync("Send", data);
     }
 }

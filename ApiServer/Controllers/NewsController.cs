@@ -1,38 +1,37 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ApiServer.Providers;
 using Microsoft.AspNetCore.Authorization;
 
-namespace ApiServer.Controllers
+namespace ApiServer.Controllers;
+
+[Authorize(AuthenticationSchemes = "Bearer")]
+[Route("api/[controller]")]
+public class NewsController : Controller
 {
-    [Authorize(AuthenticationSchemes = "Bearer")]
-    [Route("api/[controller]")]
-    public class NewsController : Controller
+    private readonly NewsStore _newsStore;
+
+    public NewsController(NewsStore newsStore)
     {
-        private NewsStore _newsStore;
+        _newsStore = newsStore;
+    }
 
-        public NewsController(NewsStore newsStore)
+    [HttpPost]
+    public IActionResult AddGroup([FromQuery] string group)
+    {
+        if (string.IsNullOrEmpty(group))
         {
-            _newsStore = newsStore;
+            return BadRequest();
         }
 
-        [HttpPost]
-        public IActionResult AddGroup([FromQuery] string group)
-        {
-            if (string.IsNullOrEmpty(group))
-            {
-                return BadRequest();
-            }
-            _newsStore.AddGroup(group);
-            return Created("AddGroup", group);
-        }
+        _newsStore.AddGroup(group);
 
-        [HttpGet]
-        [Route("")]
-        public List<string> GetAllGroups()
-        {
-            var data = _newsStore.GetAllGroups();
-            return _newsStore.GetAllGroups();
-        }
+        return Created("AddGroup", group);
+    }
+
+    [HttpGet]
+    [Route("")]
+    public List<string> GetAllGroups()
+    {
+        return _newsStore.GetAllGroups();
     }
 }

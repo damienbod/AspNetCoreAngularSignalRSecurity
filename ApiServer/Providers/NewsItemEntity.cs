@@ -1,11 +1,10 @@
-﻿namespace ApiServer.Providers
+﻿namespace ApiServer.Providers;
+
+public class NewsItemEntity
 {
-    public class NewsItemEntity
-    {
-        public long Id { get; set; }
-        public string Header { get; set; }
-        public string NewsText { get; set; }
-        public string Author { get; set; }
-        public string NewsGroup { get; set; }
-    }
+    public int Id { get; set; }
+    public string Header { get; set; } = string.Empty;
+    public string NewsText { get; set; } = string.Empty;
+    public string Author { get; set; } = string.Empty;
+    public string NewsGroup { get; set; } = string.Empty;
 }

@@ -3,23 +3,22 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace ApiServer.Controllers
+namespace ApiServer.Controllers;
+
+[AllowAnonymous]
+[Route("api/[controller]")]
+public class ClientAppSettingsDirectMessageController : Controller
 {
-    [AllowAnonymous]
-    [Route("api/[controller]")]
-    public class ClientAppSettingsDirectMessageController : Controller
+    private readonly ClientAppSettings _clientAppSettings;
+
+    public ClientAppSettingsDirectMessageController(IOptionsMonitor<ClientAppSettings> clientAppSettings)
     {
-        private readonly ClientAppSettingsDirectMessage _clientAppSettings;
+        _clientAppSettings = clientAppSettings.Get("DM");
+    }
 
-        public ClientAppSettingsDirectMessageController(IOptions<ClientAppSettingsDirectMessage> clientAppSettings)
-        {
-            _clientAppSettings = clientAppSettings.Value;
-        }
-
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(_clientAppSettings);
-        }
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok(_clientAppSettings);
     }
 }

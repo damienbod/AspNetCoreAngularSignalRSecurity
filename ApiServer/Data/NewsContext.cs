@@ -1,15 +1,26 @@
 ﻿using ApiServer.Providers;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiServer.Data
+namespace ApiServer.Data;
+
+public class NewsContext : DbContext
 {
-    public class NewsContext : DbContext
+    public NewsContext(DbContextOptions<NewsContext> options) :base(options) { }
+
+    public DbSet<NewsItemEntity> NewsItemEntities => Set<NewsItemEntity>();
+    public DbSet<NewsGroup> NewsGroups => Set<NewsGroup>();
+
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        public NewsContext(DbContextOptions<NewsContext> options) :base(options)
-        { }
-
-        public DbSet<NewsItemEntity> NewsItemEntities { get; set; }
-
-        public DbSet<NewsGroup> NewsGroups { get; set; }
+        builder.Entity<NewsItemEntity>().HasKey(m => m.Id);
+        builder.Entity<NewsGroup>().HasKey(m => m.Id);
+        base.OnModelCreating(builder);
     }
+
+
+ 
+
+  
+
+
 }

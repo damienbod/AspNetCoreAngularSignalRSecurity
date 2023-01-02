@@ -3,23 +3,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
 
-namespace ApiServer.Controllers
+namespace ApiServer.Controllers;
+
+[AllowAnonymous]
+[Route("api/[controller]")]
+public class ClientAppSettingsNewsAppController : Controller
 {
-    [AllowAnonymous]
-    [Route("api/[controller]")]
-    public class ClientAppSettingsNewsAppController : Controller
+    private readonly ClientAppSettings _clientAppSettings;
+
+    public ClientAppSettingsNewsAppController(IOptionsMonitor<ClientAppSettings> clientAppSettings)
     {
-        private readonly ClientAppSettingsNewsApp _clientAppSettings;
+        _clientAppSettings = clientAppSettings.Get("NEWS");
+    }
 
-        public ClientAppSettingsNewsAppController(IOptions<ClientAppSettingsNewsApp> clientAppSettings)
-        {
-            _clientAppSettings = clientAppSettings.Value;
-        }
-
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(_clientAppSettings);
-        }
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok(_clientAppSettings);
     }
 }

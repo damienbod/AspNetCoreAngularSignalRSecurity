@@ -1,142 +1,138 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Fido2NetLib.Objects;
 using Fido2NetLib;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static Fido2NetLib.Fido2;
-using System.IO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using StsServerIdentity.Models;
-using Microsoft.Extensions.Localization;
-using StsServerIdentity.Resources;
-using System.Reflection;
 
-namespace StsServerIdentity
+namespace StsServerIdentity;
+
+[Route("api/[controller]")]
+public class MfaFido2RegisterController : Controller
 {
+    private readonly Fido2 _lib;
+    private readonly Fido2Store _fido2Store;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IOptions<Fido2Configuration> _optionsFido2Configuration;
 
-    [Route("api/[controller]")]
-    public class MfaFido2RegisterController : Controller
+    public MfaFido2RegisterController(
+        Fido2Store fido2Store,
+        UserManager<ApplicationUser> userManager,
+        IOptions<Fido2Configuration> optionsFido2Configuration)
     {
-        private Fido2 _lib;
-        public static IMetadataService _mds;
-        private readonly Fido2Storage _fido2Storage;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IOptions<Fido2Configuration> _optionsFido2Configuration;
-        private readonly IStringLocalizer _sharedLocalizer;
+        _userManager = userManager;
+        _optionsFido2Configuration = optionsFido2Configuration;
+        _fido2Store = fido2Store;
 
-        public MfaFido2RegisterController(
-            Fido2Storage fido2Storage,
-            UserManager<ApplicationUser> userManager,
-            IOptions<Fido2Configuration> optionsFido2Configuration,
-            IStringLocalizerFactory factory)
+        _lib = new Fido2(new Fido2Configuration()
         {
-            _userManager = userManager;
-            _optionsFido2Configuration = optionsFido2Configuration;
-            _fido2Storage = fido2Storage;
+            ServerDomain = _optionsFido2Configuration.Value.ServerDomain,
+            ServerName = _optionsFido2Configuration.Value.ServerName,
+            Origins = _optionsFido2Configuration.Value.Origins,
+            TimestampDriftTolerance = _optionsFido2Configuration.Value.TimestampDriftTolerance
+        });
+    }
 
-            var type = typeof(SharedResource);
-            var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
-            _sharedLocalizer = factory.Create("SharedResource", assemblyName.Name);
+    private static string FormatException(Exception e)
+    {
+        return string.Format("{0}{1}", e.Message, e.InnerException != null ? " (" + e.InnerException.Message + ")" : "");
+    }
 
-            _lib = new Fido2(new Fido2Configuration()
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [Route("/mfamakeCredentialOptions")]
+    public async Task<JsonResult> MakeCredentialOptions([FromForm] string username, [FromForm] string displayName, [FromForm] string attType, [FromForm] string authType, [FromForm] bool requireResidentKey, [FromForm] string userVerification)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(username))
             {
-                ServerDomain = _optionsFido2Configuration.Value.ServerDomain,
-                ServerName = _optionsFido2Configuration.Value.ServerName,
-                Origin = _optionsFido2Configuration.Value.Origin,
-                TimestampDriftTolerance = _optionsFido2Configuration.Value.TimestampDriftTolerance
-            });
-        }
+                username = $"{displayName} (Usernameless user created at {DateTime.UtcNow})";
+            }
 
-        private string FormatException(Exception e)
-        {
-            return string.Format("{0}{1}", e.Message, e.InnerException != null ? " (" + e.InnerException.Message + ")" : "");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Route("/mfamakeCredentialOptions")]
-        public async Task<JsonResult> MakeCredentialOptions([FromForm] string username, [FromForm] string displayName, [FromForm] string attType, [FromForm] string authType, [FromForm] bool requireResidentKey, [FromForm] string userVerification)
-        {
-            try
+            var identityUser = await _userManager.FindByEmailAsync(username);
+            var user = new Fido2User
             {
-                if (string.IsNullOrEmpty(username))
-                {
-                    username = $"{displayName} (Usernameless user created at {DateTime.UtcNow})";
-                }
+                DisplayName = identityUser!.UserName,
+                Name = identityUser.UserName,
+                Id = Fido2Store.GetUserNameInBytes(identityUser.UserName) // byte representation of userID is required
+            };
 
-                var identityUser = await _userManager.FindByEmailAsync(username);
-                var user = new Fido2User
-                {
-                    DisplayName = identityUser.UserName,
-                    Name = identityUser.UserName,
-                    Id = Encoding.UTF8.GetBytes(identityUser.UserName) // byte representation of userID is required
-                };
-
-                // 2. Get user existing keys by username
-                var items = await _fido2Storage.GetCredentialsByUsername(identityUser.UserName);
-                var existingKeys = new List<PublicKeyCredentialDescriptor>();
+            // 2. Get user existing keys by username
+            var existingKeys = new List<PublicKeyCredentialDescriptor>();
+            if (identityUser.UserName != null)
+            {
+                var items = await _fido2Store.GetCredentialsByUserNameAsync(identityUser.UserName);         
                 foreach (var publicKeyCredentialDescriptor in items)
                 {
-                    existingKeys.Add(publicKeyCredentialDescriptor.Descriptor);
+                    if (publicKeyCredentialDescriptor.Descriptor != null)
+                        existingKeys.Add(publicKeyCredentialDescriptor.Descriptor);
                 }
-
-                // 3. Create options
-                var authenticatorSelection = new AuthenticatorSelection
-                {
-                    RequireResidentKey = requireResidentKey,
-                    UserVerification = userVerification.ToEnum<UserVerificationRequirement>()
-                };
-
-                if (!string.IsNullOrEmpty(authType))
-                    authenticatorSelection.AuthenticatorAttachment = authType.ToEnum<AuthenticatorAttachment>();
-
-                var exts = new AuthenticationExtensionsClientInputs() { Extensions = true, UserVerificationIndex = true, Location = true, UserVerificationMethod = true, BiometricAuthenticatorPerformanceBounds = new AuthenticatorBiometricPerfBounds { FAR = float.MaxValue, FRR = float.MaxValue } };
-
-                var options = _lib.RequestNewCredential(user, existingKeys, authenticatorSelection, attType.ToEnum<AttestationConveyancePreference>(), exts);
-
-                // 4. Temporarily store options, session/in-memory cache/redis/db
-                HttpContext.Session.SetString("fido2.attestationOptions", options.ToJson());
-
-                // 5. return options to client
-                return Json(options);
             }
-            catch (Exception e)
+
+            // 3. Create options
+            var authenticatorSelection = new AuthenticatorSelection
             {
-                return Json(new CredentialCreateOptions { Status = "error", ErrorMessage = FormatException(e) });
-            }
+                RequireResidentKey = requireResidentKey,
+                UserVerification = userVerification.ToEnum<UserVerificationRequirement>()
+            };
+
+            if (!string.IsNullOrEmpty(authType))
+                authenticatorSelection.AuthenticatorAttachment = authType.ToEnum<AuthenticatorAttachment>();
+
+            var exts = new AuthenticationExtensionsClientInputs
+            { 
+                Extensions = true, 
+                UserVerificationMethod = true, 
+            };
+
+            var options = _lib.RequestNewCredential(
+                user, existingKeys, 
+                authenticatorSelection, attType.ToEnum<AttestationConveyancePreference>(), exts);
+
+            // 4. Temporarily store options, session/in-memory cache/redis/db
+            HttpContext.Session.SetString("fido2.attestationOptions", options.ToJson());
+
+            // 5. return options to client
+            return Json(options);
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Route("/mfamakeCredential")]
-        public async Task<JsonResult> MakeCredential([FromBody] AuthenticatorAttestationRawResponse attestationResponse)
+        catch (Exception e)
         {
-            try
+            return Json(new CredentialCreateOptions { Status = "error", ErrorMessage = FormatException(e) });
+        }
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [Route("/mfamakeCredential")]
+    public async Task<JsonResult> MakeCredential([FromBody] AuthenticatorAttestationRawResponse attestationResponse)
+    {
+        try
+        {
+            // 1. get the options we sent the client
+            var jsonOptions = HttpContext.Session.GetString("fido2.attestationOptions");
+            var options = CredentialCreateOptions.FromJson(jsonOptions);
+
+            // 2. Create callback so that lib can verify credential id is unique to this user
+            async Task<bool> callback(IsCredentialIdUniqueToUserParams args, CancellationToken cancellationToken)
             {
-                // 1. get the options we sent the client
-                var jsonOptions = HttpContext.Session.GetString("fido2.attestationOptions");
-                var options = CredentialCreateOptions.FromJson(jsonOptions);
+                var users = await _fido2Store.GetUsersByCredentialIdAsync(args.CredentialId);
+                if (users.Count > 0) return false;
 
-                // 2. Create callback so that lib can verify credential id is unique to this user
-                IsCredentialIdUniqueToUserAsyncDelegate callback = async (IsCredentialIdUniqueToUserParams args) =>
-                {
-                    var users = await _fido2Storage.GetUsersByCredentialIdAsync(args.CredentialId);
-                    if (users.Count > 0) return false;
+                return true;
+            }
 
-                    return true;
-                };
+            // 2. Verify and make the credentials
+            var success = await _lib.MakeNewCredentialAsync(attestationResponse, options, callback);
 
-                // 2. Verify and make the credentials
-                var success = await _lib.MakeNewCredentialAsync(attestationResponse, options, callback);
-
+            if(success.Result != null)
+            {
                 // 3. Store the credentials in db
-                await _fido2Storage.AddCredentialToUser(options.User, new FidoStoredCredential
+                await _fido2Store.AddCredentialToUserAsync(options.User, new FidoStoredCredential
                 {
-                    Username = options.User.Name,
+                    UserName = options.User.Name,
                     Descriptor = new PublicKeyCredentialDescriptor(success.Result.CredentialId),
                     PublicKey = success.Result.PublicKey,
                     UserHandle = success.Result.User.Id,
@@ -145,24 +141,26 @@ namespace StsServerIdentity
                     RegDate = DateTime.Now,
                     AaGuid = success.Result.Aaguid
                 });
-
-                // 4. return "ok" to the client
-
-                var user = await _userManager.GetUserAsync(User);
-                if (user == null)
-                {
-                    return Json(new CredentialMakeResult { Status = "error", ErrorMessage = _sharedLocalizer["FIDO2_USER_NOTFOUND", _userManager.GetUserId(User)] });
-                }
-
-                await _userManager.SetTwoFactorEnabledAsync(user, true);
-                var userId = await _userManager.GetUserIdAsync(user);
-
-                return Json(success);
             }
-            catch (Exception e)
+
+            // 4. return "ok" to the client
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
             {
-                return Json(new CredentialMakeResult { Status = "error", ErrorMessage = FormatException(e) });
+                return Json(new CredentialMakeResult("error",  
+                        $"Unable to load user with ID '{_userManager.GetUserId(User)}'.",
+                        success.Result));
             }
+
+            await _userManager.SetTwoFactorEnabledAsync(user, true);
+            var userId = await _userManager.GetUserIdAsync(user);
+
+            return Json(success);
+        }
+        catch (Exception e)
+        {
+            return Json(new CredentialMakeResult("error", FormatException(e), null));
         }
     }
 }

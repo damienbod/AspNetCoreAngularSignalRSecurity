@@ -1,14 +1,14 @@
 ﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace ApiServer.SignalRHubs
+namespace ApiServer.SignalRHubs;
+
+public class UserInfoInMemory
 {
-    public class UserInfoInMemory
-    {
-        private ConcurrentDictionary<string, UserInfo> _onlineUser { get; set; } = new ConcurrentDictionary<string, UserInfo>();
+    private readonly ConcurrentDictionary<string, UserInfo> _onlineUser = new();
 
-        public bool AddUpdate(string name, string connectionId)
+    public bool AddUpdate(string? name, string connectionId)
+    {
+        if (!string.IsNullOrEmpty(name))
         {
             var userAlreadyExists = _onlineUser.ContainsKey(name);
 
@@ -23,22 +23,34 @@ namespace ApiServer.SignalRHubs
             return userAlreadyExists;
         }
 
-        public void Remove(string name)
+        throw new ArgumentNullException(nameof(name));
+    }
+
+    public void Remove(string? name)
+    {
+        if(!string.IsNullOrEmpty(name))
         {
-            UserInfo userInfo;
-            _onlineUser.TryRemove(name, out userInfo);
+            _onlineUser.TryRemove(name, out _);
+        }
+    }
+
+    public IEnumerable<UserInfo> GetAllUsersExceptThis(string? username)
+    {
+        if(string.IsNullOrEmpty(username))
+            return new List<UserInfo>();
+
+        return _onlineUser.Values.Where(item => item.UserName != username);
+    }
+
+    public UserInfo GetUserInfo(string? username)
+    {
+        if (!string.IsNullOrEmpty(username))
+        {
+            _onlineUser.TryGetValue(username, out UserInfo? userInfo);
+            if(userInfo != null)
+                return userInfo;
         }
 
-        public IEnumerable<UserInfo> GetAllUsersExceptThis(string username)
-        {
-            return _onlineUser.Values.Where(item => item.UserName != username);
-        }
-
-        public UserInfo GetUserInfo(string username)
-        {
-            UserInfo user;
-            _onlineUser.TryGetValue(username, out user);
-            return user;
-        }
+        throw new ArgumentNullException(nameof(username));
     }
 }
