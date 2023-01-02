@@ -36,7 +36,7 @@ public class UserInfoInMemory
 
     public IEnumerable<UserInfo> GetAllUsersExceptThis(string? username)
     {
-        if(!string.IsNullOrEmpty(username))
+        if(string.IsNullOrEmpty(username))
             return new List<UserInfo>();
 
         return _onlineUser.Values.Where(item => item.UserName != username);
