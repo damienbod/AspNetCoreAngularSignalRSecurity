@@ -15,6 +15,7 @@ export class NewsService {
   private hubConnection: HubConnection | undefined;
   private actionUrl: string;
   private headers: HttpHeaders;
+  private token: string = '';
   isAuthorized = false;
 
   constructor(
@@ -23,7 +24,7 @@ export class NewsService {
     private configuration: Configuration,
     private oidcSecurityService: OidcSecurityService
   ) {
-    console.warn('BEGIN EWS ...')
+    console.warn('BEGIN NEWS SERVICE ...')
     this.init();
     this.actionUrl = 'https://localhost:44390/api/news/';
 
@@ -59,15 +60,6 @@ export class NewsService {
   }
 
   getAllGroups(): Observable<string[]> {
-
-    this.oidcSecurityService.getAccessToken().subscribe((token) => {
-      // console.log(token)
-      if (token !== '') {
-        const tokenValue = 'Bearer ' + token;
-        this.headers = this.headers.append('Authorization', tokenValue);
-      }
-    });
-
     return this.http.get<string[]>(this.actionUrl, { headers: this.headers });
   }
 
@@ -85,47 +77,59 @@ export class NewsService {
   }
 
   private initHub() {
-    console.log('initHub');
+    console.warn('initHub');
 
-    let tokenValue = '';
-    this.oidcSecurityService.getAccessToken().subscribe((token) => {
-      console.log(token)
-      if (token !== '') {
-        tokenValue = '?token=' + token;
+    this.oidcSecurityService.isAuthenticated$.subscribe(
+      ({isAuthenticated}) => {
+        this.isAuthorized = isAuthenticated;
+        if (isAuthenticated) {
+
+          this.oidcSecurityService.getAccessToken().subscribe((token) => {
+
+            let tokenValue = '';
+            this.token = token;
+            const tokenApiHeader = 'Bearer ' + this.token;
+            this.headers = this.headers.append('Authorization', tokenApiHeader);
+            console.log(tokenApiHeader)
+            tokenValue = '?token=' + token;
+
+
+            this.hubConnection = new signalR.HubConnectionBuilder()
+              .withUrl(`${this.configuration.Server}looney${tokenValue}`)
+              .configureLogging(signalR.LogLevel.Information)
+              .build();
+
+            this.hubConnection.start().catch((err) => console.error(err.toString()));
+
+            this.hubConnection.on('Send', (newsItem: NewsItem) => {
+              this.store.dispatch(
+                newsAction.receiveNewsItemAction({ payload: newsItem })
+              );
+            });
+
+            this.hubConnection.on('JoinGroup', (data: string) => {
+              console.log('received data from the hub');
+              console.log(data);
+              this.store.dispatch(
+                newsAction.receiveGroupJoinedAction({ payload: data })
+              );
+            });
+
+            this.hubConnection.on('LeaveGroup', (data: string) => {
+              this.store.dispatch(newsAction.receiveGroupLeftAction({ payload: data }));
+            });
+
+            this.hubConnection.on('History', (newsItems: NewsItem[]) => {
+              console.log('received history from the hub');
+              console.log(newsItems);
+              this.store.dispatch(
+                newsAction.receiveNewsGroupHistoryAction({ payload: newsItems })
+              );
+            });
+          });
+
+        }
       }
-
-      this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(`${this.configuration.Server}looney${tokenValue}`)
-        .configureLogging(signalR.LogLevel.Information)
-        .build();
-
-      this.hubConnection.start().catch((err) => console.error(err.toString()));
-
-      this.hubConnection.on('Send', (newsItem: NewsItem) => {
-        this.store.dispatch(
-          newsAction.receiveNewsItemAction({ payload: newsItem })
-        );
-      });
-
-      this.hubConnection.on('JoinGroup', (data: string) => {
-        console.log('received data from the hub');
-        console.log(data);
-        this.store.dispatch(
-          newsAction.receiveGroupJoinedAction({ payload: data })
-        );
-      });
-
-      this.hubConnection.on('LeaveGroup', (data: string) => {
-        this.store.dispatch(newsAction.receiveGroupLeftAction({ payload: data }));
-      });
-
-      this.hubConnection.on('History', (newsItems: NewsItem[]) => {
-        console.log('received history from the hub');
-        console.log(newsItems);
-        this.store.dispatch(
-          newsAction.receiveNewsGroupHistoryAction({ payload: newsItems })
-        );
-      });
-    });
+    );
   }
 }
