@@ -20,18 +20,24 @@
 
 ### Console
 
+```
 dotnet ef migrations add init_api -c DataEventRecordContext
 dotnet ef migrations add init_hub_db -c NewsContext
+```
 
 ### Powershell
 
+```
 Add-Migration "init_api" -c DataEventRecordContext  
 Add-Migration "init_hub_db" -c NewsContext  
+```
 
 ## Running manually
 
+```
 Update-Database -Context DataEventRecordContext
 Update-Database -Context NewsContext
+```
 
 ## History
 
