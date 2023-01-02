@@ -1,10 +1,11 @@
 ﻿using ApiServer.Providers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ApiServer.SignalRHubs;
 
-[Authorize(AuthenticationSchemes = "Bearer")]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class NewsHub : Hub
 {
     private readonly NewsStore _newsStore;
