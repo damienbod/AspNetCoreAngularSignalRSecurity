@@ -4,8 +4,6 @@
 
 ## Posts in this series:
 
-### ASP.NET Core 7
-
 - [Getting started with SignalR using ASP.NET Core and Angular](https://damienbod.com/2017/09/12/getting-started-with-signalr-using-asp-net-core-and-angular/)
 - [SignalR Group messages with ngrx and Angular](https://damienbod.com/2017/09/18/signalr-group-messages-with-ngrx-and-angular/)
 - [Using EF Core and SQLite to persist SignalR Group messages in ASP.NET Core](https://damienbod.com/2017/09/29/using-ef-core-and-sqlite-to-persist-signalr-group-messages-in-asp-net-core/)
