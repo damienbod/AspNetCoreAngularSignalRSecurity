@@ -13,8 +13,7 @@ export class NewsEffects {
   sendNewsItemAction$ = createEffect(() =>
     this.actions$.pipe(
       ofType(newsAction.sendNewsItemAction),
-      map((action) => action.payload),
-      switchMap((payload) => {
+      switchMap(({ payload }) => {
         this.newsService.send(payload);
         return of(newsAction.sendNewsItemFinishedAction({ payload }));
       })

@@ -16,6 +16,8 @@ export class NewsComponent implements OnInit {
   public async: any;
   isAuthorized = false;
   newsItem: NewsItem;
+  newsItemHeader = '';
+  newsItemNewsText= '';
   group = 'IT';
   author = 'unknown';
   group$: Observable<string[]>;
@@ -35,8 +37,10 @@ export class NewsComponent implements OnInit {
   }
 
   public sendNewsItem(): void {
-    this.newsItem.newsGroup = this.group;
-    this.newsItem.author = this.author;
+
+    this.newsItem = new NewsItem();
+    this.newsItem.AddData(this.newsItemHeader, this.newsItemNewsText, this.author, this.group);
+
     this.store.dispatch(
       newsAction.sendNewsItemAction({ payload: this.newsItem })
     );

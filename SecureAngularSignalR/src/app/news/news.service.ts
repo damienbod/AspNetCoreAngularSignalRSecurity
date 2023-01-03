@@ -9,6 +9,7 @@ import * as newsAction from './store/news.action';
 import { Configuration } from '../app.constants';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import * as signalR from '@microsoft/signalr';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class NewsService {
@@ -89,7 +90,7 @@ export class NewsService {
             let tokenValue = '';
             this.token = token;
             const tokenApiHeader = 'Bearer ' + this.token;
-            this.headers = this.headers.append('Authorization', tokenApiHeader);
+            this.headers = this.headers.set('Authorization', tokenApiHeader);
             console.log(tokenApiHeader)
             tokenValue = '?token=' + token;
 
