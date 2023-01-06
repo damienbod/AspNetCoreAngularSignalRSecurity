@@ -42,6 +42,9 @@ internal static class HostingExtensions
         builder.Services.Configure<Fido2Configuration>(builder.Configuration.GetSection("fido2"));
         builder.Services.AddScoped<Fido2Store>();
 
+        builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>,
+           AdditionalUserClaimsPrincipalFactory>();
+
         // Adds a default in-memory implementation of IDistributedCache.
         builder.Services.AddDistributedMemoryCache();
         builder.Services.AddSession(options =>
