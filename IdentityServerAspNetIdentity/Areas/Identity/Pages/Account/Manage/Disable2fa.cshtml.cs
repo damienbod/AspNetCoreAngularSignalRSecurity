@@ -17,7 +17,7 @@ namespace IdentityServerAspNetIdentity.Areas.Identity.Pages.Account.Manage
         private readonly Fido2Store _fido2Store;
 
         public Disable2faModel(
-            UserManager<IdentityUser> userManager,
+            UserManager<ApplicationUser> userManager,
             Fido2Store fido2Store,
             ILogger<Disable2faModel> logger)
         {
