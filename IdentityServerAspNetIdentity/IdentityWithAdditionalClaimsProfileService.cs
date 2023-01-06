@@ -51,8 +51,8 @@ public class IdentityWithAdditionalClaimsProfileService : ProfileService<Applica
             claims.Add(new Claim(JwtClaimTypes.Role, "securedFiles.admin"));
         }
 
-        //claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
-        //claims.Add(new Claim("name", user.Email));
+        claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
+        claims.Add(new Claim("name", user.Email));
 
         context.AddRequestedClaims(claims);
     }
