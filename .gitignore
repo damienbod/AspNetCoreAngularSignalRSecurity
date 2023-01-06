@@ -23,3 +23,5 @@
 /StsServerIdentity/usersdatabase.sqlite-shm
 /StsServerIdentity/usersdatabase.sqlite-wal
 /api.txt
+/IdentityServerAspNetIdentity/usersdatabase.sqlite-shm
+/IdentityServerAspNetIdentity/usersdatabase.sqlite-wal

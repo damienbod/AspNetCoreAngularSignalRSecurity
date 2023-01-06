@@ -26,8 +26,8 @@ internal static class HostingExtensions
                         .WithOrigins(
                             "https://localhost:44311", 
                             "https://localhost:44390", 
-                            "https://localhost:44395", 
-                            "https://localhost:44318")
+                            "https://localhost:44395",
+                            "https://localhost:5001")
                         .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyHeader()
                         .AllowAnyMethod();

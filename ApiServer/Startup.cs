@@ -61,7 +61,7 @@ public class Startup
                             "https://localhost:44311", 
                             "https://localhost:44390", 
                             "https://localhost:44395", 
-                            "https://localhost:44318");
+                            "https://localhost:5001");
                 });
         });
 
@@ -72,7 +72,7 @@ public class Startup
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
-                options.Authority = "https://localhost:44318/";
+                options.Authority = "https://localhost:5001/";
                 options.Audience = "dataEventRecordsApi";
                 options.IncludeErrorDetails = true;
                 options.SaveToken = true;
@@ -84,7 +84,7 @@ public class Startup
                     NameClaimType = "email",
                     RoleClaimType = "role",
                     ValidAudiences = new List<string> { "dataEventRecordsApi" },
-                    ValidIssuers = new List<string> { "https://localhost:44318/" }
+                    ValidIssuers = new List<string> { "https://localhost:5001/" }
                 };
                 options.Events = new JwtBearerEvents
                 {
