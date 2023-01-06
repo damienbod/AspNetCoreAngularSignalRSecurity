@@ -76,6 +76,14 @@ internal static class HostingExtensions
 
         builder.Services.AddAuthentication();
 
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("IsAdmin", policyIsAdminRequirement =>
+            {
+                policyIsAdminRequirement.Requirements.Add(new IsAdminRequirement());
+            });
+        });
+
         return builder.Build();
     }
     
