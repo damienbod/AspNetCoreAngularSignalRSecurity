@@ -35,9 +35,15 @@ internal static class HostingExtensions
         });
 
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders()
-            .AddTokenProvider<Fido2UserTwoFactorTokenProvider>("FIDO2");
+          .AddEntityFrameworkStores<ApplicationDbContext>()
+          .AddDefaultTokenProviders()
+          .AddDefaultUI()
+          .AddTokenProvider<Fido2UserTwoFactorTokenProvider>("FIDO2");
+
+        //builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+        //    .AddEntityFrameworkStores<ApplicationDbContext>()
+        //    .AddDefaultTokenProviders()
+        //    .AddTokenProvider<Fido2UserTwoFactorTokenProvider>("FIDO2");
 
         builder.Services.Configure<Fido2Configuration>(builder.Configuration.GetSection("fido2"));
         builder.Services.AddScoped<Fido2Store>();

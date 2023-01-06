@@ -15,7 +15,8 @@
             Duende IdentityServer
         </a>
 
-        @if (!string.IsNullOrWhiteSpace(name))
+        <partial name="_LoginPartial" />
+      @*  @if (!string.IsNullOrWhiteSpace(name))
         {
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
@@ -27,6 +28,6 @@
               </li>
             </ul>
         }
-    
+    *@
     </nav>
 </div>
