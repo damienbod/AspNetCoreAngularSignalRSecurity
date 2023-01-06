@@ -11,9 +11,11 @@
         <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
     </li>
     <li class="nav-item">
-            <form id="logoutForm" class="form-inline" href="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+        <a class="nav-link" id="login" href="~/Account/Logout">Logout</a>
+
+           @* <form id="logoutForm" class="form-inline" href="/Account/Logout/Index" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
             <button id="logout" type="submit" class="nav-link btn btn-link">Logout</button>
-        </form>
+        </form>*@
     </li>
 }
 else
@@ -22,7 +24,7 @@ else
         <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
     </li>
     <li class="nav-item">
-            <a class="nav-link" id="login" href="~/Account/Login">Login</a>
+        <a class="nav-link" id="login" href="~/Account/Login">Login</a>
     </li>
 }
 </ul>
