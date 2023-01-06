@@ -1,11 +1,9 @@
-using Duende.IdentityServer;
 using Fido2NetLib;
 using IdentityServerAspNetIdentity.Data;
 using IdentityServerHost.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using System.Configuration;
 
 namespace IdentityServerAspNetIdentity;
 
@@ -25,7 +23,8 @@ internal static class HostingExtensions
                 {
                     builder
                         .AllowCredentials()
-                        .WithOrigins("https://localhost:44311", 
+                        .WithOrigins(
+                            "https://localhost:44311", 
                             "https://localhost:44390", 
                             "https://localhost:44395", 
                             "https://localhost:44318")
@@ -36,9 +35,9 @@ internal static class HostingExtensions
         });
 
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-          .AddEntityFrameworkStores<ApplicationDbContext>()
-          .AddDefaultTokenProviders()
-          .AddTokenProvider<Fido2UserTwoFactorTokenProvider>("FIDO2");
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders()
+            .AddTokenProvider<Fido2UserTwoFactorTokenProvider>("FIDO2");
 
         builder.Services.Configure<Fido2Configuration>(builder.Configuration.GetSection("fido2"));
         builder.Services.AddScoped<Fido2Store>();
@@ -67,6 +66,7 @@ internal static class HostingExtensions
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryClients(Config.Clients)
+            .AddInMemoryApiResources(Config.ApiResources)
             .AddAspNetIdentity<ApplicationUser>()
             .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
 
@@ -88,6 +88,7 @@ internal static class HostingExtensions
 
         app.UseStaticFiles();
         app.UseRouting();
+
         app.UseIdentityServer();
         app.UseAuthorization();
         

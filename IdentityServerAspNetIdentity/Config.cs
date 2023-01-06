@@ -29,20 +29,19 @@ public static class Config
             )
         };
 
-    //public static IEnumerable<ApiResource> GetApiResources()
-    //{
-    //    return new List<ApiResource>
-    //    {
-    //        new ApiResource("dataEventRecordsApi")
-    //        {
-    //            ApiSecrets =
-    //            {
-    //                new Secret("dataEventRecordsSecret".Sha256())
-    //            },
-    //            Scopes = new List<string> { "dataEventRecords" }
-    //        }
-    //    };
-    //}
+    public static IEnumerable<ApiResource> ApiResources =>
+        new ApiResource[]
+        {
+            new ApiResource("dataEventRecordsApi")
+            {
+                ApiSecrets =
+                {
+                    new Secret("dataEventRecordsSecret".Sha256())
+                },
+                Scopes = new List<string> { "dataEventRecords" }
+            }
+
+        };
 
     public static IEnumerable<Client> Clients => new Client[]
     {
