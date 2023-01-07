@@ -1,4 +1,6 @@
-@using Duende.IdentityServer.Extensions
+﻿@using Duende.IdentityServer.Extensions
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @{
     string name = null;
     if (!true.Equals(ViewData["signed-out"]))
@@ -15,6 +17,15 @@
             Duende IdentityServer
         </a>
 
+        @if ((await AuthorizationService.AuthorizeAsync(User, "IsAdmin")).Succeeded)
+        {
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Admin">ADMIN</a>
+                </li>
+            </ul>
+        }
+                    
         <partial name="_LoginPartial" />
       @*  @if (!string.IsNullOrWhiteSpace(name))
         {

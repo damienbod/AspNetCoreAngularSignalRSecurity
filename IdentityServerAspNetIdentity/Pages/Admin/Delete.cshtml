@@ -1,0 +1,46 @@
+﻿@page
+@model Sts.Pages.Admin.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AdminViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AdminViewModel.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AdminViewModel.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AdminViewModel.IsAdmin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AdminViewModel.IsAdmin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AdminViewModel.DataEventRecordsRole)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AdminViewModel.DataEventRecordsRole)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AdminViewModel.SecuredFilesRole)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AdminViewModel.SecuredFilesRole)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="AdminViewModel.Email" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
