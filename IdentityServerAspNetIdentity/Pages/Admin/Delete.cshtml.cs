@@ -1,59 +1,56 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using IdentityServerAspNetIdentity.Data;
 using IdentityServerAspNetIdentity.Models;
 using IdentityServerHost.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace Sts.Pages.Admin
+namespace Sts.Pages.Admin;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly UserManager<ApplicationUser> _userManager;
+
+    public DeleteModel(UserManager<ApplicationUser> userManager)
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        _userManager = userManager;
+    }
 
-        public DeleteModel(UserManager<ApplicationUser> userManager)
+    [BindProperty]
+    public AdminViewModel AdminViewModel { get; set; }
+
+    public async Task<IActionResult> OnGetAsync(string? id)
+    {
+        var user = await _userManager.FindByEmailAsync(id);
+        if (user == null)
         {
-            _userManager = userManager;
+            return NotFound();
         }
 
-        [BindProperty]
-        public AdminViewModel AdminViewModel { get; set; }
-
-        public async Task<IActionResult> OnGetAsync(string? id)
+        AdminViewModel = new AdminViewModel
         {
-            var user = await _userManager.FindByEmailAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            Email = user.Email,
+            IsAdmin = user.IsAdmin,
+            DataEventRecordsRole = user.DataEventRecordsRole,
+            SecuredFilesRole = user.SecuredFilesRole
+        };
 
-            AdminViewModel = new AdminViewModel
-            {
-                Email = user.Email,
-                IsAdmin = user.IsAdmin,
-                DataEventRecordsRole = user.DataEventRecordsRole,
-                SecuredFilesRole = user.SecuredFilesRole
-            };
+        return Page();
+    }
 
-            return Page();
+    public async Task<IActionResult> OnPostAsync(string? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+        var user = await _userManager.FindByEmailAsync(id);
+        if (user == null)
+        {
+            return NotFound();
         }
 
-        public async Task<IActionResult> OnPostAsync(string? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var user = await _userManager.FindByEmailAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+        await _userManager.DeleteAsync(user);
 
-            await _userManager.DeleteAsync(user);
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

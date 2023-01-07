@@ -25,7 +25,11 @@
 
         @if ((await AuthorizationService.AuthorizeAsync(User, "IsAdmin")).Succeeded)
         {
-          
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Admin">ADMI2N</a>
+                </li>
+            </ul>
         }
                     
         <partial name="_LoginPartial" />

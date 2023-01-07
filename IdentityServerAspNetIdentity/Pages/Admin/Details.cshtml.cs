@@ -4,41 +4,40 @@ using Microsoft.EntityFrameworkCore;
 using IdentityServerAspNetIdentity.Data;
 using IdentityServerAspNetIdentity.Models;
 
-namespace Sts.Pages.Admin
+namespace Sts.Pages.Admin;
+
+public class DetailsModel : PageModel
 {
-    public class DetailsModel : PageModel
+    private readonly ApplicationDbContext _context;
+
+    public DetailsModel(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DetailsModel(ApplicationDbContext context)
+    public AdminViewModel AdminViewModel { get; set; }
+
+    public async Task<IActionResult> OnGetAsync(string? id)
+    {
+        if (id == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        public AdminViewModel AdminViewModel { get; set; }
-
-        public async Task<IActionResult> OnGetAsync(string? id)
+        var user = await _context.Users.FirstOrDefaultAsync(m => m.Email == id);
+        if (user == null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users.FirstOrDefaultAsync(m => m.Email == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            AdminViewModel = new AdminViewModel
-            {
-                Email = user.Email,
-                IsAdmin = user.IsAdmin,
-                DataEventRecordsRole = user.DataEventRecordsRole,
-                SecuredFilesRole = user.SecuredFilesRole
-            };
-
-            return Page();
+            return NotFound();
         }
+
+        AdminViewModel = new AdminViewModel
+        {
+            Email = user.Email,
+            IsAdmin = user.IsAdmin,
+            DataEventRecordsRole = user.DataEventRecordsRole,
+            SecuredFilesRole = user.SecuredFilesRole
+        };
+
+        return Page();
     }
 }
