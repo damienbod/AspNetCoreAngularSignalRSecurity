@@ -44,9 +44,9 @@
                 @Html.DisplayFor(modelItem => item.SecuredFilesRole)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Email">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Email">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Email">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Email">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Email">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Email">Delete</a>
             </td>
         </tr>
 }
