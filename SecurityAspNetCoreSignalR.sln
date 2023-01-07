@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer", "ApiServer\ApiServer.csproj", "{61242CA8-FF15-4EC7-8DC4-80CD98054927}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServerAspNetIdentity", "IdentityServerAspNetIdentity\IdentityServerAspNetIdentity.csproj", "{F0815736-704F-43B4-8236-45875BE01D86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sts", "IdentityServerAspNetIdentity\Sts.csproj", "{F0815736-704F-43B4-8236-45875BE01D86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
