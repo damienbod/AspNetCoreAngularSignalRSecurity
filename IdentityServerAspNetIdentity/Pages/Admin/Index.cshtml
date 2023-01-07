@@ -1,0 +1,54 @@
+﻿@page
+@model Sts.Pages.Admin.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminViewModel[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminViewModel[0].IsAdmin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminViewModel[0].DataEventRecordsRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminViewModel[0].SecuredFilesRole)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.AdminViewModel) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAdmin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataEventRecordsRole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecuredFilesRole)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Email">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Email">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Email">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
