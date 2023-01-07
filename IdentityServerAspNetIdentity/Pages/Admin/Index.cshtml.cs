@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using IdentityServerAspNetIdentity.Data;
 using IdentityServerAspNetIdentity.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sts.Pages.Admin;
 
+[Authorize(AuthenticationSchemes = "Identity.Application", Policy = "IsAdmin")]
 public class IndexModel : PageModel
 {
     private readonly ApplicationDbContext _context;

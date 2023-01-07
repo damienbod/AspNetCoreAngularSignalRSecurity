@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using IdentityServerAspNetIdentity.Models;
 using IdentityServerHost.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sts.Pages.Admin;
 
+[Authorize(AuthenticationSchemes = "Identity.Application", Policy = "IsAdmin")]
 public class CreateModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;
