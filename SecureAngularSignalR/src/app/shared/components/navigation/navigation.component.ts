@@ -43,6 +43,6 @@ export class NavigationComponent implements OnInit {
 
   logout() {
     console.log('Do logout logic');
-    this.oidcSecurityService.logoff();
+    this.oidcSecurityService.logoff().subscribe();
   }
 }
