@@ -4,7 +4,6 @@ using IdentityServerHost.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using Serilog;
 
 namespace IdentityServerAspNetIdentity;
@@ -91,8 +90,11 @@ internal static class HostingExtensions
         return builder.Build();
     }
     
-    public static WebApplication ConfigurePipeline(this WebApplication app)
-    { 
+    public static WebApplication ConfigurePipeline(this WebApplication app, IWebHostEnvironment env)
+    {
+        app.UseSecurityHeaders(
+            SecurityHeadersDefinitions.GetHeaderPolicyCollection(env.IsDevelopment()));
+
         app.UseSerilogRequestLogging();
     
         if (app.Environment.IsDevelopment())
