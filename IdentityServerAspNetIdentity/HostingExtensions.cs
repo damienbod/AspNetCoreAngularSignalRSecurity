@@ -57,25 +57,24 @@ internal static class HostingExtensions
             options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         });
 
-        builder.Services
-            .AddIdentityServer(options =>
-            {
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
-                options.UserInteraction.LoginUrl = "/Identity/Account/Login";
-                options.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
+        builder.Services.AddIdentityServer(options =>
+        {
+            options.Events.RaiseErrorEvents = true;
+            options.Events.RaiseInformationEvents = true;
+            options.Events.RaiseFailureEvents = true;
+            options.Events.RaiseSuccessEvents = true;
+            options.UserInteraction.LoginUrl = "/Identity/Account/Login";
+            options.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
 
-                // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
-                options.EmitStaticAudienceClaim = true;
-            })
-            .AddInMemoryIdentityResources(Config.IdentityResources)
-            .AddInMemoryApiScopes(Config.ApiScopes)
-            .AddInMemoryClients(Config.Clients)
-            .AddInMemoryApiResources(Config.ApiResources)
-            .AddAspNetIdentity<ApplicationUser>()
-            .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
+            // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
+            options.EmitStaticAudienceClaim = true;
+        })
+        .AddInMemoryIdentityResources(Config.IdentityResources)
+        .AddInMemoryApiScopes(Config.ApiScopes)
+        .AddInMemoryClients(Config.Clients)
+        .AddInMemoryApiResources(Config.ApiResources)
+        .AddAspNetIdentity<ApplicationUser>()
+        .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
 
         builder.Services.AddAuthentication();
 

@@ -10,12 +10,10 @@ namespace Sts.Pages.Admin
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public IndexModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public IndexModel(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
         public IList<AdminViewModel> AdminViewModel { get;set; }

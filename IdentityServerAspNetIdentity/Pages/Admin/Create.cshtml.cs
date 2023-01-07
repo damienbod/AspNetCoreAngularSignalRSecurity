@@ -9,12 +9,10 @@ namespace Sts.Pages.Admin
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public CreateModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public CreateModel(UserManager<ApplicationUser> userManager)
         {
-            _context = context;
             _userManager = userManager;
         }
 

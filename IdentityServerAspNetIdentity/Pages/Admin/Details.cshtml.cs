@@ -3,20 +3,16 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using IdentityServerAspNetIdentity.Data;
 using IdentityServerAspNetIdentity.Models;
-using IdentityServerHost.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace Sts.Pages.Admin
 {
     public class DetailsModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public DetailsModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public DetailsModel(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
         public AdminViewModel AdminViewModel { get; set; }

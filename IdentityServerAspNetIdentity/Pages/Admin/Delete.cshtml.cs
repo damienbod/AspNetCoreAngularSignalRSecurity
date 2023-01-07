@@ -10,12 +10,10 @@ namespace Sts.Pages.Admin
 {
     public class DeleteModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public DeleteModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public DeleteModel(UserManager<ApplicationUser> userManager)
         {
-            _context = context;
             _userManager = userManager;
         }
 

@@ -10,12 +10,10 @@ namespace Sts.Pages.Admin
 {
     public class EditModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public EditModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public EditModel(UserManager<ApplicationUser> userManager)
         {
-            _context = context;
             _userManager = userManager;
         }
 
