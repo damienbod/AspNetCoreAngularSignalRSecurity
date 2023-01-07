@@ -45,6 +45,6 @@ export class AppComponent implements OnInit {
 
   logout(): void {
     console.log('start logoff');
-    this.oidcSecurityService.logoff();
+    this.oidcSecurityService.logoff().subscribe();
   }
 }
