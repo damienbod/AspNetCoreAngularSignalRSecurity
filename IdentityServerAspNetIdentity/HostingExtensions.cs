@@ -1,6 +1,7 @@
 using Fido2NetLib;
 using IdentityServerAspNetIdentity.Data;
 using IdentityServerHost.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
@@ -78,6 +79,7 @@ internal static class HostingExtensions
 
         builder.Services.AddAuthentication();
 
+        builder.Services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
         builder.Services.AddAuthorization(options =>
         {
             options.AddPolicy("IsAdmin", policyIsAdminRequirement =>
