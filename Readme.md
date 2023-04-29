@@ -39,6 +39,8 @@ Update-Database -Context NewsContext
 
 ## History
 
+2023-04-29 Updated nuget packages
+
 2023-01-21 Updated nuget packages
 
 2023-01-07 Updated everything in STS project
