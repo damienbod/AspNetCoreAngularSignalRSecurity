@@ -1,4 +1,4 @@
-﻿using IdentityServerHost.Models;
+﻿using IdentityServerAspNetIdentity.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace IdentityServerAspNetIdentity;

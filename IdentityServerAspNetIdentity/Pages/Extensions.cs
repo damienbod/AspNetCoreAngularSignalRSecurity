@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IdentityServerHost.Pages;
+namespace IdentityServerAspNetIdentity.Pages;
 
 public static class Extensions
 {

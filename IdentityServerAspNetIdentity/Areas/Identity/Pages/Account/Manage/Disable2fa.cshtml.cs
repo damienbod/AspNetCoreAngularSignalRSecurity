@@ -2,13 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Threading.Tasks;
-using Fido2Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using IdentityServerAspNetIdentity.Models;
 
 namespace IdentityServerAspNetIdentity.Areas.Identity.Pages.Account.Manage

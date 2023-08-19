@@ -6,7 +6,7 @@ using static Fido2NetLib.Fido2;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using IdentityServerAspNetIdentity.Data;
-using IdentityServerHost.Models;
+using IdentityServerAspNetIdentity.Models;
 
 namespace IdentityServerAspNetIdentity;
 

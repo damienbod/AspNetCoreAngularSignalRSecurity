@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using IdentityServerAspNetIdentity.Data;
-using IdentityServerHost.Models;
+using IdentityServerAspNetIdentity.Models;
 
 namespace IdentityServerAspNetIdentity;
 

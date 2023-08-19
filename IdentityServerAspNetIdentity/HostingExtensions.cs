@@ -1,6 +1,6 @@
 using Fido2NetLib;
 using IdentityServerAspNetIdentity.Data;
-using IdentityServerHost.Models;
+using IdentityServerAspNetIdentity.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

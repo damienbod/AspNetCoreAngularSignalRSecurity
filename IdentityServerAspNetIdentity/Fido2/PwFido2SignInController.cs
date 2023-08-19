@@ -4,7 +4,7 @@ using Fido2NetLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using IdentityServerHost.Models;
+using IdentityServerAspNetIdentity.Models;
 
 namespace IdentityServerAspNetIdentity;
 
