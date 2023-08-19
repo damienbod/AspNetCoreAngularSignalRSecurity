@@ -1,18 +1,16 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
-using IdentityServerHost.Models;
+using Fido2Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using IdentityServerAspNetIdentity.Models;
 
-namespace IdentityServerHost.Pages.Login;
+namespace IdentityServerAspNetIdentity.Pages.Login;
 
 [SecurityHeaders]
 [AllowAnonymous]
@@ -21,38 +19,39 @@ public class Index : PageModel
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IIdentityServerInteractionService _interaction;
-    private readonly IClientStore _clientStore;
     private readonly IEventService _events;
     private readonly IAuthenticationSchemeProvider _schemeProvider;
     private readonly IIdentityProviderStore _identityProviderStore;
 
     public ViewModel View { get; set; }
-        
+
     [BindProperty]
     public InputModel Input { get; set; }
-        
+
+    private readonly Fido2Store _fido2Store;
+
     public Index(
         IIdentityServerInteractionService interaction,
-        IClientStore clientStore,
         IAuthenticationSchemeProvider schemeProvider,
         IIdentityProviderStore identityProviderStore,
         IEventService events,
         UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager)
+        SignInManager<ApplicationUser> signInManager,
+        Fido2Store fido2Store)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _interaction = interaction;
-        _clientStore = clientStore;
         _schemeProvider = schemeProvider;
         _identityProviderStore = identityProviderStore;
         _events = events;
+        _fido2Store = fido2Store;
     }
-        
+
     public async Task<IActionResult> OnGet(string returnUrl)
     {
         await BuildModelAsync(returnUrl);
-            
+
         if (View.IsExternalLoginOnly)
         {
             // we only have one option for logging in and it's an external provider
@@ -61,11 +60,19 @@ public class Index : PageModel
 
         return Page();
     }
-        
+
     public async Task<IActionResult> OnPost()
     {
         // check if we are in the context of an authorization request
         var context = await _interaction.GetAuthorizationContextAsync(Input.ReturnUrl);
+
+        var requires2Fa = context?.AcrValues.Count(t => t.Contains("mfa")) >= 1;
+
+        var user = await _userManager.FindByNameAsync(Input.Username);
+        if (user != null && !user.TwoFactorEnabled && requires2Fa)
+        {
+            return RedirectToPage("/Home/ErrorEnable2FA/Index");
+        }
 
         // the user clicked the "cancel" button
         if (Input.Button != "login")
@@ -99,7 +106,7 @@ public class Index : PageModel
             var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberLogin, lockoutOnFailure: true);
             if (result.Succeeded)
             {
-                var user = await _userManager.FindByNameAsync(Input.Username);
+                //var user = await _userManager.FindByNameAsync(Input.Username);
                 await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id, user.UserName, clientId: context?.Client.ClientId));
 
                 if (context != null)
@@ -130,8 +137,19 @@ public class Index : PageModel
                     throw new Exception("invalid return URL");
                 }
             }
+            if (result.RequiresTwoFactor)
+            {
+                var fido2ItemExistsForUser = await _fido2Store.GetCredentialsByUserNameAsync(user.UserName);
+                if (fido2ItemExistsForUser.Count > 0)
+                {
+                    // AddDefaultUI() is not added, ASP.NET Core Identity Pages need to be added explicitly.
+                    // The Page path depends on this!
+                    return RedirectToPage("/Account/LoginFido2Mfa", new { area = "Identity", Input.ReturnUrl, Input.RememberLogin });
+                }
 
-            await _events.RaiseAsync(new UserLoginFailureEvent(Input.Username, "invalid credentials", clientId:context?.Client.ClientId));
+                return RedirectToPage("/Account/LoginWith2fa", new { area = "Identity", Input.ReturnUrl, RememberMe = Input.RememberLogin });
+            }
+            await _events.RaiseAsync(new UserLoginFailureEvent(Input.Username, "invalid credentials", clientId: context?.Client.ClientId));
             ModelState.AddModelError(string.Empty, LoginOptions.InvalidCredentialsErrorMessage);
         }
 
@@ -139,14 +157,14 @@ public class Index : PageModel
         await BuildModelAsync(Input.ReturnUrl);
         return Page();
     }
-        
+
     private async Task BuildModelAsync(string returnUrl)
     {
         Input = new InputModel
         {
             ReturnUrl = returnUrl
         };
-            
+
         var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
         if (context?.IdP != null && await _schemeProvider.GetSchemeAsync(context.IdP) != null)
         {
@@ -189,17 +207,13 @@ public class Index : PageModel
 
 
         var allowLocal = true;
-        if (context?.Client.ClientId != null)
+        var client = context?.Client;
+        if (client != null)
         {
-            var client = await _clientStore.FindEnabledClientByIdAsync(context.Client.ClientId);
-            if (client != null)
+            allowLocal = client.EnableLocalLogin;
+            if (client.IdentityProviderRestrictions != null && client.IdentityProviderRestrictions.Any())
             {
-                allowLocal = client.EnableLocalLogin;
-
-                if (client.IdentityProviderRestrictions != null && client.IdentityProviderRestrictions.Any())
-                {
-                    providers = providers.Where(provider => client.IdentityProviderRestrictions.Contains(provider.AuthenticationScheme)).ToList();
-                }
+                providers = providers.Where(provider => client.IdentityProviderRestrictions.Contains(provider.AuthenticationScheme)).ToList();
             }
         }
 

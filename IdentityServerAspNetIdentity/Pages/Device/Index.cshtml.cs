@@ -1,21 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Duende.IdentityServer.Configuration;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Validation;
-using IdentityServerHost.Pages.Consent;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using IdentityServerAspNetIdentity.Pages.Consent;
 
-namespace IdentityServerHost.Pages.Device;
+namespace IdentityServerAspNetIdentity.Pages.Device;
 
 [SecurityHeaders]
 [Authorize]
@@ -61,7 +56,8 @@ public class Index : PageModel
             return Page();
         }
 
-        Input = new InputModel { 
+        Input = new InputModel
+        {
             UserCode = userCode,
         };
 
@@ -71,7 +67,7 @@ public class Index : PageModel
     public async Task<IActionResult> OnPost()
     {
         var request = await _interaction.GetAuthorizationContextAsync(Input.UserCode);
-        if (request == null) return RedirectToPage("/Error/Index");
+        if (request == null) return RedirectToPage("/Home/Error/Index");
 
         ConsentResponse grantedConsent = null;
 

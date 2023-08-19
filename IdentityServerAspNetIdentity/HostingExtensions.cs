@@ -35,11 +35,12 @@ internal static class HostingExtensions
                 });
         });
 
+
+        // AddDefaultUI() is not added, ASP.NET Core Identity Pages need to be added explicitly.
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-          .AddEntityFrameworkStores<ApplicationDbContext>()
-          .AddDefaultTokenProviders()
-          .AddDefaultUI()
-          .AddTokenProvider<Fido2UserTwoFactorTokenProvider>("FIDO2");
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders()
+            .AddTokenProvider<Fido2UserTwoFactorTokenProvider>("FIDO2");
 
         builder.Services.Configure<Fido2Configuration>(builder.Configuration.GetSection("fido2"));
         builder.Services.AddScoped<Fido2Store>();

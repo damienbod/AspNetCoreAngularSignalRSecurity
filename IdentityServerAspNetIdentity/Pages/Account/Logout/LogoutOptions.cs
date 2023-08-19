@@ -1,4 +1,5 @@
-namespace IdentityServerAspNetIdentity.Areas.Identity.Pages.Account;
+
+namespace IdentityServerAspNetIdentity.Pages.Logout;
 
 public class LogoutOptions
 {

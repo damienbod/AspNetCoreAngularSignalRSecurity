@@ -1,7 +1,7 @@
 // Copyright (c) Duende Software. All rights reserved.
 // See LICENSE in the project root for license information.
 
-namespace IdentityServerAspNetIdentity.Areas.Identity.Pages.Account;
+namespace IdentityServerAspNetIdentity.Pages.Logout;
 
 public class LoggedOutViewModel
 {
