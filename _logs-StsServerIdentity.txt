@@ -1,0 +1,409 @@
+2023-08-19 21:19:09.647 +02:00 [INF] Starting Duende IdentityServer version 6.3.3+4b4117844553d1ce52966e37734f2b7cd285de89 (.NET 7.0.10)
+2023-08-19 21:19:09.761 +02:00 [WRN] You do not have a valid license key for the Duende software. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please start a conversation with us: https://duendesoftware.com/contact
+2023-08-19 21:19:09.767 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-19 21:19:09.776 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2023-08-19 21:19:09.779 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2023-08-19 21:19:09.784 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2023-08-19 21:19:09.788 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2023-08-19 21:19:09.792 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2023-08-19 21:19:09.796 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2023-08-19 21:19:12.231 +02:00 [INF] Now listening on: https://localhost:5001
+2023-08-19 21:19:12.235 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-19 21:19:12.237 +02:00 [INF] Hosting environment: Development
+2023-08-19 21:19:12.239 +02:00 [INF] Content root path: C:\repos\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServerIdentity
+2023-08-19 21:19:13.908 +02:00 [DBG] Login Url: /Account/Login
+2023-08-19 21:19:13.915 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2023-08-19 21:19:13.918 +02:00 [DBG] Logout Url: /Account/Logout
+2023-08-19 21:19:13.922 +02:00 [DBG] ConsentUrl Url: /consent
+2023-08-19 21:19:13.925 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2023-08-19 21:19:13.928 +02:00 [DBG] Error Url: /home/error
+2023-08-19 21:19:13.932 +02:00 [DBG] Error Id Parameter: errorId
+2023-08-19 21:19:13.950 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:19:13.990 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:19:14.737 +02:00 [INF] HTTP GET / responded 200 in 890.9736 ms
+2023-08-19 21:19:14.839 +02:00 [INF] HTTP GET /js/vendor.min.js responded 304 in 27.2015 ms
+2023-08-19 21:19:14.839 +02:00 [INF] HTTP GET /css/vendor.min.css responded 304 in 27.2014 ms
+2023-08-19 21:19:14.888 +02:00 [INF] HTTP GET /js/site.min.js responded 304 in 1.8928 ms
+2023-08-19 21:21:36.644 +02:00 [INF] Starting Duende IdentityServer version 6.3.3+4b4117844553d1ce52966e37734f2b7cd285de89 (.NET 7.0.10)
+2023-08-19 21:21:36.728 +02:00 [WRN] You do not have a valid license key for the Duende software. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please start a conversation with us: https://duendesoftware.com/contact
+2023-08-19 21:21:36.736 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-19 21:21:36.748 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2023-08-19 21:21:36.751 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2023-08-19 21:21:36.754 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2023-08-19 21:21:36.758 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2023-08-19 21:21:36.762 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2023-08-19 21:21:36.765 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2023-08-19 21:21:38.268 +02:00 [INF] Now listening on: https://localhost:5001
+2023-08-19 21:21:38.272 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-19 21:21:38.275 +02:00 [INF] Hosting environment: Development
+2023-08-19 21:21:38.281 +02:00 [INF] Content root path: C:\repos\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServerIdentity
+2023-08-19 21:21:39.698 +02:00 [DBG] Login Url: /Account/Login
+2023-08-19 21:21:39.706 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2023-08-19 21:21:39.710 +02:00 [DBG] Logout Url: /Account/Logout
+2023-08-19 21:21:39.713 +02:00 [DBG] ConsentUrl Url: /consent
+2023-08-19 21:21:39.717 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2023-08-19 21:21:39.729 +02:00 [DBG] Error Url: /home/error
+2023-08-19 21:21:39.732 +02:00 [DBG] Error Id Parameter: errorId
+2023-08-19 21:21:39.748 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:21:39.788 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:21:40.480 +02:00 [INF] HTTP GET / responded 200 in 877.4522 ms
+2023-08-19 21:22:05.398 +02:00 [DBG] CORS request made for path: /.well-known/openid-configuration from origin: https://localhost:44311
+2023-08-19 21:22:05.409 +02:00 [DBG] Client list checked and origin: https://localhost:44311 is allowed
+2023-08-19 21:22:05.413 +02:00 [DBG] CorsPolicyService allowed origin: https://localhost:44311
+2023-08-19 21:22:05.424 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:05.436 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:05.443 +02:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2023-08-19 21:22:06.355 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: Duende.IdentityServer.Endpoints.DiscoveryEndpoint
+2023-08-19 21:22:06.364 +02:00 [INF] Invoking IdentityServer endpoint: Duende.IdentityServer.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2023-08-19 21:22:06.372 +02:00 [DBG] Start discovery request
+2023-08-19 21:22:06.948 +02:00 [DBG] Created and stored new key with kid 33983D99576393C4F5A91AB07490C778.
+2023-08-19 21:22:12.017 +02:00 [INF] Active signing key found with kid 33983D99576393C4F5A91AB07490C778 for alg RS256. Expires in "89.23:59:54". Retires in "103.23:59:54"
+2023-08-19 21:22:12.037 +02:00 [INF] HTTP GET /.well-known/openid-configuration responded 200 in 6659.2754 ms
+2023-08-19 21:22:12.162 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:12.177 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:12.181 +02:00 [DBG] Request path /connect/authorize matched to endpoint type Authorize
+2023-08-19 21:22:12.207 +02:00 [DBG] Endpoint enabled: Authorize, successfully created handler: Duende.IdentityServer.Endpoints.AuthorizeEndpoint
+2023-08-19 21:22:12.213 +02:00 [INF] Invoking IdentityServer endpoint: Duende.IdentityServer.Endpoints.AuthorizeEndpoint for /connect/authorize
+2023-08-19 21:22:12.240 +02:00 [DBG] Start authorize request
+2023-08-19 21:22:12.269 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:12.280 +02:00 [DBG] No user present in authorize request
+2023-08-19 21:22:12.289 +02:00 [DBG] Start authorize request protocol validation
+2023-08-19 21:22:12.312 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:22:12.325 +02:00 [DBG] Checking for PKCE parameters
+2023-08-19 21:22:12.373 +02:00 [DBG] Calling into custom validator: Duende.IdentityServer.Validation.DefaultCustomAuthorizeRequestValidator
+2023-08-19 21:22:12.389 +02:00 [DBG] ValidatedAuthorizeRequest
+{"ClientId":"angularclient","ClientName":"angularclient","RedirectUri":"https://localhost:44311","AllowedRedirectUris":["https://localhost:44311","https://localhost:44311/silent-renew.html"],"SubjectId":"anonymous","ResponseType":"code","ResponseMode":"query","GrantType":"authorization_code","RequestedScopes":"dataEventRecords openid profile email","State":"062033eaea25bff98185b89a11ebc3df22zjJySiN","UiLocales":null,"Nonce":"18f0175993dc1f4e9c2aa847b97adc5367o5oB60d","AuthenticationContextReferenceClasses":null,"DisplayMode":null,"PromptMode":"","MaxAge":null,"LoginHint":null,"SessionId":"","Raw":{"client_id":"angularclient","redirect_uri":"https://localhost:44311","response_type":"code","scope":"dataEventRecords openid profile email","nonce":"18f0175993dc1f4e9c2aa847b97adc5367o5oB60d","state":"062033eaea25bff98185b89a11ebc3df22zjJySiN","code_challenge":"MJayxkjAx3T5wXnrb3thWpE10cVhMka0G6cQF-2VCM4","code_challenge_method":"S256"},"$type":"AuthorizeRequestValidationLog"}
+2023-08-19 21:22:12.440 +02:00 [INF] Showing login: User is not authenticated
+2023-08-19 21:22:12.446 +02:00 [INF] HTTP GET /connect/authorize responded 302 in 304.1776 ms
+2023-08-19 21:22:12.467 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:12.472 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:12.592 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:12.596 +02:00 [DBG] Start authorize request protocol validation
+2023-08-19 21:22:12.599 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:22:12.604 +02:00 [DBG] Checking for PKCE parameters
+2023-08-19 21:22:12.609 +02:00 [DBG] Calling into custom validator: Duende.IdentityServer.Validation.DefaultCustomAuthorizeRequestValidator
+2023-08-19 21:22:12.809 +02:00 [INF] HTTP GET /Account/Login responded 200 in 343.9039 ms
+2023-08-19 21:22:12.968 +02:00 [INF] HTTP GET /js/site.min.js responded 200 in 19.5728 ms
+2023-08-19 21:22:13.040 +02:00 [INF] HTTP GET /css/site.css responded 200 in 124.4164 ms
+2023-08-19 21:22:13.082 +02:00 [INF] HTTP GET /css/vendor.min.css responded 200 in 163.7579 ms
+2023-08-19 21:22:13.040 +02:00 [INF] HTTP GET /duende-logo.svg responded 200 in 90.9178 ms
+2023-08-19 21:22:13.040 +02:00 [INF] HTTP GET /lib/bootstrap4-glyphicons/css/bootstrap-glyphicons.min.css responded 200 in 121.4647 ms
+2023-08-19 21:22:13.087 +02:00 [INF] HTTP GET /js/vendor.min.js responded 200 in 148.6321 ms
+2023-08-19 21:22:13.188 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:13.192 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:13.197 +02:00 [INF] HTTP GET /css/bootstrap.min.css.map responded 404 in 11.3100 ms
+2023-08-19 21:22:13.279 +02:00 [INF] HTTP GET /favicon.ico responded 200 in 20.6699 ms
+2023-08-19 21:22:13.289 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:13.293 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:13.296 +02:00 [INF] HTTP GET /js/bootstrap.bundle.min.js.map responded 404 in 8.2763 ms
+2023-08-19 21:22:14.847 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:14.853 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:14.855 +02:00 [INF] HTTP GET /service-worker.js responded 404 in 8.9907 ms
+2023-08-19 21:22:44.286 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:44.295 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:22:44.300 +02:00 [INF] HTTP GET /service-worker.js responded 404 in 15.6342 ms
+2023-08-19 21:23:00.269 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:00.274 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:00.355 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:00.358 +02:00 [DBG] Start authorize request protocol validation
+2023-08-19 21:23:00.361 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:23:00.364 +02:00 [DBG] Checking for PKCE parameters
+2023-08-19 21:23:00.368 +02:00 [DBG] Calling into custom validator: Duende.IdentityServer.Validation.DefaultCustomAuthorizeRequestValidator
+2023-08-19 21:23:03.568 +02:00 [ERR] Failed executing DbCommand (735ms) [Parameters=[@__normalizedUserName_0='?' (Size = 5)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DataEventRecordsRole", "a"."Email", "a"."EmailConfirmed", "a"."IsAdmin", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecuredFilesRole", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2023-08-19 21:23:04.254 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'StsServerIdentity.Data.ApplicationDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: AspNetUsers'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements(Stopwatch timer)+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements(Stopwatch timer)+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: AspNetUsers'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements(Stopwatch timer)+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements(Stopwatch timer)+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2023-08-19 21:23:07.604 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: AspNetUsers'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements(Stopwatch timer)+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements(Stopwatch timer)+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Identity.UserManager`1.FindByNameAsync(String userName)
+   at StsServerIdentity.Pages.Login.Index.OnPost() in C:\repos\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServerIdentity\Pages\Account\Login\Index.cshtml.cs:line 71
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory.GenericTaskHandlerMethod.Convert[T](Object taskAsObject)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.ExecutorFactory.GenericTaskHandlerMethod.Execute(Object receiver, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeHandlerMethodAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeNextPageFilterAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Rethrow(PageHandlerExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Duende.IdentityServer.Hosting.IdentityServerMiddleware.Invoke(HttpContext context, IdentityServerOptions options, IEndpointRouter router, IUserSession userSession, IEventService events, IIssuerNameService issuerNameService, ISessionCoordinationService sessionCoordinationService) in /_/src/IdentityServer/Hosting/IdentityServerMiddleware.cs:line 120
+   at Duende.IdentityServer.Hosting.MutualTlsEndpointMiddleware.Invoke(HttpContext context, IAuthenticationSchemeProvider schemes) in /_/src/IdentityServer/Hosting/MutualTlsEndpointMiddleware.cs:line 95
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Duende.IdentityServer.Hosting.DynamicProviders.DynamicSchemeAuthenticationMiddleware.Invoke(HttpContext context) in /_/src/IdentityServer/Hosting/DynamicProviders/DynamicSchemes/DynamicSchemeAuthenticationMiddleware.cs:line 50
+   at Duende.IdentityServer.Hosting.BaseUrlMiddleware.Invoke(HttpContext context) in /_/src/IdentityServer/Hosting/BaseUrlMiddleware.cs:line 27
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-08-19 21:23:07.852 +02:00 [ERR] HTTP POST /Account/Login responded 500 in 7588.1902 ms
+2023-08-19 21:23:09.772 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:09.776 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:09.780 +02:00 [INF] HTTP GET /service-worker.js responded 404 in 9.2086 ms
+2023-08-19 21:23:13.007 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:13.013 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:13.040 +02:00 [INF] HTTP GET / responded 200 in 32.0710 ms
+2023-08-19 21:23:14.842 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:14.846 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:14.849 +02:00 [INF] HTTP GET /service-worker.js responded 404 in 6.6295 ms
+2023-08-19 21:23:24.372 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:24.380 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:24.395 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2023-08-19 21:23:24.398 +02:00 [INF] HTTP GET /diagnostics responded 302 in 26.2926 ms
+2023-08-19 21:23:24.415 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:24.420 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:24.456 +02:00 [INF] HTTP GET /Account/Login responded 200 in 41.0221 ms
+2023-08-19 21:23:26.112 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:26.115 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:26.118 +02:00 [INF] HTTP GET /service-worker.js responded 404 in 6.5214 ms
+2023-08-19 21:23:32.026 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:32.030 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:32.036 +02:00 [INF] HTTP GET /Account/register responded 404 in 10.3489 ms
+2023-08-19 21:23:33.176 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:33.180 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:23:33.186 +02:00 [INF] HTTP GET /service-worker.js responded 404 in 10.2094 ms
+2023-08-19 21:24:15.285 +02:00 [INF] Starting Duende IdentityServer version 6.3.3+4b4117844553d1ce52966e37734f2b7cd285de89 (.NET 7.0.10)
+2023-08-19 21:24:15.391 +02:00 [WRN] You do not have a valid license key for the Duende software. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please start a conversation with us: https://duendesoftware.com/contact
+2023-08-19 21:24:15.400 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-19 21:24:15.412 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2023-08-19 21:24:15.414 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2023-08-19 21:24:15.417 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2023-08-19 21:24:15.420 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2023-08-19 21:24:15.423 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2023-08-19 21:24:15.425 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2023-08-19 21:24:15.879 +02:00 [INF] Seeding database...
+2023-08-19 21:24:18.884 +02:00 [DBG] alice created
+2023-08-19 21:24:19.150 +02:00 [DBG] bob created
+2023-08-19 21:24:19.157 +02:00 [INF] Done seeding database. Exiting.
+2023-08-19 21:24:33.781 +02:00 [INF] Shut down complete
+2023-08-19 21:24:51.745 +02:00 [INF] Starting Duende IdentityServer version 6.3.3+4b4117844553d1ce52966e37734f2b7cd285de89 (.NET 7.0.10)
+2023-08-19 21:24:51.831 +02:00 [WRN] You do not have a valid license key for the Duende software. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please start a conversation with us: https://duendesoftware.com/contact
+2023-08-19 21:24:51.838 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-19 21:24:51.847 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2023-08-19 21:24:51.851 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2023-08-19 21:24:51.854 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2023-08-19 21:24:51.858 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2023-08-19 21:24:51.862 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2023-08-19 21:24:51.865 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2023-08-19 21:24:52.765 +02:00 [INF] Now listening on: https://localhost:5001
+2023-08-19 21:24:52.770 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-19 21:24:52.774 +02:00 [INF] Hosting environment: Development
+2023-08-19 21:24:52.779 +02:00 [INF] Content root path: C:\repos\git\damienbod\AspNetCoreAngularSignalRSecurity\StsServerIdentity
+2023-08-19 21:24:53.753 +02:00 [DBG] Login Url: /Account/Login
+2023-08-19 21:24:53.759 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2023-08-19 21:24:53.762 +02:00 [DBG] Logout Url: /Account/Logout
+2023-08-19 21:24:53.765 +02:00 [DBG] ConsentUrl Url: /consent
+2023-08-19 21:24:53.768 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2023-08-19 21:24:53.771 +02:00 [DBG] Error Url: /home/error
+2023-08-19 21:24:53.774 +02:00 [DBG] Error Id Parameter: errorId
+2023-08-19 21:24:53.782 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:24:53.817 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:24:54.215 +02:00 [INF] HTTP GET / responded 200 in 513.5165 ms
+2023-08-19 21:25:27.816 +02:00 [DBG] CORS request made for path: /.well-known/openid-configuration from origin: https://localhost:44311
+2023-08-19 21:25:27.827 +02:00 [DBG] Client list checked and origin: https://localhost:44311 is allowed
+2023-08-19 21:25:27.832 +02:00 [DBG] CorsPolicyService allowed origin: https://localhost:44311
+2023-08-19 21:25:27.846 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:27.858 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:27.863 +02:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2023-08-19 21:25:28.298 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: Duende.IdentityServer.Endpoints.DiscoveryEndpoint
+2023-08-19 21:25:28.309 +02:00 [INF] Invoking IdentityServer endpoint: Duende.IdentityServer.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2023-08-19 21:25:28.319 +02:00 [DBG] Start discovery request
+2023-08-19 21:25:28.611 +02:00 [INF] Active signing key found with kid 33983D99576393C4F5A91AB07490C778 for alg RS256. Expires in "89.23:56:38". Retires in "103.23:56:38"
+2023-08-19 21:25:28.660 +02:00 [INF] HTTP GET /.well-known/openid-configuration responded 200 in 902.0383 ms
+2023-08-19 21:25:28.775 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:28.788 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:28.793 +02:00 [DBG] Request path /connect/authorize matched to endpoint type Authorize
+2023-08-19 21:25:28.844 +02:00 [DBG] Endpoint enabled: Authorize, successfully created handler: Duende.IdentityServer.Endpoints.AuthorizeEndpoint
+2023-08-19 21:25:28.849 +02:00 [INF] Invoking IdentityServer endpoint: Duende.IdentityServer.Endpoints.AuthorizeEndpoint for /connect/authorize
+2023-08-19 21:25:28.893 +02:00 [DBG] Start authorize request
+2023-08-19 21:25:28.959 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:28.971 +02:00 [DBG] No user present in authorize request
+2023-08-19 21:25:29.007 +02:00 [DBG] Start authorize request protocol validation
+2023-08-19 21:25:29.039 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:25:29.063 +02:00 [DBG] Checking for PKCE parameters
+2023-08-19 21:25:29.119 +02:00 [DBG] Calling into custom validator: Duende.IdentityServer.Validation.DefaultCustomAuthorizeRequestValidator
+2023-08-19 21:25:29.151 +02:00 [DBG] ValidatedAuthorizeRequest
+{"ClientId":"angularclient","ClientName":"angularclient","RedirectUri":"https://localhost:44311","AllowedRedirectUris":["https://localhost:44311","https://localhost:44311/silent-renew.html"],"SubjectId":"anonymous","ResponseType":"code","ResponseMode":"query","GrantType":"authorization_code","RequestedScopes":"dataEventRecords openid profile email","State":"8c5a0e0f515f93be7dc234717ab274340dEc9JY6X","UiLocales":null,"Nonce":"6585cb29c92a154716c63cc068aeced991toGc2JN","AuthenticationContextReferenceClasses":null,"DisplayMode":null,"PromptMode":"","MaxAge":null,"LoginHint":null,"SessionId":"","Raw":{"client_id":"angularclient","redirect_uri":"https://localhost:44311","response_type":"code","scope":"dataEventRecords openid profile email","nonce":"6585cb29c92a154716c63cc068aeced991toGc2JN","state":"8c5a0e0f515f93be7dc234717ab274340dEc9JY6X","code_challenge":"6QgJqVGDrxi6dQPY81EGJgG7AjX4icQYbfhRBVGPcSg","code_challenge_method":"S256"},"$type":"AuthorizeRequestValidationLog"}
+2023-08-19 21:25:29.227 +02:00 [INF] Showing login: User is not authenticated
+2023-08-19 21:25:29.240 +02:00 [INF] HTTP GET /connect/authorize responded 302 in 495.5067 ms
+2023-08-19 21:25:29.270 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:29.275 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:29.395 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:29.400 +02:00 [DBG] Start authorize request protocol validation
+2023-08-19 21:25:29.404 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:25:29.409 +02:00 [DBG] Checking for PKCE parameters
+2023-08-19 21:25:29.413 +02:00 [DBG] Calling into custom validator: Duende.IdentityServer.Validation.DefaultCustomAuthorizeRequestValidator
+2023-08-19 21:25:29.719 +02:00 [INF] HTTP GET /Account/Login responded 200 in 450.3259 ms
+2023-08-19 21:25:29.913 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:29.918 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:29.923 +02:00 [INF] HTTP GET /css/bootstrap.min.css.map responded 404 in 15.8850 ms
+2023-08-19 21:25:30.021 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:30.027 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:30.035 +02:00 [INF] HTTP GET /js/bootstrap.bundle.min.js.map responded 404 in 14.4525 ms
+2023-08-19 21:25:43.405 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:43.411 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:43.495 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:43.501 +02:00 [DBG] Start authorize request protocol validation
+2023-08-19 21:25:43.504 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:25:43.507 +02:00 [DBG] Checking for PKCE parameters
+2023-08-19 21:25:43.511 +02:00 [DBG] Calling into custom validator: Duende.IdentityServer.Validation.DefaultCustomAuthorizeRequestValidator
+2023-08-19 21:25:47.301 +02:00 [DBG] Augmenting SignInContext
+2023-08-19 21:25:47.307 +02:00 [DBG] Adding idp claim with value: local
+2023-08-19 21:25:47.312 +02:00 [DBG] Adding auth_time claim with value: 1692473147
+2023-08-19 21:25:47.319 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:47.325 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:47.344 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2023-08-19 21:25:47.414 +02:00 [INF] {"Username":"alice","Provider":null,"ProviderUserId":null,"SubjectId":"614898ea-49e3-49e3-830b-2fa964b6aada","DisplayName":"alice","Endpoint":"UI","ClientId":"angularclient","Category":"Authentication","Name":"User Login Success","EventType":"Success","Id":1000,"Message":null,"ActivityId":"0HMT0T7RAGVIE:00000011","TimeStamp":"2023-08-19T19:25:47.4037936Z","ProcessId":33028,"LocalIpAddress":"::1:5001","RemoteIpAddress":"::1","$type":"UserLoginSuccessEvent"}
+2023-08-19 21:25:47.454 +02:00 [INF] HTTP POST /Account/Login responded 302 in 4052.3539 ms
+2023-08-19 21:25:47.498 +02:00 [DBG] AuthenticationScheme: Identity.Application was successfully authenticated.
+2023-08-19 21:25:47.503 +02:00 [DBG] AuthenticationScheme: Identity.Application was successfully authenticated.
+2023-08-19 21:25:47.508 +02:00 [DBG] Request path /connect/authorize/callback matched to endpoint type Authorize
+2023-08-19 21:25:47.519 +02:00 [DBG] Endpoint enabled: Authorize, successfully created handler: Duende.IdentityServer.Endpoints.AuthorizeCallbackEndpoint
+2023-08-19 21:25:47.523 +02:00 [INF] Invoking IdentityServer endpoint: Duende.IdentityServer.Endpoints.AuthorizeCallbackEndpoint for /connect/authorize/callback
+2023-08-19 21:25:47.533 +02:00 [DBG] Start authorize callback request
+2023-08-19 21:25:47.537 +02:00 [DBG] User in authorize request: 614898ea-49e3-49e3-830b-2fa964b6aada
+2023-08-19 21:25:47.540 +02:00 [DBG] Start authorize request protocol validation
+2023-08-19 21:25:47.545 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:25:47.549 +02:00 [DBG] Checking for PKCE parameters
+2023-08-19 21:25:47.552 +02:00 [DBG] Calling into custom validator: Duende.IdentityServer.Validation.DefaultCustomAuthorizeRequestValidator
+2023-08-19 21:25:47.572 +02:00 [DBG] ValidatedAuthorizeRequest
+{"ClientId":"angularclient","ClientName":"angularclient","RedirectUri":"https://localhost:44311","AllowedRedirectUris":["https://localhost:44311","https://localhost:44311/silent-renew.html"],"SubjectId":"614898ea-49e3-49e3-830b-2fa964b6aada","ResponseType":"code","ResponseMode":"query","GrantType":"authorization_code","RequestedScopes":"dataEventRecords openid profile email","State":"8c5a0e0f515f93be7dc234717ab274340dEc9JY6X","UiLocales":null,"Nonce":"6585cb29c92a154716c63cc068aeced991toGc2JN","AuthenticationContextReferenceClasses":null,"DisplayMode":null,"PromptMode":"","MaxAge":null,"LoginHint":null,"SessionId":"518B63AA32E6BCAC332F1080CAA292B2","Raw":{"client_id":"angularclient","redirect_uri":"https://localhost:44311","response_type":"code","scope":"dataEventRecords openid profile email","nonce":"6585cb29c92a154716c63cc068aeced991toGc2JN","state":"8c5a0e0f515f93be7dc234717ab274340dEc9JY6X","code_challenge":"6QgJqVGDrxi6dQPY81EGJgG7AjX4icQYbfhRBVGPcSg","code_challenge_method":"S256"},"$type":"AuthorizeRequestValidationLog"}
+2023-08-19 21:25:47.843 +02:00 [DBG] Client is configured to not require consent, no consent is required
+2023-08-19 21:25:47.854 +02:00 [DBG] Creating Authorization Code Flow response.
+2023-08-19 21:25:47.931 +02:00 [INF] {"ClientId":"angularclient","ClientName":"angularclient","RedirectUri":"https://localhost:44311","Endpoint":"Authorize","SubjectId":"614898ea-49e3-49e3-830b-2fa964b6aada","Scopes":"dataEventRecords openid profile email","GrantType":"authorization_code","Tokens":[{"TokenType":"code","TokenValue":"****48-1","$type":"Token"}],"Category":"Token","Name":"Token Issued Success","EventType":"Success","Id":2000,"Message":null,"ActivityId":"0HMT0T7RAGVIE:00000013","TimeStamp":"2023-08-19T19:25:47.9276813Z","ProcessId":33028,"LocalIpAddress":"::1:5001","RemoteIpAddress":"::1","$type":"TokenIssuedSuccessEvent"}
+2023-08-19 21:25:47.984 +02:00 [DBG] Authorize endpoint response
+{"SubjectId":"614898ea-49e3-49e3-830b-2fa964b6aada","ClientId":"angularclient","RedirectUri":"https://localhost:44311","State":"8c5a0e0f515f93be7dc234717ab274340dEc9JY6X","Scope":"dataEventRecords openid profile email","Error":null,"ErrorDescription":null,"$type":"AuthorizeResponseLog"}
+2023-08-19 21:25:48.020 +02:00 [DBG] Augmenting SignInContext
+2023-08-19 21:25:48.025 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2023-08-19 21:25:48.034 +02:00 [INF] HTTP GET /connect/authorize/callback responded 302 in 547.1117 ms
+2023-08-19 21:25:48.910 +02:00 [DBG] CORS request made for path: /connect/token from origin: https://localhost:44311
+2023-08-19 21:25:48.915 +02:00 [DBG] Client list checked and origin: https://localhost:44311 is allowed
+2023-08-19 21:25:48.918 +02:00 [DBG] CorsPolicyService allowed origin: https://localhost:44311
+2023-08-19 21:25:48.921 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:48.925 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:48.929 +02:00 [DBG] Request path /connect/token matched to endpoint type Token
+2023-08-19 21:25:48.938 +02:00 [DBG] Endpoint enabled: Token, successfully created handler: Duende.IdentityServer.Endpoints.TokenEndpoint
+2023-08-19 21:25:48.941 +02:00 [INF] Invoking IdentityServer endpoint: Duende.IdentityServer.Endpoints.TokenEndpoint for /connect/token
+2023-08-19 21:25:48.952 +02:00 [DBG] Start token request.
+2023-08-19 21:25:48.961 +02:00 [DBG] Start client validation
+2023-08-19 21:25:48.970 +02:00 [DBG] Start parsing Basic Authentication secret
+2023-08-19 21:25:48.976 +02:00 [DBG] Start parsing for secret in post body
+2023-08-19 21:25:48.980 +02:00 [DBG] client id without secret found
+2023-08-19 21:25:48.986 +02:00 [DBG] Parser found secret: PostBodySecretParser
+2023-08-19 21:25:48.989 +02:00 [DBG] Secret id found: angularclient
+2023-08-19 21:25:48.992 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:25:48.996 +02:00 [DBG] Public Client - skipping secret validation success
+2023-08-19 21:25:48.999 +02:00 [DBG] Client validation success
+2023-08-19 21:25:49.005 +02:00 [INF] {"ClientId":"angularclient","AuthenticationMethod":"NoSecret","Category":"Authentication","Name":"Client Authentication Success","EventType":"Success","Id":1010,"Message":null,"ActivityId":"0HMT0T7RAGVIF:00000003","TimeStamp":"2023-08-19T19:25:49.0038771Z","ProcessId":33028,"LocalIpAddress":"::1:5001","RemoteIpAddress":"::1","$type":"ClientAuthenticationSuccessEvent"}
+2023-08-19 21:25:49.044 +02:00 [DBG] Start token request validation
+2023-08-19 21:25:49.062 +02:00 [DBG] Start validation of authorization code token request
+2023-08-19 21:25:49.092 +02:00 [DBG] Client required a proof key for code exchange. Starting PKCE validation
+2023-08-19 21:25:49.143 +02:00 [DBG] Validation of authorization code token request success
+2023-08-19 21:25:49.154 +02:00 [INF] Token request validation success, {"ClientId":"angularclient","ClientName":"angularclient","GrantType":"authorization_code","Scopes":null,"AuthorizationCode":"****48-1","RefreshToken":"********","UserName":null,"AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"authorization_code","client_id":"angularclient","code_verifier":"6f2a903e0e37ce500458f42843f37b5bd28ad921d5ee44c9c23e8a1ad1afhnuj8CU","code":"***REDACTED***","redirect_uri":"https://localhost:44311"},"$type":"TokenRequestValidationLog"}
+2023-08-19 21:25:49.203 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:25:49.218 +02:00 [DBG] Getting claims for access token for client: angularclient
+2023-08-19 21:25:49.223 +02:00 [DBG] Getting claims for access token for subject: 614898ea-49e3-49e3-830b-2fa964b6aada
+2023-08-19 21:25:49.249 +02:00 [DBG] Claim types from profile service that were filtered: ["scope","scope"]
+2023-08-19 21:25:49.321 +02:00 [INF] Active signing key found with kid 33983D99576393C4F5A91AB07490C778 for alg RS256. Expires in "89.23:56:17". Retires in "103.23:56:17"
+2023-08-19 21:25:49.880 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:25:49.893 +02:00 [INF] Active signing key found with kid 33983D99576393C4F5A91AB07490C778 for alg RS256. Expires in "89.23:56:17". Retires in "103.23:56:17"
+2023-08-19 21:25:49.908 +02:00 [DBG] Getting claims for identity token for subject: 614898ea-49e3-49e3-830b-2fa964b6aada and client: angularclient
+2023-08-19 21:25:49.920 +02:00 [DBG] Claim types from profile service that were filtered: ["scope","scope"]
+2023-08-19 21:25:49.929 +02:00 [INF] Active signing key found with kid 33983D99576393C4F5A91AB07490C778 for alg RS256. Expires in "89.23:56:17". Retires in "103.23:56:17"
+2023-08-19 21:25:49.944 +02:00 [INF] {"ClientId":"angularclient","ClientName":"angularclient","RedirectUri":null,"Endpoint":"Token","SubjectId":"614898ea-49e3-49e3-830b-2fa964b6aada","Scopes":"dataEventRecords openid profile email","GrantType":"authorization_code","Tokens":[{"TokenType":"id_token","TokenValue":"****aF9w","$type":"Token"},{"TokenType":"access_token","TokenValue":"****0b2Q","$type":"Token"}],"Category":"Token","Name":"Token Issued Success","EventType":"Success","Id":2000,"Message":null,"ActivityId":"0HMT0T7RAGVIF:00000003","TimeStamp":"2023-08-19T19:25:49.9420731Z","ProcessId":33028,"LocalIpAddress":"::1:5001","RemoteIpAddress":"::1","$type":"TokenIssuedSuccessEvent"}
+2023-08-19 21:25:49.990 +02:00 [DBG] Token request success.
+2023-08-19 21:25:50.005 +02:00 [INF] HTTP POST /connect/token responded 200 in 1095.1339 ms
+2023-08-19 21:25:50.022 +02:00 [DBG] CORS request made for path: /.well-known/openid-configuration/jwks from origin: https://localhost:44311
+2023-08-19 21:25:50.026 +02:00 [DBG] Client list checked and origin: https://localhost:44311 is allowed
+2023-08-19 21:25:50.029 +02:00 [DBG] CorsPolicyService allowed origin: https://localhost:44311
+2023-08-19 21:25:50.032 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:50.036 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:50.040 +02:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Jwks
+2023-08-19 21:25:50.045 +02:00 [DBG] Endpoint enabled: Jwks, successfully created handler: Duende.IdentityServer.Endpoints.DiscoveryKeyEndpoint
+2023-08-19 21:25:50.056 +02:00 [INF] Invoking IdentityServer endpoint: Duende.IdentityServer.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2023-08-19 21:25:50.064 +02:00 [DBG] Start key discovery request
+2023-08-19 21:25:50.218 +02:00 [INF] HTTP GET /.well-known/openid-configuration/jwks responded 200 in 195.3020 ms
+2023-08-19 21:25:50.307 +02:00 [DBG] CORS request made for path: /connect/userinfo from origin: https://localhost:44311
+2023-08-19 21:25:50.334 +02:00 [DBG] Client list checked and origin: https://localhost:44311 is allowed
+2023-08-19 21:25:50.344 +02:00 [DBG] CorsPolicyService allowed origin: https://localhost:44311
+2023-08-19 21:25:50.349 +02:00 [INF] HTTP OPTIONS /connect/userinfo responded 204 in 41.6164 ms
+2023-08-19 21:25:50.369 +02:00 [DBG] CORS request made for path: /connect/userinfo from origin: https://localhost:44311
+2023-08-19 21:25:50.380 +02:00 [DBG] Client list checked and origin: https://localhost:44311 is allowed
+2023-08-19 21:25:50.383 +02:00 [DBG] CorsPolicyService allowed origin: https://localhost:44311
+2023-08-19 21:25:50.399 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:50.409 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:50.416 +02:00 [DBG] Request path /connect/userinfo matched to endpoint type Userinfo
+2023-08-19 21:25:50.432 +02:00 [DBG] Endpoint enabled: Userinfo, successfully created handler: Duende.IdentityServer.Endpoints.UserInfoEndpoint
+2023-08-19 21:25:50.440 +02:00 [INF] Invoking IdentityServer endpoint: Duende.IdentityServer.Endpoints.UserInfoEndpoint for /connect/userinfo
+2023-08-19 21:25:50.452 +02:00 [DBG] Start userinfo request
+2023-08-19 21:25:50.463 +02:00 [DBG] Bearer token found in header
+2023-08-19 21:25:50.692 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:25:50.703 +02:00 [DBG] client configuration validation for client angularclient succeeded.
+2023-08-19 21:25:50.721 +02:00 [DBG] Calling into custom token validator: Duende.IdentityServer.Validation.DefaultCustomTokenValidator
+2023-08-19 21:25:50.726 +02:00 [DBG] Token validation success
+{"ClientId":null,"ClientName":null,"ValidateLifetime":true,"AccessTokenType":"Jwt","ExpectedScope":"openid","TokenHandle":null,"JwtId":"8BFCAFBAB99F3EB512CE741D84A4F718","Claims":{"iss":"https://localhost:5001","nbf":1692473149,"iat":1692473149,"exp":1692476449,"aud":["dataEventRecordsApi","https://localhost:5001/resources"],"scope":["dataEventRecords","openid","profile","email"],"amr":"pwd","client_id":"angularclient","sub":"614898ea-49e3-49e3-830b-2fa964b6aada","auth_time":1692473147,"idp":"local","role":["dataEventRecords","dataEventRecords.user","user","securedFiles.user","securedFiles"],"given_name":"alice","email":"AliceSmith@email.com","name":"AliceSmith@email.com","sid":"518B63AA32E6BCAC332F1080CAA292B2","jti":"8BFCAFBAB99F3EB512CE741D84A4F718"},"$type":"TokenValidationLog"}
+2023-08-19 21:25:50.808 +02:00 [DBG] Creating userinfo response
+2023-08-19 21:25:50.823 +02:00 [DBG] Scopes in access token: dataEventRecords openid profile email
+2023-08-19 21:25:50.840 +02:00 [DBG] Requested claim types: sub name family_name given_name middle_name nickname preferred_username profile picture website gender birthdate zoneinfo locale updated_at email email_verified
+2023-08-19 21:25:50.852 +02:00 [INF] Profile service returned the following claim types: sub email name given_name family_name website preferred_username email_verified role role scope role role scope given_name role email name
+2023-08-19 21:25:50.859 +02:00 [DBG] End userinfo request
+2023-08-19 21:25:50.871 +02:00 [INF] HTTP GET /connect/userinfo responded 200 in 502.6880 ms
+2023-08-19 21:25:50.948 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:50.957 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:50.965 +02:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2023-08-19 21:25:50.991 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: Duende.IdentityServer.Endpoints.DiscoveryEndpoint
+2023-08-19 21:25:50.998 +02:00 [INF] Invoking IdentityServer endpoint: Duende.IdentityServer.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2023-08-19 21:25:51.003 +02:00 [DBG] Start discovery request
+2023-08-19 21:25:51.009 +02:00 [INF] Active signing key found with kid 33983D99576393C4F5A91AB07490C778 for alg RS256. Expires in "89.23:56:15". Retires in "103.23:56:15"
+2023-08-19 21:25:51.021 +02:00 [INF] HTTP GET /.well-known/openid-configuration responded 200 in 73.5580 ms
+2023-08-19 21:25:51.779 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:51.784 +02:00 [DBG] AuthenticationScheme: Identity.Application was not authenticated.
+2023-08-19 21:25:51.788 +02:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Jwks
+2023-08-19 21:25:51.793 +02:00 [DBG] Endpoint enabled: Jwks, successfully created handler: Duende.IdentityServer.Endpoints.DiscoveryKeyEndpoint
+2023-08-19 21:25:51.797 +02:00 [INF] Invoking IdentityServer endpoint: Duende.IdentityServer.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2023-08-19 21:25:51.803 +02:00 [DBG] Start key discovery request
+2023-08-19 21:25:51.809 +02:00 [INF] HTTP GET /.well-known/openid-configuration/jwks responded 200 in 30.6341 ms
