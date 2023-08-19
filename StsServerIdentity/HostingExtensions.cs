@@ -65,8 +65,8 @@ internal static class HostingExtensions
             options.Events.RaiseInformationEvents = true;
             options.Events.RaiseFailureEvents = true;
             options.Events.RaiseSuccessEvents = true;
-            options.UserInteraction.LoginUrl = "/Identity/Account/Login";
-            options.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
+            //options.UserInteraction.LoginUrl = "/Identity/Account/Login";
+            //options.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
 
             // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
             options.EmitStaticAudienceClaim = true;
