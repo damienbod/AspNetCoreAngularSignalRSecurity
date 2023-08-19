@@ -11,7 +11,7 @@ using StsServerIdentity.Data;
 namespace StsServerIdentity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230818171502_Users")]
+    [Migration("20230819092626_Users")]
     partial class Users
     {
         /// <inheritdoc />
@@ -233,6 +233,9 @@ namespace StsServerIdentity.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("SecuredFilesRole")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");

@@ -5,168 +5,124 @@ namespace StsServerIdentity;
 
 public static class Config
 {
-    public static IEnumerable<IdentityResource> GetIdentityResources()
-    {
-        return new List<IdentityResource>
-    {
-        new IdentityResources.OpenId(),
-        new IdentityResources.Profile(),
-        new IdentityResources.Email()
-    };
-    }
-
-    public static IEnumerable<ApiScope> GetApiScopes()
-    {
-        return new List<ApiScope>
-    {
-        new ApiScope("scope_used_for_hybrid_flow", "Scope for the scope_used_for_hybrid_flow"),
-        new ApiScope("scope_used_for_api_in_protected_zone",  "Scope for the scope_used_for_api_in_protected_zone")
-    };
-    }
-
-    public static IEnumerable<ApiResource> GetApiResources()
-    {
-        return new List<ApiResource>
-    {
-        new ApiResource("ApiHybridFlow")
+    public static IEnumerable<IdentityResource> IdentityResources =>
+        new IdentityResource[]
         {
-            ApiSecrets =
-            {
-                new Secret("hybrid_flow_secret".Sha256())
-            },
-            Scopes = { "scope_used_for_hybrid_flow" },
-            UserClaims = { "role", "admin", "user" }
-        },
-        new ApiResource("ProtectedApi")
-        {
-            DisplayName = "API protected",
-            ApiSecrets =
-            {
-                new Secret("api_in_protected_zone_secret".Sha256())
-            },
-            Scopes = { "scope_used_for_api_in_protected_zone" },
-            UserClaims = { "role", "admin", "user" }
-        }
-    };
-    }
+            new IdentityResources.OpenId(),
+            new IdentityResources.Profile(),
+            new IdentityResources.Email(),
+            new IdentityResource("dataeventrecordsir",new []{ "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin" , "dataEventRecords.user" } ),
+        };
 
-    public static IEnumerable<Client> GetClients(IConfigurationSection authConfigurations)
-    {
-        var webHybridClientUrl = authConfigurations["WebHybridClientUrl"];
-        var webCodeFlowPkceClientUrl = authConfigurations["WebCodeFlowPkceClientUrl"];
-        var aspNetCoreRequireMfaOidcUrl = authConfigurations["AspNetCoreRequireMfaOidcUrl"];
-
-        return new List<Client>
-    {
-        new Client
+    public static IEnumerable<ApiScope> ApiScopes =>
+        new ApiScope[]
         {
-            ClientName = "hybridclient",
-            ClientId = "hybridclient",
-            ClientSecrets = {new Secret("hybrid_flow_secret".Sha256()) },
-            AllowedGrantTypes = GrantTypes.Hybrid,
-            AllowOfflineAccess = true,
-            AlwaysSendClientClaims = true,
-            RequirePkce = false,
-            UpdateAccessTokenClaimsOnRefresh = true,
-            AlwaysIncludeUserClaimsInIdToken = true,
-            RedirectUris = {
-                $"{webHybridClientUrl}/signin-oidc"
-            },
-            PostLogoutRedirectUris = {
-                $"{webHybridClientUrl}/signout-callback-oidc"
-            },
-            AllowedScopes = new List<string>
+            new ApiScope("dataEventRecords", "Scope for the dataEventRecords ApiResource",
+                    new List<string> {
+                        "role",
+                        "admin",
+                        "user",
+                        "dataEventRecords",
+                        "dataEventRecords.admin",
+                        "dataEventRecords.user"
+                    }
+            )
+        };
+
+    public static IEnumerable<ApiResource> ApiResources =>
+        new ApiResource[]
+        {
+            new ApiResource("dataEventRecordsApi")
             {
-                IdentityServerConstants.StandardScopes.OpenId,
-                IdentityServerConstants.StandardScopes.Profile,
-                IdentityServerConstants.StandardScopes.OfflineAccess,
-                "scope_used_for_hybrid_flow",
-                "role"
+                ApiSecrets =
+                {
+                    new Secret("dataEventRecordsSecret".Sha256())
+                },
+                Scopes = new List<string> { "dataEventRecords" }
             }
-        },
-        new Client
-        {
-            ClientId = "CC_FOR_API",
-            ClientName = "CC_FOR_API",
-            ClientSecrets = new List<Secret> { new Secret { Value = "cc_for_api_secret".Sha256() } },
-            AllowedGrantTypes = GrantTypes.ClientCredentials,
-            AllowedScopes = new List<string> { "scope_used_for_api_in_protected_zone" }
-        },
-        new Client
-        {
-            ClientId = "deviceFlowWebClient",
-            ClientName = "Device Flow Client",
 
-            AllowedGrantTypes = GrantTypes.DeviceFlow,
+        };
+
+    public static IEnumerable<Client> Clients => new Client[]
+    {
+        new Client
+        {
+            ClientName = "angularclient",
+            ClientId = "angularclient",
+            AccessTokenType = AccessTokenType.Jwt,
+            AccessTokenLifetime = 3300,// 330 seconds, default 60 minutes
+            IdentityTokenLifetime = 3000,
+
             RequireClientSecret = false,
-
-            AlwaysIncludeUserClaimsInIdToken = true,
-            AllowOfflineAccess = true,
-
-            AllowedScopes =
-            {
-                IdentityServerConstants.StandardScopes.OpenId,
-                IdentityServerConstants.StandardScopes.Profile,
-                IdentityServerConstants.StandardScopes.Email
-            }
-        },
-        new Client
-        {
-            ClientName = "codeflowpkceclient",
-            ClientId = "codeflowpkceclient",
-            ClientSecrets = {new Secret("codeflow_pkce_client_secret".Sha256()) },
             AllowedGrantTypes = GrantTypes.Code,
             RequirePkce = true,
-            RequireClientSecret = true,
-            AllowOfflineAccess = true,
-            AlwaysSendClientClaims = true,
-            UpdateAccessTokenClaimsOnRefresh = true,
-            //AlwaysIncludeUserClaimsInIdToken = true,
-            RedirectUris = {
-                $"{webCodeFlowPkceClientUrl}/signin-oidc",
-                "https://localhost:44345/signin-oidc",
-                "https://localhost:44355/signin-oidc",
-                "https://localhost:5001/signin-oidc"
+
+            AllowAccessTokensViaBrowser = true,
+            AllowOfflineAccess =true,
+            AlwaysIncludeUserClaimsInIdToken = true,
+            RedirectUris = new List<string>
+            {
+                "https://localhost:44311",
+                "https://localhost:44311/silent-renew.html"
+
             },
-            PostLogoutRedirectUris = {
-                $"{webCodeFlowPkceClientUrl}/signout-callback-oidc",
-                "https://localhost:44345/signout-callback-oidc",
-                "https://localhost:44355/signout-callback-oidc",
-                "https://localhost:5001/signout-callback-oidc",
+            PostLogoutRedirectUris = new List<string>
+            {
+                "https://localhost:44311/unauthorized",
+                "https://localhost:44311"
+            },
+            AllowedCorsOrigins = new List<string>
+            {
+                "https://localhost:44311"
             },
             AllowedScopes = new List<string>
             {
-                IdentityServerConstants.StandardScopes.OpenId,
-                IdentityServerConstants.StandardScopes.Profile,
-                IdentityServerConstants.StandardScopes.OfflineAccess,
-                "role"
+                "openid",
+                "dataEventRecords",
+                "dataeventrecordsscope",
+                "role",
+                "profile",
+                "email"
             }
         },
         new Client
         {
-            ClientName = "AspNetCoreRequireMfaOidc",
-            ClientId = "AspNetCoreRequireMfaOidc",
-            ClientSecrets = {new Secret("AspNetCoreRequireMfaOidcSecret".Sha256()) },
-            AllowedGrantTypes = GrantTypes.Hybrid,
-            AllowOfflineAccess = true,
-            RequirePkce = false,
-            AlwaysSendClientClaims = true,
-            UpdateAccessTokenClaimsOnRefresh = true,
+            ClientName = "angularclient2",
+            ClientId = "angularclient2",
+            AccessTokenType = AccessTokenType.Jwt,
+            AccessTokenLifetime = 3300,// 330 seconds, default 60 minutes
+            IdentityTokenLifetime = 3000,
+
+            RequireClientSecret = false,
+            AllowedGrantTypes = GrantTypes.Code,
+            RequirePkce = true,
+
+            AllowAccessTokensViaBrowser = true,
+            AllowOfflineAccess =true,
             AlwaysIncludeUserClaimsInIdToken = true,
-            RedirectUris = {
-                $"{aspNetCoreRequireMfaOidcUrl}/signin-oidc"
+            RedirectUris = new List<string>
+            {
+                "https://localhost:44395",
+                "https://localhost:44395/silent-renew.html"
             },
-            PostLogoutRedirectUris = {
-                $"{aspNetCoreRequireMfaOidcUrl}/signout-callback-oidc"
+            PostLogoutRedirectUris = new List<string>
+            {
+                "https://localhost:44395/unauthorized",
+                "https://localhost:44395"
+            },
+            AllowedCorsOrigins = new List<string>
+            {
+                "https://localhost:44395"
             },
             AllowedScopes = new List<string>
             {
-                IdentityServerConstants.StandardScopes.OpenId,
-                IdentityServerConstants.StandardScopes.Profile,
-                IdentityServerConstants.StandardScopes.OfflineAccess,
-                "role"
+                "openid",
+                "dataEventRecords",
+                "dataeventrecordsscope",
+                "role",
+                "profile",
+                "email"
             }
         }
     };
-    }
 }

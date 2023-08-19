@@ -32,6 +32,7 @@ namespace StsServerIdentity.Data.Migrations
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     IsAdmin = table.Column<bool>(type: "INTEGER", nullable: false),
                     DataEventRecordsRole = table.Column<string>(type: "TEXT", nullable: true),
+                    SecuredFilesRole = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),

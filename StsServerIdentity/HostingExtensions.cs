@@ -1,8 +1,9 @@
-using Duende.IdentityServer;
 using Fido2Identity;
 using Fido2NetLib;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Logging;
 using Serilog;
 using StsServerIdentity.Data;
 using StsServerIdentity.Models;
@@ -14,6 +15,24 @@ internal static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddRazorPages();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAllOrigins",
+                builder =>
+                {
+                    builder
+                        .AllowCredentials()
+                        .WithOrigins(
+                            "https://localhost:44311",
+                            "https://localhost:44390",
+                            "https://localhost:44395",
+                            "https://localhost:5001")
+                        .SetIsOriginAllowedToAllowWildcardSubdomains()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+        });
 
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -27,38 +46,10 @@ internal static class HostingExtensions
         builder.Services.Configure<Fido2Configuration>(builder.Configuration.GetSection("fido2"));
         builder.Services.AddScoped<Fido2Store>();
 
-        var authConfigurations = builder.Configuration.GetSection("AuthConfigurations");
+        builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>,
+            AdditionalUserClaimsPrincipalFactory>();
 
-        builder.Services
-            .AddIdentityServer(options =>
-            {
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
-
-                // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
-                options.EmitStaticAudienceClaim = true;
-            })
-            .AddInMemoryIdentityResources(Config.GetIdentityResources())
-            .AddInMemoryApiResources(Config.GetApiResources())
-            .AddInMemoryApiScopes(Config.GetApiScopes())
-            .AddInMemoryClients(Config.GetClients(authConfigurations))
-            .AddAspNetIdentity<ApplicationUser>()
-            .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
-
-        builder.Services.AddAuthentication()
-            .AddGoogle(options =>
-            {
-                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-
-                // register your IdentityServer with Google at https://console.developers.google.com
-                // enable the Google+ API
-                // set the redirect URI to https://localhost:5001/signin-google
-                options.ClientId = "copy client ID from Google here";
-                options.ClientSecret = "copy client secret from Google here";
-            });
-
+        // Adds a default in-memory implementation of IDistributedCache.
         builder.Services.AddDistributedMemoryCache();
         builder.Services.AddSession(options =>
         {
@@ -68,11 +59,46 @@ internal static class HostingExtensions
             options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         });
 
+        builder.Services.AddIdentityServer(options =>
+        {
+            options.Events.RaiseErrorEvents = true;
+            options.Events.RaiseInformationEvents = true;
+            options.Events.RaiseFailureEvents = true;
+            options.Events.RaiseSuccessEvents = true;
+            options.UserInteraction.LoginUrl = "/Identity/Account/Login";
+            options.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
+
+            // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
+            options.EmitStaticAudienceClaim = true;
+        })
+        .AddInMemoryIdentityResources(Config.IdentityResources)
+        .AddInMemoryApiScopes(Config.ApiScopes)
+        .AddInMemoryClients(Config.Clients)
+        .AddInMemoryApiResources(Config.ApiResources)
+        .AddAspNetIdentity<ApplicationUser>()
+        .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
+
+        builder.Services.AddAuthentication();
+
+        builder.Services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("IsAdmin", policyIsAdminRequirement =>
+            {
+                policyIsAdminRequirement.Requirements.Add(new IsAdminRequirement());
+            });
+        });
+
         return builder.Build();
     }
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
+        app.UseSecurityHeaders(SecurityHeadersDefinitions
+            .GetHeaderPolicyCollection(app.Environment.IsDevelopment()));
+
+        IdentityModelEventSource.ShowPII = true;
+
         app.UseSerilogRequestLogging();
 
         if (app.Environment.IsDevelopment())
