@@ -39,7 +39,7 @@ Update-Database -Context NewsContext
 
 ## History
 
-- 2023-11-04 Updated nuget packages
+- 2023-11-04 Updated nuget packages, improved startup
 - 2023-08-19 Updated nuget packages, fix STS login bug
 - 2023-04-29 Updated nuget packages
 - 2023-01-21 Updated nuget packages
