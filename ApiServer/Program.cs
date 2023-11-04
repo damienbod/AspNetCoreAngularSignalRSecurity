@@ -50,7 +50,7 @@ public class Program
                 .ReadFrom.Configuration(hostingContext.Configuration)
                 .Enrich.FromLogContext()
                 .WriteTo.Console(theme: AnsiConsoleTheme.Code)
-                .WriteTo.File("../api.txt"))
+                .WriteTo.File("../_logs_api.txt"))
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
