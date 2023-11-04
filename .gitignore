@@ -27,3 +27,4 @@
 /IdentityServerAspNetIdentity/usersdatabase.sqlite-wal
 /IdentityServerAspNetIdentity/keys/is-signing-key-E16B5A7AB744F6C79102DD26B53E8CB9.json
 /StsServerIdentity/keys
+/_logs-StsServerIdentity.txt
