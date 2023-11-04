@@ -1,58 +1,40 @@
 ﻿using Serilog;
-using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
+using StsServerIdentity;
 
-namespace ApiServer;
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-public class Program
+Log.Information("Starting up");
+
+try
 {
-    public static int Main(string[] args)
-    {
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-            .Enrich.FromLogContext()
-            .WriteTo.Console()
-            .CreateLogger();
+    var builder = WebApplication.CreateBuilder(args);
 
-        try
-        {
-            Log.Information("Starting web host");
-            CreateHostBuilder(args).Build().Run();
-            return 0;
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex, "Host terminated unexpectedly");
-            return 1;
-        }
-        finally
-        {
-            Log.CloseAndFlush();
-        }
-    }
+    builder.Host.UseSerilog((ctx, lc) => lc
+        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
+        .WriteTo.File("../_logs-api.txt")
+        .Enrich.FromLogContext()
+        .ReadFrom.Configuration(ctx.Configuration));
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((context, config) =>
-            {
-                var builder = config.Build();
+    var app = builder
+        .ConfigureServices()
+        .ConfigurePipeline();
 
-                IHostEnvironment env = context.HostingEnvironment;
-
-                config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                    .AddEnvironmentVariables();
-                //.AddUserSecrets("your user secret....");
-
-            })
-            .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
-                .ReadFrom.Configuration(hostingContext.Configuration)
-                .Enrich.FromLogContext()
-                .WriteTo.Console(theme: AnsiConsoleTheme.Code)
-                .WriteTo.File("../_logs_api.txt"))
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
+    app.Run();
+}
+catch (Exception ex) when (
+    // https://github.com/dotnet/runtime/issues/60600
+    ex.GetType().Name is not "StopTheHostException"
+    // HostAbortedException was added in .NET 7, but since we target .NET 6 we
+    // need to do it this way until we target .NET 8
+    && ex.GetType().Name is not "HostAbortedException"
+    )
+{
+    Log.Fatal(ex, "Unhandled exception");
+}
+finally
+{
+    Log.Information("Shut down complete");
+    Log.CloseAndFlush();
 }
